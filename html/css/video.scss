@@ -14,6 +14,7 @@ body, html {
     top: 100px;
     bottom: 100px;
     z-index: 1;
+    @include user-select(none);
 }
 
 #left {
