@@ -39,10 +39,15 @@
             }
            
             var resizeVideos = function(pageX) {
-                var ratio = pageX/$(window).width();
+                var ratio = pageX/$("body").width();
                 if (ratio < .5)
                     return;
-                
+               
+                if ($("body").width() - pageX < 200)
+                    return;
+
+                oldRatio = ratio;
+
                 $('#left').css('width', pageX);
                 $('#right').css('left', pageX + 1);
                 $('#dragger').css('left', pageX + 1);
@@ -88,7 +93,8 @@
                 $('#ancilliary-videos').css('margin-top', -$('#ancilliary-videos').height()/2);
             }
  
-            var currPageX = 900;
+            var currPageX = .65 * $("body").width();
+            var oldRatio = .65;
             $(document).mousemove(function(e) {
                 if (move) {
                     currPageX = e.pageX;
@@ -106,10 +112,13 @@
             });
            
             $(window).resize(function() {
+                currPageX = oldRatio * $("body").width();
+                if ($("body").width() - currPageX < 200)
+                    currPageX = $("body").width() - 200;
                 resizeVideos(currPageX);
             });
-            
-            resizeVideos(currPageX);
+
+            $(window).trigger('resize');
         });
     </script>
     <title>Hello World!</title>
