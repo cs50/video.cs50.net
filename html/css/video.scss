@@ -67,14 +67,15 @@ video {
     right: 30px;
     top: 50%;
     margin-top: -239px;
-    @include perspective(200px);
-    @include perspective-origin(0% 50%);
-    @include backface-visibility(hidden);
+    
+    //@include perspective(200px);
+    //@include perspective-origin(0% 50%);
+    //@include backface-visibility(hidden);
 
-    > * {
-        width: 907px;
-        @include transform(rotateY(2deg));
-    }
+    //> * {
+    //    width: 907px;
+    //    @include transform(rotateY(2deg));
+    //}
 }
 
 #ancilliary-videos {

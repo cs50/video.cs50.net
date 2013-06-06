@@ -39,16 +39,21 @@
             }
            
             var resizeVideos = function(pageX) {
+                var ratio = pageX/$(window).width();
+                if (ratio < .5)
+                    return;
+                
                 $('#left').css('width', pageX);
                 $('#right').css('left', pageX + 1);
                 $('#dragger').css('left', pageX + 1);
                 
-                var ratio = pageX/$(window).width();
-                var degreeLeft = ratio >= .5 ? 2 : 2 + 20 * (.5 - ratio);
-                var degreeRight = ratio <= .5 ? -2 : -2 + (.5 - ratio) * 20;
-                var dlStr = "rotateY(" + degreeLeft + "deg)";
+                // var degreeLeft = ratio >= .5 ? 2 : 2 + 20 * (.5 - ratio);
+                // var degreeRight = ratio <= .5 ? -2 : -2 + (.5 - ratio) * 20;
+                var degreeRight = ratio <= .6 ? 0 : (.6 - ratio) * 100;
+                // var dlStr = "rotateY(" + degreeLeft + "deg)";
                 var drStr = "rotateY(" + degreeRight + "deg)";
 
+                /*
                 $('#main-video-wrapper > video').css({
                     "-webkit-transform": dlStr,
                     "-moz-transform": dlStr,
@@ -56,7 +61,8 @@
                     "-o-transform": dlStr,
                     "transform": dlStr,
                 });
-                
+                */
+
                 $('#ancilliary-videos > video').css({
                     "-webkit-transform": drStr,
                     "-moz-transform": drStr,
@@ -65,7 +71,8 @@
                     "transform": drStr,
                 });
 
-                var mvWidth = reverseResize($('#main-video-wrapper').width(), degreeLeft, 200);
+                // var mvWidth = reverseResize($('#main-video-wrapper').width(), degreeLeft, 200);
+                var mvWidth = $('#main-video-wrapper').width();
                 var mvHeight = mvWidth * 9.0/16.0;
                 var ovWidth = reverseResize($('#ancilliary-videos').width(), -degreeRight, 200);
                 var ovHeight = ovWidth * 9.0/16.0;
@@ -85,6 +92,7 @@
             $(document).mousemove(function(e) {
                 if (move) {
                     currPageX = e.pageX;
+                    
                     resizeVideos(e.pageX);
                 }
             });
@@ -97,7 +105,11 @@
                     e.play();
                 });
             });
-            
+           
+            $(window).resize(function() {
+                resizeVideos(currPageX);
+            });
+
             resizeVideos(currPageX);
         });
     </script>
