@@ -62,6 +62,14 @@ video {
     width: 100%;
 }
 
+#source-video {
+    display: none;
+}
+
+.video-canvas {
+    width: 100%;
+}
+
 #main-video-wrapper {
     position: absolute;
     left: 30px;
