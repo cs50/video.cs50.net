@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link href="/css/video.scss" rel="stylesheet"/>
+    <script src="/lib/jquery-1.9.1.min.js"></script>
+    <script src="/lib/underscore-min.js"></script>
+    <script src="/lib/video50.js"></script>
+    <!--script type="text/javascript" src="//use.typekit.net/qgw0qkt.js"></script-->
+    <!--script type="text/javascript">try{Typekit.load();}catch(e){}</script--> 
+    <script>
+        $(function() {
+            $("video").prop('muted', true);
+            var player = new CS50.Video({
+                playerContainer: 'body',
+                numVideos: 3,
+                video: 'http://d2o9nyf4hwsci4.cloudfront.net/.test/3vids-360p.mp4'
+            });
+        });
+    </script>
+    <title>Hello World!</title>
+  </head>
+  <body>
+  </body>
+</html>
