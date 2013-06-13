@@ -135,19 +135,19 @@ video {
 .time {
     position: absolute;
     left: 60px;
-    right: 123px;
+    right: 156px;
     top: 0px;
     bottom: 0px;
 }
 
-.progress, .timeline {
+.timeline {
+}
+
+.timeline {
     position: absolute;
     left: 35px;
     top: 13px;
     bottom: 11px;
-}
-
-.timeline {
     right: 35px;
     background-color: #BFBFBF;
     @include box-shadow("inset 1px 1px 3px #888, 1px 1px white");
@@ -155,8 +155,9 @@ video {
 }
 
 .progress {
-    width: 50px;
-    background-color: rgba(0, 0, 0, .35);
+    width: 100%;
+    height: 100%;
+    @include background-color(rgba(0, 0, 0, .35));
     z-index: 3;
 }
 
@@ -186,9 +187,13 @@ video {
 }
 
 .play-pause-control {
-    background-image: url("/img/play.png");
+    background-image: url("/img/pause.png");
     background-repeat: no-repeat;
     background-position: center;
+
+    &.pause {
+        background-image: url("/img/play.png");
+    }
 }
 
 .skip-control {
@@ -205,15 +210,14 @@ video {
 }
 
 .captions-control {
+    position: relative;   
     background-image: url("/img/cc.png");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.quality-control {
+.speed-control, .quality-control {
     color: white;
-    font-size: 9px;
-    line-height: 9px;
     font-family: Helvetica;
     text-shadow: 0px 1px .999;
     line-height: 20px;
@@ -222,6 +226,17 @@ video {
     background-image: url("/img/rectangle.png");
     background-repeat: no-repeat;
     background-position: center;
+    text-shadow: -1px 1px #888;
+    color: #F9F9F9;
+}
+
+.speed-control {
+    font-size: 10px;
+    line-height: 18px;
+}
+
+.quality-control {
+    font-size: 9px;
 }
 
 .fullscreen-control {
@@ -229,4 +244,52 @@ video {
     background-repeat: no-repeat;
     background-position: center;
     margin-left: -3px;
+}
+
+.video50-transcript-container {
+    position: absolute;
+    bottom: 50px;
+    right: -10px;
+    width: 500px;
+    height: 500px;
+    overflow: auto;
+    background-color: white;
+    padding: 20px 20px;
+    @include box-shadow(0px 0px 3px #BBB);
+    @include border-radius(3px);    
+    font-family: HelveticaNeue;
+    font-size: 13px;
+    line-height: 18px; 
+    display: none;
+
+    a {
+        text-decoration: none;
+        color: #333;
+        
+        &.highlight {
+            font-weight: bold;
+        }
+
+        &:hover {
+            color: #08c;
+        }
+    }
+}
+
+.video50-cc-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.video50-cc-text {
+    font-family: HelveticaNeue;
+    font-size: 14px;
+    @include background-color(rgba(0, 0, 0, .5));
+    display: inline-block;
+    color: white;
+    padding: 5px 8px;
 }
