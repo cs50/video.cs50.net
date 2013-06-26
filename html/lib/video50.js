@@ -12,7 +12,7 @@ var CS50 = CS50 || {};
  *      numVideos: int, the number of video screens to show
  *      playbackRates: array of floats, supported playback rates
  *      playerContainer: string, CSS selector of the desired element
- *      srt: object, maps language abbreviation to URLs of SRT files
+ *      captions: object, maps language abbreviation to URLs of SRT files
  *      title: string title of the video
  *      video: string for single video, or 
  *             object that maps bitrate to a single video source's URL, or
@@ -20,6 +20,7 @@ var CS50 = CS50 || {};
  *
  */
 CS50.Video = function(options) {
+    var me = this;
     this.options = options;
 
     // required options must be defined
@@ -28,17 +29,28 @@ CS50.Video = function(options) {
     if (!this.options.video)
         throw 'Error: You must define a video for CS50 Video to play!';
 
-    // XXX: handle different argument types of "video" option
-
     // fill in default values for optional, undefined values
     this.options = $.extend({
         aspectRatio: 16/9,
-        defaultLanguage: 'en',
+        defaultLanguage: 'eng',
         onReady: false,
-        numVideos: 1,
         playbackRates: [0.7, 1, 1.2, 1.5],
         title: '',
     }, this.options);
+    
+    // construct list of playable videos
+    
+
+    // handle different argument types of "video" option
+    if (typeof this.options.video == "string") {
+        this.options.currentVideo = this.options.video;
+    } else {
+        this.options.currentVideo = this.options.video[0];
+    }
+
+    // assign a (probably) unique id
+    var id = Math.random().toString();
+    me.options.fallbackId = id;
 
     // private member variable for template structure
     var templateHtml = {
@@ -46,6 +58,10 @@ CS50.Video = function(options) {
             <div class="video-wrapper"> \
                 <video class="source-video" autoplay src="<%= video %>"> \
                 </video> \
+                <div class="source-video-fallback-wrapper"> \
+                    <div class="source-video-fallback"> \
+                    </div> \
+                </div> \
                 <div class="left"> \
                   <div class="main-video-wrapper"> \
                     <canvas class="video-canvas" width="640" height="360" data-segment="1"></canvas> \
@@ -71,7 +87,9 @@ CS50.Video = function(options) {
         playerControls: ' \
             <div class="control-bar"> \
               <div class="left-controls"> \
-                <div class="play-pause-control"></div><div class="skip-control"> \
+                <div class="play-pause-control"> \
+                </div><div class="video50-sb-control"> \
+                </div><div class="video50-sf-control"> \
                 </div> \
               </div> \
               <div class="time"> \
@@ -80,19 +98,56 @@ CS50.Video = function(options) {
                 <div class="timelength"></div> \
               </div> \
               <div class="right-controls"> \
-                <div class="download-control"></div><div class="captions-control"> \
+                <div class="download-control video50-control-toggle"> \
+                    <ul class="video50-download-container video50-control-list"> \
+                        <% _.each(video, function(video, i) { %> \
+                            <li class="video50-download"> \
+                                <a href="<%- video.file %>?download"> \
+                                    <%- video.type.split("/")[1].toUpperCase() + " (" + video.height + "p)" %> \
+                                </a> \
+                            </li> \
+                        <% }) %> \
+                    </ul> \
+                </div><div class="captions-control video50-control-toggle"> \
+                    <ul class="video50-captions-container video50-control-list"> \
+                        <% _.each(captions, function(path, short) { %> \
+                            <li class="video50-caption"><a href="#" data-lang="<%- short %>"><%- "English" || CS50.Video.Languages[short] %></a></li> \
+                        <% }) %> \
+                        <li class="video50-caption"><a href="#" data-lang="">Off</a></li> \
+                    </ul> \
                     <div class="video50-transcript-container"></div> \
-                </div><div class="speed-control" data-speed="1"> \
-                    1x \
-                </div><div class="quality-control"> \
-                  HD \
-                </div><div class="fullscreen-control"> \
+                </div><div class="speed-control video50-control-toggle"><div class="video50-curspeed">1x</div> \
+                    <ul class="video50-speed-container video50-control-list"> \
+                        <% _.each(playbackRates, function(rate, index) { %> \
+                            <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
+                        <% }) %> \
+                    </ul> \
+                </div><div class="quality-control video50-control-toggle"><div class="video50-curquality">360p</div> \
+                    <ul class="video50-quality-container video50-control-list"> \
+                        <% var testEl = document.createElement("video") %> \
+                        <%  \
+                            if (testEl.canPlayType) { \
+                                var mp4 = "" !== (testEl.canPlayType(\'video/mp4; codecs="mp4v.20.8"\') || \
+                                          testEl.canPlayType(\'video/mp4; codecs="avc1.42E01E"\') || \
+                                          testEl.canPlayType(\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\')); \
+                                var webm = "" !== testEl.canPlayType(\'video/webm; codecs="vp8, vorbis"\'); \
+                            } \
+                        %> \
+                        <% _.each(video, function(video, i) { %> \
+                            <% if (video.type === "video/mp4" && mp4) { %> \
+                                <li class="video50-quality" data-quality="<%- video.height %>" data-path="<%- video.file %>"><%- video.height %>p</li> \
+                            <% } else if (!mp4 && webm && video.type === "video/webm") { %> \
+                                <li class="video50-quality" data-quality="<%- video.height %>" data-path="<%- video.file %>"><%- video.height %>p</li> \
+                            <% } %> \
+                        <% }) %> \
+                    </ul> \
+                </div><div class="video50-fullscreen-control"> \
                 </div> \
               </div> \
             </div> \
         ',
     };
-
+    
     // compile templates with underscore, expose templates to prototype functions
     this.templates = {};
     for (var template in templateHtml) {
@@ -107,15 +162,36 @@ CS50.Video = function(options) {
  */
 CS50.Video.prototype.createPlayer = function() {
     var me = this;
-    
+
     // clear out old containers and add video player html
     var $container = $(this.options.playerContainer);
     $container.empty();
     $container = $container.html(this.templates.player({
-        video: this.options.video,
-        numVideos: this.options.numVideos
+        video: this.options.currentVideo.file,
+        numVideos: this.options.currentVideo.numVideos
     })).find('.video-wrapper');
-    $container.append(this.templates.playerControls({}));
+
+    $container.append(this.templates.playerControls({
+        playbackRates: this.options.playbackRates,
+        downloads: this.options.downloads,
+        captions: this.options.captions,
+        video: this.options.video
+    }));
+
+    // XXX: if browser does not support, use the fallback video, hiding other controls
+    if (me.options.fallback) {
+        $container.find('.source-video').attr('src', ''); 
+        $container.find('.source-video-fallback').attr('id', me.options.fallbackId);
+        $container.find('.source-video-fallback-wrapper').addClass('activated');
+        this.flashPlayer = jwplayer(me.options.fallbackId).setup({
+            file: this.options.currentVideo.file,
+            width: "100%",
+            aspectratio: "16:9",
+            primary: "flash",
+            controls: false,
+            autostart: true
+        });
+    }
 
     // RESIZING CODE STARTS HERE
     // default position of the dragger, and % of the container's
@@ -125,9 +201,12 @@ CS50.Video.prototype.createPlayer = function() {
 
     // resize the video whenever the container has the possibility of being resized
     $(window).on('resize', function() {
-        // recalcuate correct position of dragger based on old video ratio
-        var newX = oldRatio * $container.width();
-        resizeVideos(newX);
+        if (!me.options.fallback) {
+            // recalcuate correct position of dragger based on old video ratio
+            var newX = oldRatio * $container.width();
+            resizeVideos(newX);
+        }
+        // XXX: fill in behavior for flash fallback
     });
     
     // given a desired keystoned width, gets the appropriate original width
@@ -215,66 +294,221 @@ CS50.Video.prototype.createPlayer = function() {
     // video related updates 
     var video = $container.find(".source-video")[0];
 
-    // play pause
-    $container.on('mousedown', '.play-pause-control', function() {
+    // play pause interactions
+    $container.on('mousedown', '.play-pause-control, .main-video-wrapper', function() {
         $(this).toggleClass('pause');
-    
+   
         if ($(this).hasClass('pause')) {
-            video.pause();
-        } else {
-            video.play();
+            if (me.options.fallback)
+                me.flashPlayer.play(false); 
+            else
+                video.pause();
+        } 
+        else {
+            if (me.options.fallback)
+                me.flashPlayer.play(false); 
+            else
+                video.play();
         }
     });
  
     // seek around by clicking on the progress bar
     $container.on('mousedown', '.timeline', function(e) {
         var ratio = (e.pageX - $(this).offset().left)/$(this).width();
-        video.currentTime = ratio * video.duration;
+        if (me.options.fallback) {
+            var player = me.flashPlayer;
+            player.seek(ratio * player.getDuration());
+        }
+        else
+            video.currentTime = ratio * video.duration;
     });    
 
-    // skip back 30 seconds on the 30 second button
-    $container.on('mousedown', '.skip-control', function(e) {
-        var time = video.currentTime < 30 ? 0 : video.currentTime - 30;
-        video.currentTime = time;
+    // skip back 8 seconds when skip back control is hit
+    $container.on('mousedown', '.video50-sb-control', function(e) {
+        if (me.options.fallback) {
+            var player = me.flashPlayer;
+            var time = player.getPosition() < 8 ? 0 : player.getPosition() - 8;
+            player.seek(time);
+        } 
+        else {
+            var time = video.currentTime < 8 ? 0 : video.currentTime - 8;
+            video.currentTime = time;
+        }
+    });
+
+    // skip forward 30 seconds when skip forward control is hit
+    $container.on('mousedown', '.video50-sf-control', function(e) {
+        if (me.options.fallback) {
+            var player = me.flashPlayer;
+            var time = player.getPosition() + 30 > player.getDuration() ? player.getDuration() : player.getPosition() + 30;
+            player.seek(time);
+        }
+        else {
+            var time = video.currentTime + 30 > video.duration ? video.duration : video.currentTime + 30;
+            video.currentTime = time;
+        }
+    });
+
+    // toggle play list controls
+    $container.on('mousedown', '.video50-control-toggle', function(e) {
+        var $child = $(this).find('.video50-control-list');
+        $container.find('.video50-control-list').not($child).hide();
+        $child.toggle();
     });    
 
-    // toggle video speed
-    $container.on('mousedown', '.speed-control', function(e) {
-        var index = (parseInt($(this).attr('data-speed')) + 1) % me.options.playbackRates.length;
-        var speed = me.options.playbackRates[index];
-        $(this).attr('data-speed', index);
-        $(this).text(speed + "x");
+    $container.on('mousedown', '.speed-control [data-rate]', function(e) {
+        e.preventDefault();
+
+        // no speed control for flash version
+        // XXX: notify that this doesn't work
+        if (me.options.fallback) {
+            return; 
+        }
+        
+        var speed = $(this).attr('data-rate');
+        $container.find('.video50-curspeed').text(speed + "x");
+        $(this).addClass('active').siblings().removeClass('active');
         video.playbackRate = speed;
-     });    
+    });
+    
+    $container.on('mousedown', '.captions-control [data-lang]', function(e) {
+        me.loadCaption($(this).attr('data-lang'));
+    });
+
+    $container.on('mousedown', '.quality-control [data-quality]', function(e) {
+        e.preventDefault();
+
+        // grab the quality of the new video and the file path, updating the UI
+        var quality = $(this).attr('data-quality');
+        var path = $(this).attr('data-path');
+        $container.find('.video50-curquality').text(quality + "p");
+        $(this).addClass('active').siblings().removeClass('active');
+
+        // save the old time, swap the file out, and once the metadata 
+        // has loaded, skip forward
+        if (me.options.fallback) {
+            var player = me.flashPlayer;
+            var oldTime = player.getPosition();
+            player.sendEvent('LOAD', path);
+            player.seek(oldTime);
+        }
+        else {
+            var oldTime = video.currentTime;
+            video.src = path;
+            $(video).on('loadedmetadata.change', function(e) {
+                video.currentTime = oldTime;
+                $(this).off('loadedmetadata.change');
+            });
+        }
+    });
+
+    // fullscreen control
+    $container.on('mousedown', '.video50-fullscreen-control', function(e) { 
+        // select the right destination
+        if (me.options.fallback) {
+            var container = $container.find('.source-video-fallback-wrapper')[0];
+        }
+        else {
+            var container = $container.find('.main-video-wrapper')[0];
+        }
+
+        if (!$(this).hasClass('active')) {
+            if (container.requestFullscreen) {
+              container.requestFullscreen();
+            } else if (container.mozRequestFullScreen) {
+              container.mozRequestFullScreen();
+            } else if (container.webkitRequestFullScreen) {
+              container.webkitRequestFullScreen();
+            }
+        }
+        else {
+            if (document.cancelFullscreen) {
+              document.cancelFullscreen();
+            } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+              document.webkitCancelFullScreen();
+            }
+        }
+    });
+
+    // handle exiting out of fullscreen via esc key, and dom changes on fullscreen
+    $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e) {
+        // select the right destination
+        if (me.options.fallback) {
+            var container = $container.find('.source-video-fallback-wrapper')[0];
+        }
+        else {
+            var container = $container.find('.main-video-wrapper')[0];
+        }
+        
+        if (!document.fullscreenElement && !document.mozFullScreenElement && 
+            !document.webkitFullscreenElement) {
+            // move fullscreen controls back to the multivideo display
+            $container.removeClass('fullscreen');
+            $container.find('.video50-fullscreen-control').removeClass('active');
+            $container.find('.control-bar').appendTo($container);
+        } 
+        else {
+            // move fullscreen controls so they are part of fullscreened video
+            $container.addClass('fullscreen');
+            $container.find('.video50-fullscreen-control').addClass('active');
+            $container.find('.control-bar').appendTo($(container));
+        }
+    }); 
+
+    // prevent control bar clicks from pausing the main video
+    $container.on('mousedown', '.control-bar', function(e) {
+        e.stopPropagation();
+    });
 
     // trigger a resize to get the correct dimensions for the initialization
     $(window).trigger('resize');
 
     // load closed captioning and set closed captioning to happen in a loop
-    this.loadSrt(this.options.defaultLanguage);
-    $container.find('.source-video').on('timeupdate', function(e) {
-        if (!this.lastUpdate || (this.lastUpdate + 500) < (new Date).getTime()) {
-            // update highlight on the transcript, update cc
-            me.updateTranscriptHighlight(e.target.currentTime + 7);
-            me.updateCC(e.target.currentTime + 7);
-            me.updateTimeline(e.target.currentTime);           
- 
-            this.lastUpdate = (new Date).getTime();
-        }
-    });
+    this.loadCaption(this.options.defaultLanguage);
+   
+    if (!this.options.fallback) {
+        $container.find('.source-video').on('timeupdate', function(e) {
+            if (!this.lastUpdate || (this.lastUpdate + 500) < (new Date).getTime()) {
+                // update highlight on the transcript, update cc
+                me.updateTranscriptHighlight(e.target.currentTime + 7);
+                me.updateCC(e.target.currentTime + 7);
+                me.updateTimeline(e.target.currentTime);           
+     
+                this.lastUpdate = (new Date).getTime();
+            }
+        });
 
-    // set redrawing the video to run on a loop
-    this.redrawVideo(video);
+        // set redrawing the video to run on a loop
+        this.redrawVideo(video);
+    } 
+    else {
+        // XXX: fill in behavior for flash fallback
+        me.flashPlayer.onTime(function(e) {
+            if (!me.lastUpdate || (me.lastUpdate + 500) < (new Date).getTime()) {
+                // update highlight on the transcript, update cc
+                me.updateTranscriptHighlight(e.position);
+                me.updateCC(e.position);
+                me.updateTimeline(e.position);           
+                me.lastUpdate = (new Date).getTime();
+            }
+        });
+    }
 };
 
 CS50.Video.prototype.updateTimeline = function(time) {
+    var me = this;
     var time = Math.floor(time);
     var $container = $(this.options.playerContainer);
     var video = $container.find('.source-video')[0];   
- 
+
     // update the length
     if ($container.find('.timelength').text() == "") {
-        var total = Math.floor(video.duration);
+        if (this.options.fallback)
+            var total = Math.floor(me.flashPlayer.getDuration());
+        else
+            var total = Math.floor(video.duration);
         var m = Math.floor(total / 60);
         var s = total % 60;
         m = m < 10 ? "0" + m : m;
@@ -290,7 +524,10 @@ CS50.Video.prototype.updateTimeline = function(time) {
     $container.find('.timecode').text(m + ":" + s);
 
     // update the length of the bar
-    var ratio = time/video.duration;
+    if (this.options.fallback)
+        var ratio = time / me.flashPlayer.getDuration();
+    else
+        var ratio = time / video.duration;
     $container.find('.progress').css("width", (ratio * 100) + "%");
 };
 
@@ -329,22 +566,21 @@ CS50.Video.prototype.updateTranscriptHighlight = function(time) {
 };
 
 /**
- * Load the specified SRT file.
+ * Load the specified caption file.
  *
  * @param lang Language to load
  *
  */
-CS50.Video.prototype.loadSrt = function(language) {
-    this.srtData = {};
+CS50.Video.prototype.loadCaption = function(language) {
     var player = this.player;
     var me = this;
 
-    if (this.options.srt[language]) {
-        $.get(this.options.srt[language], function(response) {
+    if (this.options.captions[language]) {
+        $.get(this.options.captions[language], function(response) {
             var timecodes = response.split(/\n\s*\n/);
 
             // if transcript container is given, then build transcript
-            if (_.keys(me.options.srt).length) {
+            if (_.keys(me.options.captions).length) {
                 // clear previous text
                 var $container = $(me.options.playerContainer).find('.video50-transcript-container');
                 
@@ -393,14 +629,19 @@ CS50.Video.prototype.loadSrt = function(language) {
  */
 CS50.Video.prototype.redrawVideo = function(video) {
     // for each canvas object, draw the appropriate segment onto the canvas
+    var that = this;
     var $container = $(this.options.playerContainer);
     $container.find('.video-canvas').each(function(i, canvas) {
         var context = canvas.getContext('2d');
-        var x = ($(canvas).attr('data-segment') - 1) * 640;
-        context.drawImage(video, x, 0, 640, 360, 0, 0, 640, 360);
+        var segment = $(canvas).attr('data-segment') - 1;
+        var rows = that.options.currentVideo.rows || 1;
+        var cols = that.options.currentVideo.cols || 1;
+        var y = Math.floor(segment / cols) * 360;
+        var x = (segment % cols) * 640;
+        var width = that.options.currentVideo.width / rows;
+        context.drawImage(video, x, y, width, 360, 0, 0, width, 360);
     });
 
     // redraw the video at approximately 30fps
-    var that = this;
     setTimeout(function() { that.redrawVideo(video) }, 30);
 };

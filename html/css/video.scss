@@ -35,6 +35,21 @@ body, html {
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    font-family: HelveticaNeue;
+}
+
+.source-video-fallback-wrapper {
+    display: none;
+
+    &.activated {
+        position: absolute;
+        display: block;
+        z-index: 3;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
 }
 
 .control-bar {
@@ -83,15 +98,7 @@ video {
     right: 30px;
     top: 50%;
     margin-top: -239px;
-    
-    //@include perspective(200px);
-    //@include perspective-origin(0% 50%);
-    //@include backface-visibility(hidden);
-
-    //> * {
-    //    width: 907px;
-    //    @include transform(rotateY(2deg));
-    //}
+    cursor: pointer;   
 }
 
 .ancilliary-videos {
@@ -112,11 +119,12 @@ video {
         width: 327px;
         @include transform(rotateY(-2deg));
         direction: ltr;
-        cursor: pointer;
+        cursor: w-resize;
     }
 }
 
 .left-controls > *, .right-controls > *, .timeline {
+    position: relative;
     cursor: pointer;
 }
 
@@ -125,7 +133,7 @@ video {
 
     > * {
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         width: 20px;
         height: 20px;
         padding: 5px 5px;
@@ -134,13 +142,10 @@ video {
 
 .time {
     position: absolute;
-    left: 60px;
+    left: 85px;
     right: 156px;
     top: 0px;
     bottom: 0px;
-}
-
-.timeline {
 }
 
 .timeline {
@@ -190,18 +195,29 @@ video {
     background-image: url("/img/pause.png");
     background-repeat: no-repeat;
     background-position: center;
+    margin-top: 1px;
 
     &.pause {
         background-image: url("/img/play.png");
     }
 }
 
-.skip-control {
+.video50-sb-control {
     background-image: url("/img/skipback.png");
     background-repeat: no-repeat;
     background-position: center;
     margin-left: -6px;
+    margin-top: 1px;
 }
+
+.video50-sf-control {
+    background-image: url("/img/skipforward.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: -2px;
+    margin-top: 1px;
+}
+
 
 .download-control {
     background-image: url("/img/download.png");
@@ -230,16 +246,55 @@ video {
     color: #F9F9F9;
 }
 
-.speed-control {
+.video50-control-list {
+    position: absolute;
+    bottom: 35px;
+    right: 5px;
+    list-style-type: none; 
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    @include background-linear-gradient(top, #F1F1F1, #E5E5E5);
+    @include border-radius(2px);
+    @include box-shadow(0px 1px 3px #BBB);
+    color: #333;
+    text-shadow: 0px 1px white;
+    display: none;
+
+    li {
+        padding: 2px 6px;
+        display: block;
+        border-top: 1px solid white;
+        border-bottom: 1px solid #DDD;
+        white-space: nowrap;
+    
+        a {
+            text-decoration: none;
+            color: inherit;
+            font-size: inherit;    
+        }
+
+        &:first-child {
+            border-top: 0px;
+        }
+
+        &:last-child {
+            border-bottom: 0px;
+        }
+    }
+}
+
+.video50-control-toggle {
     font-size: 10px;
     line-height: 18px;
+    text-align: center;
 }
 
 .quality-control {
     font-size: 9px;
 }
 
-.fullscreen-control {
+.video50-fullscreen-control {
     background-image: url("/img/fullscreen.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -257,7 +312,6 @@ video {
     padding: 20px 20px;
     @include box-shadow(0px 0px 3px #BBB);
     @include border-radius(3px);    
-    font-family: HelveticaNeue;
     font-size: 13px;
     line-height: 18px; 
     display: none;
@@ -283,13 +337,24 @@ video {
     right: 0px;
     text-align: center;
     margin-bottom: 30px;
+
+    .video50-cc-text {
+        font-size: 14px;
+        @include background-color(rgba(0, 0, 0, .5));
+        display: inline-block;
+        color: white;
+        padding: 5px 8px;
+    }
 }
 
-.video50-cc-text {
-    font-family: HelveticaNeue;
-    font-size: 14px;
-    @include background-color(rgba(0, 0, 0, .5));
-    display: inline-block;
-    color: white;
-    padding: 5px 8px;
+.video-wrapper.fullscreen .video50-cc-container {
+    margin-bottom: 100px;
+    
+    .video50-cc-text {
+        font-size: 24px;
+        @include background-color(rgba(0, 0, 0, .5));
+        display: inline-block;
+        color: white;
+        padding: 10px 16px;
+    }
 }
