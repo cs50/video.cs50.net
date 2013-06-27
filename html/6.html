@@ -7,174 +7,119 @@
     <script src="/lib/underscore-min.js"></script>
     <script src="/lib/jwplayer/jwplayer.js" ></script>
     <script src="/lib/video50.js"></script>
+    <script src="/lib/video50.languages.js"></script>
     <!--script type="text/javascript" src="//use.typekit.net/qgw0qkt.js"></script-->
     <!--script type="text/javascript">try{Typekit.load();}catch(e){}</script--> 
     <script>
         $(function() {
             var player = new CS50.Video({
                 "playerContainer": "body",
-                "title":"HTTP",
+                "title":"Week 2",
+                "subtitle":null,
                 "authors":[
                     "David J. Malan"
                 ],
-                "date": "2004-02-12T15:19:21+00:00",
-                "thumbnail": {
-                    "url": "http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http.png",
-                    "height": 175,
-                    "width": 98
-                },
-                "audio": [
+                "date":"2012-09-17T13:00:00-05:00",
+                "thumbnails":[
                     {
-                    "bitrate":1024,
-                    "duration":209,
-                    "frequency": 120,
-                    "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http.mp3",
-                    "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/shorts\/http\/http.mp3",   
-                    "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http.mp3?download",
-                    "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http.mp3?torrent",
-                    "type": "audio/mpeg"
-                }
+                        "url":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m.png",
+                        "height":185,
+                        "width":104
+                    }
                 ],
-                "video": [
+                "files":[
                     {
-                        "width": 1920,
-                        "height": 360,
-                        "rows": 3,
-                        "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file": "http://d2o9nyf4hwsci4.cloudfront.net/.test/3_stacked-360.mp4",
-                        "type": "video/mp4",
-                        "numVideos": 3
+                        "duration":4293,
+                        "file":"http://cdn.cs50.net/2012/fall/lectures/2/week2m.mp3",
+                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp3:2012/fall/lectures/2/week2m.mp3",
+                        "download":"http://cdn.cs50.net/2012/fall/lectures/2/week2m.mp3?download",
+                        "torrent":"http://cdn.cs50.net/2012/fall/lectures/2/week2m.mp3?torrent",
+                        "type":"audio/mpeg"
                     },
                     {
-                        "width": 1920,
-                        "height": 360,
-                        "rows": 3,
-                        "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-special-720p.webm",
-                        "type": "video/webm"
-                    },
-                    {
-                        "width": 3840,
-                        "height": 720,
-                        "rows": 3,
-                        "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-special-720p.mp4",
-                        "type": "video/mp4"
-                    },
-                    {
-                        "width": 3840,
-                        "height": 720,
-                        "rows": 3,
-                        "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-special-720p.webm",
-                        "type": "video/webm"
-                    },   
-                    {
-                        "height":240,
-                        "width":426.66665649414,
-                        "framerate":29.97,
-                        "bitrate":189936,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.mp4",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.mp4?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.mp4?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/shorts\/http\/http-240p.mp4",
-                        "type": "video/mp4"
-                    },
-                    {
-                        "height":360,
-                        "width":640,
-                        "framerate":29.97,
-                        "bitrate":633022,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.mp4",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.mp4?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.mp4?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/shorts\/http\/http-240p.mp4",
-                        "type": "video/mp4"
-                    },
-                    {
-                        "height":720,
                         "width":1280,
-                        "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.mp4",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.mp4?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.mp4?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/shorts\/http\/http-720p.mp4",
-                        "type": "video/mp4"
+                        "height":2160,
+                        "rows":3,
+                        "duration":4293,
+                        "file":"http://cdn.cs50.net/.test/3_stacked-720.mp4",
+                        "type":"video/mp4",
+                        "numVideos":3
                     },
                     {
+                        "width":1280,
+                        "height":2160,
+                        "rows":3,
+                        "duration":4293,
+                        "file":"http://cdn.cs50.net/.test/3_stacked-720.webm",
+                        "type":"video/webm"
+                    },
+                    {
+                        "width":640,
                         "height":1080,
-                        "width":1920,
-                        "framerate":29.97,
-                        "bitrate":2628030,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.mp4",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.mp4?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.mp4?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/shorts\/http\/http-1080p.mp4",
-                        "type": "video/mp4"
+                        "rows":3,
+                        "duration":4293,
+                        "file":"http://cdn.cs50.net/.test/3_stacked-360.mp4",
+                        "type":"video/mp4",
+                        "numVideos":3
+                    },
+                    {
+                        "width":640,
+                        "height":1080,
+                        "rows":3,
+                        "duration":4293,
+                        "file":"http://cdn.cs50.net/.test/3_stacked-360.webm",
+                        "type":"video/webm"
                     },
                     {
                         "height":240,
                         "width":426.66665649414,
                         "framerate":29.97,
-                        "bitrate":189936,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.webm",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.webm?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-240p.webm?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/webm:2012\/fall\/shorts\/http\/http-240p.webm",
-                        "type": "video/webm"
+                        "bitrate":190603,
+                        "duration":4293,
+                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m.mp4",
+                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m.mp4?download",
+                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m.mp4?torrent",
+                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/lectures\/2\/week2m.mp4",
+                        "type":"video/mp4"
                     },
                     {
                         "height":360,
                         "width":640,
                         "framerate":29.97,
-                        "bitrate":633022,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.webm",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.webm?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-360p.webm?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/webm:2012\/fall\/shorts\/http\/http-240p.webm",
-                        "type": "video/webm"
+                        "bitrate":636956,
+                        "duration":4293,
+                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-360p.mp4",
+                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-360p.mp4?download",
+                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-360p.mp4?torrent",
+                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/lectures\/2\/week2m.mp4",
+                        "type":"video/mp4"
                     },
                     {
                         "height":720,
                         "width":1280,
                         "framerate":29.97,
-                        "bitrate":1623783,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.webm",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.webm?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-720p.webm?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/webm:2012\/fall\/shorts\/http\/http-720p.webm",
-                        "type": "video/webm"
+                        "bitrate":1625276,
+                        "duration":4293,
+                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-720p.mp4",
+                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-720p.mp4?download",
+                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-720p.mp4?torrent",
+                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/lectures\/2\/week2m-720p.mp4",
+                        "type":"video/mp4"
                     },
                     {
                         "height":1080,
                         "width":1920,
                         "framerate":29.97,
-                        "bitrate":2628030,
-                        "duration":209,
-                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.webm",
-                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.webm?download",
-                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/http-1080p.webm?torrent",
-                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/webm:2012\/fall\/shorts\/http\/http-1080p.webm",
-                        "type": "video/webm"
-                    }       
-                ],
-                "captions":{
+                        "bitrate":2625341,
+                        "duration":4293,
+                        "file":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-1080p.mp4",
+                        "download":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-1080p.mp4?download",
+                        "torrent":"http:\/\/cdn.cs50.net\/2012\/fall\/lectures\/2\/week2m-1080p.mp4?torrent",
+                        "stream":"rtmp:\/\/stream.cs50.net\/cfx\/st\/mp4:2012\/fall\/lectures\/2\/week2m-1080p.mp4",
+                        "type":"video/mp4"
+                    }
+               ],
+               "captions":{
                     "afr":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/afr\/http.srt",
                     "alb":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/alb\/http.srt",
                     "ara":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/ara\/http.srt",
@@ -237,7 +182,7 @@
                     "vie":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/vie\/http.srt",
                     "wel":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/wel\/http.srt",
                     "yid":"http:\/\/cdn.cs50.net\/2012\/fall\/shorts\/http\/lang\/yid\/http.srt"
-               }
+                }
             });
         });
     </script>

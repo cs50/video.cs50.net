@@ -10,7 +10,7 @@ body, html {
     min-width: 500px;
 }
 
-.left, .right {
+.video50-left, .video50-right {
     position: absolute;
     top: 100px;
     bottom: 100px;
@@ -18,19 +18,19 @@ body, html {
     @include user-select(none);
 }
 
-.left {
+.video50-left {
     left: 0px;
     width: 900px;
     border-right: 1px solid #DDD;
 }
 
-.right {
+.video50-right {
     right: 0px;
     left: 901px;
     border-left: 1px solid white;
 }
 
-.video-wrapper {
+.video50-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
@@ -38,7 +38,7 @@ body, html {
     font-family: HelveticaNeue;
 }
 
-.source-video-fallback-wrapper {
+.video50-source-video-fallback-wrapper {
     display: none;
 
     &.activated {
@@ -52,7 +52,7 @@ body, html {
     }
 }
 
-.control-bar {
+.video50-control-bar {
     position: absolute;
     bottom: 0px;
     @include background-linear-gradient(top, #F1F1F1, #E1E1E1);
@@ -65,7 +65,7 @@ body, html {
     z-index: 4;
 }
 
-.dragger {
+.video50-dragger {
     position: absolute;
     width: 10px;
     height: 50px;
@@ -84,15 +84,15 @@ video {
     width: 100%;
 }
 
-.source-video {
+.video50-source-video {
     display: none;
 }
 
-.video-canvas {
+.video50-canvas {
     width: 100%;
 }
 
-.main-video-wrapper {
+.video50-main-video-wrapper {
     position: absolute;
     left: 30px;
     right: 30px;
@@ -101,7 +101,7 @@ video {
     cursor: pointer;   
 }
 
-.ancilliary-videos {
+.video50-ancilliary-videos {
     list-style-type: hidden;
     position: absolute;
     left: 30px;
@@ -123,12 +123,12 @@ video {
     }
 }
 
-.left-controls > *, .right-controls > *, .timeline {
+.video50-left-controls > *, .video50-right-controls > *, .video50-timeline {
     position: relative;
     cursor: pointer;
 }
 
-.left-controls, .right-controls {
+.video50-left-controls, .video50-right-controls {
     line-height: 30px;
 
     > * {
@@ -140,7 +140,7 @@ video {
     }
 }
 
-.time {
+.video50-time {
     position: absolute;
     left: 85px;
     right: 156px;
@@ -148,7 +148,7 @@ video {
     bottom: 0px;
 }
 
-.timeline {
+.video50-timeline {
     position: absolute;
     left: 35px;
     top: 13px;
@@ -159,22 +159,22 @@ video {
     z-index: 2;
 }
 
-.progress {
+.video50-progress {
     width: 100%;
     height: 100%;
     @include background-color(rgba(0, 0, 0, .35));
     z-index: 3;
 }
 
-.timecode {
+.video50-timecode {
     float: left;
 }
 
-.timelength {
+.video50-timelength {
     float: right;    
 }
 
-.timelength, .timecode {
+.video50-timelength, .video50-timecode {
     color: #888;
     font-size: 11px;
     line-height: 33px;
@@ -183,15 +183,15 @@ video {
     text-align: center;
 }
 
-.left-controls {
+.video50-left-controls {
     float: left;
 }
 
-.right-controls {
+.video50-right-controls {
     float: right;
 }
 
-.play-pause-control {
+.video50-play-pause-control {
     background-image: url("/img/pause.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -219,20 +219,20 @@ video {
 }
 
 
-.download-control {
+.video50-download-control {
     background-image: url("/img/download.png");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.captions-control {
+.video50-captions-control {
     position: relative;   
     background-image: url("/img/cc.png");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.speed-control, .quality-control {
+.video50-speed-control, .video50-quality-control {
     color: white;
     font-family: Helvetica;
     text-shadow: 0px 1px .999;
@@ -253,6 +253,8 @@ video {
     list-style-type: none; 
     margin: 0px;
     padding: 0px;
+    overflow: auto;
+    max-height: 395px;
     text-align: left;
     @include background-linear-gradient(top, #F1F1F1, #E5E5E5);
     @include border-radius(2px);
@@ -269,6 +271,7 @@ video {
         white-space: nowrap;
     
         a {
+            display: block;
             text-decoration: none;
             color: inherit;
             font-size: inherit;    
@@ -290,7 +293,7 @@ video {
     text-align: center;
 }
 
-.quality-control {
+.video50-quality-control {
     font-size: 9px;
 }
 
@@ -347,7 +350,7 @@ video {
     }
 }
 
-.video-wrapper.fullscreen .video50-cc-container {
+.video50-wrapper.fullscreen .video50-cc-container {
     margin-bottom: 100px;
     
     .video50-cc-text {
