@@ -7,7 +7,7 @@ body, html {
     padding: 0px;
     margin: 0px;
     background-color: #F1F2F3;
-    min-width: 500px;
+    min-width: 600px;
 }
 
 .video50-left, .video50-right {
@@ -36,6 +36,19 @@ body, html {
     height: 100%;
     margin: 0 auto;
     font-family: HelveticaNeue;
+
+    &.single-video {
+        background-color: black;
+
+        .video50-left {
+            border: none;
+        }
+
+        .video50-main-video-wrapper {
+            left: 0px;
+            right: 0px;
+        }
+    }
 }
 
 .video50-source-video-fallback-wrapper {
@@ -84,10 +97,6 @@ video {
     width: 100%;
 }
 
-.video50-source-video {
-    display: none;
-}
-
 .video50-canvas {
     width: 100%;
 }
@@ -99,6 +108,12 @@ video {
     top: 50%;
     margin-top: -239px;
     cursor: pointer;   
+    overflow: hidden;
+}
+
+.video50-source-video {
+    position: relative;
+    top: 0px;
 }
 
 .video50-ancilliary-videos {
