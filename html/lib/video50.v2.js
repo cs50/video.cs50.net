@@ -692,10 +692,6 @@ CS50.Video.prototype.processTimeUpdates = function() {
         case "video":
             // html5 timeupdate event
             $container.find('.video50-source-video').on('timeupdate.video50', function(e) {
-                if (me.video.paused) {
-                    $('.video50-ancilliary-videos .video50-video').trigger('timeupdate');
-                }
-            
                 // update highlight on the transcript, update cc
                 if (!this.lastUpdate || (this.lastUpdate + 500) < (new Date).getTime()) {
                     me.updateTranscriptHighlight(e.target.currentTime);
@@ -888,6 +884,7 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
 
     // handle keypress changes on the video
     $container.on('keydown.video50', function(e) {
+        console.log("hi");
         switch(e.which) {
             case 49:
             case 50:
