@@ -385,9 +385,25 @@ CS50.Video.prototype.createPlayer = function(state) {
                     me.video.pause(); 
                     $.each(me.subVideos, function(i, v) { v.pause(); });
                 },
-                seek: function(time) { 
+                seek: function(time) {
+                    me.cbHandlers.pause();
                     me.video.currentTime = time; 
                     $.each(me.subVideos, function(i, v) { v.currentTime = time; });
+                    
+                    // buffer for a bit so syncing doesn't get thrown off
+                    var loaded = 0;
+                    $container.find('video').on('seeked.video50', function(e) {
+                        var length = me.options.currentVideo.length || 1;
+                        if (++loaded == length) {
+                            
+                            // restore video playback state if it exists
+                            if (me.state !== undefined) {
+                                me.cbHandlers.seek(me.state.currentTime);
+                            }
+                            $container.find('.video').off('seeked.video50');
+                            me.cbHandlers.play();
+                        }
+                    });
                 },
                 duration: function() { return me.video.duration; },
                 position: function() { return me.video.currentTime; },
@@ -483,13 +499,14 @@ CS50.Video.prototype.startVideos = function(handlers) {
         case "canvas":
         case "video":
             var loaded = 0;
-            $('video').on('canplaythrough', function(e) {
+            $container.find('video').on('canplaythrough.video50', function(e) {
                 var length = me.options.currentVideo.length || 1;
                 if (++loaded == length) {
                     // restore video playback state if it exists
                     if (me.state !== undefined) {
                         me.cbHandlers.seek(me.state.currentTime);
                     }
+                    $container.find('.video').off('canplaythrough.video50');
                     $container.find('.video50-play-pause-control').trigger('mousedown');
                 }
             });
@@ -884,7 +901,6 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
 
     // handle keypress changes on the video
     $container.on('keydown.video50', function(e) {
-        console.log("hi");
         switch(e.which) {
             case 49:
             case 50:
