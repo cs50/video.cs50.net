@@ -339,6 +339,7 @@ CS50.Video.prototype.createPlayer = function(state) {
 
         // XXX: turn off any timeouts 
         // XXX: turn off webkitanimationrequest syncing
+        // XXX: turn off flash events (XXX: do we have to properly destroy jwplayer instances??)
         clearTimeout(me.timeout);
 
         // only swap out the part of the DOM related to the videos
@@ -650,11 +651,9 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         me.loadCaption(short);
     });
 
-    // XXX: handle changing of the video quality/format, should just reinstantiate player
     $container.on('mousedown.video50', '.video50-quality-control [data-index]', function(e) {
         e.preventDefault();
    
-        // XXX: support different modes
         // grab the quality of the new video and the file path, updating the UI
         var i = $(this).attr('data-index');
         me.options.currentVideo = me.options.files[i];
@@ -664,6 +663,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         else
             var quality = me.options.files[i].singleHeight;
 
+        // XXX: make UI options more clear...
         $container.find('.video50-curquality').text(quality + "p");
         $(this).addClass('active').siblings().removeClass('active');
         
@@ -706,12 +706,10 @@ CS50.Video.prototype.processTimeUpdates = function() {
                 }
             });
             break;
-        // XXX: implement these
-        case "video_singlestream":
-            break;
         case "flash":
             // flash timeupdate event
-    /*        me.video.onTime(function(e) {
+            // XXX: probably want to use the main video after a swap...
+            me.video.onTime(function(e) {
                 // update highlight on the transcript, update cc
                 if (!me.lastUpdate || (me.lastUpdate + 500) < (new Date).getTime()) {
                     me.updateTranscriptHighlight(e.position);
@@ -719,9 +717,7 @@ CS50.Video.prototype.processTimeUpdates = function() {
                     me.updateTimeline(e.position);           
                     me.lastUpdate = (new Date).getTime();
                 }
-            }); */
-            break;
-        case "flash_singlestream":
+            });
             break;
     }
 }
@@ -900,7 +896,9 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
             case 53:
                 // handle swapping the video with key numbers
                 var segment = e.which - 49;
-                $container.find('[data-segment=' + segment + ']').click();
+                var $video = $container.find('[data-segment=' + segment + ']');
+                if ($video.closest('.video50-main-video-wrapper').length == 0)
+                    $video.trigger('mousedown');
                 break;
             case 32:
                 $container.find('.video50-main-video-wrapper').trigger('mousedown');
