@@ -48,31 +48,36 @@ CS50.Video = function(options) {
     }
 
     // handle different argument types of "video" option
-    if (typeof this.options.files == "string") {
-        this.options.currentVideo = this.options.files;
-    } 
-    else {
-        for (var i = 0; i < this.options.files.length; i++) {
-            // for supported files, fill in some default values if unspecified
-            if (me.supportsFormat(this.options.files[i].type)) {
-                this.options.files[i] = $.extend({
-                    rows: 1,
-                    cols: 1,
-                    numVideos: (this.options.files[i].rows || 1) * (this.options.files[i].cols || 1)
-                }, this.options.files[i]);
-
-                this.options.files[i].singleHeight = this.options.files[i].height / this.options.files[i].rows;
-                this.options.files[i].singleWidth = this.options.files[i].width / this.options.files[i].cols;
-
-                if (this.options.currentVideo === undefined)
-                    this.options.currentVideo = this.options.files[i];
+    for (var i = 0; i < this.options.files.length; i++) {
+        // must support all videos in an array to support to entire array
+        if (this.options.files[i] instanceof Array) {
+            var support = true;
+            for (var j = 0; j < this.options.files[i].length; j++) {
+                 support = support && me.supportsFormat(this.options.files[i][j].type);
             }
-        }
 
-        // no supported file formats uh oh
-        if (this.options.currentVideo === undefined) {
-            throw 'Error: None of the given video files are supported in this browser';
+            if (this.options.currentVideo === undefined && support)
+                this.options.currentVideo = this.options.files[i];
         }
+        // for supported files in concatenated format, fill in some default values if unspecified
+        else if (me.supportsFormat(this.options.files[i].type)) {
+            this.options.files[i] = $.extend({
+                rows: 1,
+                cols: 1,
+                numVideos: (this.options.files[i].rows || 1) * (this.options.files[i].cols || 1)
+            }, this.options.files[i]);
+
+            this.options.files[i].singleHeight = this.options.files[i].height / this.options.files[i].rows;
+            this.options.files[i].singleWidth = this.options.files[i].width / this.options.files[i].cols;
+
+            if (this.options.currentVideo === undefined)
+                this.options.currentVideo = this.options.files[i];
+        }
+    }
+
+    // no supported file formats uh oh
+    if (this.options.currentVideo === undefined) {
+        throw 'Error: None of the given video files are supported in this browser';
     }
 
     // assign a (probably) unique id
@@ -87,16 +92,18 @@ CS50.Video = function(options) {
                     <div class="video50-source-video-fallback"> \
                     </div> \
                 </div> \
-                <div class="video50-left"> \
-                  <div class="video50-main-video-wrapper"> \
-                    <video class="video50-source-video video50-video" data-segment="0" autoplay src="<%- video.file %>"> \
-                    </video> \
-                    <div class="video50-cc-container"> \
-                        <div class="video50-cc-text"></div> \
+                <div class="video50-videos-wrapper">
+                    <div class="video50-left"> \
+                      <div class="video50-main-video-wrapper"> \
+                        <video class="video50-source-video video50-video" data-segment="0" autoplay src="<%- video.file %>"> \
+                        </video> \
+                        <div class="video50-cc-container"> \
+                            <div class="video50-cc-text"></div> \
+                        </div> \
+                      </div> \
                     </div> \
-                  </div> \
-                </div> \
-                <%= canvasHtml %> \
+                    <%= canvasHtml %> \
+                </div>
             </div> \
         ',
 
@@ -109,6 +116,38 @@ CS50.Video = function(options) {
                       <div class="video50-ancilliary-videos"> \
                         <% for (var i = 1; i < video.numVideos; i++) { %> \
                             <canvas class="video50-canvas video50-video" width="<%- video.width / video.cols %>" height="<%- video.height / video.rows %>" data-segment="<%= i %>"></canvas> \
+                        <% } %> \
+                      </div> \
+                    </div> \
+                <% } %> \
+            </div> \
+        ',
+
+        playerVideo: ' \
+            <div class="video50-canvas-area"> \
+                <% if (video.numVideos > 1) { %> \
+                    <div class="video50-dragger">  \
+                    </div> \
+                    <div class="video50-right"> \
+                      <div class="video50-ancilliary-videos"> \
+                        <% for (var i = 1; i < video.numVideos; i++) { %> \
+                            <video class="video50-canvas video50-video" data-segment="<%= i %>"></video> \
+                        <% } %> \
+                      </div> \
+                    </div> \
+                <% } %> \
+            </div> \
+        ',
+
+        playerFlash: ' \
+            <div class="video50-canvas-area"> \
+                <% if (video.numVideos > 1) { %> \
+                    <div class="video50-dragger">  \
+                    </div> \
+                    <div class="video50-right"> \
+                      <div class="video50-ancilliary-videos"> \
+                        <% for (var i = 1; i < video.numVideos; i++) { %> \
+                            <video class="video50-canvas video50-video" data-segment="<%= i %>"></video> \
                         <% } %> \
                       </div> \
                     </div> \
@@ -133,15 +172,21 @@ CS50.Video = function(options) {
                 <div class="video50-download-control video50-control-toggle"> \
                     <ul class="video50-download-container video50-control-list"> \
                         <% _.each(files, function(file, i) { %> \
-                            <li class="video50-download"> \
-                                <a href="<%- file.file %>?download"> \
-                                    <% if (file.type === "video/mp4" || file.type === "video/webm") { %> \
-                                        <%- file.type.split("/")[1].toUpperCase() + " (" + file.height + "p)" %> \
-                                    <% } else { %> \
-                                        <%- file.type.split("/")[1].toUpperCase() %> \
-                                    <% } %> \
-                                </a> \
-                            </li> \
+                            <% \
+                                if (!(file instanceof Array)) \
+                                    file = [file]; \
+                            %> \
+                            <% _.each(file, function(subfile, j) { %> \
+                                <li class="video50-download"> \
+                                    <a href="<%- subfile.subfile %>?download"> \
+                                        <% if (subfile.type === "video/mp4" || subfile.type === "video/webm") { %> \
+                                            <%- subfile.type.split("/")[1].toUpperCase() + " (" + subfile.height + "p)" %> \
+                                        <% } else { %> \
+                                            <%- subfile.type.split("/")[1].toUpperCase() %> \
+                                        <% } %> \
+                                    </a> \
+                                </li> \
+                            <% }) %> \
                         <% }) %> \
                         <% if (captions && _.keys(captions).length > 0) { %> \
                             <li class="video50-download"> \
@@ -169,9 +214,25 @@ CS50.Video = function(options) {
                     <ul class="video50-quality-container video50-control-list"> \
                         <% _.each(files, function(file, i) { %> \
                             <% if (file.type === "video/mp4" && supportsMP4) { %> \
-                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p</li> \
-                            <% } else if (!supportsMP4 && supportsWebM && file.type === "video/webm") { %> \
-                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p</li> \
+                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p (MP4)</li> \
+                            <% } else if (supportsWebM && file.type === "video/webm") { %> \
+                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p (WebM)</li> \
+                            <% } else if (file instanceof Array) { %> \
+                                <% var supports = true; %> \
+                                <% var type = undefined; %> \
+                                <% \
+                                    _.each(file, function(subfile, j) { \
+                                        if (subfile.type == "video/webm" && supportsWebM) \
+                                            type = (type == "MP4" || type == "Mixed") ? "Mixed" : "WebM"; \
+                                        else if (subfile.type == "video/mp4" && supportsMP4) \
+                                            type = (type == "WebM" || type == "Mixed") ? "Mixed" : "MP4"; \
+                                        else \
+                                            supports = false; \
+                                    }); \
+                                %> \
+                                <% if (supports) { %> \
+                                    <li class="video50-quality" data-index="<%- i %>"><%- file[0].height %>p (<%- type %>)</li> \
+                                <% } %> \
                             <% } %> \
                         <% }) %> \
                     </ul> \
@@ -209,10 +270,13 @@ CS50.Video.prototype.supportsFormat = function(format) {
  */
 CS50.Video.prototype.createPlayer = function() {
     var me = this;
-
-    // clear out old containers and add video player html
     var $container = $(me.options.playerContainer);
+
+    // clear out old containers 
     $container.empty();
+    
+    // construct new HTML for the player video area
+    // XXX: depending on the video type, construct the different player types (html5 concatenated, etc.)
     $container = $container.html(me.templates.player({
         video: me.options.currentVideo,
         canvasHtml: me.templates.playerCanvas({
@@ -220,12 +284,13 @@ CS50.Video.prototype.createPlayer = function() {
         })
     })).find('.video50-wrapper');
     
-    // cache canvases
+    // XXX: only if necessary, cache canvases
     me.canvases = $container.find('.video50-canvas');
     if (me.options.currentVideo.numVideos == 1) {
         $container.addClass('single-video');
     } 
 
+    // create player controls separately
     $container.append(this.templates.playerControls({
         playbackRates: this.options.playbackRates,
         downloads: this.options.downloads,
@@ -275,7 +340,6 @@ CS50.Video.prototype.createPlayer = function() {
    
     // resizes the videos appropriately and positions the dragger at dividing point = x
     var resizeVideos = function(x) {
-        
         // do not allow main video to become smaller than 50% of viewport
         var ratio = x/$container.width();
         if (ratio < .5)
@@ -336,7 +400,7 @@ CS50.Video.prototype.createPlayer = function() {
         $container.find('.video50-ancilliary-videos')
                   .css('margin-top', -$container.find('.video50-ancilliary-videos').height()/2);
     }
-    
+   
     // toggle clicked video to main video in left panel
     $container.on('click', '.video50-ancilliary-videos .video50-canvas', function() {
         // simply swap the data-segment id of the two video canvases 
@@ -584,8 +648,20 @@ CS50.Video.prototype.createPlayer = function() {
         }
     });
 
+    // control fading out of videos
+    CS50.controlFade = undefined;
+    $container.on('mousemove', function(e) {
+        clearTimeout(CS50.controlFade);
+        $container.find('.video50-control-bar').fadeIn();
+        CS50.controlFade = setTimeout(function() {
+            $container.find('.video50-control-bar').fadeOut();
+        }, 3000);
+    });
+    $container.trigger('mousemove');
+
     // trigger a resize to get the correct dimensions for the initialization
     $(window).trigger('resize');
+
 
     // load closed captioning and set closed captioning to happen in a loop
     this.loadCaption(this.options.defaultLanguage);
@@ -607,8 +683,8 @@ CS50.Video.prototype.createPlayer = function() {
         $container.find('.video50-source-video').on('timeupdate', function(e) {
             if (!this.lastUpdate || (this.lastUpdate + 500) < (new Date).getTime()) {
                 // update highlight on the transcript, update cc
-                me.updateTranscriptHighlight(e.target.currentTime + 7);
-                me.updateCC(e.target.currentTime + 7);
+                me.updateTranscriptHighlight(e.target.currentTime);
+                me.updateCC(e.target.currentTime);
                 me.updateTimeline(e.target.currentTime);           
      
                 this.lastUpdate = (new Date).getTime();

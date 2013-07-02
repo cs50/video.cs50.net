@@ -51,19 +51,39 @@ body, html {
     }
 }
 
-.video50-source-video-fallback-wrapper {
-    display: none;
+.video50-videos-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 
-    &.activated {
-        position: absolute;
-        display: block;
-        z-index: 3;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
+    &.fullmode {
+        background-color: black;
+
+        .video50-dragger {
+            display: none;
+        }
+
+        .video50-right {
+            display: none;    
+        }
+
+        .video50-left {
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            border: 0px;
+        
+            .video50-main-video-wrapper {
+                left: 0px;
+                right: 0px;
+            }
+        }
     }
 }
+
 
 .video50-control-bar {
     position: absolute;
@@ -97,7 +117,7 @@ video {
     width: 100%;
 }
 
-.video50-canvas {
+.video50-video {
     width: 100%;
 }
 
