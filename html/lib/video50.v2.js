@@ -271,7 +271,6 @@ CS50.Video.prototype.createPlayer = function(state) {
 
     // XXX: factor function that determines what type of player to instantiate
     var modes = ["canvas", "video", "flash"];
-
     // if we've supplied an array of videos, then multistream
     if (me.options.currentVideo instanceof Array) {
         me.mode = me.supportsHTML5 ? "video" : "flash";
@@ -463,7 +462,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                     $.each(me.subVideos, function(i, v) { v.seek(time); });
                 },
                 duration: function() { return me.video.getDuration(); },
-                position: function() { return me.video.getPosition(); },
+                position: function() { console.log('hi'); return me.video.getPosition(); },
             });
             me.videoHandlers({
                 duration: function() { return me.video.getDuration(); },
@@ -736,7 +735,7 @@ CS50.Video.prototype.processTimeUpdates = function() {
                 if (!me.lastUpdate || (me.lastUpdate + 500) < (new Date).getTime()) {
                     me.updateTranscriptHighlight(e.position);
                     me.updateCC(e.position);
-                    me.updateTimeline(e.position);           
+                    me.updateTimeline(e.position, me.video.getDuration());           
                     me.lastUpdate = (new Date).getTime();
                 }
             });
