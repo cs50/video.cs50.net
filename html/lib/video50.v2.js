@@ -386,22 +386,19 @@ CS50.Video.prototype.createPlayer = function(state) {
                     $.each(me.subVideos, function(i, v) { v.pause(); });
                 },
                 seek: function(time) {
-                    me.cbHandlers.pause();
+                    if (!$container.find('.video50-play-pause-control').hasClass('pause'))
+                        $container.find('.video50-play-pause-control').trigger('mousedown');
+                    
                     me.video.currentTime = time; 
                     $.each(me.subVideos, function(i, v) { v.currentTime = time; });
-                    
+                 
                     // buffer for a bit so syncing doesn't get thrown off
                     var loaded = 0;
-                    $container.find('video').on('seeked.video50', function(e) {
+                    $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
                         var length = me.options.currentVideo.length || 1;
                         if (++loaded == length) {
-                            
-                            // restore video playback state if it exists
-                            if (me.state !== undefined) {
-                                me.cbHandlers.seek(me.state.currentTime);
-                            }
                             $container.find('.video').off('seeked.video50');
-                            me.cbHandlers.play();
+                            $container.find('.video50-play-pause-control').trigger('mousedown');
                         }
                     });
                 },
@@ -502,12 +499,13 @@ CS50.Video.prototype.startVideos = function(handlers) {
             $container.find('video').on('canplaythrough.video50', function(e) {
                 var length = me.options.currentVideo.length || 1;
                 if (++loaded == length) {
-                    // restore video playback state if it exists
-                    if (me.state !== undefined) {
-                        me.cbHandlers.seek(me.state.currentTime);
-                    }
                     $container.find('.video').off('canplaythrough.video50');
-                    $container.find('.video50-play-pause-control').trigger('mousedown');
+                    
+                    // restore video playback state if it exists
+                    if (me.state !== undefined)
+                        me.cbHandlers.seek(me.state.currentTime);
+                    else 
+                        $container.find('.video50-play-pause-control').trigger('mousedown');
                 }
             });
             break;
@@ -570,7 +568,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     
     // skip back 8 seconds when skip back control is hit
     $container.on('mousedown.video50', '.video50-sb-control', function(e) {
-        var time = handlers.position() > 8 ? 0 : handlers.position() - 8;
+        var time = handlers.position() < 8 ? 0 : handlers.position() - 8;
         handlers.seek(time);
     });
 
