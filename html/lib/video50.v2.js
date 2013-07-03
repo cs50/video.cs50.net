@@ -359,7 +359,18 @@ CS50.Video.prototype.createPlayer = function(state) {
             me.controlBarHandlers({
                 play: function() { me.video.play() },
                 pause: function() { me.video.pause() },
-                seek: function(time) { me.video.currentTime = time; },
+                seek: function(time) {
+                    if (!$container.find('.video50-play-pause-control').hasClass('pause'))
+                        $container.find('.video50-play-pause-control').trigger('mousedown');
+                    
+                    me.video.currentTime = time; 
+                    
+                    // buffer for a bit so syncing doesn't get thrown off
+                    $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
+                        $container.find('.video').off('seeked.video50');
+                        $container.find('.video50-play-pause-control').trigger('mousedown');
+                    });
+                },
                 duration: function() { return me.video.duration; },
                 position: function() { return me.video.currentTime; },
                 playbackRate: function(speed) { me.video.playbackRate = speed; }
