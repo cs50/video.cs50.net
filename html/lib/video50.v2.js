@@ -271,6 +271,7 @@ CS50.Video.prototype.createPlayer = function(state) {
 
     // XXX: factor function that determines what type of player to instantiate
     var modes = ["canvas", "video", "flash"];
+    
     // if we've supplied an array of videos, then multistream
     if (me.options.currentVideo instanceof Array) {
         me.mode = me.supportsHTML5 ? "video" : "flash";
