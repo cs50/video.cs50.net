@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="/lib/jquery-1.9.1.min.js"></script>
+    <script src="/lib/johndyer-mediaelement-2601db5/build/mediaelement-and-player.js" ></script>
+    <script>
+
+        var one, two, three;
+
+        $(function() {
+
+            one = new MediaElement('one', {
+                pluginPath: '/lib/johndyer-mediaelement-2601db5/build/',
+                flashName: 'flashmediaelement.swf',
+                plugins: ['flash'],
+                success: function(mediaElement, domObject) {
+                    mediaElement.addEventListener('timeupdate', function(e) {
+                        $('#one-t').html(mediaElement.currentTime);
+                    }, false);
+                    mediaElement.play();
+                }
+
+            });
+
+            two = new MediaElement('two', {
+                pluginPath: '/lib/johndyer-mediaelement-2601db5/build/',
+                flashName: 'flashmediaelement.swf',
+                plugins: ['flash'],
+                success: function(mediaElement, domObject) {
+                    mediaElement.addEventListener('timeupdate', function(e) {
+                        $('#two-t').html(mediaElement.currentTime);
+                    }, false);
+                    mediaElement.play();
+                }
+            });
+
+            three = new MediaElement('three', {
+                pluginPath: '/lib/johndyer-mediaelement-2601db5/build/',
+                flashName: 'flashmediaelement.swf',
+                plugins: ['flash'],
+                success: function(mediaElement, domObject) {
+                    mediaElement.addEventListener('timeupdate', function(e) {
+                        $('#three-t').html(mediaElement.currentTime);
+                    }, false);
+                    mediaElement.play();
+                }
+            });
+
+        });
+
+        function sync() {
+            var t = one.currentTime;
+            two.setCurrentTime(t);
+            three.setCurrentTime(t);
+        }
+
+    </script>
+    <style>
+
+        body { margin: 0; }
+
+    </style>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td><video id="one" src="http://cdn.cs50.net/.test/cs50_week2m_camA-360p.mp4"></video></td>
+        <td><video id="two" src="http://cdn.cs50.net/.test/cs50_week2m_camB-360p.mp4"></video></td>
+        <td><video id="three" src="http://cdn.cs50.net/.test/cs50_week2m_projector-360p.mp4"></video></td>
+      </tr>
+      <tr>
+        <td><div id="one-t"></div></td>
+        <td><div id="two-t"></div></td>
+        <td><div id="three-t"></div></td>
+      </tr>
+    </table>
+    <input id="button" onclick="sync()" type="button" value="SYNC"/>
+  </body>
+</html>
