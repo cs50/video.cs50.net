@@ -99,15 +99,15 @@ body, html {
 
 .video50-dragger {
     position: absolute;
-    width: 10px;
-    height: 50px;
+    width: 12px;
+    height: 60px;
     @include border-radius(10px);
-    @include box-shadow("inset -1px -1px 2px #888, inset 1px 1px 3px #EEE");
+    @include box-shadow("inset 0px 0px 3px #040404");
     top: 50%;
     left: 901px;
     margin-top: -25px;
-    margin-left: -5px;
-    background-color: rgb(0, 143, 255);
+    margin-left: -6px;
+    background-color: #555;
     z-index: 2;
     cursor: pointer;
 }
@@ -130,6 +130,7 @@ video {
     cursor: pointer;   
     overflow: hidden;
     @include box-shadow(0px 0px 8px #111);
+    -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
 }
 
 .video50-source-video {
