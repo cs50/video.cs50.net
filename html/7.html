@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="/lib/jquery-1.9.1.min.js"></script>
+    <script src="/lib/jwplayer/jwplayer.js" ></script>
+    <script>
+
+        var one, two, three;
+
+        $(function() {
+
+            one = jwplayer("one").setup({
+                autostart: true,
+                file: 'http://cdn.cs50.net/.test/cs50_week2m_camA-360p.mp4'
+            });
+            one.onTime(function(e) {
+                $('#one-t').html(e.position);
+            });
+
+            two = jwplayer("two").setup({
+                autostart: true,
+                file: 'http://cdn.cs50.net/.test/cs50_week2m_camB-360p.mp4'
+            });
+            two.onTime(function(e) {
+                $('#two-t').html(e.position);
+            });
+
+            three = jwplayer("three").setup({
+                autostart: true, 
+                file: 'http://cdn.cs50.net/.test/cs50_week2m_projector-360p.mp4'
+            });
+            three.onTime(function(e) {
+                $('#three-t').html(e.position);
+            });
+
+        });
+
+        function sync() {
+            var t = one.getPosition();
+            two.seek(t);
+            three.seek(t);
+        }
+
+    </script>
+    <style>
+
+        body { margin: 0; }
+
+    </style>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td><div id="one"></div></td>
+        <td><div id="two"></div></td>
+        <td><div id="three"></div></td>
+      </tr>
+      <tr>
+        <td><div id="one-t"></div></td>
+        <td><div id="two-t"></div></td>
+        <td><div id="three-t"></div></td>
+      </tr>
+    </table>
+    <input onclick="sync()" type="button" value="SYNC"/>
+  </body>
+</html>
