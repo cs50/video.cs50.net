@@ -731,6 +731,15 @@ CS50.Video.prototype.swapHandlers = function() {
     
     return {
         video: function(el) {
+            // retain prior pause state
+            var paused = $(me.video).prop('paused');
+
+            // pause the videos to avoid bugs
+            me.video.pause();
+            _.each(me.subVideos, function(video, index) {
+                video.pause();
+            });
+            
             // swap the two dom elements and their classes
             var $oldMain = $container.find('.video50-main-video-wrapper .video50-video')
                                      .removeClass('video50-source-video');
@@ -746,11 +755,13 @@ CS50.Video.prototype.swapHandlers = function() {
             me.video = $container.find('.video50-source-video')[0];
             me.subVideos = $container.find('.video50-ancilliary-videos > video').get();
             
-            // play the videos, since moving the DOM element pauses by default
-            me.video.play();
-            _.each(me.subVideos, function(video, index) {
-                video.play();
-            });
+            // play the videos if they weren't paused before
+            if (!paused) {
+                me.video.play();
+                _.each(me.subVideos, function(video, index) {
+                    video.play();
+                });
+            }
 
             // trigger a resize to attain the correct dimensions
             $(window).trigger('resize');
