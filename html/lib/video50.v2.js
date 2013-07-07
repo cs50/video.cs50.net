@@ -6,7 +6,6 @@ var CS50 = CS50 || {};
  *
  * @param options Object Video50 options:
  *      aspectRatio: float, aspect ratio for a single video
- *      defaultLanguage: string, default language for subtitles, transcript
  *      download: object, maps download name to video download urls
  *      onReady: function, function to call when player is finished loading
  *      numVideos: int, the number of video screens to show
@@ -24,61 +23,77 @@ CS50.Video = function(options) {
     this.options = options;
 
     // required options must be defined
-    if (!this.options.playerContainer)
+    if (!me.options.playerContainer)
         throw 'Error: You must define a container for CS50 Video!';
-    if (!this.options.files)
+    if (!me.options.sources)
         throw 'Error: You must define a video for CS50 Video to play!';
 
+    // if an object supplied just turn it into an array of one object
+    if (!(me.options.sources instanceof Array)) {
+       me.options.sources = [me.options.sources] 
+    }
+
     // fill in default values for optional, undefined values
-    this.options = $.extend({
-        aspectRatio: 16/9,
-        defaultLanguage: 'eng',
-        onReady: false,
+    me.options = $.extend({
         playbackRates: [0.7, 1, 1.2, 1.5],
         title: '',
-    }, this.options);
+    }, me.options);
     
     // detect compatibility for various video types
     var testEl = document.createElement("video");
     me.supportsHTML5 = testEl.canPlayType;
     if (testEl.canPlayType) {
-        this.options.supportsMP4 = "" !== (testEl.canPlayType('video/mp4; codecs="mp4v.20.8"') ||
+        me.options.supportsMP4 = "" !== (testEl.canPlayType('video/mp4; codecs="mp4v.20.8"') ||
                   testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') ||
                   testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"'));
-        this.options.supportsWebM = "" !== testEl.canPlayType('video/webm; codecs="vp8, vorbis"');
+        me.options.supportsWebM = "" !== testEl.canPlayType('video/webm; codecs="vp8, vorbis"');
     }
 
-    // handle different argument types of "video" option
-    for (var i = 0; i < this.options.files.length; i++) {
-        // must support all videos in an array to support to entire array
-        if (this.options.files[i] instanceof Array) {
-            var support = true;
-            for (var j = 0; j < this.options.files[i].length; j++) {
-                 support = support && me.supportsFormat(this.options.files[i][j].type);
-            }
+    // parse the sources argument to determine which are multistream and which are single stream
+    me.multiStreamSources = [];
+    me.singleStreamSources = [];
+    me.currentSource = undefined;
 
-            if (this.options.currentVideo === undefined && support)
-                this.options.currentVideo = this.options.files[i];
+    $.each(me.options.sources, function(i, source) {       
+        // check if the required keys are supplied, correctly
+        if (!(source.source && source.source instanceof Array)) {
+            throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key, and that the value of the key is an array.';
         }
-        // for supported files in concatenated format, fill in some default values if unspecified
-        else if (me.supportsFormat(this.options.files[i].type)) {
-            this.options.files[i] = $.extend({
-                rows: 1,
-                cols: 1,
-                numVideos: (this.options.files[i].rows || 1) * (this.options.files[i].cols || 1)
-            }, this.options.files[i]);
 
-            this.options.files[i].singleHeight = this.options.files[i].height / this.options.files[i].rows;
-            this.options.files[i].singleWidth = this.options.files[i].width / this.options.files[i].cols;
-
-            if (this.options.currentVideo === undefined)
-                this.options.currentVideo = this.options.files[i];
+        // at least one src key must be defined, determine single of multistream
+        if (source.source[0] && source.source[0].src) {
+            source.video50_index = i;
+            if (source.source[0].src instanceof Array)
+                me.multiStreamSources.push(source);
+            else
+                me.singleStreamSources.push(source);
+        } 
+        else {
+            throw 'Video source with label' + (source.label || 'undefined') 
+                +  'incorrectly defined. Array must have at least one entry with a src key.'
         }
+
+        // detect default video
+        if (source.default && me.currentSource === undefined) {
+            me.currentSource = source;
+        }
+        else if (source.default) {
+            throw 'Sources array is incorrectly defined. More than one default video specified';
+        }
+    });
+
+    // if no default video, just get the first video of the sources array
+    if (me.currentSource === undefined) {
+        if (me.supportsHTML5)
+            me.currentSource = me.options.sources[0];
+        else
+            me.currentSource = me.singleStreamSources[0];
     }
 
-    // no supported file formats uh oh
-    if (this.options.currentVideo === undefined) {
-        throw 'Error: None of the given video files are supported in this browser';
+    // XXX: if still undefined, this is a purely multistream video, no flash, inform
+    // user that they must use a better browser
+    if (me.currentSource === undefined) {
+        console.log('unimplemented');
     }
 
     // private member variable for template structure
@@ -91,11 +106,37 @@ CS50.Video = function(options) {
             </div> \
         ',
 
-        // for concatenated videos, using canvas
-        playerCanvas: ' \
+        // for synced individual <video> tags
+        playerVideo: ' \
+            <% // parse into a more loopable format %> \
+            <% \
+                var angles = []; \
+                _.each(source.source, function(format, i) { \
+                    if (format.src instanceof Array) { \
+                        _.each(format.src, function(path, j) { \
+                            var entry = { path: path, type: format.type }; \
+                            if (angles[j] === undefined) \
+                                angles[j] = [entry]; \
+                            else \
+                                angles[j].push(entry); \
+                        }); \
+                    } \
+                    else { \
+                        var entry = { path: format.src, type: format.type }; \
+                        if (angles[0] === undefined) \
+                            angles[0] = [entry]; \
+                        else \
+                            angles[0].push(entry); \
+                    } \
+                }); \
+            %> \
             <div class="video50-left"> \
               <div class="video50-main-video-wrapper"> \
-                <video class="video50-source-video video50-video" data-segment="0" src="<%- video.file %>"> \
+                <video class="video50-source-video video50-video" data-segment="0"> \
+                <% _.each(angles.shift(), function(format, i) { %> \
+                    <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                <% }); %> \
+                <% // XXX: put error message for unsupported formats here %> \
                 </video> \
                 <div class="video50-cc-container"> \
                     <div class="video50-cc-text"></div> \
@@ -106,29 +147,13 @@ CS50.Video = function(options) {
             </div> \
             <div class="video50-right"> \
               <div class="video50-ancilliary-videos"> \
-                <% for (var i = 1; i < video.numVideos; i++) { %> \
-                    <canvas class="video50-canvas video50-video" width="<%- video.width / video.cols %>" height="<%- video.height / video.rows %>" data-segment="<%= i %>"></canvas> \
-                <% } %> \
-              </div> \
-            </div> \
-        ',
-
-        // for synced individual <video> tags
-        playerVideo: ' \
-            <div class="video50-left"> \
-              <div class="video50-main-video-wrapper"> \
-                <video class="video50-source-video video50-video" data-segment="0" src="<%- video.file || video[0].file %>"></video> \
-                <div class="video50-cc-container"> \
-                    <div class="video50-cc-text"></div> \
-                </div> \
-              </div> \
-            </div> \
-            <div class="video50-dragger">  \
-            </div> \
-            <div class="video50-right"> \
-              <div class="video50-ancilliary-videos"> \
-                <% for (var i = 1; i < video.length; i++) { %> \
-                    <video class="video50-video" data-segment="<%= i %>" src="<%- video[i].file %>"></video> \
+                <% for (var i = 0; i < angles.length; i++) { %> \
+                    <video class="video50-video" data-segment="<%= i %>"> \
+                    <% _.each(angles[i], function(format, j) { %> \
+                        <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                        <% // XXX: put error message for unsupported formats here %> \
+                    <% }); %> \
+                    </video> \
                 <% } %> \
               </div> \
             </div> \
@@ -139,22 +164,12 @@ CS50.Video = function(options) {
             <div class="video50-left"> \
               <div class="video50-main-video-wrapper"> \
                 <div class="video50-source-video video50-flash-wrapper video50-video" data-segment="0"> \
-                    <div id="a" class="video50-flash" data-src="<%- video.file || video[0].file %>"></div> \
+                    <% // XXX: GENERATE A RANDOM ID %> \
+                    <div id="a" class="video50-flash" data-src="<%- source.source[0].src %>"></div> \
                 </div> \
                 <div class="video50-cc-container"> \
                     <div class="video50-cc-text"></div> \
                 </div> \
-              </div> \
-            </div> \
-            <div class="video50-dragger"> \
-            </div> \
-            <div class="video50-right"> \
-              <div class="video50-ancilliary-videos"> \
-                <% for (var i = 1; i < video.length; i++) { %> \
-                    <div class="video50-flash-wrapper video50-video" data-segment="<%= i %>"> \
-                        <div id="<%= String.fromCharCode(97 + i) %>" class="video50-flash" data-src="<%- video[i].file %>"></div> \
-                    </div> \
-                <% } %> \
               </div> \
             </div> \
         ',
@@ -175,69 +190,42 @@ CS50.Video = function(options) {
               <div class="video50-right-controls"> \
                 <div class="video50-download-control video50-control-toggle"> \
                     <ul class="video50-download-container video50-control-list"> \
-                        <% _.each(files, function(file, i) { %> \
-                            <% \
-                                if (!(file instanceof Array)) \
-                                    file = [file]; \
-                            %> \
-                            <% _.each(file, function(subfile, j) { %> \
-                                <li class="video50-download"> \
-                                    <a href="<%- subfile.subfile %>?download"> \
-                                        <% if (subfile.type === "video/mp4" || subfile.type === "video/webm") { %> \
-                                            <%- subfile.type.split("/")[1].toUpperCase() + " (" + subfile.height + "p)" %> \
-                                        <% } else { %> \
-                                            <%- subfile.type.split("/")[1].toUpperCase() %> \
-                                        <% } %> \
-                                    </a> \
-                                </li> \
-                            <% }) %> \
-                        <% }) %> \
-                        <% if (captions && _.keys(captions).length > 0) { %> \
-                            <li class="video50-download"> \
-                                <a class="video50-transcript-download" href="<%- captions[defaultLanguage] %>?download"> \
-                                    SRT (<%- CS50.Video.Languages[defaultLanguage] || "Unknown Language" %>) \
-                                </a> \
-                            </li> \
-                        <% } %> \
+                    <% _.each(downloads, function(download, i) { %> \
+                        <li class="video50-download"> \
+                            <a href="<%- download.src %>"> \
+                                <%- downloads.label %> \
+                            </a> \
+                        </li> \
+                    <% }); %> \
                     </ul> \
                 </div><div class="video50-captions-control video50-control-toggle"> \
                     <ul class="video50-captions-container video50-control-list"> \
-                        <li class="video50-caption"><a href="#" data-lang="">Off</a></li> \
-                        <% _.each(captions, function(path, short) { %> \
-                            <li class="video50-caption" data-lang="<%- short %>"><%- CS50.Video.Languages[short] || "Unknown Language" %></li> \
-                        <% }) %> \
+                        <li class="video50-caption" data-lang="">Off</li> \
+                    <% _.each(captions, function(caption, i) { %> \
+                        <li class="video50-caption" data-lang="<%- caption.srclang %>"> \
+                            <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
+                        </li> \
+                    <% }) %> \
                     </ul> \
                     <div class="video50-transcript-container"></div> \
                 </div><div class="video50-speed-control video50-control-toggle"><div class="video50-curspeed">1x</div> \
                     <ul class="video50-speed-container video50-control-list"> \
-                        <% _.each(playbackRates, function(rate, index) { %> \
-                            <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
-                        <% }) %> \
+                    <% _.each(playbackRates, function(rate, i) { %> \
+                        <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
+                    <% }) %> \
                     </ul> \
                 </div><div class="video50-quality-control video50-control-toggle"><div class="video50-curquality"></div> \
                     <ul class="video50-quality-container video50-control-list"> \
-                        <% _.each(files, function(file, i) { %> \
-                            <% if (file.type === "video/mp4" && supportsMP4) { %> \
-                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p (MP4)</li> \
-                            <% } else if (supportsWebM && file.type === "video/webm") { %> \
-                                <li class="video50-quality" data-index="<%- i %>"><%- file.height / file.rows %>p (WebM)</li> \
-                            <% } else if (file instanceof Array) { %> \
-                                <% var supports = true; %> \
-                                <% var type = undefined; %> \
-                                <% \
-                                    _.each(file, function(subfile, j) { \
-                                        if (subfile.type == "video/webm" && supportsWebM) \
-                                            type = (type == "MP4" || type == "Mixed") ? "Mixed" : "WebM"; \
-                                        else if (subfile.type == "video/mp4" && supportsMP4) \
-                                            type = (type == "WebM" || type == "Mixed") ? "Mixed" : "MP4"; \
-                                        else \
-                                            supports = false; \
-                                    }); \
-                                %> \
-                                <% if (supports) { %> \
-                                    <li class="video50-quality" data-index="<%- i %>"><%- file[0].height %>p (Multistream <%- type %>)</li> \
-                                <% } %> \
-                            <% } %> \
+                        <% // XXX: LABEL WHETHER THESE WILL WORK FOR THE USER %> \
+                        <% _.each(singleStreamSources, function(source, i) { %> \
+                            <li class="video50-quality" data-index="<%- source.video50_index %>"> \
+                                <%- source.label %> \
+                            </li> \
+                        <% }) %> \
+                        <% _.each(multiStreamSources, function(source, i) { %> \
+                            <li class="video50-quality" data-index="<%- source.video50_index %>"> \
+                                <%- source.label %> \
+                            </li> \
                         <% }) %> \
                     </ul> \
                 </div><div class="video50-fullscreen-control"> \
@@ -270,42 +258,20 @@ CS50.Video.prototype.createPlayer = function(state) {
         $container.empty();
 
     // XXX: factor function that determines what type of player to instantiate
-    var modes = ["canvas", "video", "flash"];
-    
-    // if we've supplied an array of videos, then multistream
-    if (me.options.currentVideo instanceof Array) {
-        me.mode = me.supportsHTML5 ? "video" : "flash";
-        me.fullmode = false;
-    } 
-    else {
-        // use canvas singlestreaming if more than 1 video provided and HTML5 supported
-        if (me.options.currentVideo.numVideos > 1 && me.supportsHTML5) {
-            me.mode = "canvas";
-            me.fullmode = false;
-        }
-        // if not, set flag fullmode that expands video to viewport, and show a single video
-        else {
-            me.mode = me.supportsHTML5 ? "video" : "flash";
-            me.fullmode = true; 
-        }
-    }
+    me.mode = me.supportsHTML5 ? "video" : "flash";
+    me.fullmode = !(me.currentSource.source[0].src instanceof Array);
 
     // grab HTML for the player area
     var playerHTML;
     switch(me.mode) {
-        case "canvas":
-            playerHTML = me.templates.playerCanvas({
-                video: me.options.currentVideo
-            });
-            break;
         case "video":
             playerHTML = me.templates.playerVideo({
-                video: me.options.currentVideo
+                source: me.currentSource
             });
             break;
         case "flash":
             playerHTML = me.templates.playerFlash({
-                video: me.options.currentVideo    
+                source: me.currentSource    
             });
             break;
     }
@@ -314,19 +280,19 @@ CS50.Video.prototype.createPlayer = function(state) {
     if (me.first === undefined) {
         // construct the actual player, swap the container to a tighter scope
         $container = $container.html(me.templates.player({
-            video: me.options.currentVideo,    
+            source: me.currentSource,    
             playerHTML: playerHTML
         })).find('.video50-wrapper');
 
         // attach the control bar to the player
-        $container.append(this.templates.playerControls({
-            playbackRates: this.options.playbackRates,
-            downloads: this.options.downloads,
-            captions: this.options.captions,
-            defaultLanguage: this.options.defaultLanguage,
-            files: this.options.files,
-            supportsMP4: this.options.supportsMP4,
-            supportsWebM: this.options.supportsWebM
+        $container.append(me.templates.playerControls({
+            playbackRates: me.options.playbackRates,
+            downloads: me.options.downloads,
+            captions: me.options.captions,
+            supportsMP4: me.options.supportsMP4,
+            supportsWebM: me.options.supportsWebM,
+            multiStreamSources: me.multiStreamSources,
+            singleStreamSources: me.singleStreamSources
         }));
         me.first = true;
     } 
@@ -352,34 +318,6 @@ CS50.Video.prototype.createPlayer = function(state) {
     // for each mode, perform different operations for instantiating the player
     // attach function handlers for the different operations of seeking, resizing, etc.
     switch (me.mode) {
-        case "canvas":
-            // video related updates 
-            me.video = $container.find(".video50-source-video")[0];
-            me.canvases = $container.find('.video50-canvas');
-            me.controlBarHandlers({
-                play: function() { me.video.play() },
-                pause: function() { me.video.pause() },
-                seek: function(time) {
-                    if (!$container.find('.video50-play-pause-control').hasClass('pause'))
-                        $container.find('.video50-play-pause-control').trigger('mousedown');
-                    
-                    me.video.currentTime = time; 
-                    
-                    // buffer for a bit so syncing doesn't get thrown off
-                    $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
-                        $container.find('.video').off('seeked.video50');
-                        $container.find('.video50-play-pause-control').trigger('mousedown');
-                    });
-                },
-                duration: function() { return me.video.duration; },
-                position: function() { return me.video.currentTime; },
-                playbackRate: function(speed) { me.video.playbackRate = speed; }
-            });
-            me.videoHandlers({
-                duration: function() { return me.video.duration; },
-                swap: this.swapHandlers()[me.mode]
-            });
-            break;
         case "video":
             // set the videos accordingly
             me.video = $container.find('.video50-source-video')[0];
@@ -406,7 +344,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                     // buffer for a bit so syncing doesn't get thrown off
                     var loaded = 0;
                     $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
-                        var length = me.options.currentVideo.length || 1;
+                        var length = me.currentSource.source[0].src.length || 1;
                         if (++loaded == length) {
                             $container.find('.video').off('seeked.video50');
                             $container.find('.video50-play-pause-control').trigger('mousedown');
@@ -463,7 +401,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                     $.each(me.subVideos, function(i, v) { v.seek(time); });
                 },
                 duration: function() { return me.video.getDuration(); },
-                position: function() { console.log('hi'); return me.video.getPosition(); },
+                position: function() { return me.video.getPosition(); },
             });
             me.videoHandlers({
                 duration: function() { return me.video.getDuration(); },
@@ -473,12 +411,8 @@ CS50.Video.prototype.createPlayer = function(state) {
     }
     me.processTimeUpdates(me.mode);
 
-    // for canvas, start redrawing loop
-    if (me.mode == "canvas") {
-        me.redrawVideo(me.video);
-    } 
     // for multisync videos, specify how to sync. should factor.
-    else if (me.mode == "video" && !me.fullmode) {
+    if (me.mode == "video" && !me.fullmode) {
         me.syncHTML5Videos();
     } 
     else if (me.mode == "flash" && !me.fullmode) {
@@ -504,11 +438,10 @@ CS50.Video.prototype.startVideos = function(handlers) {
     var me = this;
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
     switch (me.mode) {
-        case "canvas":
         case "video":
             var loaded = 0;
             $container.find('video').on('canplaythrough.video50', function(e) {
-                var length = me.options.currentVideo.length || 1;
+                var length = me.currentSource.source[0].src.length || 1;
                 if (++loaded == length) {
                     $container.find('.video').off('canplaythrough.video50');
                     
@@ -524,7 +457,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
             var loaded = 0;
             $.each([me.video].concat(me.subVideos), function(i, v) {
                 v.onReady(function(e) {
-                    var length = me.options.currentVideo.length || 1;
+                    var length = me.currentSource.source[0].src.length || 1;
                     if (++loaded == length) {
                         // restore video playback state if it exists
                         if (me.state !== undefined) {
@@ -682,15 +615,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
    
         // grab the quality of the new video and the file path, updating the UI
         var i = $(this).attr('data-index');
-        me.options.currentVideo = me.options.files[i];
-
-        if (me.options.currentVideo instanceof Array)
-            var quality = me.options.files[i][0].height;
-        else
-            var quality = me.options.files[i].singleHeight;
-
-        // XXX: make UI options more clear...
-        $container.find('.video50-curquality').text(quality + "p");
+        me.currentSource = me.options.sources[i];
         $(this).addClass('active').siblings().removeClass('active');
         
         // save and restore state
@@ -714,7 +639,6 @@ CS50.Video.prototype.processTimeUpdates = function() {
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
    
     switch (me.mode) {
-        case "canvas":
         case "video":
             // html5 timeupdate event
             $container.find('.video50-source-video').on('timeupdate.video50', function(e) {
@@ -772,27 +696,6 @@ CS50.Video.prototype.updateTimeline = function(time, total) {
     $container.find('.video50-progress').css("width", (ratio * 100) + "%");
 };
 
-/*
- *  Draws a frame from the video to the canvases.
- */
-CS50.Video.prototype.redrawVideo = function(video) {
-    // for each canvas object, draw the appropriate segment onto the canvas
-    var me = this;
-    me.canvases.each(function(i, canvas) {
-        var context = canvas.getContext('2d');
-        var segment = canvas.getAttribute('data-segment');
-        var rows = me.options.currentVideo.rows;
-        var cols = me.options.currentVideo.cols;
-        var height = me.options.currentVideo.singleHeight;
-        var width = me.options.currentVideo.singleWidth;
-        var y = Math.floor(segment / cols) * height;
-        var x = (segment % cols) * width;
-        context.drawImage(video, x, y, width, height, 0, 0, width, height);
-    });
-
-    // redraw the video at approximately 30fps
-    me.timeout = setTimeout(function() { me.redrawVideo(video) }, 20);
-};
 
 // XXX: handle video syncing
 CS50.Video.prototype.syncHTML5Videos = function() {
@@ -827,20 +730,6 @@ CS50.Video.prototype.swapHandlers = function() {
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
     
     return {
-        canvas: function(el) {
-            // simply swap the data-segment id of the two video canvases 
-            var oldMain = $container.find('.video50-main-video-wrapper .video50-video')
-                                    .attr('data-segment');
-            var newMain = $(el).attr('data-segment');
-
-            $container.find('.video50-main-video-wrapper .video50-video')
-                      .attr('data-segment', newMain);
-            
-            $container.find('.video50-main-video-wrapper .video50-video')
-                      .css('top', - newMain * $container.find('.video50-main-video-wrapper').height()); 
-
-            $(el).attr('data-segment', oldMain);
-        },
         video: function(el) {
             // swap the two dom elements and their classes
             var $oldMain = $container.find('.video50-main-video-wrapper .video50-video')

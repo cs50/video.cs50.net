@@ -37,17 +37,6 @@ body, html {
     margin: 0 auto;
     font-family: HelveticaNeue;
     background-color: #222;
-
-    &.single-video {
-        .video50-left {
-            border: none;
-        }
-
-        .video50-main-video-wrapper {
-            left: 0px;
-            right: 0px;
-        }
-    }
 }
 
 .video50-videos-wrapper {
@@ -56,6 +45,10 @@ body, html {
     left: 0px;
     right: 0px;
     bottom: 0px;
+
+    .video50-main-video-wrapper {
+        -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
+    }
 
     &.fullmode {
         background-color: black;
@@ -78,6 +71,7 @@ body, html {
             .video50-main-video-wrapper {
                 left: 0px;
                 right: 0px;
+                -webkit-box-reflect: none;
             }
         }
     }
@@ -130,7 +124,6 @@ video {
     cursor: pointer;   
     overflow: hidden;
     @include box-shadow(0px 0px 8px #111);
-    -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
 }
 
 .video50-source-video {
