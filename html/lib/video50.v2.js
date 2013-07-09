@@ -82,6 +82,19 @@ CS50.Video = function(options) {
         }
     });
 
+    // parse languages into a keyed format for fast access
+    me.keyedCaptions = {};
+    $.each(me.options.captions, function(i, caption) {
+        me.keyedCaptions[caption.srclang] = caption;
+    
+        // load default caption
+        if (caption.default)
+            me.loadCaption(caption.srclang);
+    });
+
+    // load VTT for thumbnails
+    me.loadThumbnails();
+
     // if no default video, just get the first video of the sources array
     if (me.currentSource === undefined) {
         if (me.supportsHTML5)
@@ -144,6 +157,7 @@ CS50.Video = function(options) {
               </div> \
             </div> \
             <div class="video50-dragger">  \
+                <div class="video50-dragger-knob"></div> \
             </div> \
             <div class="video50-right"> \
               <div class="video50-ancilliary-videos"> \
@@ -177,28 +191,33 @@ CS50.Video = function(options) {
         playerControls: ' \
             <div class="video50-control-bar"> \
               <div class="video50-left-controls"> \
-                <div class="video50-play-pause-control pause"> \
-                </div><div class="video50-sb-control"> \
-                </div><div class="video50-sf-control"> \
+                <div class="video50-play-pause-control video50-control-icon pause"> \
+                </div><div class="video50-sb-control video50-control-icon"> \
+                </div><div class="video50-sf-control video50-control-icon"> \
                 </div> \
               </div> \
               <div class="video50-time"> \
-                <div class="video50-timecode"></div> \
-                <div class="video50-timeline"><div class="video50-progress"></div></div> \
-                <div class="video50-timelength"></div> \
+                <div class="video50-timecode">-:--:--</div> \
+                <div class="video50-timeline-wrapper"> \
+                    <div class="video50-thumbnail-wrapper"> \
+                        <div class="video50-thumbnail"></div> \
+                    </div> \
+                    <div class="video50-timeline"><div class="video50-progress"></div></div> \
+                </div> \
+                <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-download-control video50-control-toggle"> \
+                <div class="video50-download-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-download-container video50-control-list"> \
                     <% _.each(downloads, function(download, i) { %> \
                         <li class="video50-download"> \
                             <a href="<%- download.src %>"> \
-                                <%- downloads.label %> \
+                                <%- download.label %> \
                             </a> \
                         </li> \
                     <% }); %> \
                     </ul> \
-                </div><div class="video50-captions-control video50-control-toggle"> \
+                </div><div class="video50-captions-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-captions-container video50-control-list"> \
                         <li class="video50-caption" data-lang="">Off</li> \
                     <% _.each(captions, function(caption, i) { %> \
@@ -208,13 +227,13 @@ CS50.Video = function(options) {
                     <% }) %> \
                     </ul> \
                     <div class="video50-transcript-container"></div> \
-                </div><div class="video50-speed-control video50-control-toggle"><div class="video50-curspeed">1x</div> \
+                </div><div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
                     <ul class="video50-speed-container video50-control-list"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
                         <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
-                </div><div class="video50-quality-control video50-control-toggle"><div class="video50-curquality"></div> \
+                </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
                     <ul class="video50-quality-container video50-control-list"> \
                         <% // XXX: LABEL WHETHER THESE WILL WORK FOR THE USER %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
@@ -228,7 +247,7 @@ CS50.Video = function(options) {
                             </li> \
                         <% }) %> \
                     </ul> \
-                </div><div class="video50-fullscreen-control"> \
+                </div><div class="video50-fullscreen-control video50-control-icon"> \
                 </div> \
               </div> \
             </div> \
@@ -335,21 +354,25 @@ CS50.Video.prototype.createPlayer = function(state) {
                     $.each(me.subVideos, function(i, v) { v.pause(); });
                 },
                 seek: function(time) {
-                    if (!$container.find('.video50-play-pause-control').hasClass('pause'))
-                        $container.find('.video50-play-pause-control').trigger('mousedown');
-                    
-                    me.video.currentTime = time; 
-                    $.each(me.subVideos, function(i, v) { v.currentTime = time; });
-                 
-                    // buffer for a bit so syncing doesn't get thrown off
-                    var loaded = 0;
-                    $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
-                        var length = me.currentSource.source[0].src.length || 1;
-                        if (++loaded == length) {
-                            $container.find('.video').off('seeked.video50');
+                    if (!me.seeking) {
+                        me.seeking = true;
+                        if (!$container.find('.video50-play-pause-control').hasClass('pause'))
                             $container.find('.video50-play-pause-control').trigger('mousedown');
-                        }
-                    });
+                        
+                        me.video.currentTime = time; 
+                        $.each(me.subVideos, function(i, v) { v.currentTime = time; });
+                     
+                        // buffer for a bit so syncing doesn't get thrown off
+                        var loaded = 0;
+                        $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
+                            var length = me.currentSource.source[0].src.length || 1;
+                            if (++loaded == length) {
+                                $container.find('.video').off('seeked.video50');
+                                $container.find('.video50-play-pause-control').trigger('mousedown');
+                                me.seeking = false;
+                            }
+                        });
+                    }
                 },
                 duration: function() { return me.video.duration; },
                 position: function() { return me.video.currentTime; },
@@ -440,10 +463,10 @@ CS50.Video.prototype.startVideos = function(handlers) {
     switch (me.mode) {
         case "video":
             var loaded = 0;
-            $container.find('video').on('canplaythrough.video50', function(e) {
+            $container.find('video').on('canplay.video50', function(e) {
                 var length = me.currentSource.source[0].src.length || 1;
                 if (++loaded == length) {
-                    $container.find('.video').off('canplaythrough.video50');
+                    $container.find('video').off('canplay.video50');
                     
                     // restore video playback state if it exists
                     if (me.state !== undefined)
@@ -505,11 +528,39 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     });
 
     // seek around by clicking on the progress bar
-    $container.on('mousedown.video50', '.video50-timeline', function(e) {
+    $container.on('mousedown.video50', '.video50-timeline-wrapper', function(e) {
         var ratio = (e.pageX - $(this).offset().left)/$(this).width();
+        
+        // manual seeks can override other types of seeking
+        me.seeking = false;
         handlers.seek(ratio * handlers.duration());
     });    
     
+    // enable thumbnails when hovering over progress bar
+    $container.on('mousemove', '.video50-timeline-wrapper', function(e) {
+        var x = e.pageX - $(this).offset().left;
+        var ratio = x/$(this).width();
+        var time = ratio * handlers.duration();
+     
+        if (me.thumbnailKeys && me.thumbnailKeys.length > 0) {
+            // if successful update of thumbnail
+            var success = me.updateThumbnail(time);
+            if (success) {
+                // center thumbnail wrapper
+                var $thumbnailWrapper = $container.find('.video50-thumbnail-wrapper');
+                $thumbnailWrapper.show().css({
+                    left: x - $thumbnailWrapper.outerWidth(true)/2
+                }); 
+            } 
+        }    
+    });
+   
+    // disable thumbnails when mousing off progress bar
+    $container.on('mouseout', '.video50-timeline-wrapper', function(e) {
+         if (me.thumbnailKeys.length > 0)
+            $container.find('.video50-thumbnail-wrapper').hide();
+    });
+ 
     // skip back 8 seconds when skip back control is hit
     $container.on('mousedown.video50', '.video50-sb-control', function(e) {
         var time = handlers.position() < 8 ? 0 : handlers.position() - 8;
@@ -545,38 +596,38 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-control-bar', function(e) {
         e.stopPropagation();
     });
-    
+   
     // handle fading out of video controls after 3 second idle
-    CS50.controlFade = undefined;
-    $container.on('mousemove.video50', function(e) {
-        clearTimeout(CS50.controlFade);
-        $container.find('.video50-control-bar').fadeIn();
-        CS50.controlFade = setTimeout(function() {
-            $container.find('.video50-control-bar').fadeOut();
-        }, 3000);
-    });
-    $container.trigger('mousemove');
+    /*
+        CS50.controlFade = undefined;
+        $container.on('mousemove.video50', function(e) {
+            clearTimeout(CS50.controlFade);
+            $container.find('.video50-control-bar').fadeIn();
+            CS50.controlFade = setTimeout(function() {
+                $container.find('.video50-control-bar').fadeOut();
+            }, 3000);
+        });
+        $container.trigger('mousemove');
+    */
 
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
         var container = $container.find('.video50-main-video-wrapper')[0];
         if (!$(this).hasClass('active')) {
-            if (container.requestFullscreen) {
-              container.requestFullscreen();
-            } else if (container.mozRequestFullScreen) {
-              container.mozRequestFullScreen();
-            } else if (container.webkitRequestFullscreen) {
-              container.webkitRequestFullscreen();
-            }
+            if (container.requestFullscreen) 
+                container.requestFullscreen();
+             else if (container.mozRequestFullScreen) 
+                container.mozRequestFullScreen();
+             else if (container.webkitRequestFullscreen) 
+                container.webkitRequestFullscreen();
         }
         else {
-            if (document.cancelFullscreen) {
-              document.cancelFullscreen();
-            } else if (document.mozCancelFullScreen) {
-              document.mozCancelFullScreen();
-            } else if (document.webkitCancelFullscreen) {
-              document.webkitCancelFullscreen();
-            }
+            if (document.cancelFullscreen) 
+                document.cancelFullscreen();
+            else if (document.mozCancelFullScreen) 
+                document.mozCancelFullScreen();
+            else if (document.webkitCancelFullScreen) 
+                document.webkitCancelFullScreen();
         }
     });
    
@@ -587,14 +638,14 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         if (!document.fullscreenElement && !document.mozFullScreenElement && 
             !document.webkitFullscreenElement) {
             // ... move fullscreen controls back to the multivideo display
-            $container.removeClass('fullscreen');
+            $container.find('.video50-wrapper').removeClass('fullscreen');
             $container.find('.video50-fullscreen-control').removeClass('active');
-            $container.find('.video50-control-bar').appendTo($container);
+            $container.find('.video50-control-bar').appendTo($container.find('.video50-wrapper'));
         } 
         // element is being fullscreened, so ...
         else {
             // ... move fullscreen controls so they are part of fullscreened video
-            $container.addClass('fullscreen');
+            $container.find('.video50-wrapper').addClass('fullscreen');
             $container.find('.video50-fullscreen-control').addClass('active');
             $container.find('.video50-control-bar').appendTo($(container));
         }
@@ -676,20 +727,24 @@ CS50.Video.prototype.updateTimeline = function(time, total) {
     var video = $container.find('.video50-source-video')[0];   
 
     // update the length
-    if ($container.find('.video50-timelength').text() == "") {
-        var m = Math.floor(total / 60);
-        var s = total % 60;
+    if ($container.find('.video50-timelength').text() == "-:--:--") {
+        var h = Math.floor(total / 3600);
+        var left = total % 3600; 
+        var m = Math.floor(left / 60);
+        var s = left % 60;
         m = m < 10 ? "0" + m : m;
         s = s < 10 ? "0" + s : s;
-        $container.find('.video50-timelength').text(m + ":" + s);   
+        $container.find('.video50-timelength').text((h > 0) ? h + ":" + m + ":" + s : m + ":" + s);   
     }
 
     // update the timecode
-    var m = Math.floor(time / 60);
-    var s = time % 60;
+    var h = Math.floor(time / 3600);
+    var left = time % 3600; 
+    var m = Math.floor(left / 60);
+    var s = left % 60;
     m = m < 10 ? "0" + m : m;
     s = s < 10 ? "0" + s : s;
-    $container.find('.video50-timecode').text(m + ":" + s);
+    $container.find('.video50-timecode').text((total >= 3600) ? h + ":" + m + ":" + s : m + ":" + s);   
 
     // update the length of the bar
     var ratio = time / total;
@@ -697,18 +752,36 @@ CS50.Video.prototype.updateTimeline = function(time, total) {
 };
 
 
-// XXX: handle video syncing
 CS50.Video.prototype.syncHTML5Videos = function() {
     var me = this;
     for (var i = 0; i < me.subVideos.length; i++) {
         if (me.subVideos[i].readyState === 4 && (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .05)) {
-            me.subVideos[i].currentTime = me.video.currentTime;
+            // XXX: add buffering icon
+            me.cbHandlers.seek(me.video.currentTime);        
         }
     }
-  
-    webkitRequestAnimationFrame(function() {
-        me.syncHTML5Videos();
-    });
+
+    // use request animation frame to sync    
+    if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(function() {
+            me.syncHTML5Videos();
+        });
+    } 
+    else if (window.webkitRequestAnimationFrame) { 
+        window.webkitRequestAnimationFrame(function() {
+            me.syncHTML5Videos();
+        });
+    }
+    else if (window.mozRequestAnimationFrame) {
+        window.mozRequestAnimationFrame(function() {
+            me.syncHTML5Videos();
+        });
+    }
+    else {
+        window.setTimeout(function() {
+            me.syncHTML5Videos();
+        }, 50);
+    }
 }
 
 CS50.Video.prototype.syncFlashVideos = function() {
@@ -950,11 +1023,34 @@ CS50.Video.prototype.updateCC = function(time) {
     var $container = $(this.options.playerContainer);
     var $active = $container.find('.video50-transcript-container [data-time="' + time + '"]');
     var $text = $container.find('.video50-cc-text');
-
+    
     // if current CC is not correct
-    if ($active.length && $text.attr('data-time') != time) {
+    if ($active.length && $text.attr('data-time') != time && $text.hasClass('show')) {
+        $text.css('display', 'inline-block');
         $text.text($active.text());
     }  
+};
+
+/*
+ *   Updates the thumbnail for hovering over the time bar.
+ */
+CS50.Video.prototype.updateThumbnail = function(time) {
+    var me = this;
+    var $thumbnail = $(me.options.playerContainer).find('.video50-thumbnail');
+    var s = me.lowerBound(me.thumbnailKeys, time);
+   
+    // if this doesn't index into the array, didn't update
+    if (s == -1)
+        return false;
+
+    // update thumbnail if it's not the same as the last thumbnail
+    if (me.lastThumbnail !== s) {
+        // update the image for the time slider
+        me.lastThumbnail = s;
+        var thumbnail = me.thumbnails[me.thumbnailKeys[me.lastThumbnail]];
+        $thumbnail.css(thumbnail);
+    }
+    return true;
 };
 
 /**
@@ -977,6 +1073,67 @@ CS50.Video.prototype.updateTranscriptHighlight = function(time) {
 };
 
 /**
+ * Load the specified vtt file for timeline thumbnails.
+ *
+ */
+CS50.Video.prototype.loadThumbnails = function() {
+    var me = this;
+
+    me.thumbnailKeys = [];
+    me.thumbnails = {};
+    if (me.options.thumbnails && me.options.thumbnails.src) {
+        $.get(me.options.thumbnails.src, function(response) {
+            var timecodes = response.split(/\n\s*\n/);
+        
+            // build up an array mapping time in seconds to objects of
+            // thumbnail srcs, and attributes necessary for display
+            $.each(timecodes, function(i, timecode) {
+                var timecode = timecode.split("\n");
+                var timestamp = timecode[0];
+                var path = timecode[1];                
+
+                // XXX: support subsecond thumbnails?
+                // convert from hours:minutes:seconds.ms to seconds
+                if (timestamp && path) {
+                    var time = timestamp.match(/(\d+):(\d+):(\d+).(\d+)/);
+                    var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
+                    path = path.split("#");
+            
+                    var css = path[1] ? path[1].split('=')[1].split(',') : [];
+
+                    // XXX: throw error on invalid thumbnails
+                    // hash timecodes to thumbnails
+                    me.thumbnails[seconds] = {
+                        background: "url(" + path[0] + ")",
+                        "background-position-x": -parseInt(css[0]),
+                        "background-position-y": -parseInt(css[1]),
+                        width: parseInt(css[2]),
+                        height: parseInt(css[3])
+                    };
+
+                    // create an array of keys to binary search over for time range buckets
+                    me.thumbnailKeys.push(seconds);
+                }
+            });
+        });
+    }
+}
+
+/*
+ *  Searches a sorted array for a number n, returning the index of the number
+ *  in the array if found, else, returning the index of the largest number
+ *  smaller than n. Returns -1 if no such index.
+ * 
+ *  Based on underscore.js's indexOf function.
+ */
+CS50.Video.prototype.lowerBound = function(array, item) {
+    if (array == null) return -1;
+    var i = 0, l = array.length;
+    i = _.sortedIndex(array, item);
+    return array[i] === item ? i : i - 1;
+}
+
+/**
  * Load the specified caption file.
  *
  * @param lang Language to load
@@ -986,15 +1143,15 @@ CS50.Video.prototype.loadCaption = function(language) {
     var player = this.player;
     var me = this;
 
-    if (this.options.captions[language]) {
-        $.get(this.options.captions[language], function(response) {
+    if (me.keyedCaptions[language]) {
+        $.get(me.keyedCaptions[language].src, function(response) {
             var timecodes = response.split(/\n\s*\n/);
 
             // if transcript container is given, then build transcript
             if (_.keys(me.options.captions).length) {
                 // clear previous text
                 var $container = $(me.options.playerContainer).find('.video50-transcript-container');
-                
+ 
                 // look for a previous caption if already active, keep the timecode
                 var oldTime = $container.find('.highlight[data-time]').attr('data-time');
                 $container.empty();
@@ -1029,8 +1186,14 @@ CS50.Video.prototype.loadCaption = function(language) {
                     me.updateCC(time);
                     me.updateTranscriptHighlight(time);
                 }
+                
+                $(me.options.playerContainer).find('.video50-cc-text').addClass('show');
             }
         });
+    } 
+    else {
+        // hide captions if does not exist
+        $(me.options.playerContainer).find('.video50-cc-text').removeClass('show').hide();
     }
 };
 

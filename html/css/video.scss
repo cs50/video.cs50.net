@@ -35,8 +35,8 @@ body, html {
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    font-family: HelveticaNeue;
     background-color: #222;
+    font-family: HelveticaNeue;
 }
 
 .video50-videos-wrapper {
@@ -47,7 +47,14 @@ body, html {
     bottom: 0px;
 
     .video50-main-video-wrapper {
-        -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 50%;
+        margin-top: -239px;
+        cursor: pointer;   
+        -webkit-box-reflect: below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
+        background-color: black;
     }
 
     &.fullmode {
@@ -81,49 +88,75 @@ body, html {
 .video50-control-bar {
     position: absolute;
     bottom: 0px;
-    @include background-linear-gradient(top, #F1F1F1, #E1E1E1);
-    @include border-radius(3px);
-    @include box-shadow("0px 1px 3px #BBB, inset 0px 1px 1px white");
-    height: 30px;
-    left: 100px;
-    right: 100px;
-    bottom: 30px;
-    z-index: 4;
+    border-top: 1px solid #555;
+    @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
+    @include box-shadow(0px -1px 1px #111);
+    height: 40px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1000;
 }
 
 .video50-dragger {
+    position: absolute;
+    width: 12px;
+    top: 100px;
+    bottom: 100px;
+    left: 901px;
+    margin-left: -6px;
+    cursor: col-resize;
+    z-index: 2;
+}
+
+.video50-dragger-knob {
     position: absolute;
     width: 12px;
     height: 60px;
     @include border-radius(10px);
     @include box-shadow("inset 0px 0px 3px #040404");
     top: 50%;
-    left: 901px;
     margin-top: -25px;
+    left: 50%;
     margin-left: -6px;
     background-color: #555;
-    z-index: 2;
-    cursor: pointer;
-}
-
-video {
-    width: 100%;
 }
 
 .video50-video {
     width: 100%;
+    background-color: black;
     @include box-shadow(0px 0px 8px #111);
 }
 
-.video50-main-video-wrapper {
+.video50-thumbnail-wrapper {
     position: absolute;
-    left: 30px;
-    right: 30px;
-    top: 50%;
-    margin-top: -239px;
-    cursor: pointer;   
-    overflow: hidden;
-    @include box-shadow(0px 0px 8px #111);
+    bottom: 35px;
+    background-color: black;
+    padding: 3px;
+    @include box-shadow(0px 0px 5px #111);
+    @include background-linear-gradient(top, #222, #111);
+    @include border-radius(2px);
+
+    &:after {
+        content: '';
+        border: 5px solid transparent;
+        border-top: 5px solid black;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -5px;
+    }
+}
+
+.video50-thumbnail {
+    background-color: black;
+    background-image: url(http://cdn.cs76.net/2013/summer/lectures/0/thumbnails/lecture0-44.jpg); 
+    width: 160px; 
+    height: 90px; 
+    background-position: 0px -180px; 
+    background-repeat: initial initial;
+    @include box-shadow(inset 0px 0px 5px #000);
+    @include border-radius(2px);
 }
 
 .video50-source-video {
@@ -165,36 +198,44 @@ video {
     > * {
         display: inline-block;
         vertical-align: top;
-        width: 20px;
-        height: 20px;
-        padding: 5px 5px;
     }
 }
 
 .video50-time {
     position: absolute;
-    left: 85px;
-    right: 156px;
+    left: 110px;
+    right: 165px;
     top: 0px;
     bottom: 0px;
 }
 
+.video50-timeline-wrapper {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 45px;
+    right: 45px;
+}
+
 .video50-timeline {
     position: absolute;
-    left: 35px;
+    left: 0px;
     top: 13px;
-    bottom: 11px;
-    right: 35px;
-    background-color: #BFBFBF;
-    @include box-shadow("inset 1px 1px 3px #888, 1px 1px white");
+    bottom: 15px;
+    right: 0px;
+    @include background-linear-gradient(top, #1F1F1F, #313131);
+    @include border-radius(10px);
+    border: 1px solid #202020;
+    @include box-shadow("0px 1px 1px #444");
     z-index: 2;
+    overflow: hidden; 
 }
 
 .video50-progress {
-    width: 100%;
+    width: 0%;
     height: 100%;
-    @include background-color(rgba(0, 0, 0, .35));
     z-index: 3;
+    @include background-linear-gradient(top, #FCFCFC, #888);
 }
 
 .video50-timecode {
@@ -206,11 +247,10 @@ video {
 }
 
 .video50-timelength, .video50-timecode {
-    color: #888;
+    color: #DBDBDB;
     font-size: 11px;
-    line-height: 33px;
-    font-family: Helvetica;
-    text-shadow: 0px 1px white;
+    line-height: 39px;
+    text-shadow: 0px 1px black;
     text-align: center;
 }
 
@@ -222,83 +262,95 @@ video {
     float: right;
 }
 
-.video50-play-pause-control {
-    background-image: url("/img/pause.png");
+.video50-control-icon {
+    border: 5px solid transparent;
+    background-image: url("/img/video50-icons.png");
     background-repeat: no-repeat;
-    background-position: center;
-    margin-top: 1px;
+    height: 30px;
+    width: 20px;
+    @include transition(.1s linear background-image);
+
+    &:hover {
+        background-image: url("/img/video50-icons-glow.png");
+    }
+}
+
+.video50-play-pause-control {
+    background-position: -30px 0px;
+    width: 30px;
 
     &.pause {
-        background-image: url("/img/play.png");
+        background-position: 0px 0px; 
     }
 }
 
 .video50-sb-control {
-    background-image: url("/img/skipback.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-left: -6px;
-    margin-top: 1px;
+    background-position: -65px 0px;
+    margin-left: 0px;
 }
 
 .video50-sf-control {
-    background-image: url("/img/skipforward.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-left: -2px;
-    margin-top: 1px;
+    background-position: -95px 0px;
 }
 
-
 .video50-download-control {
-    background-image: url("/img/download.png");
-    background-repeat: no-repeat;
-    background-position: center;
+    background-position: -125px 0px;
+}
+
+.video50-speed-control {
+    background-position: -155px 0px;
+    position: relative;
+
+    .video50-curspeed {
+        position: absolute;
+        bottom: 3px;
+        right: -2px;
+        background-color: red;
+        color: white;
+        @include border-radius(1px);
+        @include box-shadow(1px 1px 1px black);
+        font-size: 7px;
+        line-height: 7px;
+        padding: 1px;
+        text-shadow: 0px 1px black;
+    }
 }
 
 .video50-captions-control {
-    position: relative;   
-    background-image: url("/img/cc.png");
-    background-repeat: no-repeat;
-    background-position: center;
+    background-position: -185px 0px;
 }
 
-.video50-speed-control, .video50-quality-control {
-    color: white;
-    font-family: Helvetica;
-    text-shadow: 0px 1px .999;
-    line-height: 20px;
-    text-align: center;
-    padding-right: 7px;
-    background-image: url("/img/rectangle.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    text-shadow: -1px 1px #888;
-    color: #F9F9F9;
+.video50-quality-control {
+    background-position: -215px 0px;
+}
+
+.video50-fullscreen-control {
+    background-position: -245px 0px;
+    border-right: 10px solid transparent;
 }
 
 .video50-control-list {
     position: absolute;
-    bottom: 35px;
-    right: 5px;
+    bottom: 42px;
+    right: 0px;
     list-style-type: none; 
     margin: 0px;
     padding: 0px;
     overflow: auto;
     max-height: 395px;
     text-align: left;
-    @include background-linear-gradient(top, #F1F1F1, #E5E5E5);
+    background-color: #333;
     @include border-radius(2px);
-    @include box-shadow(0px 1px 3px #BBB);
-    color: #333;
-    text-shadow: 0px 1px white;
+    @include box-shadow(0px 0px 3px #111);
+    color: white;
+    text-shadow: 0px 1px black;
     display: none;
 
     li {
-        padding: 2px 6px;
+        padding: 2px 8px;
         display: block;
-        border-top: 1px solid white;
-        border-bottom: 1px solid #DDD;
+        border-top: 1px solid #444;
+        border-bottom: 1px solid #282828;
         white-space: nowrap;
     
         a {
@@ -322,17 +374,6 @@ video {
     font-size: 10px;
     line-height: 18px;
     text-align: center;
-}
-
-.video50-quality-control {
-    font-size: 9px;
-}
-
-.video50-fullscreen-control {
-    background-image: url("/img/fullscreen.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-left: -3px;
 }
 
 .video50-transcript-container {
@@ -373,22 +414,38 @@ video {
     margin-bottom: 30px;
 
     .video50-cc-text {
-        font-size: 14px;
         @include background-color(rgba(0, 0, 0, .5));
+        font-size: 14px;
         display: inline-block;
         color: white;
         padding: 5px 8px;
+        display: none;
     }
 }
 
-.video50-wrapper.fullscreen .video50-cc-container {
-    margin-bottom: 100px;
+.video50-wrapper.fullscreen {
+    .video50-left {
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        border: 0px;
     
-    .video50-cc-text {
-        font-size: 24px;
-        @include background-color(rgba(0, 0, 0, .5));
-        display: inline-block;
-        color: white;
-        padding: 10px 16px;
+        .video50-main-video-wrapper {
+            left: 0px;
+            right: 0px;
+            -webkit-box-reflect: none;
+        }
     }
+
+    .video50-cc-container {
+        margin-bottom: 100px;
+        
+        .video50-cc-text {
+            font-size: 24px;
+            display: inline-block;
+            color: white;
+            padding: 10px 16px;
+        }
+    }   
 }
