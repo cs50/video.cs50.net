@@ -165,7 +165,7 @@ CS50.Video = function(options) {
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
                             <div class="video50-transcript-download video50-transcript-icon"> \
                                 <ul class="video50-transcript-download-list"> \
-                                    <li class="video50-transcript-url">Download Transcript</li> \
+                                    <!--li class="video50-transcript-url"><a>Download Transcript</a></li--> \
                                     <li class="video50-srt-url"><a target="_blank">Download .SRT</a></li> \
                                 </ul> \
                             </div> \
