@@ -919,13 +919,13 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         var $cancel = $container.find(".video50-transcript-cancel");
         if ($.trim($(this).val()) == "") {
             $cancel.removeClass('cancel');
-            $container.find('[data-time], br').show();
+            $container.find('[data-time], br').css('display', 'inline');
         } 
         else {
             // perform a search and enable clearing the field
             $cancel.addClass('cancel');
             $container.find('[data-time], br').hide();
-            $container.find("[data-time]:Contains('" + $(this).val() + "')").show();
+            $container.find("[data-time]:Contains('" + $(this).val() + "')").css('display', 'block');
         }
     });
 
