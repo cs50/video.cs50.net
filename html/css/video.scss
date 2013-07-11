@@ -156,13 +156,13 @@ body, html {
         margin-top: -23px;
         left: 50%;
         margin-left: -21px;
-        background-image: url("/img/slider-empty.png");
+        background-image: url("../img/slider-empty.png");
         @include transition(.1s linear background-image);
     }
 
     &:hover, &:active {
         .video50-dragger-knob {
-            background-image: url("/img/slider.png");
+            background-image: url("../img/slider.png");
         }
     }
 }
@@ -310,14 +310,14 @@ body, html {
 
 .video50-control-icon {
     border: 5px solid transparent;
-    background-image: url("/img/video50-icons.png");
+    background-image: url("../img/video50-icons.png");
     background-repeat: no-repeat;
     height: 30px;
     width: 20px;
     @include transition(.1s linear background-image);
 
     &:hover {
-        background-image: url("/img/video50-icons-glow.png");
+        background-image: url("../img/video50-icons-glow.png");
     }
 }
 
@@ -446,7 +446,7 @@ body, html {
         top: 5px;
         width: 30px;
         height: 30px;
-        background-image: url("/img/video50-icons.png");
+        background-image: url("../img/video50-icons.png");
         background-position: -330px 0px;
         cursor: default;
             
@@ -458,7 +458,7 @@ body, html {
 
     .video50-transcript-icon {
         border: 1px solid #222;
-        background-image: url("/img/video50-icons.png");
+        background-image: url("../img/video50-icons.png");
         @include box-shadow("0px 1px 1px #444");
         background-repeat: no-repeat;
         height: 30px;
@@ -471,7 +471,7 @@ body, html {
         position: relative;
 
         &:hover, &:active {
-            background-image: url("/img/video50-icons-glow.png");
+            background-image: url("../img/video50-icons-glow.png");
         }
 
         &:active, &.active {
@@ -671,7 +671,7 @@ body, html {
         display: block;
         height: 50px;
         width: 50px;
-        background-image: url("/img/browsers.png");
+        background-image: url("../img/browsers.png");
     }
 
     &.video50-ie a {
