@@ -577,7 +577,8 @@ CS50.Video.prototype.createPlayer = function(state) {
                 width: "100%",
                 height: "100%",
                 controls: false,
-                stretching: "uniform"
+                stretching: "uniform",
+                primary: "flash"
             });
             me.video.setMute(false);
             me.subVideos = [];
@@ -587,7 +588,8 @@ CS50.Video.prototype.createPlayer = function(state) {
                     width: "100%",
                     height: "100%",
                     controls: false,
-                    stretching: "uniform"
+                    stretching: "uniform",
+                    primary: "flash"
                 }));
                 me.subVideos[i].setMute(true);
             });
