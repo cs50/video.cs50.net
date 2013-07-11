@@ -47,6 +47,11 @@ body, html {
     margin: 0 auto;
     background-color: #222;
     font-family: HelveticaNeue;
+    overflow: hidden;
+
+    &.fullscreen {
+        overflow: visible;
+    }
 
     &.fullmode, &.fullscreen {
         background-color: black;
@@ -56,7 +61,24 @@ body, html {
         }
 
         .video50-right {
-            display: none;    
+            top: 30px;
+            right: 30px;
+            bottom: auto;
+        
+            .video50-ancilliary-videos {
+                list-style-type: none;
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                left: auto;
+                bottom: auto;
+                white-space: nowrap;
+                @include perspective(0px);
+
+                > * {
+                    display: inline-block;
+                }
+            }
         }
 
         .video50-left {
@@ -65,24 +87,13 @@ body, html {
             left: 0px;
             right: 0px;
             border: 0px;
-        
+
             .video50-main-video-wrapper {
+                top: 0px;
                 left: 0px;
                 right: 0px;
+                bottom: 0px;
                 -webkit-box-reflect: none;
-            }
-        }
-
-        .video50-ancilliary-videos {
-            list-style-type: none;
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            left: auto;
-            bottom: auto;
-
-            > * {
-                display: inline-block;
             }
         }
         
@@ -165,6 +176,7 @@ body, html {
     width: 100%;
     background-color: black;
     @include box-shadow(0px 0px 8px #111);
+    outline: 1px solid transparent;
 }
 
 .video50-thumbnail-wrapper {

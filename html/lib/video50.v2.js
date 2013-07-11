@@ -526,6 +526,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                 play: function() { 
                     me.video.play(); 
                     $.each(me.subVideos, function(i, v) { v.play(); });
+                    me.seeking = false;
                 },
                 pause: function() { 
                     me.video.pause(); 
@@ -547,7 +548,6 @@ CS50.Video.prototype.createPlayer = function(state) {
                             if (++loaded == length) {
                                 $container.find('.video').off('seeked.video50');
                                 $container.find('.video50-play-pause-control').trigger('mousedown');
-                                me.seeking = false;
                             }
                         });
                     }
@@ -811,16 +811,21 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousemove.video50, click.video50', function(e) {
         clearTimeout(CS50.controlFade);
         $container.find('.video50-control-bar').fadeIn();
+        $container.find('.video50-right').fadeIn();
         CS50.controlFade = setTimeout(function() {
             if ($container.find('.video50-control-togglee:visible').length < 1)
                 $container.find('.video50-control-bar').fadeOut();
+        
+            if ($container.find('.video50-wrapper').hasClass('fullscreen')) {
+                $container.find('.video50-right').fadeOut();
+            }
         }, 3000);
     });
     $container.trigger('mousemove');
 
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
-        var container = $container.find('.video50-main-video-wrapper')[0];
+        var container = $container.find('.video50-wrapper')[0];
         if (!$(this).hasClass('active')) {
             if (container.requestFullscreen) 
                 container.requestFullscreen();
@@ -841,23 +846,20 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
    
     // handle DOM changes when a native browser fullscreen is initiated or cancelled
     $(document).on('webkitfullscreenchange.video50 mozfullscreenchange.video50 fullscreenchange.video50', function(e) {
-        var container = $container.find('.video50-main-video-wrapper')[0];
-
         // element is being unfullscreened, so ...
         if (!document.fullscreenElement && !document.mozFullScreenElement && 
             !document.webkitFullscreenElement) {
             // ... move fullscreen controls back to the multivideo display
             $container.find('.video50-wrapper').removeClass('fullscreen');
             $container.find('.video50-fullscreen-control').removeClass('active');
-            $container.find('.video50-control-bar').appendTo($container.find('.video50-wrapper'));
         } 
         // element is being fullscreened, so ...
         else {
             // ... move fullscreen controls so they are part of fullscreened video
             $container.find('.video50-wrapper').addClass('fullscreen');
             $container.find('.video50-fullscreen-control').addClass('active');
-            $container.find('.video50-control-bar').appendTo($(container));
         }
+        $(window).trigger('resize');
     }); 
    
     // change the caption language, and change the caption download language
@@ -1083,7 +1085,7 @@ CS50.Video.prototype.syncHTML5Videos = function() {
     if (!me.seeking) {
         for (var i = 0; i < me.subVideos.length; i++) {
             if (me.subVideos[i].readyState === 4 && 
-                (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .05)) {
+                (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .1)) {
                 // XXX: add buffering icon
                 me.cbHandlers.seek(me.video.currentTime);        
             }
@@ -1271,7 +1273,39 @@ CS50.Video.prototype.reverseKeystone = function(desired, angle, z) {
 CS50.Video.prototype.resizeMultistream = function(x) {
     var me = this;
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
-    
+   
+    // if we're in fullscreen mode, use a different algorithm
+    if ($container.hasClass('fullscreen')) {
+        $container.find('.video50-left').css({
+            width: "auto",
+        });
+        
+        $container.find('.video50-main-video-wrapper').css({
+            height: "auto",
+            "margin-top": "0px",
+        });
+
+        $container.find('.video50-main-video-wrapper .video50-video').css({
+            height: "100%",
+            width: "100%"
+        });
+
+        $container.find('.video50-right').css({
+            left: "auto"
+        });
+
+        $container.find('.video50-ancilliary-videos').css({
+            "margin-top": "0px"
+        });
+
+        $container.find('.video50-ancilliary-videos .video50-video').css({
+            width: 200,
+            height: "auto"
+        });
+
+        return;   
+    }
+
     // do not allow main video to become smaller than 50% of viewport
     var ratio = x/$container.width();
     if (ratio < .5)
