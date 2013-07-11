@@ -96,7 +96,7 @@ CS50.Video = function(options) {
             <div class="video50-right"> \
               <div class="video50-ancilliary-videos"> \
                 <% for (var i = 0; i < angles.length; i++) { %> \
-                    <video class="video50-video" data-segment="<%= i %>"> \
+                    <video class="video50-video" data-segment="<%= i + 1 %>"> \
                     <% _.each(angles[i], function(format, j) { %> \
                         <source src="<%- format.path %>" type="<%- format.type %>"></source> \
                     <% }); %> \
