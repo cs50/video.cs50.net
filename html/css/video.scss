@@ -47,27 +47,8 @@ body, html {
     margin: 0 auto;
     background-color: #222;
     font-family: HelveticaNeue;
-}
 
-.video50-videos-wrapper {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-
-    .video50-main-video-wrapper {
-        position: absolute;
-        left: 30px;
-        right: 30px;
-        top: 50%;
-        margin-top: -239px;
-        cursor: pointer;   
-        -webkit-box-reflect: below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
-        background-color: black;
-    }
-
-    &.fullmode {
+    &.fullmode, &.fullscreen {
         background-color: black;
 
         .video50-dragger {
@@ -91,6 +72,49 @@ body, html {
                 -webkit-box-reflect: none;
             }
         }
+
+        .video50-ancilliary-videos {
+            list-style-type: none;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            left: auto;
+            bottom: auto;
+
+            > * {
+                display: inline-block;
+            }
+        }
+        
+        .video50-cc-container {
+            margin-bottom: 100px;
+            
+            .video50-cc-text {
+                font-size: 24px;
+                display: inline-block;
+                color: white;
+                padding: 10px 16px;
+            }
+        }   
+    }
+}
+
+.video50-videos-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    .video50-main-video-wrapper {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 50%;
+        margin-top: -239px;
+        cursor: pointer;   
+        -webkit-box-reflect: below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
+        background-color: black;
     }
 }
 
@@ -180,7 +204,7 @@ body, html {
 }
 
 .video50-ancilliary-videos {
-    list-style-type: hidden;
+    list-style-type: none;
     position: absolute;
     left: 30px;
     right: 30px;
@@ -387,6 +411,7 @@ body, html {
     @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     @include box-shadow(0px 1px 1px #111);
     @include border-radius(2px 2px 0px 0px);
+    z-index: 5;
 
     > * {
         vertical-align: middle;
@@ -436,21 +461,66 @@ body, html {
         display: inline-block;
         float: right;
         @include border-radius(3px);
+        position: relative;
 
         &:hover, &:active {
             background-image: url("/img/video50-icons-glow.png");
         }
 
-        &:active {
+        &:active, &.active {
             @include box-shadow("0px 1px 1px #444, inset 0px 1px 2px #111");
+            @include user-select(none);
         }
 
         &.video50-transcript-download {
             background-position: -120px 0px;
         }
 
+        &.video50-transcript-download.active {
+            .video50-transcript-download-list {
+                display: block;
+            }
+        }
+
         &.video50-transcript-popout {
             background-position: -300px 0px;
+        }
+    }
+}
+
+.video50-transcript-download-list {
+    position: absolute;
+    top: 33px;
+    right: 0px;
+    list-style-type: none;
+    background-color: #333;
+    @include border-radius(2px);
+    border: 1px solid #282828;
+    color: #EEE;
+    text-shadow: 0px 1px black;
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+    display: none;
+
+    li {
+        font-size: 12px;
+        padding: 4px 10px;
+        display: block;
+        border-top: 1px solid #444;
+        border-bottom: 1px solid #282828;
+        white-space: nowrap;
+    
+        &:hover {
+            color: #BBB;
+        }
+
+        &:first-child {
+            border-top: 0px;
+        }
+
+        &:last-child {
+            border-bottom: 0px;
         }
     }
 }
@@ -505,12 +575,13 @@ body, html {
         border-top: 1px solid #444;
         border-bottom: 1px solid #282828;
         white-space: nowrap;
-    
-        a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            font-size: inherit;    
+        
+        &:hover {
+            color: #BBB;
+        }
+
+        &.active {
+            color: #51C0FF;
         }
 
         &:first-child {
@@ -544,33 +615,6 @@ body, html {
         padding: 5px 8px;
         display: none;
     }
-}
-
-.video50-wrapper.fullscreen {
-    .video50-left {
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        border: 0px;
-    
-        .video50-main-video-wrapper {
-            left: 0px;
-            right: 0px;
-            -webkit-box-reflect: none;
-        }
-    }
-
-    .video50-cc-container {
-        margin-bottom: 100px;
-        
-        .video50-cc-text {
-            font-size: 24px;
-            display: inline-block;
-            color: white;
-            padding: 10px 16px;
-        }
-    }   
 }
 
 .video50-error-wrapper {
@@ -662,18 +706,17 @@ body, html {
     position: fixed;
     font-size: 10px;
     max-width: 200px;
-    margin-left: -220px;
     background-color: #f2dede;
     color: #b94a48;
     text-shadow: 0 1px #EEE;
-    padding: 3px 6px 5px 6px;
-    @include border-radius(2px);
+    padding: 3px 8px 5px 8px;
+    @include border-radius(3px);
     margin-bottom: -21px;
     white-space: normal;
     margin-right: 8px;
     cursor: default;
     font-size: 11px;
-
+    
     a {
         display: inline;
         color: #b94a48;
@@ -693,7 +736,7 @@ body, html {
     &:after {
         content: '';
         position: absolute;
-        right: -8px;
+        right: -6px;
         bottom: 7px;
         border: 4px solid transparent;
         border-left: 4px solid #f2dede; 

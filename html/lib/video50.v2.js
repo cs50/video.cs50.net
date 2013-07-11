@@ -154,7 +154,7 @@ CS50.Video = function(options) {
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                         <li class="video50-caption" data-lang="">Off</li> \
                     <% _.each(captions, function(caption, i) { %> \
-                        <li class="video50-caption" data-lang="<%- caption.srclang %>"> \
+                        <li class="video50-caption<%- caption.default ? " active" : ""  %>" data-lang="<%- caption.srclang %>"> \
                             <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
                         </li> \
                     <% }) %> \
@@ -163,7 +163,12 @@ CS50.Video = function(options) {
                     <div class="video50-transcript-container-wrapper video50-control-togglee"> \
                         <div class="video50-transcript-search-wrapper"> \
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
-                            <div class="video50-transcript-download video50-transcript-icon"></div> \
+                            <div class="video50-transcript-download video50-transcript-icon"> \
+                                <ul class="video50-transcript-download-list"> \
+                                    <li class="video50-transcript-url">Download Transcript</li> \
+                                    <li class="video50-srt-url"><a target="_blank">Download .SRT</a></li> \
+                                </ul> \
+                            </div> \
                             <input class="video50-transcript-search" type="text"/> \
                             <div class="video50-transcript-cancel"></div> \
                         </div> \
@@ -172,19 +177,18 @@ CS50.Video = function(options) {
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
-                        <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
+                            <li class="video50-speed<%- rate == 1 ? " active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
                 </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
-                        <% // XXX: LABEL WHETHER THESE WILL WORK FOR THE USER %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
-                            <li class="video50-quality <%- (source.video50_supported) ? "" : "video50-disabled" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source.default) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality <%- (source.video50_supported) ? "" : "video50-disabled" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source.default) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
@@ -339,8 +343,15 @@ CS50.Video = function(options) {
             source.video50_supported = false;
         }
 
-        if (i == 1)
-            source.video50_supported = false;
+        // detect default video, or first supported video if no default video specified
+        if (source.default && source.video50_supported) {
+            me.currentSource = source;
+            me.defaultSourceSupported = true;
+        }
+        else if (me.currentSource === undefined && source.video50_supported) { 
+            me.currentSource = source;
+            source.first = true;
+        }
 
         // push updated object into sources
         me.sources.push(source);
@@ -357,12 +368,6 @@ CS50.Video = function(options) {
             throw 'Video source with label' + (source.label || 'undefined') 
                 +  'incorrectly defined. Array must have at least one entry with a src key.'
         }
-
-        // detect default video, or first supported video if no default video specified
-        if (source.default && source.video50_supported)
-            me.currentSource = source;
-        else if (me.currentSource === undefined && source.video50_supported) 
-            me.currentSource = source;
     });
    
     // user that they must use a better browser by this point, if nothing works
@@ -378,14 +383,12 @@ CS50.Video = function(options) {
         me.keyedCaptions = {};
         $.each(me.options.captions, function(i, caption) {
             me.keyedCaptions[caption.srclang] = caption;
-        
-            // load default caption
+             
+            // store default caption
             if (caption.default)
-                me.loadCaption(caption.srclang);
+                me.defaultCaption = caption.srclang;
         });
 
-        // load VTT for thumbnails
-        me.loadThumbnails();
         this.createPlayer();
     }
 };
@@ -458,6 +461,10 @@ CS50.Video.prototype.createPlayer = function(state) {
             });
             break;
     }
+        
+    // load VTT for thumbnails, load caption
+    me.loadThumbnails();
+    me.loadCaption(me.defaultCaption);
     
     // don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
     if (me.first === undefined) {
@@ -476,7 +483,8 @@ CS50.Video.prototype.createPlayer = function(state) {
             supportsWebM: me.supportsWebM,
             multiStreamSources: me.multiStreamSources,
             singleStreamSources: me.singleStreamSources,
-            supportPlayback: me.templates.supportPlayback
+            supportPlayback: me.templates.supportPlayback,
+            dss: me.defaultSourceSupported
         }));
         me.first = true;
     } 
@@ -547,6 +555,9 @@ CS50.Video.prototype.createPlayer = function(state) {
                 duration: function() { return me.video.duration; },
                 position: function() { return me.video.currentTime; },
                 playbackRate: function(speed) { 
+                    if (speed === undefined)
+                        return me.video.playbackRate;
+                    
                     me.video.playbackRate = speed; 
                     $.each(me.subVideos, function(i, v) { v.playbackRate = speed; });
                 }
@@ -639,8 +650,10 @@ CS50.Video.prototype.startVideos = function(handlers) {
                     $container.find('video').off('canplay.video50');
                     
                     // restore video playback state if it exists
-                    if (me.state !== undefined)
-                        me.cbHandlers.seek(me.state.currentTime);
+                    if (me.state !== undefined) {
+                        me.cbHandlers.playbackRate(me.state.playbackRate || 1)
+                        me.cbHandlers.seek(me.state.currentTime || 0);
+                    }
                     else 
                         $container.find('.video50-play-pause-control').trigger('mousedown');
                 }
@@ -785,7 +798,13 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     
         if (!$(this).hasClass('video50-disabled'))
             $child.toggle();
-    });   
+    });
+
+    // mark selected menu options as active
+    $container.on('mousedown.video50', '.video50-control-list li', function(e) {
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+    });
 
     // handle fading out of video controls after 3 second idle
     CS50.controlFade = undefined;
@@ -823,6 +842,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // handle DOM changes when a native browser fullscreen is initiated or cancelled
     $(document).on('webkitfullscreenchange.video50 mozfullscreenchange.video50 fullscreenchange.video50', function(e) {
         var container = $container.find('.video50-main-video-wrapper')[0];
+
         // element is being unfullscreened, so ...
         if (!document.fullscreenElement && !document.mozFullScreenElement && 
             !document.webkitFullscreenElement) {
@@ -844,9 +864,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-captions-control [data-lang]', function(e) {
         e.preventDefault();
         var short = $(this).attr('data-lang');
-        $container.find('.video50-transcript-download')
-                    .text("SRT (" + CS50.Video.Languages[short]+ ")")
-                    .attr('href', me.options.captions[short]);
         me.loadCaption(short);
     });
     
@@ -877,7 +894,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         
         // save and restore state
         me.state = {
-            currentTime: handlers.position()
+            currentTime: handlers.position(),
+            playbackRate: handlers.playbackRate() || 1
         };
 
         me.createPlayer(); 
@@ -932,6 +950,18 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     // cancel a search
     $container.on('click.video50.video50-transcript', '.video50-transcript-cancel.cancel', function(e) {
         $container.find(".video50-transcript-search").val("").trigger('keyup');
+    });
+    
+    // downloads
+    $container.on('click.video50', '.video50-transcript-download', function(e) {
+        $(this).toggleClass('active');
+    });
+
+    $container.on('click.video50', '.video50-transcript-url', function(e) {
+        var $text = $container.find('.video50-transcript-container').clone();
+        $text.find('br').replaceWith("\n");
+        var url = 'data:application/octet-stream,' + encodeURIComponent($text.text());
+        window.open(url);
     });
 
     if (!external) {
@@ -1048,14 +1078,19 @@ CS50.Video.prototype.updateTimeline = function(time, total) {
 
 CS50.Video.prototype.syncHTML5Videos = function() {
     var me = this;
-    for (var i = 0; i < me.subVideos.length; i++) {
-        if (me.subVideos[i].readyState === 4 && (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .05)) {
-            // XXX: add buffering icon
-            me.cbHandlers.seek(me.video.currentTime);        
+  
+    // only if we're not seeking do we try to sync
+    if (!me.seeking) {
+        for (var i = 0; i < me.subVideos.length; i++) {
+            if (me.subVideos[i].readyState === 4 && 
+                (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .05)) {
+                // XXX: add buffering icon
+                me.cbHandlers.seek(me.video.currentTime);        
+            }
         }
     }
 
-    // use request animation frame to sync
+    // use request animation frame to resync on subsequent frames
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                                 window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     
@@ -1437,8 +1472,10 @@ CS50.Video.prototype.loadCaption = function(language) {
             // if transcript container is given, then build transcript
             if (_.keys(me.options.captions).length) {
                 // clear previous text
-                var $container = $(me.options.playerContainer).find('.video50-transcript-container');
- 
+                var $container = $(me.transcriptContainer).find('.video50-transcript-container');
+                $(me.transcriptContainer).find('.video50-srt-url a')
+                                         .attr('href', me.keyedCaptions[language].src);
+
                 // look for a previous caption if already active, keep the timecode
                 var oldTime = $container.find('.highlight[data-time]').attr('data-time');
                 $container.empty();
