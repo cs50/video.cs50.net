@@ -1,5 +1,15 @@
 @import "mixins";
 
+.small {
+    height: 800px;
+    width: 800px;
+    position: fixed;
+    top: 50%;
+    margin-top: -400px;
+    left: 50%;
+    margin-left: -400px;
+}
+
 body, html {
     position: relative;
     height: 100%;
@@ -638,16 +648,14 @@ body, html {
     }
 }
 
-.video50-disabled {
+.video50-quality.video50-disabled {
+    color: #666;
     cursor: not-allowed;
 }
 
-.video50-quality.video50-disabled {
-    color: #666;
-}
-
-.video50-disabled.video50-toggle {
+.video50-disabled.video50-speed-control {
     opacity: .2;
+    cursor: not-allowed;
 }
 
 .video50-quality .video50-support-tooltip {

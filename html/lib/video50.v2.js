@@ -772,6 +772,11 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('click.video50', '.video50-control-toggle', function(e) {
         e.stopPropagation();
     });
+    
+    $container.on('mousedown.video50', '.video50-transcript-control', function(e) {
+        if (me.externalTranscript)
+            me.transcriptWindow.focus();
+    });
 
     // toggle list controls in the control bar
     $container.on('mousedown.video50', '.video50-control-toggle', function(e) {
@@ -949,7 +954,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
                 $transcript.find('body').show();
             });
             
-            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown');            
+            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown').addClass('video50-disabled');            
             me.loadTranscriptHandlers($transcript.find('body'), true);
         });
     } else {
@@ -958,7 +963,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
             me.loadTranscriptHandlers(
                 $(me.options.playerContainer).find('.video50-transcript-container-wrapper').parent()
             );
-            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown');            
+            $(me.options.playerContainer).find('.video50-transcript-control').removeClass('video50-disabled').trigger('mousedown');            
         });
     }
     
