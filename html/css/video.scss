@@ -89,8 +89,8 @@ body, html {
     position: absolute;
     bottom: 0px;
     border-top: 1px solid #555;
-    @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     @include box-shadow(0px -1px 1px #111);
+    @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     height: 40px;
     left: 0px;
     right: 0px;
@@ -100,26 +100,31 @@ body, html {
 
 .video50-dragger {
     position: absolute;
-    width: 12px;
+    width: 42px;
     top: 100px;
     bottom: 100px;
     left: 901px;
-    margin-left: -6px;
+    margin-left: -21px;
     cursor: col-resize;
     z-index: 2;
-}
 
-.video50-dragger-knob {
-    position: absolute;
-    width: 12px;
-    height: 60px;
-    @include border-radius(10px);
-    @include box-shadow("inset 0px 0px 3px #040404");
-    top: 50%;
-    margin-top: -25px;
-    left: 50%;
-    margin-left: -6px;
-    background-color: #555;
+    .video50-dragger-knob {
+        position: absolute;
+        width: 42px;
+        height: 46px;
+        top: 50%;
+        margin-top: -23px;
+        left: 50%;
+        margin-left: -21px;
+        background-image: url("/img/slider-empty.png");
+        @include transition(.1s linear background-image);
+    }
+
+    &:hover, &:active {
+        .video50-dragger-knob {
+            background-image: url("/img/slider.png");
+        }
+    }
 }
 
 .video50-video {
@@ -136,6 +141,7 @@ body, html {
     @include box-shadow(0px 0px 5px #111);
     @include background-linear-gradient(top, #222, #111);
     @include border-radius(2px);
+    display: none;
 
     &:after {
         content: '';
@@ -150,7 +156,6 @@ body, html {
 
 .video50-thumbnail {
     background-color: black;
-    background-image: url(http://cdn.cs76.net/2013/summer/lectures/0/thumbnails/lecture0-44.jpg); 
     width: 160px; 
     height: 90px; 
     background-position: 0px -180px; 
@@ -204,7 +209,7 @@ body, html {
 .video50-time {
     position: absolute;
     left: 110px;
-    right: 165px;
+    right: 195px;
     top: 0px;
     bottom: 0px;
 }
@@ -329,13 +334,151 @@ body, html {
     border-right: 10px solid transparent;
 }
 
+.video50-transcript-control {
+    background-position: -275px 0px;
+}
+
+.video50-transcript-container-wrapper {
+    position: absolute;
+    bottom: 42px;
+    right: 0px;
+    width: 500px;
+    height: 300px;
+    @include border-radius(2px);
+    @include box-shadow(0px 0px 3px #111);
+    font-family: HelveticaNeue;
+    background-color: #333;
+    display: none;
+
+    &.external {
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        width: auto;
+        height: auto;
+        @include border-radius(0px);
+        @include box-shadow(none);
+
+        .video50-transcript-search-wrapper .video50-transcript-popout {
+            background-position: -360px 0px;
+        }
+    }
+}
+                        
+.video50-transcript-search-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 40px;
+    border-top: 1px solid #555;
+    @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
+    @include box-shadow(0px 1px 1px #111);
+    @include border-radius(2px 2px 0px 0px);
+
+    > * {
+        vertical-align: middle;
+    }
+
+    .video50-transcript-search {
+        @include border-radius(3px);
+        @include background-linear-gradient(top, #1F1F1F, #313131);
+        @include box-shadow("0px 1px 1px #444");
+        border: 1px solid #202020;
+        height: 18px;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 6px 30px 4px 8px;
+        margin: 5px 0px 5px 5px;
+        width: 378px;
+        outline: none !important;
+        color: #DBDBDB;
+        text-shadow: 0px 1px #000;
+    }
+
+    .video50-transcript-cancel {
+        position: absolute;
+        left: 392px;
+        top: 5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("/img/video50-icons.png");
+        background-position: -330px 0px;
+        cursor: default;
+            
+        &.cancel {
+            cursor: pointer;
+            background-position: -360px 0px;
+        }
+    }
+
+    .video50-transcript-icon {
+        border: 1px solid #222;
+        background-image: url("/img/video50-icons.png");
+        @include box-shadow("0px 1px 1px #444");
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        margin: 4px 4px 4px 0px;
+        @include transition(.1s linear background-image);
+        display: inline-block;
+        float: right;
+        @include border-radius(3px);
+
+        &:hover, &:active {
+            background-image: url("/img/video50-icons-glow.png");
+        }
+
+        &:active {
+            @include box-shadow("0px 1px 1px #444, inset 0px 1px 2px #111");
+        }
+
+        &.video50-transcript-download {
+            background-position: -120px 0px;
+        }
+
+        &.video50-transcript-popout {
+            background-position: -300px 0px;
+        }
+    }
+}
+
+.video50-transcript-container {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 20px 20px;
+    overflow: auto;
+    font-size: 13px;
+    line-height: 20px; 
+
+    a {
+        text-decoration: none;
+        color: #BBB;
+        text-shadow: 0px 1px black;
+        
+        &.highlight {
+            color: #6C9BFF;
+        }
+
+        &:hover {
+            color: #6C9BFF;
+        }
+    }
+}
+
+
 .video50-control-list {
     position: absolute;
     bottom: 42px;
     right: 0px;
-    list-style-type: none; 
     margin: 0px;
     padding: 0px;
+    list-style-type: none; 
     overflow: auto;
     max-height: 395px;
     text-align: left;
@@ -373,36 +516,6 @@ body, html {
 .video50-control-toggle {
     font-size: 10px;
     line-height: 18px;
-    text-align: center;
-}
-
-.video50-transcript-container {
-    position: absolute;
-    bottom: 50px;
-    right: -10px;
-    width: 500px;
-    height: 500px;
-    overflow: auto;
-    background-color: white;
-    padding: 20px 20px;
-    @include box-shadow(0px 0px 3px #BBB);
-    @include border-radius(3px);    
-    font-size: 13px;
-    line-height: 18px; 
-    display: none;
-
-    a {
-        text-decoration: none;
-        color: #333;
-        
-        &.highlight {
-            font-weight: bold;
-        }
-
-        &:hover {
-            color: #08c;
-        }
-    }
 }
 
 .video50-cc-container {
@@ -448,4 +561,181 @@ body, html {
             padding: 10px 16px;
         }
     }   
+}
+
+.video50-error-wrapper {
+    font-family: "HelveticaNeue";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @include background-linear-gradient(top, #333, #222); 
+}
+
+.video50-error {
+    position: absolute;
+    padding: 30px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: #CCC;
+    text-shadow: 0px -1px black; 
+    text-align: center;
+    
+    h1 {
+        font-size: 20px;   
+    }
+}
+
+.video50-supported-browsers {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.video50-browser-icon {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+
+    a {
+        display: block;
+        height: 50px;
+        width: 50px;
+        background-image: url("/img/browsers.png");
+    }
+
+    &.video50-ie a {
+        background-position: 0px 0px;
+    }
+
+    &.video50-chrome a {
+        background-position: -50px 0px;
+    }
+
+    &.video50-firefox a {
+        background-position: -100px 0px;
+    }
+
+    &.video50-opera a {
+        background-position: -150px 0px;
+    }
+    
+    &.video50-safari a {
+        background-position: -200px 0px;
+    }
+    
+    &.video50-flash a {
+        background-position: -250px 0px;
+    }
+
+    &:hover {
+        .video50-browser-tooltip {
+            display: block;
+        }
+    }
+}
+
+.video50-disabled {
+    cursor: not-allowed;
+}
+
+.video50-quality.video50-disabled {
+    color: #666;
+}
+
+.video50-disabled.video50-toggle {
+    opacity: .2;
+}
+
+.video50-quality .video50-support-tooltip {
+    position: fixed;
+    font-size: 10px;
+    max-width: 200px;
+    margin-left: -220px;
+    background-color: #f2dede;
+    color: #b94a48;
+    text-shadow: 0 1px #EEE;
+    padding: 3px 6px 5px 6px;
+    @include border-radius(2px);
+    margin-bottom: -21px;
+    white-space: normal;
+    margin-right: 8px;
+    cursor: default;
+    font-size: 11px;
+
+    a {
+        display: inline;
+        color: #b94a48;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: -8px;
+        width: 8px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        bottom: 7px;
+        border: 4px solid transparent;
+        border-left: 4px solid #f2dede; 
+    }
+}
+
+.video50-browser-tooltip {
+    position: absolute;
+    font-size: 10px;
+    display: none;
+    top: 65px;
+    left: -30px;
+    width: 100px;
+    padding: 6px 6px 8px 6px;
+    text-shadow: 0px 1px white; 
+    @include border-radius(2px);
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 51px;
+        border: 4px solid transparent;
+    }
+}
+
+.video50-red {
+    background-color: #f2dede;
+    color: #b94a48;
+    text-shadow: 0 1px 0 #DDD;
+
+    &:after {
+        border-bottom: 4px solid #f2dede; 
+    }
+}
+
+.video50-yellow {
+    background-color: #fcf8e3;
+    color: #c09853;
+
+    &:after {
+        border-bottom: 4px solid #fcf8e3; 
+    }
+}
+
+.video50-green {
+    background-color: #dff0d8;
+    color: #468847;
+    
+    &:after {
+        border-bottom: 4px solid #dff0d8; 
+    }
 }

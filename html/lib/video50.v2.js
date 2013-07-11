@@ -39,76 +39,11 @@ CS50.Video = function(options) {
         title: '',
     }, me.options);
     
-    // detect compatibility for various video types
-    var testEl = document.createElement("video");
-    me.supportsHTML5 = testEl.canPlayType;
-    if (testEl.canPlayType) {
-        me.options.supportsMP4 = "" !== (testEl.canPlayType('video/mp4; codecs="mp4v.20.8"') ||
-                  testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') ||
-                  testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"'));
-        me.options.supportsWebM = "" !== testEl.canPlayType('video/webm; codecs="vp8, vorbis"');
-    }
-
-    // parse the sources argument to determine which are multistream and which are single stream
-    me.multiStreamSources = [];
-    me.singleStreamSources = [];
-    me.currentSource = undefined;
-
-    $.each(me.options.sources, function(i, source) {       
-        // check if the required keys are supplied, correctly
-        if (!(source.source && source.source instanceof Array)) {
-            throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key, and that the value of the key is an array.';
-        }
-
-        // at least one src key must be defined, determine single of multistream
-        if (source.source[0] && source.source[0].src) {
-            source.video50_index = i;
-            if (source.source[0].src instanceof Array)
-                me.multiStreamSources.push(source);
-            else
-                me.singleStreamSources.push(source);
-        } 
-        else {
-            throw 'Video source with label' + (source.label || 'undefined') 
-                +  'incorrectly defined. Array must have at least one entry with a src key.'
-        }
-
-        // detect default video
-        if (source.default && me.currentSource === undefined) {
-            me.currentSource = source;
-        }
-        else if (source.default) {
-            throw 'Sources array is incorrectly defined. More than one default video specified';
-        }
-    });
-
-    // parse languages into a keyed format for fast access
-    me.keyedCaptions = {};
-    $.each(me.options.captions, function(i, caption) {
-        me.keyedCaptions[caption.srclang] = caption;
+    // add jquery uppercase contains
+    jQuery.expr[':'].Contains = function(a, i, m) {
+        return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+    };
     
-        // load default caption
-        if (caption.default)
-            me.loadCaption(caption.srclang);
-    });
-
-    // load VTT for thumbnails
-    me.loadThumbnails();
-
-    // if no default video, just get the first video of the sources array
-    if (me.currentSource === undefined) {
-        if (me.supportsHTML5)
-            me.currentSource = me.options.sources[0];
-        else
-            me.currentSource = me.singleStreamSources[0];
-    }
-
-    // XXX: if still undefined, this is a purely multistream video, no flash, inform
-    // user that they must use a better browser
-    if (me.currentSource === undefined) {
-        console.log('unimplemented');
-    }
-
     // private member variable for template structure
     var templateHtml = {
         player: ' \
@@ -149,7 +84,6 @@ CS50.Video = function(options) {
                 <% _.each(angles.shift(), function(format, i) { %> \
                     <source src="<%- format.path %>" type="<%- format.type %>"></source> \
                 <% }); %> \
-                <% // XXX: put error message for unsupported formats here %> \
                 </video> \
                 <div class="video50-cc-container"> \
                     <div class="video50-cc-text"></div> \
@@ -165,7 +99,6 @@ CS50.Video = function(options) {
                     <video class="video50-video" data-segment="<%= i %>"> \
                     <% _.each(angles[i], function(format, j) { %> \
                         <source src="<%- format.path %>" type="<%- format.type %>"></source> \
-                        <% // XXX: put error message for unsupported formats here %> \
                     <% }); %> \
                     </video> \
                 <% } %> \
@@ -208,7 +141,7 @@ CS50.Video = function(options) {
               </div> \
               <div class="video50-right-controls"> \
                 <div class="video50-download-control video50-control-icon video50-control-toggle"> \
-                    <ul class="video50-download-container video50-control-list"> \
+                    <ul class="video50-download-container video50-control-list video50-control-togglee"> \
                     <% _.each(downloads, function(download, i) { %> \
                         <li class="video50-download"> \
                             <a href="<%- download.src %>"> \
@@ -218,7 +151,7 @@ CS50.Video = function(options) {
                     <% }); %> \
                     </ul> \
                 </div><div class="video50-captions-control video50-control-icon video50-control-toggle"> \
-                    <ul class="video50-captions-container video50-control-list"> \
+                    <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                         <li class="video50-caption" data-lang="">Off</li> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-caption" data-lang="<%- caption.srclang %>"> \
@@ -226,23 +159,32 @@ CS50.Video = function(options) {
                         </li> \
                     <% }) %> \
                     </ul> \
-                    <div class="video50-transcript-container"></div> \
+                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle"> \
+                    <div class="video50-transcript-container-wrapper video50-control-togglee"> \
+                        <div class="video50-transcript-search-wrapper"> \
+                            <div class="video50-transcript-popout video50-transcript-icon"></div> \
+                            <div class="video50-transcript-download video50-transcript-icon"></div> \
+                            <input class="video50-transcript-search" type="text"/> \
+                            <div class="video50-transcript-cancel"></div> \
+                        </div> \
+                        <div class="video50-transcript-container"></div> \
+                    </div> \
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
-                    <ul class="video50-speed-container video50-control-list"> \
+                    <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
                         <li class="video50-speed" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
                 </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
-                    <ul class="video50-quality-container video50-control-list"> \
+                    <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
                         <% // XXX: LABEL WHETHER THESE WILL WORK FOR THE USER %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
-                            <li class="video50-quality" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality <%- (source.video50_supported) ? "" : "video50-disabled" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality <%- (source.video50_supported) ? "" : "video50-disabled" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
@@ -252,6 +194,100 @@ CS50.Video = function(options) {
               </div> \
             </div> \
         ',
+
+        playerError: '\
+            <div class="video50-error-wrapper"> \
+                <div class="video50-error"><%= error %></div> \
+            </div> \
+        ',
+
+        supportTooltip: '\
+            <div class="video50-support-tooltip"> \
+                <%= supportPlayback({ source: source }) %> \
+            </div> \
+        ',
+
+        supportPlayback: '\
+            <% \
+                var support = { \
+                    "video/mp4"   : ["IE", "Chrome", "Safari"], \
+                    "video/x-flv" : ["Flash"], \
+                    "video/webm"  : ["Chrome", "Firefox", "Opera"], \
+                    "video/ogg"   : ["Chrome", "Firefox", "Opera"] \
+                }; \
+                \
+                var numSupport = 0; \
+                var flashonly = true; \
+                var supportlist = { Chrome: 0, Firefox: 0, Safari: 0, Opera: 0, IE:0, Flash: 0 }; \
+                _.each(source.source, function(video, j) { \
+                    _.each(support[video.type], function(browser, j) { \
+                        if (supportlist[browser] != 1) { \
+                            supportlist[browser] = 1; \
+                            numSupport++; \
+                        } \
+                        \
+                        if (browser != "flash") \
+                            flashonly = false; \
+                    }); \
+                }); \
+                \
+            %> \
+            <% if (!flashonly) { %> \
+                Your browser version does not support this video format. The latest version of these browsers or plugins do: \
+                <% var soFar = 0; %><% _.each(supportlist, function(count, browser) { %> \
+                    <% if (count > 0) { %> \
+                        <% soFar++; %> \
+                        <a target="_blank" href="https://www.google.com/search?q=<%- encodeURIComponent(browser + "download latest version") %>"><%- browser %></a><%= (soFar !== numSupport) ? "," : "." %> \
+                    <% } %> \
+                <% }); %> \
+            <% } else { %> \
+                This video requires <a target="_blank" href="https://www.google.com/search?q=<%- encodeURIComponent("Adobe Flash download latest version") %>">Adobe Flash.</a> \
+            <% } %> \
+        ',
+
+        supportedBrowsers: ' \
+            <% \
+                var support = { \
+                    "video/mp4"   : ["IE", "Chrome", "Safari"], \
+                    "video/x-flv" : ["Flash"], \
+                    "video/webm"  : ["Chrome", "Firefox", "Opera"], \
+                    "video/ogg"   : ["Chrome", "Firefox", "Opera"] \
+                }; \
+                \
+                var browserCount = { Chrome: 0, Firefox: 0, Safari: 0, Opera: 0, IE:0, Flash: 0 }; \
+                _.each(sources, function(source, i) { \
+                    var counted = { Chrome: 0, Firefox: 0, Safari: 0, Opera: 0, IE:0, Flash: 0 }; \
+                    _.each(source.source, function(video, j) { \
+                        _.each(support[video.type], function(browser, j) { \
+                            if (!counted[browser]) { \
+                                browserCount[browser]++; \
+                                counted[browser] = 1; \
+                            } \
+                        }); \
+                    }); \
+                }); \
+                \
+                var sortedCount = _.keys(browserCount).sort(function(a, b) { \
+                    return browserCount[b] - browserCount[a]; \
+                }); \
+            %> \
+            <ul class="video50-supported-browsers"> \
+                <% _.each(sortedVCount, function(browser, index) { %> \
+                    <% var count = browserCount[browser]; %> \
+                    <li class="video50-browser-icon video50-<%- browser.toLowerCase() %>"> \
+                        <% var query = browser + " download latest version"; %> \
+                        <% var ratio = count/sources.length; %> \
+                        <% var quality = (ratio < 1) ? (ratio < .5) ? "red" : "yellow" : "green"; %> \
+                        <a target="_blank" href="https://www.google.com/search?q=<%- encodeURIComponent(query) %>"></a> \
+                        <% if (tooltip) { %> \
+                            <div class="video50-browser-tooltip video50-<%- quality %>"> \
+                                <%- browser %> supports <br><%- count %> of <%- sources.length %> videos. \
+                            </div> \
+                        <% } %> \
+                    </li> \
+                <% }); %> \
+            </ul> \
+        '
     };
     
     // compile templates with underscore, expose templates to prototype functions
@@ -259,9 +295,137 @@ CS50.Video = function(options) {
     for (var template in templateHtml) {
         this.templates[template] = _.template(templateHtml[template]);
     }
+    
+    // detect compatibility for various video types
+    var testEl = document.createElement("video");
+    me.supportsHTML5 = (testEl.canPlayType !== undefined);
+    if (me.supportsHTML5) {
+        me.supportsMP4 = "" !== (testEl.canPlayType('video/mp4; codecs="mp4v.20.8"') ||
+                  testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') ||
+                  testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"'));
+        me.supportsWebM = "" !== testEl.canPlayType('video/webm; codecs="vp8, vorbis"');
+    
+        // Check for Ogg support
+        me.supportsOgg = "" !== testEl.canPlayType( 'video/ogg; codecs="theora"' );
+    }
 
-    this.createPlayer();
+    me.supportsFlash = false;
+    try {
+        var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+        if (fo) me.supportsFlash = true;
+    }
+    catch(e){
+        if (navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) me.supportsFlash = true;
+    }
+    
+    // parse the sources argument to determine which are multistream and which are single stream
+    // further determine the default source, and mark whether each source is supported by the browser
+    me.sources = [];
+    me.multiStreamSources = [];
+    me.singleStreamSources = [];
+    me.currentSource = undefined;
+
+    $.each(me.options.sources, function(i, source) {  
+        // check if the required keys are supplied, correctly
+        if (!(source.source && source.source instanceof Array)) {
+            throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key, and that the value of the key is an array.';
+        }
+
+        // mark a source as supported or unsupported
+        if (me.supportsSource(source)) {
+            source.video50_supported = true;            
+        }
+        else {
+            source.video50_supported = false;
+        }
+
+        if (i == 1)
+            source.video50_supported = false;
+
+        // push updated object into sources
+        me.sources.push(source);
+
+        // at least one src key must be defined, then determine if single or multistream
+        if (source.source[0] && source.source[0].src) {
+            source.video50_index = i;
+            if (source.source[0].src instanceof Array)
+                me.multiStreamSources.push(source);
+            else
+                me.singleStreamSources.push(source);
+        } 
+        else {
+            throw 'Video source with label' + (source.label || 'undefined') 
+                +  'incorrectly defined. Array must have at least one entry with a src key.'
+        }
+
+        // detect default video, or first supported video if no default video specified
+        if (source.default && source.video50_supported)
+            me.currentSource = source;
+        else if (me.currentSource === undefined && source.video50_supported) 
+            me.currentSource = source;
+    });
+   
+    // user that they must use a better browser by this point, if nothing works
+    if (me.currentSource === undefined) {
+        $(me.options.playerContainer).html(me.templates.playerError({
+            error: "<h1>Sorry, none of our video formats are supported by your browser version.</h1><h1>Try the latest version of these browsers instead.</h1>" +
+                me.templates.supportedBrowsers({ tooltip: true, sources: me.sources })
+        }));
+        return;
+    }
+    else {
+        // parse languages into a keyed format for fast access
+        me.keyedCaptions = {};
+        $.each(me.options.captions, function(i, caption) {
+            me.keyedCaptions[caption.srclang] = caption;
+        
+            // load default caption
+            if (caption.default)
+                me.loadCaption(caption.srclang);
+        });
+
+        // load VTT for thumbnails
+        me.loadThumbnails();
+        this.createPlayer();
+    }
 };
+
+/*
+ *  Returns whether a source is supported by this browser
+ * 
+ *  @param returns a source object.
+ */
+CS50.Video.prototype.supportsSource = function(source) {
+    var me = this;
+
+    // must at least support html5 to support multistream
+    if (source.source[0].src instanceof Array && !me.supportsHTML5)
+        return false;
+    // else, if any one of the source's video types is supported, then it works
+    for (var j = 0; j < source.source.length; j++) {
+        switch (source.source[j].type) {
+            case "video/mp4":
+                if ((me.supportsHTML5 && me.supportsMP4) || me.supportsFlash)
+                    return true;
+                break;
+            case "video/webm":
+                if (me.supportsHTML5 && me.supportsWebM)
+                    return true;
+                break;
+            case "video/ogg":
+                if (me.supportsHTML5 && me.supportsOgg)
+                    return true;
+                break;
+            case "video/x-flv":
+                if (me.supportsFlash)
+                    return true;
+                break;
+        }
+    }
+
+    return false;
+}
+
 
 /*
  *  Creates a new instance of the player in the specified container.
@@ -282,7 +446,7 @@ CS50.Video.prototype.createPlayer = function(state) {
 
     // grab HTML for the player area
     var playerHTML;
-    switch(me.mode) {
+    switch (me.mode) {
         case "video":
             playerHTML = me.templates.playerVideo({
                 source: me.currentSource
@@ -295,7 +459,7 @@ CS50.Video.prototype.createPlayer = function(state) {
             break;
     }
     
-    // XXX: don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
+    // don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
     if (me.first === undefined) {
         // construct the actual player, swap the container to a tighter scope
         $container = $container.html(me.templates.player({
@@ -308,10 +472,11 @@ CS50.Video.prototype.createPlayer = function(state) {
             playbackRates: me.options.playbackRates,
             downloads: me.options.downloads,
             captions: me.options.captions,
-            supportsMP4: me.options.supportsMP4,
-            supportsWebM: me.options.supportsWebM,
+            supportsMP4: me.supportsMP4,
+            supportsWebM: me.supportsWebM,
             multiStreamSources: me.multiStreamSources,
-            singleStreamSources: me.singleStreamSources
+            singleStreamSources: me.singleStreamSources,
+            supportPlayback: me.templates.supportPlayback
         }));
         me.first = true;
     } 
@@ -322,11 +487,16 @@ CS50.Video.prototype.createPlayer = function(state) {
         $container.off('.video50');
         $(window).off('.video50');
 
-        // XXX: turn off any timeouts 
-        // XXX: turn off webkitanimationrequest syncing
         // XXX: turn off flash events (XXX: do we have to properly destroy jwplayer instances??)
-        clearTimeout(me.timeout);
+        // clear any request animation frame syncs
+        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame ||
+                                   window.webkitCancelAnimationFrame || window.msCancelAnimationFrame;
 
+        if (cancelAnimationFrame)
+            cancelAnimationFrame(me.syncTimer);
+        else
+            clearTimeout(me.syncTimer);
+        
         // only swap out the part of the DOM related to the videos
         $container.find('.video50-videos-wrapper').html(playerHTML);
     
@@ -537,7 +707,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     });    
     
     // enable thumbnails when hovering over progress bar
-    $container.on('mousemove', '.video50-timeline-wrapper', function(e) {
+    $container.on('mousemove.video50', '.video50-timeline-wrapper', function(e) {
         var x = e.pageX - $(this).offset().left;
         var ratio = x/$(this).width();
         var time = ratio * handlers.duration();
@@ -556,7 +726,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     });
    
     // disable thumbnails when mousing off progress bar
-    $container.on('mouseout', '.video50-timeline-wrapper', function(e) {
+    $container.on('mouseout.video50', '.video50-timeline-wrapper', function(e) {
          if (me.thumbnailKeys.length > 0)
             $container.find('.video50-thumbnail-wrapper').hide();
     });
@@ -572,6 +742,11 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         var time = handlers.position() + 30 > handlers.duration() ? handlers.duration() : handlers.position() + 30;
         handlers.seek(time);
     });
+    
+    // prevent control bar clicks from pausing the main video (or propagating in general)
+    $container.on('mousedown.video50', '.video50-control-bar', function(e) {
+        e.stopPropagation();
+    });
 
     // control the speed of video playback
     // XXX: remove player control if this option is not defined
@@ -583,32 +758,41 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             $(this).addClass('active').siblings().removeClass('active');
             handlers.playbackRate(speed);
         });
+    } 
+    else {
+        $container.find('.video50-speed-control').addClass('video50-disabled');
     }
+
+    // close menus when anything else is clicked
+    $container.on('click.video50', function(e) {
+        $(this).find('.video50-control-togglee').hide();
+    });
+
+    // prevent clicks on menus from closing menus
+    $container.on('click.video50', '.video50-control-toggle', function(e) {
+        e.stopPropagation();
+    });
 
     // toggle list controls in the control bar
     $container.on('mousedown.video50', '.video50-control-toggle', function(e) {
-        var $child = $(this).find('.video50-control-list');
-        $container.find('.video50-control-list').not($child).hide();
-        $child.toggle();
-    });    
+        var $child = $(this).find('.video50-control-togglee');
+        $container.find('.video50-control-togglee').not($child).hide();
     
-    // prevent control bar clicks from pausing the main video (or propagating in general)
-    $container.on('mousedown.video50', '.video50-control-bar', function(e) {
-        e.stopPropagation();
-    });
-   
+        if (!$(this).hasClass('video50-disabled'))
+            $child.toggle();
+    });   
+
     // handle fading out of video controls after 3 second idle
-    /*
-        CS50.controlFade = undefined;
-        $container.on('mousemove.video50', function(e) {
-            clearTimeout(CS50.controlFade);
-            $container.find('.video50-control-bar').fadeIn();
-            CS50.controlFade = setTimeout(function() {
+    CS50.controlFade = undefined;
+    $container.on('mousemove.video50, click.video50', function(e) {
+        clearTimeout(CS50.controlFade);
+        $container.find('.video50-control-bar').fadeIn();
+        CS50.controlFade = setTimeout(function() {
+            if ($container.find('.video50-control-togglee:visible').length < 1)
                 $container.find('.video50-control-bar').fadeOut();
-            }, 3000);
-        });
-        $container.trigger('mousemove');
-    */
+        }, 3000);
+    });
+    $container.trigger('mousemove');
 
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
@@ -650,7 +834,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             $container.find('.video50-control-bar').appendTo($(container));
         }
     }); 
-    
+   
     // change the caption language, and change the caption download language
     $container.on('mousedown.video50', '.video50-captions-control [data-lang]', function(e) {
         e.preventDefault();
@@ -660,13 +844,30 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
                     .attr('href', me.options.captions[short]);
         me.loadCaption(short);
     });
+    
+    $container.on('mouseenter.video50', '.video50-quality.video50-disabled', function(e) {
+        $container.find($('.video50-support-tooltip')).remove();
+        var $tooltip = $('<div>').append(me.templates.supportTooltip({
+            source: me.sources[$(this).attr('data-index')],
+            supportPlayback: me.templates.supportPlayback
+        })).children().css({
+            right: $(window).width() - $(this).offset().left,
+            bottom: $(window).height() - $(this).offset().top
+        });
+        $(this).append($tooltip);
+    }).on('mouseleave.video50', '.video50-quality.video50-disabled', function(e) {
+        $(this).find($('.video50-support-tooltip')).remove();
+    });
 
     $container.on('mousedown.video50', '.video50-quality-control [data-index]', function(e) {
         e.preventDefault();
-   
+  
+        if ($(this).hasClass('video50-disabled'))
+            return false;
+
         // grab the quality of the new video and the file path, updating the UI
         var i = $(this).attr('data-index');
-        me.currentSource = me.options.sources[i];
+        me.currentSource = me.sources[i];
         $(this).addClass('active').siblings().removeClass('active');
         
         // save and restore state
@@ -676,6 +877,94 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
         me.createPlayer(); 
     });
+
+    me.loadTranscriptHandlers($container.find('.video50-transcript-container-wrapper').parent());
+};
+
+/* 
+ * Attaches transcript handlers, makes code reusable for external window.
+ *
+ * @param jQuery object $container, jquery container to which we should attach handlers
+ * @param external bool, bool indicating whether the window is external or internal
+ */
+CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
+    var me = this;
+
+    // turn off handlers on the old transcript container
+    if (me.transcriptContainer) {
+        me.transcriptContainer.off('.video50-transcript');
+    }
+   
+    $container.on('click.video50.video50-transcript', '[data-time]', function(e) {
+        var time = $(this).attr('data-time');
+        me.cbHandlers.seek(time); 
+    });
+
+    // prevent clicking of the transcript area from closing the transcript
+    $container.on('mousedown.video50.video50-transcript', '.video50-transcript-container-wrapper', function(e) {
+        e.stopPropagation();
+    });
+
+    // prevent keypresses from pausing the video/propagating 
+    $container.on('keyup.video50.video50-transcript, keydown.video50.video50-transcript, keypress.video50.video50-transcript', '.video50-transcript-search', function(e) {
+        e.stopPropagation();
+    });
+
+    $container.on('keyup.video50.video50-transcript', '.video50-transcript-search', function(e) {
+        var $cancel = $container.find(".video50-transcript-cancel");
+        if ($.trim($(this).val()) == "") {
+            $cancel.removeClass('cancel');
+            $container.find('[data-time], br').show();
+        } 
+        else {
+            // perform a search and enable clearing the field
+            $cancel.addClass('cancel');
+            $container.find('[data-time], br').hide();
+            $container.find("[data-time]:Contains('" + $(this).val() + "')").show();
+        }
+    });
+
+    // cancel a search
+    $container.on('click.video50.video50-transcript', '.video50-transcript-cancel.cancel', function(e) {
+        $container.find(".video50-transcript-search").val("").trigger('keyup');
+    });
+
+    if (!external) {
+        $container.on('click.video50.video50-transcript', '.video50-transcript-popout', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            me.transcriptWindow = window.open('', '', 'width=500, height=500');
+            me.transcriptWindow.document.write('<!doctype html><html><head></head><body></body></html>');
+            
+            var $transcript = $(me.transcriptWindow.document);
+            $transcript.find('head')
+                       .append($(document).find('link, style').clone());
+                
+            $transcript.find('body')
+                       .empty()
+                       .hide()
+                       .append($container.find('.video50-transcript-container-wrapper').clone().addClass('external'))
+            // once CSS is loaded, show the body 
+            $transcript.find('link').load(function() {
+                $transcript.find('body').show();
+            });
+            
+            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown');            
+            me.loadTranscriptHandlers($transcript.find('body'), true);
+        });
+    } else {
+        $container.on('click.video50.video50-transcript', '.video50-transcript-popout', function(e) {
+            me.transcriptWindow.close();
+            me.loadTranscriptHandlers(
+                $(me.options.playerContainer).find('.video50-transcript-container-wrapper').parent()
+            );
+            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown');            
+        });
+    }
+    
+    // update current transcript container
+    me.externalTranscript = external || false;
+    me.transcriptContainer = $container;
 };
 
 /*
@@ -761,30 +1050,26 @@ CS50.Video.prototype.syncHTML5Videos = function() {
         }
     }
 
-    // use request animation frame to sync    
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(function() {
+    // use request animation frame to sync
+    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    
+    if (requestAnimationFrame) {
+        me.syncTimer = requestAnimationFrame(function() {
             me.syncHTML5Videos();
         });
     } 
-    else if (window.webkitRequestAnimationFrame) { 
-        window.webkitRequestAnimationFrame(function() {
-            me.syncHTML5Videos();
-        });
-    }
-    else if (window.mozRequestAnimationFrame) {
-        window.mozRequestAnimationFrame(function() {
-            me.syncHTML5Videos();
-        });
-    }
     else {
-        window.setTimeout(function() {
+        me.syncTimer = window.setTimeout(function() {
             me.syncHTML5Videos();
         }, 50);
     }
 }
 
 CS50.Video.prototype.syncFlashVideos = function() {
+    // XXX: doesn't currently do anything, since we don't support flash syncing
+    return;
+    
     var me = this;
     for (var i = 0; i < me.subVideos.length; i++) {
         if (me.subVideos[i].getState() !== "BUFFERING" && 
@@ -883,7 +1168,7 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
 
     // handle keypress changes on the video
     $container.on('keydown.video50', function(e) {
-        switch(e.which) {
+        switch (e.which) {
             case 49:
             case 50:
             case 51:
@@ -943,7 +1228,6 @@ CS50.Video.prototype.reverseKeystone = function(desired, angle, z) {
 }
    
 // resizes the videos appropriately and positions the dragger at dividing point = x
-// XXX: handle resizing of player
 CS50.Video.prototype.resizeMultistream = function(x) {
     var me = this;
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
@@ -1020,9 +1304,8 @@ CS50.Video.prototype.resizeMultistream = function(x) {
  */
 CS50.Video.prototype.updateCC = function(time) {
     var time = Math.floor(time);
-    var $container = $(this.options.playerContainer);
-    var $active = $container.find('.video50-transcript-container [data-time="' + time + '"]');
-    var $text = $container.find('.video50-cc-text');
+    var $active = $(this.transcriptContainer).find('.video50-transcript-container [data-time="' + time + '"]');
+    var $text = $(this.options.playerContainer).find('.video50-cc-text');
     
     // if current CC is not correct
     if ($active.length && $text.attr('data-time') != time && $text.hasClass('show')) {
@@ -1059,7 +1342,7 @@ CS50.Video.prototype.updateThumbnail = function(time) {
  */
 CS50.Video.prototype.updateTranscriptHighlight = function(time) {
     var time = Math.floor(time);
-    var $container = $(this.options.playerContainer).find('.video50-transcript-container');
+    var $container = $(this.transcriptContainer).find('.video50-transcript-container');
     var $active = $container.find('[data-time="' + time + '"]');
 
     // check if a new element should be highlighted
@@ -1101,7 +1384,6 @@ CS50.Video.prototype.loadThumbnails = function() {
             
                     var css = path[1] ? path[1].split('=')[1].split(',') : [];
 
-                    // XXX: throw error on invalid thumbnails
                     // hash timecodes to thumbnails
                     me.thumbnails[seconds] = {
                         background: "url(" + path[0] + ")",
@@ -1194,18 +1476,5 @@ CS50.Video.prototype.loadCaption = function(language) {
     else {
         // hide captions if does not exist
         $(me.options.playerContainer).find('.video50-cc-text').removeClass('show').hide();
-    }
-};
-
-/*
- *  Detects whether the player can play a particular file, given a file format.
- *  @param format to test for support (e.g. video/mp4, video/webm)
- */
-CS50.Video.prototype.supportsFormat = function(format) {
-    switch (format) {
-        case "video/mp4":
-            return this.options.supportsMP4;
-        case "video/webm":
-            return this.options.supportsWebM;
     }
 };
