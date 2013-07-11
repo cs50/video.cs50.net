@@ -154,7 +154,7 @@ CS50.Video = function(options) {
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                         <li class="video50-caption" data-lang="">Off</li> \
                     <% _.each(captions, function(caption, i) { %> \
-                        <li class="video50-caption<%- caption.default ? " active" : ""  %>" data-lang="<%- caption.srclang %>"> \
+                        <li class="video50-caption<%- caption["default"] ? " active" : ""  %>" data-lang="<%- caption.srclang %>"> \
                             <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
                         </li> \
                     <% }) %> \
@@ -183,12 +183,12 @@ CS50.Video = function(options) {
                 </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source.default) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source.default) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
@@ -344,7 +344,7 @@ CS50.Video = function(options) {
         }
 
         // detect default video, or first supported video if no default video specified
-        if (source.default && source.video50_supported) {
+        if (source["default"] && source.video50_supported) {
             me.currentSource = source;
             me.defaultSourceSupported = true;
         }
@@ -385,7 +385,7 @@ CS50.Video = function(options) {
             me.keyedCaptions[caption.srclang] = caption;
              
             // store default caption
-            if (caption.default)
+            if (caption["default"])
                 me.defaultCaption = caption.srclang;
         });
 
