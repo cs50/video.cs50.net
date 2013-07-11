@@ -276,7 +276,7 @@ CS50.Video = function(options) {
                 }); \
             %> \
             <ul class="video50-supported-browsers"> \
-                <% _.each(sortedVCount, function(browser, index) { %> \
+                <% _.each(sortedCount, function(browser, index) { %> \
                     <% var count = browserCount[browser]; %> \
                     <li class="video50-browser-icon video50-<%- browser.toLowerCase() %>"> \
                         <% var query = browser + " download latest version"; %> \
@@ -544,7 +544,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                         // buffer for a bit so syncing doesn't get thrown off
                         var loaded = 0;
                         $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
-                            var length = me.currentSource.source[0].src.length || 1;
+                            var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
                             if (++loaded == length) {
                                 $container.find('.video').off('seeked.video50');
                                 $container.find('.video50-play-pause-control').trigger('mousedown');
@@ -575,8 +575,9 @@ CS50.Video.prototype.createPlayer = function(state) {
             me.video = jwplayer($main.attr('id')).setup({
                 file: $main.attr('data-src'),
                 width: "100%",
-                aspectratio: "16:9",
+                height: "100%",
                 controls: false,
+                stretching: "uniform"
             });
             me.video.setMute(false);
             me.subVideos = [];
@@ -584,8 +585,9 @@ CS50.Video.prototype.createPlayer = function(state) {
                 me.subVideos.push(jwplayer($(e).attr('id')).setup({
                     file: $(e).attr('data-src'),
                     width: "100%",
-                    aspectratio: "16:9",
+                    height: "100%",
                     controls: false,
+                    stretching: "uniform"
                 }));
                 me.subVideos[i].setMute(true);
             });
@@ -625,10 +627,10 @@ CS50.Video.prototype.createPlayer = function(state) {
     
     // for non sync'd single video mode, change CSS so video fills viewport
     if (me.fullmode) {
-        $container.find('.video50-videos-wrapper').addClass('fullmode'); 
+        $container.addClass('fullmode'); 
     }
     else {
-        $container.find('.video50-videos-wrapper').removeClass('fullmode'); 
+        $container.removeClass('fullmode'); 
     }
     
     // resize videos
@@ -645,7 +647,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
         case "video":
             var loaded = 0;
             $container.find('video').on('canplay.video50', function(e) {
-                var length = me.currentSource.source[0].src.length || 1;
+                var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
                 if (++loaded == length) {
                     $container.find('video').off('canplay.video50');
                     
@@ -663,7 +665,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
             var loaded = 0;
             $.each([me.video].concat(me.subVideos), function(i, v) {
                 v.onReady(function(e) {
-                    var length = me.currentSource.source[0].src.length || 1;
+                    var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
                     if (++loaded == length) {
                         // restore video playback state if it exists
                         if (me.state !== undefined) {
@@ -1275,7 +1277,7 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     var $container = $(me.options.playerContainer).find('.video50-wrapper');
    
     // if we're in fullscreen mode, use a different algorithm
-    if ($container.hasClass('fullscreen')) {
+    if ($container.is('.fullscreen, .fullmode')) {
         $container.find('.video50-left').css({
             width: "auto",
         });

@@ -79,10 +79,9 @@ body, html {
         bottom: 0px;
         -webkit-box-reflect: none; }
     .video50-wrapper.fullmode .video50-cc-container, .video50-wrapper.fullscreen .video50-cc-container {
-      margin-bottom: 100px; }
+      margin-bottom: 75px; }
       .video50-wrapper.fullmode .video50-cc-container .video50-cc-text, .video50-wrapper.fullscreen .video50-cc-container .video50-cc-text {
         font-size: 24px;
-        display: inline-block;
         color: white;
         padding: 10px 16px; }
 
@@ -618,7 +617,6 @@ body, html {
     background-color: #80000000;
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
-    display: inline-block;
     color: white;
     padding: 5px 8px;
     display: none; }
