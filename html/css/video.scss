@@ -129,6 +129,7 @@ body, html {
     bottom: 0px;
     border-top: 1px solid #555;
     @include box-shadow(0px -1px 1px #111);
+    background: url('/img/background-gradient.png');
     @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     height: 40px;
     left: 0px;
@@ -179,6 +180,7 @@ body, html {
     background-color: black;
     padding: 3px;
     @include box-shadow(0px 0px 5px #111);
+    background-color: #222;
     @include background-linear-gradient(top, #222, #111);
     @include border-radius(2px);
     display: none;
@@ -268,6 +270,7 @@ body, html {
     top: 13px;
     bottom: 15px;
     right: 0px;
+    background-color: #313131;
     @include background-linear-gradient(top, #1F1F1F, #313131);
     @include border-radius(10px);
     border: 1px solid #202020;
@@ -280,6 +283,7 @@ body, html {
     width: 0%;
     height: 100%;
     z-index: 3;
+    background-color: #CCC;
     @include background-linear-gradient(top, #FCFCFC, #888);
 }
 
@@ -414,6 +418,7 @@ body, html {
     right: 0px;
     height: 40px;
     border-top: 1px solid #555;
+    background: url('/img/background-gradient.png');
     @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     @include box-shadow(0px 1px 1px #111);
     @include border-radius(2px 2px 0px 0px);
