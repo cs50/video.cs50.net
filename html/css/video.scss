@@ -67,7 +67,6 @@ body, html {
                 right: 30px;
                 left: auto;
                 bottom: auto;
-                white-space: nowrap;
                 @include perspective(0px);
 
                 > * {
@@ -251,7 +250,7 @@ body, html {
 .video50-time {
     position: absolute;
     left: 110px;
-    right: 195px;
+    right: 205px;
     top: 0px;
     bottom: 0px;
 }
@@ -375,11 +374,28 @@ body, html {
 
 .video50-fullscreen-control {
     background-position: -245px 0px;
-    border-right: 10px solid transparent;
+}
+
+.video50-control-divider {
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 40px;
+    width: 0px;
+    border-left: 1px solid #222;
+    border-right: 1px solid #444;
+    cursor: default;
 }
 
 .video50-transcript-control {
     background-position: -275px 0px;
+    border-right: 10px solid transparent;
+}
+
+.video50-search-result {
+    display: block !important;
+    padding: 5px 10px;
+    border-bottom: 1px solid #222;
+    border-top: 1px solid #444;
 }
 
 .video50-transcript-container-wrapper {
@@ -406,7 +422,7 @@ body, html {
         @include box-shadow(none);
 
         .video50-transcript-search-wrapper .video50-transcript-popout {
-            background-position: -360px 0px;
+            background-position: -390px 0px;
         }
     }
 }
@@ -542,6 +558,12 @@ body, html {
     }
 }
 
+.video50-search-time {
+    display: inline;
+    margin-right: 10px;
+    color: #777;
+}
+
 .video50-transcript-container {
     position: absolute;
     top: 40px;
@@ -552,6 +574,10 @@ body, html {
     overflow: auto;
     font-size: 13px;
     line-height: 20px; 
+
+    &.video50-transcript-searching {
+        padding: 0px;    
+    }
 
     a {
         text-decoration: none;

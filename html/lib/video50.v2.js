@@ -4,6 +4,7 @@ var CS50 = CS50 || {};
 /*
  * Constructor for CS50 Video library.
  *
+ * @param playerContainer CSS selector specifying which boxes to place player into
  * @param options Object Video50 options:
  *      aspectRatio: float, aspect ratio for a single video
  *      download: object, maps download name to video download urls
@@ -18,15 +19,18 @@ var CS50 = CS50 || {};
  *             object that maps bitrate to an array of video URLs, if the videos are not concatenated. 
  *
  */
-CS50.Video = function(options) {
+CS50.Video = function(playerContainer, options) {
     var me = this;
     this.options = options;
 
     // required options must be defined
-    if (!me.options.playerContainer)
+    if (!playerContainer)
         throw 'Error: You must define a container for CS50 Video!';
     if (!me.options.sources)
         throw 'Error: You must define a video for CS50 Video to play!';
+
+    // save selector
+    me.playerContainer = playerContainer;
 
     // if an object supplied just turn it into an array of one object
     if (!(me.options.sources instanceof Array)) {
@@ -140,7 +144,28 @@ CS50.Video = function(options) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-download-control video50-control-icon video50-control-toggle"> \
+                <div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
+                    <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
+                    <% _.each(playbackRates, function(rate, i) { %> \
+                            <li class="video50-speed<%- rate == 1 ? " active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
+                    <% }) %> \
+                    </ul> \
+                </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
+                    <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
+                        <% _.each(singleStreamSources, function(source, i) { %> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                                <%- source.label %> \
+                            </li> \
+                        <% }) %> \
+                        <% _.each(multiStreamSources, function(source, i) { %> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                                <%- source.label %> \
+                            </li> \
+                        <% }) %> \
+                    </ul> \
+                </div><div class="video50-fullscreen-control video50-control-icon"> \
+                </div><div class="video50-control-divider"> \
+                </div><div class="video50-download-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-download-container video50-control-list video50-control-togglee"> \
                     <% _.each(downloads, function(download, i) { %> \
                         <li class="video50-download"> \
@@ -163,37 +188,12 @@ CS50.Video = function(options) {
                     <div class="video50-transcript-container-wrapper video50-control-togglee"> \
                         <div class="video50-transcript-search-wrapper"> \
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
-                            <div class="video50-transcript-download video50-transcript-icon"> \
-                                <ul class="video50-transcript-download-list"> \
-                                    <!--li class="video50-transcript-url"><a>Download Transcript</a></li--> \
-                                    <li class="video50-srt-url"><a target="_blank">Download .SRT</a></li> \
-                                </ul> \
-                            </div> \
-                            <input class="video50-transcript-search" type="text"/> \
+                            <div class="video50-transcript-download video50-transcript-icon"></div> \
+                            <input class="video50-transcript-search" type="text" placeholder="Search Transcript"/> \
                             <div class="video50-transcript-cancel"></div> \
                         </div> \
                         <div class="video50-transcript-container"></div> \
                     </div> \
-                </div><div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
-                    <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
-                    <% _.each(playbackRates, function(rate, i) { %> \
-                            <li class="video50-speed<%- rate == 1 ? " active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
-                    <% }) %> \
-                    </ul> \
-                </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
-                    <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
-                        <% _.each(singleStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
-                                <%- source.label %> \
-                            </li> \
-                        <% }) %> \
-                        <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
-                                <%- source.label %> \
-                            </li> \
-                        <% }) %> \
-                    </ul> \
-                </div><div class="video50-fullscreen-control video50-control-icon"> \
                 </div> \
               </div> \
             </div> \
@@ -372,7 +372,7 @@ CS50.Video = function(options) {
    
     // user that they must use a better browser by this point, if nothing works
     if (me.currentSource === undefined) {
-        $(me.options.playerContainer).html(me.templates.playerError({
+        $(me.playerContainer).html(me.templates.playerError({
             error: "<h1>Sorry, none of our video formats are supported by your browser version.</h1><h1>Try the latest version of these browsers instead.</h1>" +
                 me.templates.supportedBrowsers({ tooltip: true, sources: me.sources })
         }));
@@ -437,7 +437,7 @@ CS50.Video.prototype.supportsSource = function(source) {
  */
 CS50.Video.prototype.createPlayer = function(state) {
     var me = this;
-    var $container = $(me.options.playerContainer);
+    var $container = $(me.playerContainer);
     
     // clear out old containers 
     if (me.first === undefined) 
@@ -464,7 +464,8 @@ CS50.Video.prototype.createPlayer = function(state) {
         
     // load VTT for thumbnails, load caption
     me.loadThumbnails();
-    me.loadCaption(me.defaultCaption);
+    me.loadCC(me.defaultCaption);
+    me.loadTranscript(me.defaultCaption);
     
     // don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
     if (me.first === undefined) {
@@ -644,7 +645,7 @@ CS50.Video.prototype.createPlayer = function(state) {
 
 CS50.Video.prototype.startVideos = function(handlers) {
     var me = this;
-    var $container = $(me.options.playerContainer).find('.video50-wrapper');
+    var $container = $(me.playerContainer).find('.video50-wrapper');
     switch (me.mode) {
         case "video":
             var loaded = 0;
@@ -696,7 +697,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
  */
 CS50.Video.prototype.controlBarHandlers = function(handlers) {
     var me = this;
-    var $container = $(me.options.playerContainer);
+    var $container = $(me.playerContainer);
     
     // expose control bar handlers in case we have to use them manually
     me.cbHandlers = handlers;
@@ -750,7 +751,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
  
     // skip back 8 seconds when skip back control is hit
     $container.on('mousedown.video50', '.video50-sb-control', function(e) {
-        var time = handlers.position() < 8 ? 0 : handlers.position() - 8;
+        var time = handlers.position() < 10 ? 0 : handlers.position() - 10;
         handlers.seek(time);
     });
 
@@ -870,7 +871,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-captions-control [data-lang]', function(e) {
         e.preventDefault();
         var short = $(this).attr('data-lang');
-        me.loadCaption(short);
+        me.loadCC(short);
     });
     
     $container.on('mouseenter.video50', '.video50-quality.video50-disabled', function(e) {
@@ -943,13 +944,27 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         var $cancel = $container.find(".video50-transcript-cancel");
         if ($.trim($(this).val()) == "") {
             $cancel.removeClass('cancel');
-            $container.find('[data-time], br').css('display', 'inline');
+            $container.find('.video50-search-time').remove();
+            $container.find('.video50-transcript-container').removeClass('video50-transcript-searching');
+            $container.find('[data-time], br').show().removeClass('video50-search-result');
         } 
         else {
             // perform a search and enable clearing the field
             $cancel.addClass('cancel');
-            $container.find('[data-time], br').hide();
-            $container.find("[data-time]:Contains('" + $(this).val() + "')").css('display', 'block');
+            $container.find('.video50-transcript-container').addClass('video50-transcript-searching');
+            $container.find('[data-time], br').hide().removeClass('video50-search-result');
+            $container.find("[data-time]:Contains('" + $(this).val() + "')")
+                .show()
+                .addClass('video50-search-result');
+            
+            if ($container.find('.video50-search-time').length <= 0) {
+                $container.find('.video50-search-result').prepend(function() {
+                    return "<div class='video50-search-time'>" +
+                                me.formatTimestamp($(this).attr('data-time'), me.video.duration) +
+                            "</div>";
+                })
+            }
+            
         }
     });
 
@@ -960,14 +975,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     
     // downloads
     $container.on('click.video50', '.video50-transcript-download', function(e) {
-        $(this).toggleClass('active');
-    });
-
-    $container.on('click.video50', '.video50-transcript-url', function(e) {
-        var $text = $container.find('.video50-transcript-container').clone();
-        $text.find('br').replaceWith("\n");
-        var url = 'data:application/octet-stream,' + encodeURIComponent($text.text());
-        window.open(url);
+        window.open(me.keyedCaptions[language].src);
     });
 
     if (!external) {
@@ -979,7 +987,8 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
             
             var $transcript = $(me.transcriptWindow.document);
             $transcript.find('head')
-                       .append($(document).find('link, style').clone());
+                       .append($(document).find('[data-library="video50"]').clone())
+                       .append("<title>Transcript</title>");
                 
             $transcript.find('body')
                        .empty()
@@ -990,16 +999,21 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
                 $transcript.find('body').show();
             });
             
-            $(me.options.playerContainer).find('.video50-transcript-control').trigger('mousedown').addClass('video50-disabled');            
+            $(me.playerContainer).find('.video50-transcript-control').trigger('mousedown').addClass('video50-disabled');            
             me.loadTranscriptHandlers($transcript.find('body'), true);
         });
     } else {
+        // reload the transcript into the main window when this window closes
+        me.transcriptWindow.onbeforeunload = function() {
+            me.loadTranscriptHandlers(
+                $(me.playerContainer).find('.video50-transcript-container-wrapper').parent()
+            );
+            $(me.playerContainer).find('.video50-transcript-control').removeClass('video50-disabled').trigger('mousedown'); 
+        }
+
+        // convenience button
         $container.on('click.video50.video50-transcript', '.video50-transcript-popout', function(e) {
             me.transcriptWindow.close();
-            me.loadTranscriptHandlers(
-                $(me.options.playerContainer).find('.video50-transcript-container-wrapper').parent()
-            );
-            $(me.options.playerContainer).find('.video50-transcript-control').removeClass('video50-disabled').trigger('mousedown');            
         });
     }
     
@@ -1017,7 +1031,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
  */
 CS50.Video.prototype.processTimeUpdates = function() {
     var me = this;
-    var $container = $(me.options.playerContainer).find('.video50-wrapper');
+    var $container = $(me.playerContainer).find('.video50-wrapper');
    
     switch (me.mode) {
         case "video":
@@ -1049,32 +1063,30 @@ CS50.Video.prototype.processTimeUpdates = function() {
     }
 }
 
-CS50.Video.prototype.updateTimeline = function(time, total) {
-    var me = this;
-    var time = Math.floor(time);
-    var total = Math.floor(total);
-    var $container = $(this.options.playerContainer);
-    var video = $container.find('.video50-source-video')[0];   
-
-    // update the length
-    if ($container.find('.video50-timelength').text() == "-:--:--") {
-        var h = Math.floor(total / 3600);
-        var left = total % 3600; 
-        var m = Math.floor(left / 60);
-        var s = left % 60;
-        m = m < 10 ? "0" + m : m;
-        s = s < 10 ? "0" + s : s;
-        $container.find('.video50-timelength').text((h > 0) ? h + ":" + m + ":" + s : m + ":" + s);   
-    }
-
-    // update the timecode
+CS50.Video.prototype.formatTimestamp = function(time, total) {
+    time = Math.floor(time);
+    total = Math.floor(total);
     var h = Math.floor(time / 3600);
     var left = time % 3600; 
     var m = Math.floor(left / 60);
     var s = left % 60;
     m = m < 10 ? "0" + m : m;
     s = s < 10 ? "0" + s : s;
-    $container.find('.video50-timecode').text((total >= 3600) ? h + ":" + m + ":" + s : m + ":" + s);   
+    return (total > 3600) ? h + ":" + m + ":" + s : m + ":" + s;
+}
+
+CS50.Video.prototype.updateTimeline = function(time, total) {
+    var me = this;
+    var $container = $(me.playerContainer);
+    var video = $container.find('.video50-source-video')[0];   
+
+    // update the length
+    if ($container.find('.video50-timelength').text() == "-:--:--") {
+        $container.find('.video50-timelength').text(me.formatTimestamp(total, total));
+    }
+
+    // update the timecode
+    $container.find('.video50-timecode').text(me.formatTimestamp(time, total));
 
     // update the length of the bar
     var ratio = time / total;
@@ -1131,7 +1143,7 @@ CS50.Video.prototype.syncFlashVideos = function() {
 
 CS50.Video.prototype.swapHandlers = function() {
     var me = this;
-    var $container = $(me.options.playerContainer).find('.video50-wrapper');
+    var $container = $(me.playerContainer).find('.video50-wrapper');
     
     return {
         video: function(el) {
@@ -1205,7 +1217,7 @@ CS50.Video.prototype.swapHandlers = function() {
  */
 CS50.Video.prototype.videoHandlers = function(handlers) {
     var me = this;
-    var $container = $(me.options.playerContainer);
+    var $container = $(me.playerContainer);
     
     // handle swapping of videos
     $container.on('mousedown.video50', '.video50-ancilliary-videos .video50-video', function(e) {
@@ -1276,7 +1288,7 @@ CS50.Video.prototype.reverseKeystone = function(desired, angle, z) {
 // resizes the videos appropriately and positions the dragger at dividing point = x
 CS50.Video.prototype.resizeMultistream = function(x) {
     var me = this;
-    var $container = $(me.options.playerContainer).find('.video50-wrapper');
+    var $container = $(me.playerContainer).find('.video50-wrapper');
    
     // if we're in fullscreen mode, use a different algorithm
     if ($container.is('.fullscreen, .fullmode')) {
@@ -1380,16 +1392,22 @@ CS50.Video.prototype.resizeMultistream = function(x) {
 /*
  *  Updates the closed captioning for the video player.
  */
-CS50.Video.prototype.updateCC = function(time) {
+CS50.Video.prototype.updateCC = function(time, force) {
+    var me = this;
     var time = Math.floor(time);
-    var $active = $(this.transcriptContainer).find('.video50-transcript-container [data-time="' + time + '"]');
-    var $text = $(this.options.playerContainer).find('.video50-cc-text');
     
-    // if current CC is not correct
-    if ($active.length && $text.attr('data-time') != time && $text.hasClass('show')) {
-        $text.css('display', 'inline-block');
-        $text.text($active.text());
-    }  
+    if (me.currentCaptions[time] !== undefined && (time != me.lastActiveCC || force)) {
+        me.lastActiveCC = time;
+        
+        var $text = $(me.playerContainer).find('.video50-cc-text');
+       
+        // if can be shown, change the text, then display. we must do this to
+        // avoid an empty box when no text is present
+        if ($text.hasClass('video50-show')) {
+            $text.text(me.currentCaptions[time])
+            $text.css('display', 'inline-block');
+        }
+    }
 };
 
 /*
@@ -1397,7 +1415,7 @@ CS50.Video.prototype.updateCC = function(time) {
  */
 CS50.Video.prototype.updateThumbnail = function(time) {
     var me = this;
-    var $thumbnail = $(me.options.playerContainer).find('.video50-thumbnail');
+    var $thumbnail = $(me.playerContainer).find('.video50-thumbnail');
     var s = me.lowerBound(me.thumbnailKeys, time);
    
     // if this doesn't index into the array, didn't update
@@ -1418,13 +1436,22 @@ CS50.Video.prototype.updateThumbnail = function(time) {
  * Highlight the line corresponding to the current point in the video in the transcript
  *
  */
-CS50.Video.prototype.updateTranscriptHighlight = function(time) {
+CS50.Video.prototype.updateTranscriptHighlight = function(time, force) {
+    var me = this;
     var time = Math.floor(time);
-    var $container = $(this.transcriptContainer).find('.video50-transcript-container');
+
+    // avoid subsecond update, unless forcing applied
+    if (time == me.lastActiveTranscript && !force)
+        return;
+    
+    var $container = $(me.transcriptContainer).find('.video50-transcript-container');
     var $active = $container.find('[data-time="' + time + '"]');
 
     // check if a new element should be highlighted
     if ($active && $active.length) {
+        // update last transcript update time
+        me.lastActiveTranscript = time;
+        
         // remove all other highlights
         $container.find('a').removeClass('highlight');
 
@@ -1493,13 +1520,55 @@ CS50.Video.prototype.lowerBound = function(array, item) {
     return array[i] === item ? i : i - 1;
 }
 
+CS50.Video.prototype.loadCC = function(language) {
+    var player = this.player;
+    var me = this;
+    me.currentCaptions = {};
+
+    if (me.keyedCaptions[language]) {
+        $.get(me.keyedCaptions[language].src, function(response) {
+            var timecodes = response.split(/\n\s*\n/);
+
+            // build CC object
+            var n = timecodes.length;
+            for (var i = 0; i < n; i++) {
+                // split the elements of the timecode
+                var timecode = timecodes[i].split("\n");
+                if (timecode.length > 1) {
+                    // extract time and content from timecode
+                    var timestamp = timecode[1].split(" --> ")[0];
+                    timecode.splice(0, 2);
+                    var content = timecode.join(" ");
+
+                    // convert from hours:minutes:seconds to seconds
+                    var time = timestamp.match(/(\d+):(\d+):(\d+)/);
+                    var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
+
+                    // create mapping from time to content
+                    me.currentCaptions[seconds] = content;
+                }
+            }
+
+            // if there was a previously active timecode, update cc and highlight
+            if (me.lastActiveCC)
+                me.updateCC(me.lastActiveCC, true);
+            
+            $(me.playerContainer).find('.video50-cc-text').addClass('video50-show');
+        });
+    } 
+    else {
+        // hide captions if does not exist
+        $(me.playerContainer).find('.video50-cc-text').removeClass('video50-show').hide();
+    }
+}
+
 /**
  * Load the specified caption file.
  *
  * @param lang Language to load
  *
  */
-CS50.Video.prototype.loadCaption = function(language) {
+CS50.Video.prototype.loadTranscript = function(language) {
     var player = this.player;
     var me = this;
 
@@ -1507,54 +1576,45 @@ CS50.Video.prototype.loadCaption = function(language) {
         $.get(me.keyedCaptions[language].src, function(response) {
             var timecodes = response.split(/\n\s*\n/);
 
-            // if transcript container is given, then build transcript
-            if (_.keys(me.options.captions).length) {
-                // clear previous text
-                var $container = $(me.transcriptContainer).find('.video50-transcript-container');
-                $(me.transcriptContainer).find('.video50-srt-url a')
-                                         .attr('href', me.keyedCaptions[language].src);
+            // clear previous text
+            var $container = $(me.transcriptContainer).find('.video50-transcript-container');
+            $container.empty();
 
-                // look for a previous caption if already active, keep the timecode
-                var oldTime = $container.find('.highlight[data-time]').attr('data-time');
-                $container.empty();
+            // iterate over each timecode
+            var n = timecodes.length;
+            for (var i = 0; i < n; i++) {
+                // split the elements of the timecode
+                var timecode = timecodes[i].split("\n");
+                if (timecode.length > 1) {
+                    // extract time and content from timecode
+                    var timestamp = timecode[1].split(" --> ")[0];
+                    timecode.splice(0, 2);
+                    var content = timecode.join(" ");
 
-                // iterate over each timecode
-                var n = timecodes.length;
-                for (var i = 0; i < n; i++) {
-                    // split the elements of the timecode
-                    var timecode = timecodes[i].split("\n");
-                    if (timecode.length > 1) {
-                        // extract time and content from timecode
-                        var timestamp = timecode[1].split(" --> ")[0];
-                        timecode.splice(0, 2);
-                        var content = timecode.join(" ");
+                    // if line starts with >> or [, then start a new line
+                    if (content.match(/^(>>|\[)/) && i != 0)
+                        $container.append('<br /><br />');
+                    
+                    // if line starts with a speakername and colon, insert a new line
+                    content = content.replace(/^(.*?:)/, function(a, b) {
+                        if (i != 0)
+                            $container.append('<br />');
+                        return '<strong>' + b + '</strong>';
+                    });
 
-                        // if line starts with >> or [, then start a new line
-                        if (content.match(/^(>>|\[)/))
-                            $container.append('<br /><br />');
 
-                        // convert from hours:minutes:seconds to seconds
-                        var time = timestamp.match(/(\d+):(\d+):(\d+)/);
-                        var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
+                    // convert from hours:minutes:seconds to seconds
+                    var time = timestamp.match(/(\d+):(\d+):(\d+)/);
+                    var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
 
-                        // add line to transcript
-                        $container.append('<a href="#" data-time="' + seconds + '">' + content + '</a> ');
-                    }
+                    // add line to transcript
+                    $container.append('<a href="#" data-time="' + seconds + '">' + content + '</a> ');
                 }
-
-                // if there was a previously active timecode, update cc and highlight
-                if (oldTime) {
-                    var time = { position: oldTime };
-                    me.updateCC(time);
-                    me.updateTranscriptHighlight(time);
-                }
-                
-                $(me.options.playerContainer).find('.video50-cc-text').addClass('show');
             }
+
+            // if there was a previously active timecode, highlight
+            if (me.lastActiveTranscript)
+                me.updateTrancriptHighlight(me.lastActiveTranscript, true);
         });
     } 
-    else {
-        // hide captions if does not exist
-        $(me.options.playerContainer).find('.video50-cc-text').removeClass('show').hide();
-    }
 };
