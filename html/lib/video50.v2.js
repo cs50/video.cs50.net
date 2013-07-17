@@ -29,8 +29,17 @@ CS50.Video = function(playerContainer, options) {
     if (!me.options.sources)
         throw 'Error: You must define a video for CS50 Video to play!';
 
-    // save selector
-    me.playerContainer = playerContainer;
+    // save selector or trigger lightbox mode
+    if (playerContainer == "lightbox") {
+        var $lightbox = $('<div id="video50-lightbox"></div>').hide();
+        $('body').find('#video50-lightbox').remove();
+        $('body').append($lightbox);
+        $lightbox.fadeIn(300);
+        me.playerContainer = "#video50-lightbox";
+    }
+    else {
+        me.playerContainer = playerContainer;
+    }
 
     // if an object supplied just turn it into an array of one object
     if (!(me.options.sources instanceof Array)) {
@@ -39,7 +48,7 @@ CS50.Video = function(playerContainer, options) {
 
     // fill in default values for optional, undefined values
     me.options = $.extend({
-        playbackRates: [0.7, 1, 1.2, 1.5],
+        playbackRates: [0.7, 1.2, 1.5],
         title: '',
     }, me.options);
     
@@ -144,21 +153,22 @@ CS50.Video = function(playerContainer, options) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-speed-control video50-control-icon video50-control-toggle"><div class="video50-curspeed">1x</div> \
+                <div class="video50-speed-toggle video50-control-icon"><div class="video50-curspeed">1x</div> \
+                </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
-                            <li class="video50-speed<%- rate == 1 ? " active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
+                            <li class="video50-speed <%- i == 0 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
                 </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " active" : "" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " vidoe50-active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label %> \
                             </li> \
                         <% }) %> \
@@ -175,11 +185,11 @@ CS50.Video = function(playerContainer, options) {
                         </li> \
                     <% }); %> \
                     </ul> \
-                </div><div class="video50-captions-control video50-control-icon video50-control-toggle"> \
+                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle"> \
+                </div><div class="video50-captions-lang video50-control-icon video50-control-toggle"> \
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
-                        <li class="video50-caption" data-lang="">Off</li> \
                     <% _.each(captions, function(caption, i) { %> \
-                        <li class="video50-caption<%- caption["default"] ? " active" : ""  %>" data-lang="<%- caption.srclang %>"> \
+                        <li class="video50-caption<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
                             <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
                         </li> \
                     <% }) %> \
@@ -194,6 +204,14 @@ CS50.Video = function(playerContainer, options) {
                         </div> \
                         <div class="video50-transcript-container"></div> \
                     </div> \
+                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle"> \
+                    <ul class="video50-tlang-container video50-control-list video50-control-togglee"> \
+                    <% _.each(captions, function(caption, i) { %> \
+                        <li class="video50-tlang<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
+                            <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
+                        </li> \
+                    <% }) %> \
+                    </ul> \
                 </div> \
               </div> \
             </div> \
@@ -773,12 +791,31 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             e.preventDefault();
             var speed = $(this).attr('data-rate');
             $container.find('.video50-curspeed').text(speed + "x");
-            $(this).addClass('active').siblings().removeClass('active');
+            $container.find('.video50-speed-toggle').addClass('video50-active');
+            $(this).addClass('video50-active')
+                   .siblings().removeClass('.video50-active');
             handlers.playbackRate(speed);
+        });
+
+        $container.on('mousedown.video50', '.video50-speed-toggle', function(e) {
+            e.preventDefault();
+
+            $(this).toggleClass('video50-active');
+            if ($(this).hasClass('video50-active')) {
+                var speed = $container.find('.video50-speed-control .video50-active')
+                                      .attr('data-rate');
+                $container.find('.video50-curspeed').text(speed + "x");
+                handlers.playbackRate(speed);  
+            } 
+            else {
+                $container.find('.video50-curspeed').text("1x");
+                handlers.playbackRate(1.0);
+            }
         });
     } 
     else {
         $container.find('.video50-speed-control').addClass('video50-disabled');
+        $container.find('.video50-speed-toggle').addClass('video50-disabled');
     }
 
     // close menus when anything else is clicked
@@ -805,12 +842,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             $child.toggle();
     });
 
-    // mark selected menu options as active
-    $container.on('mousedown.video50', '.video50-control-list li', function(e) {
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-    });
-
     // handle fading out of video controls after 3 second idle
     CS50.controlFade = undefined;
     $container.on('mousemove.video50, click.video50', function(e) {
@@ -831,7 +862,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
         var container = $container.find('.video50-wrapper')[0];
-        if (!$(this).hasClass('active')) {
+        if (!$(this).hasClass('video50-active')) {
             if (container.requestFullscreen) 
                 container.requestFullscreen();
              else if (container.mozRequestFullScreen) 
@@ -856,22 +887,75 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             !document.webkitFullscreenElement) {
             // ... move fullscreen controls back to the multivideo display
             $container.find('.video50-wrapper').removeClass('fullscreen');
-            $container.find('.video50-fullscreen-control').removeClass('active');
+            $container.find('.video50-fullscreen-control').removeClass('video50-active');
         } 
         // element is being fullscreened, so ...
         else {
             // ... move fullscreen controls so they are part of fullscreened video
             $container.find('.video50-wrapper').addClass('fullscreen');
-            $container.find('.video50-fullscreen-control').addClass('active');
+            $container.find('.video50-fullscreen-control').addClass('video50-active');
         }
         $(window).trigger('resize');
     }); 
-   
-    // change the caption language, and change the caption download language
-    $container.on('mousedown.video50', '.video50-captions-control [data-lang]', function(e) {
-        e.preventDefault();
+  
+    // toggle the captions on and off
+    $container.on('mousedown.video50', '.video50-captions-toggle', function(e) {
+        e.stopPropagation();
+
+        // grab caption text
+        var $text = $container.find('.video50-cc-text');
+        
+        $(this).toggleClass('video50-active');
+        if ($(this).hasClass('video50-active')) {
+            // prepare to show the box for the caption
+            $text.addClass('video50-show');
+
+            // show it immediately if it already has text within
+            if ($text.text() != "")
+                $text.css('display', 'inline-block');
+        }
+        else
+            $text.removeClass('video50-show').hide();
+    });
+
+    // change the transcript language
+    $container.on('mousedown.video50', '.video50-transcript-lang [data-lang]', function(e) {
+        e.stopPropagation();
+        
+        // don't reload transcript if already chosen
+        if ($(this).hasClass('video50-active')) {
+            // pop transcript open
+            $container.find('.video50-transcript-control').trigger('mousedown');
+            return;
+        }
+
+        // find relevant transcript, load the new language
+        var short = $(this).attr('data-lang');
+        me.loadTranscript(short);
+        
+        // pop transcript open
+        $container.find('.video50-transcript-control').trigger('mousedown');
+    });
+
+    // change the caption language
+    $container.on('mousedown.video50', '.video50-captions-lang [data-lang]', function(e) {
+        e.stopPropagation();
+        
+        // don't reload CC if already chosen
+        if ($(this).hasClass('video50-active')) {
+            // turn on captions if they weren't on before
+            if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
+                $container.find('.video50-captions-toggle').trigger('mousedown');
+            return;
+        }
+
+        // find relevant CC, load the new language
         var short = $(this).attr('data-lang');
         me.loadCC(short);
+
+        // turn on captions if they weren't on before
+        if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
+            $container.find('.video50-captions-toggle').trigger('mousedown');
     });
     
     $container.on('mouseenter.video50', '.video50-quality.video50-disabled', function(e) {
@@ -897,7 +981,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         // grab the quality of the new video and the file path, updating the UI
         var i = $(this).attr('data-index');
         me.currentSource = me.sources[i];
-        $(this).addClass('active').siblings().removeClass('active');
+        $(this).addClass('video50-active')
+               .siblings().removeClass('video50-active');
         
         // save and restore state
         me.state = {
@@ -906,6 +991,12 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         };
 
         me.createPlayer(); 
+    });
+
+    // mark selected menu options as active
+    $container.on('mousedown.video50', '.video50-control-list li', function(e) {
+        $(this).siblings().removeClass('video50-active');
+        $(this).addClass('video50-active');
     });
 
     me.loadTranscriptHandlers($container.find('.video50-transcript-container-wrapper').parent());
@@ -975,7 +1066,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     
     // downloads
     $container.on('click.video50', '.video50-transcript-download', function(e) {
-        window.open(me.keyedCaptions[language].src);
+        window.open(me.keyedCaptions[me.transcriptLanguage].src);
     });
 
     if (!external) {
@@ -1398,15 +1489,15 @@ CS50.Video.prototype.updateCC = function(time, force) {
     
     if (me.currentCaptions[time] !== undefined && (time != me.lastActiveCC || force)) {
         me.lastActiveCC = time;
-        
-        var $text = $(me.playerContainer).find('.video50-cc-text');
        
-        // if can be shown, change the text, then display. we must do this to
+        // update the text of the caption
+        var $text = $(me.playerContainer).find('.video50-cc-text');
+        $text.text(me.currentCaptions[time])
+       
+        // if can be shown, then display. we must do this to
         // avoid an empty box when no text is present
-        if ($text.hasClass('video50-show')) {
-            $text.text(me.currentCaptions[time])
+        if ($text.hasClass('video50-show'))
             $text.css('display', 'inline-block');
-        }
     }
 };
 
@@ -1526,6 +1617,7 @@ CS50.Video.prototype.loadCC = function(language) {
     me.currentCaptions = {};
 
     if (me.keyedCaptions[language]) {
+        me.ccLanguage = language;
         $.get(me.keyedCaptions[language].src, function(response) {
             var timecodes = response.split(/\n\s*\n/);
 
@@ -1552,14 +1644,8 @@ CS50.Video.prototype.loadCC = function(language) {
             // if there was a previously active timecode, update cc and highlight
             if (me.lastActiveCC)
                 me.updateCC(me.lastActiveCC, true);
-            
-            $(me.playerContainer).find('.video50-cc-text').addClass('video50-show');
         });
     } 
-    else {
-        // hide captions if does not exist
-        $(me.playerContainer).find('.video50-cc-text').removeClass('video50-show').hide();
-    }
 }
 
 /**
@@ -1573,6 +1659,7 @@ CS50.Video.prototype.loadTranscript = function(language) {
     var me = this;
 
     if (me.keyedCaptions[language]) {
+        me.transcriptLanguage = language;
         $.get(me.keyedCaptions[language].src, function(response) {
             var timecodes = response.split(/\n\s*\n/);
 
@@ -1614,7 +1701,7 @@ CS50.Video.prototype.loadTranscript = function(language) {
 
             // if there was a previously active timecode, highlight
             if (me.lastActiveTranscript)
-                me.updateTrancriptHighlight(me.lastActiveTranscript, true);
+                me.updateTranscriptHighlight(me.lastActiveTranscript, true);
         });
     } 
 };
