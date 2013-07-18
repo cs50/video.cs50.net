@@ -1439,6 +1439,11 @@ CS50.Video.prototype.resizeMultistream = function(x) {
  
     // calculate and invoke keystoning for ancilliary videos
     var degreeRight = ratio <= .6 ? 0 : (.6 - ratio) * 45;
+    /*@cc_on
+        if (/^10/.test(@_jscript_version))
+            degreeRight = -degreeRight;
+    @*/
+    
     var drStr = "rotateY(" + degreeRight + "deg)";
     $container.find('.video50-ancilliary-videos > .video50-video').css({
         "-webkit-transform": drStr,
