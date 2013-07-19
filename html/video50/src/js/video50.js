@@ -58,14 +58,23 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     }, me.options);
    
     // add any additional analytics metadata, and instantiate analytics
-    me.analyticsData = analytics || {};
+    me.analyticsProperties = analytics ? analytics.properties || {} : {};
+
+    if (typeof me.analyticsProperties !== "object")
+        throw "Analytics properties key must be an object.";
+
     me.analytics50 = new CS50.Analytics({
         mixpanel: {
             token: "3fc293419dc7fe68cb84230f3eca54c6"
         }
     }, true);
-   
-    // XXX: identify user with analytics
+
+    // identify and tag user with readable name, if provided
+    if (analytics && analytics.identify && (typeof analytics.identify) == "string" && analytics.identify.length > 0)
+        me.analytics50.identify(analytics.identify);
+    
+    if (analytics && analytics.name_tag && (typeof analytics.name_tag) == "string" && analytics.name_tag.length > 0)
+        me.analytics50.name_tag(analytics.name_tag);
 
     // add jquery uppercase contains
     jQuery.expr[':'].Contains = function(a, i, m) {
@@ -195,10 +204,8 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 </div><div class="video50-download-control video50-control-icon video50-control-toggle <%- downloads.length < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-download-container video50-control-list video50-control-togglee"> \
                     <% _.each(downloads, function(download, i) { %> \
-                        <li class="video50-download"> \
-                            <a href="<%- download.src %>"> \
-                                <%- download.label %> \
-                            </a> \
+                        <li class="video50-download" data-src="<%- download.src %>"> \
+                            <a><%- download.label %></a> \
                         </li> \
                     <% }); %> \
                     </ul> \
@@ -483,6 +490,13 @@ CS50.Video.prototype.supportsSource = function(source) {
     return false;
 }
 
+CS50.Video.prototype.track = function(event, obj) {
+    var me = this;
+    if (me.analytics50) {            
+        obj.properties = me.analyticsProperties;
+        me.analytics50.track(event, obj);
+    }
+}
 
 /*
  *  Creates a new instance of the player in the specified container.
@@ -763,26 +777,25 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-play-pause-control, .video50-main-video-wrapper', function(e) {
         var playPauseButton = $container.find('.video50-play-pause-control')
         var track = !e.isTrigger;
-
         if (playPauseButton.toggleClass('pause').hasClass('pause')) {
-            handlers.pause();
-
-            if (track && window.analytics50) {
-                window.analytics50.track('video50/pause', { 
-                    time: handlers.position(), 
-                    source: me.currentSource,
+            if (track) {
+                me.track('video50/pause', { 
+                    position: handlers.position(), 
+                    source: me.currentSource
                 });
             }
+            
+            handlers.pause();
         } 
         else {
-            handlers.play();
-            
-            if (track && window.analytics50) {
-                window.analytics50.track('video50/play', { 
-                    time: handlers.position(), 
-                    source: me.currentSource,
+            if (track) {
+                me.track('video50/play', { 
+                    position: handlers.position(), 
+                    source: me.currentSource
                 });
             }
+            
+            handlers.play(); 
         }
     });
 
@@ -791,14 +804,12 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         var ratio = (e.pageX - $(this).offset().left)/$(this).width();
       
         // track start of seeking to end of seeking
-        if (window.analytics50) {
-            window.analytics50.track('video50/seek', { 
-                from: handlers.position(), 
-                to: ratio * handlers.duration(),
-                source: me.currentSource,
-                transcript: false
-            });
-        }
+        me.track('video50/seek', { 
+            from: handlers.position(), 
+            to: ratio * handlers.duration(),
+            source: me.currentSource,
+            transcript: false
+        });
 
         // manual seeks can override other types of seeking
         me.seeking = false;
@@ -832,12 +843,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
  
     // skip back 8 seconds when skip back control is hit
     $container.on('mousedown.video50', '.video50-sb-control', function(e) {
-        if (window.analytics50) {
-            window.analytics50.track('video50/skipBack10', { 
-                from: handlers.position(),    
-                source: me.currentSource 
-            });
-        }
+        me.track('video50/skipBack10', { 
+            from: handlers.position(),    
+            source: me.currentSource 
+        });
 
         var time = handlers.position() < 10 ? 0 : handlers.position() - 10;
         handlers.seek(time);
@@ -845,12 +854,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
     // skip forward 30 seconds when skip forward control is hit
     $container.on('mousedown.video50', '.video50-sf-control', function(e) {
-        if (window.analytics50) {
-            window.analytics50.track('video50/skipForward30', { 
-                from: handlers.position(),    
-                source: me.currentSource
-            });
-        }
+        me.track('video50/skipForward30', { 
+            from: handlers.position(),    
+            source: me.currentSource
+        });
         
         var time = handlers.position() + 30 > handlers.duration() ? handlers.duration() : handlers.position() + 30;
         handlers.seek(time);
@@ -873,13 +880,11 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
                    .siblings().removeClass('.video50-active');
             handlers.playbackRate(speed);
             
-            if (window.analytics50) {
-                window.analytics50.track('video50/seekBack10', { 
-                    old: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
-                    new: $(this).attr('data-rate'),
-                    source: me.currentSource 
-                });
-            }
+            me.track('video50/playbackRate', { 
+                old: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
+                new: $(this).attr('data-rate'),
+                source: me.currentSource 
+            });
         });
 
         $container.on('mousedown.video50', '.video50-speed-toggle', function(e) {
@@ -900,13 +905,11 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
                 handlers.playbackRate(1.0);
             }
             
-            if (window.analytics50) {
-                window.analytics50.track('video50/seekBack10', { 
-                    old: old,
-                    new: speed,
-                    source: me.currentSource 
-                });
-            }
+            me.track('video50/playbackRateToggle', { 
+                old: old,
+                new: speed,
+                source: me.currentSource 
+            });
         });
     } 
     else {
@@ -923,11 +926,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('click.video50', '.video50-control-toggle', function(e) {
         e.stopPropagation();
     });
-    
-    $container.on('mousedown.video50', '.video50-transcript-control', function(e) {
-        if (me.externalTranscript)
-            me.transcriptWindow.focus();
-    });
 
     // toggle list controls in the control bar
     $container.on('mousedown.video50', '.video50-control-toggle', function(e) {
@@ -936,6 +934,30 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     
         if (!$(this).hasClass('video50-disabled'))
             $child.toggle();
+    });
+    
+    $container.on('mousedown.video50', '.video50-transcript-control', function(e) {
+        var track = !e.isTrigger;
+        var toggle = "";
+        
+        if (me.externalTranscript) {
+            me.transcriptWindow.focus();
+            toggle = "on";
+        } 
+        else {
+            if ($container.find('.video50-transcript-contrainer-wrapper').is(':visible'))
+                toggle = "on";
+            else
+                toggle = "off";
+        }
+
+        if (track) {
+            me.track('video50/transcriptToggle', { 
+                source: me.currentSource, 
+                lang: me.transcriptLanguage,
+                toggle: "on"
+            });
+        }
     });
 
     $container.on('mouseenter.video50', '.video50-control-bar', function(e) {
@@ -979,8 +1001,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
              else if (container.webkitRequestFullscreen) 
                 container.webkitRequestFullscreen();
             
-            if (window.analytics50)
-                window.analytics50.track('video50/fullscreen', { source: me.currentSource });
+            me.track('video50/fullscreen', { source: me.currentSource });
         }
         else {
             if (document.cancelFullscreen) 
@@ -1011,14 +1032,14 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     }); 
   
     // asset downloads
-    $container.on('mousedown.video50', '.video50-download a', function(e) {
+    $container.on('mousedown.video50', '.video50-download', function(e) {
+        window.open($(this).attr('data-src'));
+        
         // track downloaded assets
-        if (window.analytics50) {
-            window.analytics50.track('video50/transcript', { 
-                asset: $(this).attr('href'),
-                source: me.currentSource, 
-            });
-        }
+        me.track('video50/download', { 
+            asset: $(this).attr('href'),
+            source: me.currentSource
+        });
     });
 
     // toggle the captions on and off
@@ -1049,13 +1070,11 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
         
         // toggling of captions
-        if (window.analytics50) {
-            window.analytics50.track('video50/ccToggle', { 
-                source: me.currentSource, 
-                lang: me.ccLanguage,
-                toggle: track
-            });
-        }
+        me.track('video50/ccToggle', { 
+            source: me.currentSource, 
+            lang: me.ccLanguage,
+            toggle: track
+        });
     });
 
     // change the transcript language
@@ -1074,12 +1093,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         me.loadTranscript(lang);
         
         // toggling of transcripts
-        if (window.analytics50) {
-            window.analytics50.track('video50/transcript', { 
-                source: me.currentSource, 
-                lang: lang
-            });
-        }
+        me.track('video50/loadTranscript', { 
+            source: me.currentSource, 
+            lang: lang
+        });
 
         // pop transcript open
         $container.find('.video50-transcript-control').trigger('mousedown');
@@ -1102,12 +1119,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         me.loadCC(lang);
         
         // toggling of transcripts
-        if (window.analytics50) {
-            window.analytics50.track('video50/cc', { 
-                source: me.currentSource,
-                lang: lang
-            });
-        }
+        me.track('video50/loadCC', { 
+            source: me.currentSource,
+            lang: lang
+        });
 
         // turn on captions if they weren't on before
         if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
@@ -1172,12 +1187,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
                .siblings().removeClass('video50-active');
        
         // toggling of video source
-        if (window.analytics50) {
-            window.analytics50.track('video50/source', { 
-                old: oldSource,
-                new: me.currentSource
-            });
-        }
+        me.track('video50/source', { 
+            old: oldSource,
+            new: me.currentSource
+        });
         
         // save and restore state
         me.state = {
@@ -1215,14 +1228,12 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         var time = $(this).attr('data-time');
         
         // seeking via transcript click
-        if (window.analytics50) {
-            window.analytics50.track('video50/seek', { 
-                old: me.cbHandlers.position(),
-                new: time,
-                source: me.source,
-                transcript: true
-            });
-        }
+        me.track('video50/seek', { 
+            old: me.cbHandlers.position(),
+            new: time,
+            source: me.currentSource,
+            transcript: true
+        });
         
         me.cbHandlers.seek(time); 
     });
@@ -1272,12 +1283,10 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     // downloads
     $container.on('click.video50', '.video50-transcript-download', function(e) {
         // CC download
-        if (window.analytics50) {
-            window.analytics50.track('video50/srt', { 
-                source: me.source,
-                lang: me.transcriptLanguage,
-            });
-        }
+        me.track('video50/srt', { 
+            source: me.currentSource,
+            lang: me.transcriptLanguage
+        });
 
         window.open(me.keyedCaptions[me.transcriptLanguage].src);
     });
@@ -1288,12 +1297,10 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
             e.stopPropagation();
        
             // pop transcript out
-            if (window.analytics50) {
-                window.analytics50.track('video50/popout', { 
-                    source: me.source,
-                    lang: me.transcriptLanguage,
-                });
-            }
+            me.track('video50/popout', { 
+                source: me.currentSource,
+                lang: me.transcriptLanguage
+            });
             
             me.transcriptWindow = window.open('', '', 'width=500, height=500');
             me.transcriptWindow.document.write('<!doctype html><html><head></head><body></body></html>');
@@ -1535,13 +1542,11 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     // handle swapping of videos
     $container.on('mousedown.video50', '.video50-ancilliary-videos .video50-video', function(e) {
         // track which videos were swapped
-        if (window.analytics50) {
-            window.analytics50.track('video50/popout', { 
-                source: me.source,
-                old: $container.find('.video50-source-video source').attr('src'),
-                new: $(this).find('source').attr('src'),
-            });
-        }
+        me.track('video50/popout', { 
+            source: me.currentSource,
+            old: $container.find('.video50-source-video source').attr('src'),
+            new: $(this).find('source').attr('src')
+        });
         
         handlers.swap(this);
     });
@@ -1577,17 +1582,16 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     })
     
     $(document).on('mouseup.video50', function(e) {
-        move = false;
-        
         // track resizing
-        if (window.analytics50) {
-            window.analytics50.track('video50/popout', { 
+        if (move) {
+            me.track('video50/resize', { 
                 from: from,
                 to: e.pageX - $container[0].offsetLeft,
                 containerWidth: $container.width(),
-                source: me.source,
+                source: me.currentSource
             });
         }
+        move = false;
     });
    
     $(document).on('mousemove.video50', function(e) {
