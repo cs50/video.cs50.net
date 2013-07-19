@@ -1028,13 +1028,17 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         if (text == "")
             return;
 
-        $container.find($('.video50-support-tooltip')).remove();
-        var $tooltip = $('<div>').addClass('video50-control-tooltip').css({
-            right: $(window).width() - $(this).offset().left - 35,
-            bottom: $(window).height() - $(this).offset().top + 28
-        }).text(text);
-        $(this).append($tooltip);
+        var that = this;
+        me.tooltipTimeout = setTimeout(function() {
+            $container.find($('.video50-support-tooltip')).remove();
+            var $tooltip = $('<div>').addClass('video50-control-tooltip').css({
+                right: $(window).width() - $(that).offset().left - 35,
+                bottom: $(window).height() - $(that).offset().top + 28
+            }).text(text);
+            $(that).append($tooltip);
+        }, 300);
     }).on('mouseleave.video50', '.video50-control-icon.video50-disabled', function(e) {
+        clearTimeout(me.tooltipTimeout);
         $(this).find($('.video50-control-tooltip')).remove();
     });
 
