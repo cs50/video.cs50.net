@@ -239,10 +239,11 @@ CS50.Video = function(playerContainer, options) {
         supportPlayback: '\
             <% \
                 var support = { \
-                    "video/mp4"   : ["IE", "Chrome", "Safari"], \
-                    "video/x-flv" : ["Flash"], \
-                    "video/webm"  : ["Chrome", "Firefox", "Opera"], \
-                    "video/ogg"   : ["Chrome", "Firefox", "Opera"] \
+                    "video/mp4"       : ["IE", "Chrome", "Safari"], \
+                    "video/quicktime" : ["IE", "Chrome", "Safari"], \
+                    "video/x-flv"     : ["Flash"], \
+                    "video/webm"      : ["Chrome", "Firefox", "Opera"], \
+                    "video/ogg"       : ["Chrome", "Firefox", "Opera"] \
                 }; \
                 \
                 var numSupport = 0; \
@@ -277,10 +278,11 @@ CS50.Video = function(playerContainer, options) {
         supportedBrowsers: ' \
             <% \
                 var support = { \
-                    "video/mp4"   : ["IE", "Chrome", "Safari"], \
-                    "video/x-flv" : ["Flash"], \
-                    "video/webm"  : ["Chrome", "Firefox", "Opera"], \
-                    "video/ogg"   : ["Chrome", "Firefox", "Opera"] \
+                    "video/mp4"       : ["IE", "Chrome", "Safari"], \
+                    "video/quicktime" : ["IE", "Chrome", "Safari"], \
+                    "video/x-flv"     : ["Flash"], \
+                    "video/webm"      : ["Chrome", "Firefox", "Opera"], \
+                    "video/ogg"       : ["Chrome", "Firefox", "Opera"] \
                 }; \
                 \
                 var browserCount = { Chrome: 0, Firefox: 0, Safari: 0, Opera: 0, IE:0, Flash: 0 }; \
@@ -372,6 +374,13 @@ CS50.Video = function(playerContainer, options) {
             source.video50_supported = false;
         }
 
+        // mark whether a source _must_ be played with flash
+        source.flashonly = true;
+        for (var i = 0; i < source.source.length && source.flashonly; i++) {
+            if (source.source[i].type != "video/x-flv")
+                source.flashonly = false;
+        }
+
         // detect default video, or first supported video if no default video specified
         if (source["default"] && source.video50_supported) {
             me.currentSource = source;
@@ -418,7 +427,7 @@ CS50.Video = function(playerContainer, options) {
                 me.defaultCaption = caption.srclang;
         });
 
-        this.createPlayer();
+        me.createPlayer();
     }
 };
 
@@ -433,10 +442,15 @@ CS50.Video.prototype.supportsSource = function(source) {
     // must at least support html5 to support multistream
     if (source.source[0].src instanceof Array && !me.supportsHTML5)
         return false;
+
     // else, if any one of the source's video types is supported, then it works
     for (var j = 0; j < source.source.length; j++) {
         switch (source.source[j].type) {
             case "video/mp4":
+                if ((me.supportsHTML5 && me.supportsMP4) || me.supportsFlash)
+                    return true;
+                break;
+            case "video/quicktime":
                 if ((me.supportsHTML5 && me.supportsMP4) || me.supportsFlash)
                     return true;
                 break;
@@ -474,6 +488,7 @@ CS50.Video.prototype.createPlayer = function(state) {
 
     // XXX: factor function that determines what type of player to instantiate
     me.mode = me.supportsHTML5 ? "video" : "flash";
+    me.mode = me.currentSource.flashonly ? "flash" : me.mode;
     me.fullmode = !(me.currentSource.source[0].src instanceof Array);
 
     // grab HTML for the player area
@@ -853,6 +868,12 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             $child.toggle();
     });
 
+    $container.on('mouseenter.video50', '.video50-control-bar', function(e) {
+        me.forceControlAppear = true;
+    }).on('mouseleave.video50', '.video50-control-bar', function(e) {
+        me.forceControlAppear = false;
+    });
+
     // handle fading out of video controls after 3 second idle
     CS50.controlFade = undefined;
     $container.on('mousemove.video50, click.video50', function(e) {
@@ -860,15 +881,20 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         $container.find('.video50-control-bar').fadeIn();
         $container.find('.video50-right').fadeIn();
         CS50.controlFade = setTimeout(function() {
+            if (me.forceControlAppear) {
+                $container.trigger('mousemove');
+                return;
+            }
+
             if ($container.find('.video50-control-togglee:visible').length < 1)
                 $container.find('.video50-control-bar').fadeOut();
         
-            if ($container.find('.video50-wrapper').hasClass('fullscreen')) {
+            if ($container.find('.video50-wrapper').hasClass('fullscreen'))
                 $container.find('.video50-right').fadeOut();
-            }
         }, 3000);
     });
     $container.trigger('mousemove');
+
 
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
