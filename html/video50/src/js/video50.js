@@ -881,8 +881,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             handlers.playbackRate(speed);
             
             me.track('video50/playbackRate', { 
-                old: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
-                new: $(this).attr('data-rate'),
+                oldSpeed: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
+                newSpeed: $(this).attr('data-rate'),
                 source: me.currentSource 
             });
         });
@@ -906,8 +906,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             }
             
             me.track('video50/playbackRateToggle', { 
-                old: old,
-                new: speed,
+                oldSpeed: old,
+                newSpeed: speed,
                 source: me.currentSource 
             });
         });
@@ -1188,8 +1188,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
        
         // toggling of video source
         me.track('video50/source', { 
-            old: oldSource,
-            new: me.currentSource
+            oldSource: oldSource,
+            newSource: me.currentSource
         });
         
         // save and restore state
@@ -1229,8 +1229,8 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         
         // seeking via transcript click
         me.track('video50/seek', { 
-            old: me.cbHandlers.position(),
-            new: time,
+            oldPosition: me.cbHandlers.position(),
+            newPosition: time,
             source: me.currentSource,
             transcript: true
         });
@@ -1542,10 +1542,10 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     // handle swapping of videos
     $container.on('mousedown.video50', '.video50-ancilliary-videos .video50-video', function(e) {
         // track which videos were swapped
-        me.track('video50/popout', { 
+        me.track('video50/swap', { 
             source: me.currentSource,
-            old: $container.find('.video50-source-video source').attr('src'),
-            new: $(this).find('source').attr('src')
+            oldMain: $container.find('.video50-source-video source').attr('src'),
+            newMain: $(this).find('source').attr('src')
         });
         
         handlers.swap(this);
