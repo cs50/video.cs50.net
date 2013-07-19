@@ -27,8 +27,5 @@ cat \
 java -jar $SCRIPTPATH/../lib/yuicompressor-2.4.7.jar -o $SCRIPTPATH/../html/video50/build/css/cs50.video.min.css $SCRIPTPATH/../html/video50/build/css/cs50.video.min.css
 
 echo "Copying assets..."
-cp $SCRIPTPATH/../html/video50/src/lib/jwplayer/jwplayer.flash.swf $SCRIPTPATH/../html/video50/build/jwplayer.flash.swf
-cp $SCRIPTPATH/../html/video50/src/img/* $SCRIPTPATH/../html/video50/build/img
-cp -r $SCRIPTPATH/../html/video50/src/examples $SCRIPTPATH/../html/video50/build/
-mv -f $SCRIPTPATH/../html/video50/build/examples/1-build.html $SCRIPTPATH/../html/video50/build/examples/1.html
-mv -f $SCRIPTPATH/../html/video50/build/examples/2-build.html $SCRIPTPATH/../html/video50/build/examples/2.html
+cp $SCRIPTPATH/../html/video50/src/lib/jwplayer/jwplayer.flash.swf $SCRIPTPATH/../html/video50/build/js/
+cp $SCRIPTPATH/../html/video50/src/img/* $SCRIPTPATH/../html/video50/build/img/
