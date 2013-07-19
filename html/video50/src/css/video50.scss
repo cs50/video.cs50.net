@@ -421,6 +421,10 @@ body, html {
 
 .video50-fullscreen-control {
     background-position: -245px 0px;
+
+    &.video50-active {
+        background-position: -455px 0px;
+    }
 }
 
 .video50-control-divider {
