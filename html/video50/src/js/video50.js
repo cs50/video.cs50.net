@@ -930,8 +930,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
 
         // find relevant transcript, load the new language
-        var short = $(this).attr('data-lang');
-        me.loadTranscript(short);
+        var lang = $(this).attr('data-lang');
+        me.loadTranscript(lang);
         
         // pop transcript open
         $container.find('.video50-transcript-control').trigger('mousedown');
@@ -950,8 +950,8 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
 
         // find relevant CC, load the new language
-        var short = $(this).attr('data-lang');
-        me.loadCC(short);
+        var lang = $(this).attr('data-lang');
+        me.loadCC(lang);
 
         // turn on captions if they weren't on before
         if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
