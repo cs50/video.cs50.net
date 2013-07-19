@@ -21,16 +21,11 @@ var CS50 = CS50 || {};
  */
 CS50.Video = function(playerContainer, options) {
     var me = this;
-    this.options = options;
-
-    // required options must be defined
-    if (!playerContainer)
-        throw 'Error: You must define a container for CS50 Video!';
-    if (!me.options.sources)
-        throw 'Error: You must define a video for CS50 Video to play!';
-
+    
     // save selector or trigger lightbox mode
-    if (playerContainer == "lightbox") {
+    // lightbox if no selector provided
+    if (arguments.length == 1) {
+        options = playerContainer;
         var $lightbox = $('<div id="video50-lightbox"></div>').hide();
         $('body').find('#video50-lightbox').remove();
         $('body').append($lightbox);
@@ -40,6 +35,13 @@ CS50.Video = function(playerContainer, options) {
     else {
         me.playerContainer = playerContainer;
     }
+    
+    this.options = options;
+    if (!me.options.sources)
+        throw 'Error: You must define a video for CS50 Video to play!';
+
+    if ($(me.playerContainer).height() == "0")
+        throw 'Error: Container to embed in must have a height!';
 
     // if an object supplied just turn it into an array of one object
     if (!(me.options.sources instanceof Array)) {
@@ -48,6 +50,8 @@ CS50.Video = function(playerContainer, options) {
 
     // fill in default values for optional, undefined values
     me.options = $.extend({
+        captions: [],
+        downloads: [],
         playbackRates: [0.7, 1.2, 1.5],
         title: '',
     }, me.options);
@@ -160,22 +164,24 @@ CS50.Video = function(playerContainer, options) {
                             <li class="video50-speed <%- i == 0 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
-                </div><div class="video50-quality-control video50-control-icon video50-control-toggle"><div class="video50-curquality"></div> \
+                    <% var len = singleStreamSources.length + multiStreamSources.length; %> \
+                </div><div class="video50-quality-control video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
+                        <% var unnamed = 1; %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
-                                <%- source.label %> \
+                                <%- source.label ? source.label : "Unnamed Video #" + (unnamed++) %> \
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " vidoe50-active" : "" %>" data-index="<%- source.video50_index %>"> \
-                                <%- source.label %> \
+                                <%- source.label ? source.label : "Unnamed Video #" + (unnamed++) %> \
                             </li> \
                         <% }) %> \
                     </ul> \
                 </div><div class="video50-fullscreen-control video50-control-icon"> \
                 </div><div class="video50-control-divider"> \
-                </div><div class="video50-download-control video50-control-icon video50-control-toggle"> \
+                </div><div class="video50-download-control video50-control-icon video50-control-toggle <%- downloads.length < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-download-container video50-control-list video50-control-togglee"> \
                     <% _.each(downloads, function(download, i) { %> \
                         <li class="video50-download"> \
@@ -185,8 +191,9 @@ CS50.Video = function(playerContainer, options) {
                         </li> \
                     <% }); %> \
                     </ul> \
-                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle"> \
-                </div><div class="video50-captions-lang video50-control-icon video50-control-toggle"> \
+                    <% var len = captions.length %> \
+                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-captions-lang video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-caption<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
@@ -194,7 +201,7 @@ CS50.Video = function(playerContainer, options) {
                         </li> \
                     <% }) %> \
                     </ul> \
-                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle"> \
+                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
                     <div class="video50-transcript-container-wrapper video50-control-togglee"> \
                         <div class="video50-transcript-search-wrapper"> \
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
@@ -204,7 +211,7 @@ CS50.Video = function(playerContainer, options) {
                         </div> \
                         <div class="video50-transcript-container"></div> \
                     </div> \
-                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle"> \
+                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-tlang-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-tlang<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
@@ -349,9 +356,13 @@ CS50.Video = function(playerContainer, options) {
 
     $.each(me.options.sources, function(i, source) {  
         // check if the required keys are supplied, correctly
-        if (!(source.source && source.source instanceof Array)) {
-            throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key, and that the value of the key is an array.';
+        if (!source.source) {
+            throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key.';
         }
+
+        // if source key is single object, wrap in array.
+        if (!(source.source instanceof Array))
+            source.source = [source.source];
 
         // mark a source as supported or unsupported
         if (me.supportsSource(source)) {
@@ -902,6 +913,9 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-captions-toggle', function(e) {
         e.stopPropagation();
 
+        if ($(this).hasClass('video50-disabled'))
+            return;
+
         // grab caption text
         var $text = $container.find('.video50-cc-text');
         
@@ -957,7 +971,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
             $container.find('.video50-captions-toggle').trigger('mousedown');
     });
-    
+   
     $container.on('mouseenter.video50', '.video50-quality.video50-disabled', function(e) {
         $container.find($('.video50-support-tooltip')).remove();
         var $tooltip = $('<div>').append(me.templates.supportTooltip({
@@ -970,6 +984,32 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         $(this).append($tooltip);
     }).on('mouseleave.video50', '.video50-quality.video50-disabled', function(e) {
         $(this).find($('.video50-support-tooltip')).remove();
+    });
+
+    $container.on('mouseenter.video50', '.video50-control-icon.video50-disabled', function(e) {
+        var text = "";
+        if ($(this).hasClass('video50-speed-toggle'))
+            text = "Adjustment of playback rate is not supported for this video.";
+        else if ($(this).hasClass('video50-quality-control')) 
+            text = "This is the only available view or resolution for this video.";   
+        else if ($(this).hasClass('video50-download-control')) 
+            text = "This video has no downloadable assets.";
+        else if ($(this).hasClass('video50-captions-toggle')) 
+            text = "This video has no subtitles available.";
+        else if ($(this).hasClass('video50-transcript-control')) 
+            text = "This video has no transcript available.";
+   
+        if (text == "")
+            return;
+
+        $container.find($('.video50-support-tooltip')).remove();
+        var $tooltip = $('<div>').addClass('video50-control-tooltip').css({
+            right: $(window).width() - $(this).offset().left - 35,
+            bottom: $(window).height() - $(this).offset().top + 28
+        }).text(text);
+        $(this).append($tooltip);
+    }).on('mouseleave.video50', '.video50-control-icon.video50-disabled', function(e) {
+        $(this).find($('.video50-control-tooltip')).remove();
     });
 
     $container.on('mousedown.video50', '.video50-quality-control [data-index]', function(e) {

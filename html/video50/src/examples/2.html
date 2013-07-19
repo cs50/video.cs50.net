@@ -2,17 +2,17 @@
 
 <html lang="en">
   <head>
-    <link href="video50/src/css/video.scss" data-library="video50" rel="stylesheet"/>
-    <script src="video50/src/lib/jquery-1.9.1.min.js"></script>
-    <script src="video50/src/lib/underscore-min.js"></script>
-    <script src="video50/src/lib/jwplayer/jwplayer.js" ></script>
-    <script src="video50/src/js/video50.js"></script>
-    <script src="video50/src/js/video50.languages.js"></script>
+    <link href="../css/video50.scss" data-library="video50" rel="stylesheet"/>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/underscore-min.js"></script>
+    <script src="../lib/jwplayer/jwplayer.js" ></script>
+    <script src="../js/video50.js"></script>
+    <script src="../js/video50.languages.js"></script>
     <!--script type="text/javascript" src="//use.typekit.net/qgw0qkt.js"></script-->
     <!--script type="text/javascript">try{Typekit.load();}catch(e){}</script--> 
     <script>
         $(function() {
-            var player = new CS50.Video("lightbox", {
+            var player = new CS50.Video({
                 "captions":[
                     {
                         "src":"http://cdn.cs50.net/2012/fall/lectures/2/lang/afr/week2m.srt",
@@ -82,7 +82,7 @@
                         ]
                     },
                 ],
-                "thumbnails": { "src": "/assets/lecture0.vtt" },
+                "thumbnails": { "src": "assets/lecture0.vtt" },
                 "title":"Week 2"
             });
         });

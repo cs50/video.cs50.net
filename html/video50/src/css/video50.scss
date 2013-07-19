@@ -23,6 +23,7 @@ body, html {
     bottom: 0px;
     padding: 20px;
     @include background-color(rgba(0, 0, 0, .8));
+    z-index: 2147483647;
 
     .video50-wrapper {
         @include box-shadow(0px 0px 3px black);
@@ -789,8 +790,8 @@ body, html {
     cursor: not-allowed;
 }
 
-.video50-disabled.video50-speed-toggle {
-    opacity: .2;
+.video50-disabled.video50-control-icon {
+    background-image: url("../img/video50-icons-faded.png");
     cursor: not-allowed;
 }
 
@@ -880,5 +881,39 @@ body, html {
     
     &:after {
         border-bottom: 4px solid #dff0d8; 
+    }
+}
+
+.video50-control-tooltip {
+    position: fixed;
+    font-size: 10px;
+    max-width: 200px;
+    background-color: #f2dede;
+    color: #b94a48;
+    text-shadow: 0 1px #EEE;
+    padding: 3px 8px 5px 8px;
+    @include border-radius(3px);
+    margin-bottom: -21px;
+    white-space: normal;
+    margin-right: 8px;
+    cursor: default;
+    font-size: 11px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        bottom: -8px;
+        right: 0px;
+        height: 8px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        right: 7px;
+        bottom: -8px;
+        border: 4px solid transparent;
+        border-top: 4px solid #f2dede; 
     }
 }
