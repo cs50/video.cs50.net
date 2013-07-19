@@ -24,7 +24,8 @@ body, html {
   bottom: 0px;
   padding: 20px;
   background-color: #CC000000;
-  background-color: rgba(0, 0, 0, 0.8); }
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2147483647; }
   #video50-lightbox .video50-wrapper {
     box-shadow: 0px 0px 3px black;
     behavior: url("/lib/PIE-1.0.0/PIE.php");
@@ -416,6 +417,8 @@ body, html {
 
 .video50-fullscreen-control {
   background-position: -245px 0px; }
+  .video50-fullscreen-control.video50-active {
+    background-position: -455px 0px; }
 
 .video50-control-divider {
   margin-left: 5px;
@@ -750,8 +753,8 @@ body, html {
   color: #666;
   cursor: not-allowed; }
 
-.video50-disabled.video50-speed-toggle {
-  opacity: .2;
+.video50-disabled.video50-control-icon {
+  background-image: url("../img/video50-icons-faded.png");
   cursor: not-allowed; }
 
 .video50-quality .video50-support-tooltip {
@@ -829,3 +832,35 @@ body, html {
   color: #468847; }
   .video50-green:after {
     border-bottom: 4px solid #dff0d8; }
+
+.video50-control-tooltip {
+  position: fixed;
+  font-size: 10px;
+  max-width: 200px;
+  background-color: #f2dede;
+  color: #b94a48;
+  text-shadow: 0 1px #EEE;
+  padding: 3px 8px 5px 8px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  behavior: url("/lib/PIE-1.0.0/PIE.php");
+  margin-bottom: -21px;
+  white-space: normal;
+  margin-right: 8px;
+  cursor: default;
+  font-size: 11px; }
+  .video50-control-tooltip:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -8px;
+    right: 0px;
+    height: 8px; }
+  .video50-control-tooltip:after {
+    content: '';
+    position: absolute;
+    right: 7px;
+    bottom: -8px;
+    border: 4px solid transparent;
+    border-top: 4px solid #f2dede; }
