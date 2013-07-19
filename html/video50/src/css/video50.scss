@@ -378,21 +378,28 @@ body, html {
 }
 
 .video50-speed-toggle {
-    background-position: -155px 0px;
+    background-image: none !important;
     position: relative;
+    border-left: none;
+    width: 25px;
 
     .video50-curspeed {
         position: absolute;
-        bottom: 3px;
-        right: -2px;
-        background-color: red;
-        color: white;
-        @include border-radius(1px);
-        @include box-shadow(1px 1px 1px black);
-        font-size: 7px;
-        line-height: 7px;
-        padding: 1px;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        color: #DBDBDB;
+        font-size: 11px;
+        line-height: 28px;
+        text-align: center;
         text-shadow: 0px 1px black;
+    }
+
+    &.video50-disabled {
+        .video50-curspeed {
+            opacity: .2;
+        }
     }
 }
 

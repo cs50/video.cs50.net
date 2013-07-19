@@ -14,7 +14,19 @@
     <script>
         $(function() {
             $(function() {
-                new CS50.Video(".small", {"captions":[],"downloads":[{"label":false,"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/0\/week0m.flv?download"}],"sources":{"source":[{"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/0\/week0m.flv","type":"video\/x-flv"}]}});
+                new CS50.Video(".small", {
+                    "captions":[],
+                    "downloads":[{"label":false,"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/3\/week3w.mov?download"}],
+                    "sources":{
+                        "label":false,
+                        "source":[
+                            {
+                                "src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/3\/week3w.mov",
+                                "type":"video\/quicktime"
+                            }
+                        ]
+                    }
+                });
             });
         });
     </script>

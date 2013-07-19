@@ -12,6 +12,7 @@ echo "Building JavaScript..."
 cat \
     $SCRIPTPATH/../html/video50/src/lib/underscore-min.js \
     $SCRIPTPATH/../html/video50/src/lib/jwplayer/jwplayer.js \
+    $SCRIPTPATH/../html/video50/src/lib/cs50.analytics.js \
     $SCRIPTPATH/../html/video50/src/js/video50.js \
     $SCRIPTPATH/../html/video50/src/js/video50.languages.js \
     > $SCRIPTPATH/../html/video50/build/js/cs50.video.min.js

@@ -19,23 +19,24 @@ var CS50 = CS50 || {};
  *             object that maps bitrate to an array of video URLs, if the videos are not concatenated. 
  *
  */
-CS50.Video = function(playerContainer, options) {
+CS50.Video = function(playerContainer, playerOptions, analytics) {
     var me = this;
-    
-    // save selector or trigger lightbox mode
-    // lightbox if no selector provided
-    if (arguments.length == 1) {
-        options = playerContainer;
+   
+    if ((typeof playerContainer) === "string") {
+        me.playerContainer = playerContainer;
+        options = playerOptions;
+    } 
+    else {
+        analytics = playerOptions;
+        playerOptions = playerContainer;
+        options = playerOptions;
         var $lightbox = $('<div id="video50-lightbox"></div>').hide();
         $('body').find('#video50-lightbox').remove();
         $('body').append($lightbox);
         $lightbox.fadeIn(300);
         me.playerContainer = "#video50-lightbox";
     }
-    else {
-        me.playerContainer = playerContainer;
-    }
-    
+
     this.options = options;
     if (!me.options.sources)
         throw 'Error: You must define a video for CS50 Video to play!';
@@ -55,7 +56,17 @@ CS50.Video = function(playerContainer, options) {
         playbackRates: [0.7, 1.2, 1.5],
         title: '',
     }, me.options);
-    
+   
+    // add any additional analytics metadata, and instantiate analytics
+    me.analyticsData = analytics || {};
+    me.analytics50 = new CS50.Analytics({
+        mixpanel: {
+            token: "3fc293419dc7fe68cb84230f3eca54c6"
+        }
+    }, true);
+   
+    // XXX: identify user with analytics
+
     // add jquery uppercase contains
     jQuery.expr[':'].Contains = function(a, i, m) {
         return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
@@ -157,7 +168,7 @@ CS50.Video = function(playerContainer, options) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-speed-toggle video50-control-icon"><div class="video50-curspeed">1x</div> \
+                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">1.0x</div> \
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
@@ -174,7 +185,7 @@ CS50.Video = function(playerContainer, options) {
                             </li> \
                         <% }) %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
-                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " vidoe50-active" : "" %>" data-index="<%- source.video50_index %>"> \
+                            <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label ? source.label : "Unnamed Video #" + (unnamed++) %> \
                             </li> \
                         <% }) %> \
@@ -240,7 +251,7 @@ CS50.Video = function(playerContainer, options) {
             <% \
                 var support = { \
                     "video/mp4"       : ["IE", "Chrome", "Safari"], \
-                    "video/quicktime" : ["IE", "Chrome", "Safari"], \
+                    "video/quicktime" : ["Flash"], \
                     "video/x-flv"     : ["Flash"], \
                     "video/webm"      : ["Chrome", "Firefox", "Opera"], \
                     "video/ogg"       : ["Chrome", "Firefox", "Opera"] \
@@ -279,7 +290,7 @@ CS50.Video = function(playerContainer, options) {
             <% \
                 var support = { \
                     "video/mp4"       : ["IE", "Chrome", "Safari"], \
-                    "video/quicktime" : ["IE", "Chrome", "Safari"], \
+                    "video/quicktime" : ["Flash"], \
                     "video/x-flv"     : ["Flash"], \
                     "video/webm"      : ["Chrome", "Firefox", "Opera"], \
                     "video/ogg"       : ["Chrome", "Firefox", "Opera"] \
@@ -305,6 +316,7 @@ CS50.Video = function(playerContainer, options) {
             <ul class="video50-supported-browsers"> \
                 <% _.each(sortedCount, function(browser, index) { %> \
                     <% var count = browserCount[browser]; %> \
+                    <% if (count > 0) { %> \
                     <li class="video50-browser-icon video50-<%- browser.toLowerCase() %>"> \
                         <% var query = browser + " download latest version"; %> \
                         <% var ratio = count/sources.length; %> \
@@ -316,11 +328,12 @@ CS50.Video = function(playerContainer, options) {
                             </div> \
                         <% } %> \
                     </li> \
+                    <% } %> \
                 <% }); %> \
             </ul> \
         '
     };
-    
+   
     // compile templates with underscore, expose templates to prototype functions
     this.templates = {};
     for (var template in templateHtml) {
@@ -355,7 +368,8 @@ CS50.Video = function(playerContainer, options) {
     me.multiStreamSources = [];
     me.singleStreamSources = [];
     me.currentSource = undefined;
-
+    me.defaultSourceSupported = false;
+    
     $.each(me.options.sources, function(i, source) {  
         // check if the required keys are supplied, correctly
         if (!source.source) {
@@ -377,7 +391,7 @@ CS50.Video = function(playerContainer, options) {
         // mark whether a source _must_ be played with flash
         source.flashonly = true;
         for (var i = 0; i < source.source.length && source.flashonly; i++) {
-            if (source.source[i].type != "video/x-flv")
+            if (source.source[i].type != "video/x-flv" && source.source[i].type != "video/quicktime")
                 source.flashonly = false;
         }
 
@@ -387,8 +401,8 @@ CS50.Video = function(playerContainer, options) {
             me.defaultSourceSupported = true;
         }
         else if (me.currentSource === undefined && source.video50_supported) { 
-            me.currentSource = source;
             source.first = true;
+            me.currentSource = source;
         }
 
         // push updated object into sources
@@ -450,10 +464,6 @@ CS50.Video.prototype.supportsSource = function(source) {
                 if ((me.supportsHTML5 && me.supportsMP4) || me.supportsFlash)
                     return true;
                 break;
-            case "video/quicktime":
-                if ((me.supportsHTML5 && me.supportsMP4) || me.supportsFlash)
-                    return true;
-                break;
             case "video/webm":
                 if (me.supportsHTML5 && me.supportsWebM)
                     return true;
@@ -462,6 +472,7 @@ CS50.Video.prototype.supportsSource = function(source) {
                 if (me.supportsHTML5 && me.supportsOgg)
                     return true;
                 break;
+            case "video/quicktime":
             case "video/x-flv":
                 if (me.supportsFlash)
                     return true;
@@ -481,7 +492,7 @@ CS50.Video.prototype.supportsSource = function(source) {
 CS50.Video.prototype.createPlayer = function(state) {
     var me = this;
     var $container = $(me.playerContainer);
-    
+  
     // clear out old containers 
     if (me.first === undefined) 
         $container.empty();
@@ -489,7 +500,7 @@ CS50.Video.prototype.createPlayer = function(state) {
     // XXX: factor function that determines what type of player to instantiate
     me.mode = me.supportsHTML5 ? "video" : "flash";
     me.mode = me.currentSource.flashonly ? "flash" : me.mode;
-    me.fullmode = !(me.currentSource.source[0].src instanceof Array);
+    me.fullmode = !(me.currentSource.source[0].src instanceof Array) || (me.currentSource.source[0].src.length == 1);
 
     // grab HTML for the player area
     var playerHTML;
@@ -506,21 +517,16 @@ CS50.Video.prototype.createPlayer = function(state) {
             break;
     }
         
-    // load VTT for thumbnails, load caption
-    me.loadThumbnails();
-    me.loadCC(me.defaultCaption);
-    me.loadTranscript(me.defaultCaption);
     
     // don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
     if (me.first === undefined) {
         // construct the actual player, swap the container to a tighter scope
-        $container = $container.html(me.templates.player({
+        // attach the control bar to the player
+        $container.html(me.templates.player({
             source: me.currentSource,    
             playerHTML: playerHTML
-        })).find('.video50-wrapper');
-
-        // attach the control bar to the player
-        $container.append(me.templates.playerControls({
+        })).find('.video50-wrapper')
+           .append(me.templates.playerControls({
             playbackRates: me.options.playbackRates,
             downloads: me.options.downloads,
             captions: me.options.captions,
@@ -531,6 +537,11 @@ CS50.Video.prototype.createPlayer = function(state) {
             supportPlayback: me.templates.supportPlayback,
             dss: me.defaultSourceSupported
         }));
+        
+        // load VTT for thumbnails, load caption
+        me.loadThumbnails();
+        me.loadCC(me.defaultCaption);
+        me.loadTranscript(me.defaultCaption);
         me.first = true;
     } 
     else {
@@ -749,20 +760,46 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // XXX: test for required handlers
 
     // toggle play pause
-    $container.on('mousedown.video50', '.video50-play-pause-control, .video50-main-video-wrapper', function() {
+    $container.on('mousedown.video50', '.video50-play-pause-control, .video50-main-video-wrapper', function(e) {
         var playPauseButton = $container.find('.video50-play-pause-control')
+        var track = !e.isTrigger;
+
         if (playPauseButton.toggleClass('pause').hasClass('pause')) {
             handlers.pause();
+
+            if (track && window.analytics50) {
+                window.analytics50.track('video50/pause', { 
+                    time: handlers.position(), 
+                    source: me.currentSource,
+                });
+            }
         } 
         else {
             handlers.play();
+            
+            if (track && window.analytics50) {
+                window.analytics50.track('video50/play', { 
+                    time: handlers.position(), 
+                    source: me.currentSource,
+                });
+            }
         }
     });
 
     // seek around by clicking on the progress bar
     $container.on('mousedown.video50', '.video50-timeline-wrapper', function(e) {
         var ratio = (e.pageX - $(this).offset().left)/$(this).width();
-        
+      
+        // track start of seeking to end of seeking
+        if (window.analytics50) {
+            window.analytics50.track('video50/seek', { 
+                from: handlers.position(), 
+                to: ratio * handlers.duration(),
+                source: me.currentSource,
+                transcript: false
+            });
+        }
+
         // manual seeks can override other types of seeking
         me.seeking = false;
         handlers.seek(ratio * handlers.duration());
@@ -773,7 +810,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         var x = e.pageX - $(this).offset().left;
         var ratio = x/$(this).width();
         var time = ratio * handlers.duration();
-     
+
         if (me.thumbnailKeys && me.thumbnailKeys.length > 0) {
             // if successful update of thumbnail
             var success = me.updateThumbnail(time);
@@ -795,12 +832,26 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
  
     // skip back 8 seconds when skip back control is hit
     $container.on('mousedown.video50', '.video50-sb-control', function(e) {
+        if (window.analytics50) {
+            window.analytics50.track('video50/skipBack10', { 
+                from: handlers.position(),    
+                source: me.currentSource 
+            });
+        }
+
         var time = handlers.position() < 10 ? 0 : handlers.position() - 10;
         handlers.seek(time);
     });
 
     // skip forward 30 seconds when skip forward control is hit
     $container.on('mousedown.video50', '.video50-sf-control', function(e) {
+        if (window.analytics50) {
+            window.analytics50.track('video50/skipForward30', { 
+                from: handlers.position(),    
+                source: me.currentSource
+            });
+        }
+        
         var time = handlers.position() + 30 > handlers.duration() ? handlers.duration() : handlers.position() + 30;
         handlers.seek(time);
     });
@@ -811,16 +862,24 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     });
 
     // control the speed of video playback
-    // XXX: remove player control if this option is not defined
     if (handlers.playbackRate !== undefined) {
         $container.on('mousedown.video50', '.video50-speed-control [data-rate]', function(e) {
             e.preventDefault();
+            
             var speed = $(this).attr('data-rate');
             $container.find('.video50-curspeed').text(speed + "x");
             $container.find('.video50-speed-toggle').addClass('video50-active');
             $(this).addClass('video50-active')
                    .siblings().removeClass('.video50-active');
             handlers.playbackRate(speed);
+            
+            if (window.analytics50) {
+                window.analytics50.track('video50/seekBack10', { 
+                    old: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
+                    new: $(this).attr('data-rate'),
+                    source: me.currentSource 
+                });
+            }
         });
 
         $container.on('mousedown.video50', '.video50-speed-toggle', function(e) {
@@ -828,14 +887,25 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
             $(this).toggleClass('video50-active');
             if ($(this).hasClass('video50-active')) {
+                var old = 1;
                 var speed = $container.find('.video50-speed-control .video50-active')
                                       .attr('data-rate');
                 $container.find('.video50-curspeed').text(speed + "x");
                 handlers.playbackRate(speed);  
             } 
             else {
-                $container.find('.video50-curspeed').text("1x");
+                var old = $container.find('.video50-speed-control .video50-active').attr('data-rate');
+                var speed = 1;
+                $container.find('.video50-curspeed').text("1.0x");
                 handlers.playbackRate(1.0);
+            }
+            
+            if (window.analytics50) {
+                window.analytics50.track('video50/seekBack10', { 
+                    old: old,
+                    new: speed,
+                    source: me.currentSource 
+                });
             }
         });
     } 
@@ -897,7 +967,9 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
 
     // request a native browser fullscreen, if possible
-    $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) { 
+    $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) {
+        // XXX check if this works in IE/nonnative fullscreen
+
         var container = $container.find('.video50-wrapper')[0];
         if (!$(this).hasClass('video50-active')) {
             if (container.requestFullscreen) 
@@ -906,6 +978,9 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
                 container.mozRequestFullScreen();
              else if (container.webkitRequestFullscreen) 
                 container.webkitRequestFullscreen();
+            
+            if (window.analytics50)
+                window.analytics50.track('video50/fullscreen', { source: me.currentSource });
         }
         else {
             if (document.cancelFullscreen) 
@@ -935,6 +1010,17 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         $(window).trigger('resize');
     }); 
   
+    // asset downloads
+    $container.on('mousedown.video50', '.video50-download a', function(e) {
+        // track downloaded assets
+        if (window.analytics50) {
+            window.analytics50.track('video50/transcript', { 
+                asset: $(this).attr('href'),
+                source: me.currentSource, 
+            });
+        }
+    });
+
     // toggle the captions on and off
     $container.on('mousedown.video50', '.video50-captions-toggle', function(e) {
         e.stopPropagation();
@@ -943,6 +1029,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             return;
 
         // grab caption text
+        var track = "";
         var $text = $container.find('.video50-cc-text');
         
         $(this).toggleClass('video50-active');
@@ -953,9 +1040,22 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             // show it immediately if it already has text within
             if ($text.text() != "")
                 $text.css('display', 'inline-block');
+
+            var track = "on";
         }
-        else
+        else {
             $text.removeClass('video50-show').hide();
+            var track = "off";
+        }
+        
+        // toggling of captions
+        if (window.analytics50) {
+            window.analytics50.track('video50/ccToggle', { 
+                source: me.currentSource, 
+                lang: me.ccLanguage,
+                toggle: track
+            });
+        }
     });
 
     // change the transcript language
@@ -973,6 +1073,14 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         var lang = $(this).attr('data-lang');
         me.loadTranscript(lang);
         
+        // toggling of transcripts
+        if (window.analytics50) {
+            window.analytics50.track('video50/transcript', { 
+                source: me.currentSource, 
+                lang: lang
+            });
+        }
+
         // pop transcript open
         $container.find('.video50-transcript-control').trigger('mousedown');
     });
@@ -992,6 +1100,14 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         // find relevant CC, load the new language
         var lang = $(this).attr('data-lang');
         me.loadCC(lang);
+        
+        // toggling of transcripts
+        if (window.analytics50) {
+            window.analytics50.track('video50/cc', { 
+                source: me.currentSource,
+                lang: lang
+            });
+        }
 
         // turn on captions if they weren't on before
         if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
@@ -1050,9 +1166,18 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
         // grab the quality of the new video and the file path, updating the UI
         var i = $(this).attr('data-index');
+        var oldSource = me.currentSource;
         me.currentSource = me.sources[i];
         $(this).addClass('video50-active')
                .siblings().removeClass('video50-active');
+       
+        // toggling of video source
+        if (window.analytics50) {
+            window.analytics50.track('video50/source', { 
+                old: oldSource,
+                new: me.currentSource
+            });
+        }
         
         // save and restore state
         me.state = {
@@ -1088,6 +1213,17 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
    
     $container.on('click.video50.video50-transcript', '[data-time]', function(e) {
         var time = $(this).attr('data-time');
+        
+        // seeking via transcript click
+        if (window.analytics50) {
+            window.analytics50.track('video50/seek', { 
+                old: me.cbHandlers.position(),
+                new: time,
+                source: me.source,
+                transcript: true
+            });
+        }
+        
         me.cbHandlers.seek(time); 
     });
 
@@ -1124,8 +1260,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
                                 me.formatTimestamp($(this).attr('data-time'), me.video.duration) +
                             "</div>";
                 })
-            }
-            
+            } 
         }
     });
 
@@ -1136,6 +1271,14 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     
     // downloads
     $container.on('click.video50', '.video50-transcript-download', function(e) {
+        // CC download
+        if (window.analytics50) {
+            window.analytics50.track('video50/srt', { 
+                source: me.source,
+                lang: me.transcriptLanguage,
+            });
+        }
+
         window.open(me.keyedCaptions[me.transcriptLanguage].src);
     });
 
@@ -1143,6 +1286,15 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         $container.on('click.video50.video50-transcript', '.video50-transcript-popout', function(e) {
             e.preventDefault();
             e.stopPropagation();
+       
+            // pop transcript out
+            if (window.analytics50) {
+                window.analytics50.track('video50/popout', { 
+                    source: me.source,
+                    lang: me.transcriptLanguage,
+                });
+            }
+            
             me.transcriptWindow = window.open('', '', 'width=500, height=500');
             me.transcriptWindow.document.write('<!doctype html><html><head></head><body></body></html>');
             
@@ -1382,6 +1534,15 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     
     // handle swapping of videos
     $container.on('mousedown.video50', '.video50-ancilliary-videos .video50-video', function(e) {
+        // track which videos were swapped
+        if (window.analytics50) {
+            window.analytics50.track('video50/popout', { 
+                source: me.source,
+                old: $container.find('.video50-source-video source').attr('src'),
+                new: $(this).find('source').attr('src'),
+            });
+        }
+        
         handlers.swap(this);
     });
 
@@ -1405,16 +1566,28 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
             default:
                 break;
         }
-    });
+    }); 
     
     // handle the mouse on and off behavior of the video dragger
     var move = false;
+    var from = undefined;
     $container.on('mousedown.video50', '.video50-dragger', function(e) {
         move = true;
+        from = e.pageX - $container[0].offsetLeft;
     })
     
     $(document).on('mouseup.video50', function(e) {
         move = false;
+        
+        // track resizing
+        if (window.analytics50) {
+            window.analytics50.track('video50/popout', { 
+                from: from,
+                to: e.pageX - $container[0].offsetLeft,
+                containerWidth: $container.width(),
+                source: me.source,
+            });
+        }
     });
    
     $(document).on('mousemove.video50', function(e) {

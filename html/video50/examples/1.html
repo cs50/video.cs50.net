@@ -6,13 +6,14 @@
     <script src="../src/lib/jquery-1.9.1.min.js"></script>
     <script src="../src/lib/underscore-min.js"></script>
     <script src="../src/lib/jwplayer/jwplayer.js" ></script>
+    <script src="../src/lib/cs50.analytics.js" ></script>
     <script src="../src/js/video50.js"></script>
     <script src="../src/js/video50.languages.js"></script>
     <!--script type="text/javascript" src="//use.typekit.net/qgw0qkt.js"></script-->
     <!--script type="text/javascript">try{Typekit.load();}catch(e){}</script--> 
     <script>
         $(function() {
-            var player = new CS50.Video('.small', {
+            var player = new CS50.Video({
                 "captions":[
                     {
                         "src":"http://cdn.cs76.net/2013/summer/lectures/1/lecture1/lang/afr/lecture1.srt",
