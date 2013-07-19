@@ -35,6 +35,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
         $('body').append($lightbox);
         $lightbox.fadeIn(300);
         me.playerContainer = "#video50-lightbox";
+        me.lightbox = true;
     }
 
     this.options = options;
@@ -89,6 +90,9 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                     <%= playerHTML %> \
                 </div> \
             </div> \
+            <% if (lightbox) { %> \
+                <div class="video50-dismiss">&times;</div> \
+            <% } %> \
         ',
 
         // for synced individual <video> tags
@@ -521,12 +525,12 @@ CS50.Video.prototype.createPlayer = function(state) {
     switch (me.mode) {
         case "video":
             playerHTML = me.templates.playerVideo({
-                source: me.currentSource
+                source: me.currentSource,
             });
             break;
         case "flash":
             playerHTML = me.templates.playerFlash({
-                source: me.currentSource    
+                source: me.currentSource, 
             });
             break;
     }
@@ -538,7 +542,8 @@ CS50.Video.prototype.createPlayer = function(state) {
         // attach the control bar to the player
         $container.html(me.templates.player({
             source: me.currentSource,    
-            playerHTML: playerHTML
+            playerHTML: playerHTML,
+            lightbox: me.lightbox
         })).find('.video50-wrapper')
            .append(me.templates.playerControls({
             playbackRates: me.options.playbackRates,
@@ -966,21 +971,34 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         me.forceControlAppear = false;
     });
 
+    // bye bye
+    $container.on('click.video50', '.video50-dismiss', function(e) {
+        $('#video50-lightbox').fadeOut(200, function() {
+            $('#video50-lightbox').remove();
+        });
+    });
+
     // handle fading out of video controls after 3 second idle
     CS50.controlFade = undefined;
     $container.on('mousemove.video50, click.video50', function(e) {
         clearTimeout(CS50.controlFade);
         $container.find('.video50-control-bar').fadeIn();
         $container.find('.video50-right').fadeIn();
+        $container.find('.video50-dismiss').fadeIn();
         CS50.controlFade = setTimeout(function() {
+            // if hovering over control bar, force to remain
             if (me.forceControlAppear) {
                 $container.trigger('mousemove');
                 return;
             }
+            
+            $container.find('.video50-dismiss').fadeOut();
 
+            // if a menu is open, don't hide the control bar
             if ($container.find('.video50-control-togglee:visible').length < 1)
                 $container.find('.video50-control-bar').fadeOut();
         
+            // if the video is fullscreen, hide the right videos
             if ($container.find('.video50-wrapper').hasClass('fullscreen'))
                 $container.find('.video50-right').fadeOut();
         }, 3000);
@@ -1554,6 +1572,13 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     // handle keypress changes on the video
     $container.on('keydown.video50', function(e) {
         switch (e.which) {
+            case 27:
+                if ($container.find('.video50-wrapper').hasClass('fullscreen')) {
+                    return;
+                }
+                else
+                    $container.find('.video50-dismiss').trigger('click');
+                break;
             case 49:
             case 50:
             case 51:
