@@ -699,10 +699,10 @@ CS50.Video.prototype.createPlayer = function(state) {
     
     // for non sync'd single video mode, change CSS so video fills viewport
     if (me.fullmode) {
-        $container.addClass('fullmode'); 
+        $container.find('.video50-wrapper').addClass('fullmode'); 
     }
     else {
-        $container.removeClass('fullmode'); 
+        $container.find('.video50-wrapper').removeClass('fullmode'); 
     }
     
     // resize videos
