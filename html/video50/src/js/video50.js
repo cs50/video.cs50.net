@@ -158,6 +158,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
               <div class="video50-main-video-wrapper"> \
                 <div class="video50-source-video video50-flash-wrapper video50-video" data-segment="0"> \
                     <% // XXX: GENERATE A RANDOM ID %> \
+                    <div class="video50-overlay"></div> \
                     <div id="a" class="video50-flash" data-src="<%- source.source[0].src %>"></div> \
                 </div> \
                 <div class="video50-cc-container"> \
@@ -214,7 +215,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                     <ul class="video50-download-container video50-control-list video50-control-togglee"> \
                     <% _.each(downloads, function(download, i) { %> \
                         <li class="video50-download" data-src="<%- download.src %>"> \
-                            <a><%- download.label %></a> \
+                            <a><%- download.label || download.src.split("/").pop().split("?")[0]  %></a> \
                         </li> \
                     <% }); %> \
                     </ul> \

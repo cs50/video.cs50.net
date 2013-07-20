@@ -36,7 +36,8 @@
   text-align: center;
   line-height: 27px;
   font-size: 25px;
-  cursor: pointer; }
+  cursor: pointer;
+  z-index: 1; }
 
 .video50-left, .video50-right {
   position: absolute;
@@ -343,7 +344,10 @@
   font-size: 11px;
   line-height: 39px;
   text-shadow: 0px 1px black;
-  text-align: center; }
+  text-align: center;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none; }
 
 .video50-left-controls {
   float: left; }
@@ -385,7 +389,10 @@
   background-image: none !important;
   position: relative;
   border-left: none;
-  width: 25px; }
+  width: 25px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none; }
   .video50-speed-toggle .video50-curspeed {
     position: absolute;
     top: 0px;
