@@ -1172,15 +1172,15 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mouseenter.video50', '.video50-control-icon.video50-disabled', function(e) {
         var text = "";
         if ($(this).hasClass('video50-speed-toggle'))
-            text = "Adjustment of playback rate is not supported for this video.";
+            text = "This video is in a format that cannot be sped up or slowed down.";
         else if ($(this).hasClass('video50-quality-control')) 
-            text = "This is the only available view or resolution for this video.";   
+            text = "This video does not offer alternative layouts or resolutions.";
         else if ($(this).hasClass('video50-download-control')) 
-            text = "This video has no downloadable assets.";
+            text = "This video is not downloadable.";
         else if ($(this).hasClass('video50-captions-toggle')) 
-            text = "This video has no subtitles available.";
+            text = "This video does not have subtitles.";
         else if ($(this).hasClass('video50-transcript-control')) 
-            text = "This video has no transcript available.";
+            text = "This video does not have a transcript.";
    
         if (text == "")
             return;
