@@ -77,6 +77,11 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     if (analytics && analytics.name_tag && (typeof analytics.name_tag) == "string" && analytics.name_tag.length > 0)
         me.analytics50.name_tag(analytics.name_tag);
 
+    // parse out JS path
+    me.jsPath = $(document).find('script[data-library="video50"]').attr('src').split('/');
+    me.jsPath.pop();
+    me.jsPath = me.jsPath.join('/') + '/';
+
     // add jquery uppercase contains
     jQuery.expr[':'].Contains = function(a, i, m) {
         return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
@@ -653,7 +658,8 @@ CS50.Video.prototype.createPlayer = function(state) {
                 height: "100%",
                 controls: false,
                 stretching: "uniform",
-                primary: "flash"
+                primary: "flash",
+                base: me.jsPath
             });
             me.video.setMute(false);
             me.subVideos = [];
@@ -664,7 +670,8 @@ CS50.Video.prototype.createPlayer = function(state) {
                     height: "100%",
                     controls: false,
                     stretching: "uniform",
-                    primary: "flash"
+                    primary: "flash",
+                    base: me.jsPath
                 }));
                 me.subVideos[i].setMute(true);
             });
@@ -1325,7 +1332,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
             
             var $transcript = $(me.transcriptWindow.document);
             $transcript.find('head')
-                       .append($(document).find('[data-library="video50"]').clone())
+                       .append($(document).find('link[data-library="video50"]').clone())
                        .append("<title>Transcript</title>");
                 
             $transcript.find('body')
