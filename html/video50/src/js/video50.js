@@ -187,7 +187,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">1.0x</div> \
+                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">2x</div> \
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
@@ -919,7 +919,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             else {
                 var old = $container.find('.video50-speed-control .video50-active').attr('data-rate');
                 var speed = 1;
-                $container.find('.video50-curspeed').text("1.0x");
                 handlers.playbackRate(1.0);
             }
             
