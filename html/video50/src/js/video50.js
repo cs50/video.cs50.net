@@ -54,7 +54,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     me.options = $.extend({
         captions: [],
         downloads: [],
-        playbackRates: [0.7, 1.2, 1.5],
+        playbackRates: [.75, 1.5, 2],
         title: '',
     }, me.options);
    
@@ -171,7 +171,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
         playerControls: ' \
             <div class="video50-control-bar"> \
               <div class="video50-left-controls"> \
-                <div class="video50-play-pause-control video50-control-icon pause"> \
+                <div class="video50-play-pause-control video50-control-icon video50-pause"> \
                 </div><div class="video50-sb-control video50-control-icon"> \
                 </div><div class="video50-sf-control video50-control-icon"> \
                 </div> \
@@ -191,7 +191,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
-                            <li class="video50-speed <%- i == 0 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
+                            <li class="video50-speed <%- rate == 2 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
                     <% var len = singleStreamSources.length + multiStreamSources.length; %> \
@@ -590,7 +590,7 @@ CS50.Video.prototype.createPlayer = function(state) {
         $container.find('.video50-videos-wrapper').html(playerHTML);
     
         // make the video control paused, so quality jiggering will cause playback to happen
-        $container.find('.video50-play-pause-control').addClass('pause');
+        $container.find('.video50-play-pause-control').addClass('video50-pause');
     }
 
     // for each mode, perform different operations for instantiating the player
@@ -616,8 +616,10 @@ CS50.Video.prototype.createPlayer = function(state) {
                 seek: function(time) {
                     if (!me.seeking) {
                         me.seeking = true;
-                        if (!$container.find('.video50-play-pause-control').hasClass('pause'))
+                        if (!$container.find('.video50-play-pause-control').hasClass('video50-pause'))
                             $container.find('.video50-play-pause-control').trigger('mousedown');
+                        
+                        $container.find('.video50-play-pause-control').addClass('video50-buffer');
                         
                         me.video.currentTime = time; 
                         $.each(me.subVideos, function(i, v) { v.currentTime = time; });
@@ -627,6 +629,7 @@ CS50.Video.prototype.createPlayer = function(state) {
                         $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
                             var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
                             if (++loaded == length) {
+                                $container.find('.video50-play-pause-control').removeClass('video50-buffer');
                                 $container.find('.video').off('seeked.video50');
                                 $container.find('.video50-play-pause-control').trigger('mousedown');
                             }
@@ -731,9 +734,11 @@ CS50.Video.prototype.startVideos = function(handlers) {
     switch (me.mode) {
         case "video":
             var loaded = 0;
+            $container.find('.video50-play-pause-control').addClass('video50-buffer');
             $container.find('video').on('canplay.video50', function(e) {
                 var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
                 if (++loaded == length) {
+                    $container.find('.video50-play-pause-control').removeClass('video50-buffer');
                     $container.find('video').off('canplay.video50');
                     
                     // restore video playback state if it exists
@@ -790,7 +795,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-play-pause-control, .video50-main-video-wrapper', function(e) {
         var playPauseButton = $container.find('.video50-play-pause-control')
         var track = !e.isTrigger;
-        if (playPauseButton.toggleClass('pause').hasClass('pause')) {
+        if (playPauseButton.toggleClass('video50-pause').hasClass('video50-pause')) {
             if (track) {
                 me.track('video50/pause', { 
                     position: handlers.position(), 
@@ -1762,7 +1767,7 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     $container.find('.video50-main-video-wrapper')
               .css('margin-top', -$container.find('.video50-main-video-wrapper').height()/2);
     $container.find('.video50-ancilliary-videos')
-              .css('margin-top', -$container.find('.video50-ancilliary-videos').height()/2);
+              .css('margin-top', -$container.find('.video50-ancilliary-videos').height()/2 + 3);
 }
 
 /*

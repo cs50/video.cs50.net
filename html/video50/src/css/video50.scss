@@ -1,6 +1,7 @@
 @import "mixins";
 
 #video50-lightbox {
+    font-family: HelveticaNeue, Helvetica, sans-serif;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -16,18 +17,17 @@
 }
 
 .video50-dismiss {
-    position: fixed;
-    height: 30px;
-    width: 30px;
-    @include border-radius(18px);
     position: absolute;
     top: 8px;
     right: 8px;
+    height: 30px;
+    width: 30px;
+    @include border-radius(18px);
     background-color: #333;
     border: 3px solid white;
     color: white;
     text-align: center;
-    line-height: 27px;
+    line-height: 25px;
     font-size: 25px;
     cursor: pointer;
     z-index: 1;
@@ -363,8 +363,15 @@
     background-position: -30px 0px;
     width: 30px;
 
-    &.pause {
+    &.video50-pause {
         background-position: 0px 0px; 
+    }
+
+    &.video50-buffer {
+        @include transition(none);
+        background-image: url("../img/loading.gif");
+        background-position: center center;
+        background-repeat: no-repeat;
     }
 }
 
@@ -387,6 +394,10 @@
     border-left: none;
     width: 25px;
     @include user-select(none);
+
+    &.video50-active .video50-curspeed {
+        color: #51C0FF;
+    }
 
     .video50-curspeed {
         position: absolute;
