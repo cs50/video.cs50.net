@@ -220,8 +220,8 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                     <% }); %> \
                     </ul> \
                     <% var len = captions.length %> \
-                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
-                </div><div class="video50-captions-lang video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-captions-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-caption<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
@@ -229,7 +229,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                         </li> \
                     <% }) %> \
                     </ul> \
-                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <div class="video50-transcript-container-wrapper video50-control-togglee"> \
                         <div class="video50-transcript-search-wrapper"> \
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
@@ -239,7 +239,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                         </div> \
                         <div class="video50-transcript-container"></div> \
                     </div> \
-                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-tlang-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-tlang<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
@@ -386,7 +386,17 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     me.singleStreamSources = [];
     me.currentSource = undefined;
     me.defaultSourceSupported = false;
-    
+  
+    // check for default caption
+    var hasDefault = false;
+    $.each(me.options.captions || [], function(i, caption) {
+        if (caption["default"])
+            hasDefault = true;
+    });
+
+    if (!hasDefault && me.options.captions)
+        me.options.captions[0]["default"] = true;
+
     $.each(me.options.sources, function(i, source) {  
         // check if the required keys are supplied, correctly
         if (!source.source) {
