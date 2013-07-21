@@ -394,7 +394,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
             hasDefault = true;
     });
 
-    if (!hasDefault && me.options.captions)
+    if (!hasDefault && me.options.captions && me.options.captions.length > 0)
         me.options.captions[0]["default"] = true;
 
     $.each(me.options.sources, function(i, source) {  
