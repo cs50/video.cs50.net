@@ -948,7 +948,14 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     $container.on('mousedown.video50', '.video50-control-toggle', function(e) {
         var $child = $(this).find('.video50-control-togglee');
         $container.find('.video50-control-togglee').not($child).hide();
-    
+        
+        if ($(this).is('.video50-download-control')) {
+            if ($(this).find('.video50-download').length == 1) {
+                $(this).find('.video50-download').trigger('mousedown');
+                return;
+            }
+        }
+
         if (!$(this).hasClass('video50-disabled'))
             $child.toggle();
     });
@@ -1060,9 +1067,10 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
         $(window).trigger('resize');
     }); 
-  
+ 
     // asset downloads
     $container.on('mousedown.video50', '.video50-download', function(e) {
+        e.stopPropagation();
         window.open($(this).attr('data-src'));
         
         // track downloaded assets
