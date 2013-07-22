@@ -13,21 +13,9 @@
     <!--script type="text/javascript">try{Typekit.load();}catch(e){}</script--> 
     <script>
         $(function() {
-            $(function() {
-                new CS50.Video({
-                    "captions":[],
-                    "downloads":[{"label":false,"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/3\/week3w.mov?download"}],
-                    "sources":{
-                        "label":false,
-                        "source":[
-                            {
-                                "src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/3\/week3w.mov",
-                                "type":"video\/quicktime"
-                            }
-                        ]
-                    }
-                });
-            });
+            new CS50.Video(
+           {"captions":[],"downloads":[{"label":false,"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/0\/week0m.flv?download"}],"sources":{"label":false,"source":[{"src":"rtmp:\/\/stream.cs50.net\/cfx\/st\/flv:2007\/fall\/lectures\/0\/week0m","type":"video\/x-flv"},{"src":"http:\/\/cdn.cs50.net\/2007\/fall\/lectures\/0\/week0m.flv","type":"video\/x-flv"}]}} 
+            );
         });
     </script>
     <title>Hello World!</title>

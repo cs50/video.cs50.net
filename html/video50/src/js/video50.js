@@ -128,7 +128,9 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
               <div class="video50-main-video-wrapper"> \
                 <video class="video50-source-video video50-video" data-segment="0"> \
                 <% _.each(angles.shift(), function(format, i) { %> \
-                    <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                    <% if (format.path.indexOf("rtmp://") !== 0) { %> \
+                        <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                    <% } %> \
                 <% }); %> \
                 </video> \
                 <div class="video50-cc-container"> \
@@ -144,7 +146,9 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 <% for (var i = 0; i < angles.length; i++) { %> \
                     <video class="video50-video" data-segment="<%= i + 1 %>"> \
                     <% _.each(angles[i], function(format, j) { %> \
-                        <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                        <% if (format.path.indexOf("rtmp://") !== 0) { %> \
+                            <source src="<%- format.path %>" type="<%- format.type %>"></source> \
+                        <% } %> \
                     <% }); %> \
                     </video> \
                 <% } %> \
@@ -159,7 +163,19 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 <div class="video50-source-video video50-flash-wrapper video50-video" data-segment="0"> \
                     <% // XXX: GENERATE A RANDOM ID %> \
                     <div class="video50-overlay"></div> \
-                    <div id="a" class="video50-flash" data-src="<%- source.source[0].src %>"></div> \
+                    <% \
+                        var i = source.RTMPIndex || source.flashIndex; \
+                        if (_.indexOf(["video/mp4", "video/quicktime", "video/x-flv"], source.source[i].type) == -1) { \
+                            if (source.flashIndex) { \
+                                 i = source.flashIndex; \
+                            } \
+                            else { \
+                                alert("CS50 Video was incorrectly configured. Please contact the site owner. RTMP files must be .mov, .mp4, or ..flv."); \
+                                throw "CS50 Video was incorrectly configured. RTMP files must be .mov, .mp4, or .flv!"; \
+                            } \
+                        } \
+                    %> \
+                    <div id="a" class="video50-flash" data-src="<%- source.source[i].src %>"></div> \
                 </div> \
                 <div class="video50-cc-container"> \
                     <div class="video50-cc-text"></div> \
@@ -187,11 +203,11 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">2x</div> \
+                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">1.5x</div> \
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
-                            <li class="video50-speed <%- rate == 2 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
+                        <li class="video50-speed <%- rate == 1.5 ? "video50-active" : "" %>" data-rate="<%- rate %>"><%- rate %>x</li> \
                     <% }) %> \
                     </ul> \
                     <% var len = singleStreamSources.length + multiStreamSources.length; %> \
@@ -237,7 +253,13 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                             <input class="video50-transcript-search" type="text" placeholder="Search Transcript"/> \
                             <div class="video50-transcript-cancel"></div> \
                         </div> \
-                        <div class="video50-transcript-container"></div> \
+                        <div class="video50-transcript-container"> \
+                            <div class="video50-transcript-scroll"> \
+                            </div> \
+                        </div> \
+                        <div class="video50-resume-scroll"> \
+                            Resume Automatic Scrolling \
+                        </div> \
                     </div> \
                 </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-tlang-container video50-control-list video50-control-togglee"> \
@@ -397,6 +419,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     if (!hasDefault && me.options.captions && me.options.captions.length > 0)
         me.options.captions[0]["default"] = true;
 
+    // look at each of the sources provided
     $.each(me.options.sources, function(i, source) {  
         // check if the required keys are supplied, correctly
         if (!source.source) {
@@ -415,11 +438,30 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
             source.video50_supported = false;
         }
 
-        // mark whether a source _must_ be played with flash
-        source.flashonly = true;
-        for (var i = 0; i < source.source.length && source.flashonly; i++) {
+        // determine whether a source must be played with flash
+        source.flashonly = true; source.flashIndex; source.RTMPIndex;
+        for (var i = 0; i < source.source.length; i++) {
+            // support string argument for src by converting to single length array
+            if (typeof source.source[i].src == "string")
+                source.source[i].src = [source.source[i].src];
+            
+            // if it has video formats other than flash or quicktime, could possible be played by mov
             if (source.source[i].type != "video/x-flv" && source.source[i].type != "video/quicktime")
                 source.flashonly = false;
+
+            // find the index of the first flash compatible video
+            if (source.flashIndex == undefined) {
+                if (_.indexOf(["video50/x-flv", "video/quicktime", "video/mp4"], source.source[i].type))
+                    source.flashIndex = i;
+            }
+            
+            // iterate over these src keys, noting if any of them are RMTP
+            for (var j = 0; j < source.source[i].src.length; j++) {
+                if (source.source[i].src[j].indexOf("rtmp://") == 0) {
+                    source.RTMPIndex = i;
+                    break;
+                }
+            }
         }
 
         // detect default video, or first supported video if no default video specified
@@ -438,7 +480,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
         // at least one src key must be defined, then determine if single or multistream
         if (source.source[0] && source.source[0].src) {
             source.video50_index = i;
-            if (source.source[0].src instanceof Array)
+            if (source.source[0].src.length > 1)
                 me.multiStreamSources.push(source);
             else
                 me.singleStreamSources.push(source);
@@ -1128,7 +1170,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // change the transcript language
     $container.on('mousedown.video50', '.video50-transcript-lang [data-lang]', function(e) {
         e.stopPropagation();
-        
+
         // don't reload transcript if already chosen
         if ($(this).hasClass('video50-active')) {
             // pop transcript open
@@ -1159,7 +1201,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             // turn on captions if they weren't on before
             if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
                 $container.find('.video50-captions-toggle').trigger('mousedown');
-            return;
         }
 
         // find relevant CC, load the new language
@@ -1175,6 +1216,9 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         // turn on captions if they weren't on before
         if (!$container.find('.video50-captions-toggle').hasClass('video50-active'))
             $container.find('.video50-captions-toggle').trigger('mousedown');
+    
+        // hide menus
+        $container.trigger('click');
     });
    
     $container.on('mouseenter.video50', '.video50-quality.video50-disabled', function(e) {
@@ -1297,16 +1341,32 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     });
 
     $container.on('keyup.video50.video50-transcript', '.video50-transcript-search', function(e) {
+        me.oldScroll = me.oldScroll === undefined ? $container.find('.video50-transcript-container').scrollTop() : me.oldScroll;
+        me.oldManual = me.oldManual === undefined ? me.manualScroll : me.oldManual;
+        
         var $cancel = $container.find(".video50-transcript-cancel");
         if ($.trim($(this).val()) == "") {
-            $cancel.removeClass('cancel');
+            $cancel.removeClass('video50-cancel');
             $container.find('.video50-search-time').remove();
             $container.find('.video50-transcript-container').removeClass('video50-transcript-searching');
             $container.find('[data-time], br').show().removeClass('video50-search-result');
+            
+            // restore old values for scroll + autoscrolling
+            $container.find('.video50-transcript-contaienr').scrollTop(me.oldScroll);
+            me.oldScroll = undefined;
+            me.manualScroll = me.oldManual;
+            me.oldManual = undefined;
+
+            if (me.manualScroll)
+                $container.find('.video50-resume-scroll').show();
         } 
         else {
+            // disable autoscrolling, hide resume scroll if shown before to avoid obscuring results
+            me.manualScroll = true;
+            $container.find('.video50-resume-scroll').hide();
+
             // perform a search and enable clearing the field
-            $cancel.addClass('cancel');
+            $cancel.addClass('video50-cancel');
             $container.find('.video50-transcript-container').addClass('video50-transcript-searching');
             $container.find('[data-time], br').hide().removeClass('video50-search-result');
             $container.find("[data-time]:Contains('" + $(this).val() + "')")
@@ -1324,7 +1384,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     });
 
     // cancel a search
-    $container.on('click.video50.video50-transcript', '.video50-transcript-cancel.cancel', function(e) {
+    $container.on('click.video50.video50-transcript', '.video50-transcript-cancel.video50-cancel', function(e) {
         $container.find(".video50-transcript-search").val("").trigger('keyup');
     });
     
@@ -1337,6 +1397,24 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         });
 
         window.open(me.keyedCaptions[me.transcriptLanguage].src);
+    });
+
+    // scrolling
+    var events = ['scroll', 'mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup'];
+    var eventString = events.join('.video50, ') + '.video50';
+    $container.on(eventString, '.video50-transcript-container', function(e) {
+        me.manualScroll = true;
+        
+        if (me.oldManual == undefined)
+            $container.find('.video50-resume-scroll').show();
+    });
+
+    // resume automatic scrolling
+    $container.on('mousedown', '.video50-resume-scroll', function(e) {
+        e.stopPropagation(); 
+        $(this).hide();
+        me.manualScroll = false;
+        me.updateTranscriptHighlight(me.lastActiveTranscript, true);
     });
 
     if (!external) {
@@ -1855,6 +1933,13 @@ CS50.Video.prototype.updateTranscriptHighlight = function(time, force) {
 
         // add highlight to active element
         $active.addClass('highlight');
+    
+        // scroll transcript to that location
+        if (!me.manualScroll) {
+            var top = $active.position().top || 0;
+            top -= $container.height() / 2;
+            $container.scrollTop(top);
+        }
     }
 };
 
@@ -1864,7 +1949,6 @@ CS50.Video.prototype.updateTranscriptHighlight = function(time, force) {
  */
 CS50.Video.prototype.loadThumbnails = function() {
     var me = this;
-
     me.thumbnailKeys = [];
     me.thumbnails = {};
     if (me.options.thumbnails && me.options.thumbnails.src) {
@@ -1971,7 +2055,7 @@ CS50.Video.prototype.loadTranscript = function(language) {
             var timecodes = response.split(/\n\s*\n/);
 
             // clear previous text
-            var $container = $(me.transcriptContainer).find('.video50-transcript-container');
+            var $container = $(me.transcriptContainer).find('.video50-transcript-scroll');
             $container.empty();
 
             // iterate over each timecode

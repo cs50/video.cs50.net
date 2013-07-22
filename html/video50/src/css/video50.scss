@@ -543,7 +543,7 @@
         background-position: -330px 0px;
         cursor: default;
             
-        &.cancel {
+        &.video50-cancel {
             cursor: pointer;
             background-position: -360px 0px;
         }
@@ -635,6 +635,24 @@
     display: inline;
     margin-right: 10px;
     color: #777;
+}
+
+.video50-transcript-scroll {
+    position: relative;
+}
+
+.video50-resume-scroll {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    @include border-radius(0px 0px 3px 3px);
+    background-color: #555;
+    border: 1px solid #282828;
+    @include box-shadow(0px 1px 3px #222);
+    color: #EEE;
+    text-shadow: 0px 1px black;
+    padding: 2px 10px;
 }
 
 .video50-transcript-container {
