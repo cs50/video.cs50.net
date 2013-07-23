@@ -21,7 +21,7 @@ var CS50 = CS50 || {};
  */
 CS50.Video = function(playerContainer, playerOptions, analytics) {
     var me = this;
-   
+
     if ((typeof playerContainer) === "string") {
         me.playerContainer = playerContainer;
         options = playerOptions;
@@ -659,34 +659,37 @@ CS50.Video.prototype.createPlayer = function(state) {
                 play: function() { 
                     me.video.play(); 
                     $.each(me.subVideos, function(i, v) { v.play(); });
-                    me.seeking = false;
                 },
                 pause: function() { 
                     me.video.pause(); 
                     $.each(me.subVideos, function(i, v) { v.pause(); });
                 },
-                seek: function(time) {
-                    if (!me.seeking) {
-                        me.seeking = true;
-                        if (!$container.find('.video50-play-pause-control').hasClass('video50-pause'))
-                            $container.find('.video50-play-pause-control').trigger('mousedown');
-                        
-                        $container.find('.video50-play-pause-control').addClass('video50-buffer');
-                        
-                        me.video.currentTime = time; 
-                        $.each(me.subVideos, function(i, v) { v.currentTime = time; });
-                     
-                        // buffer for a bit so syncing doesn't get thrown off
-                        var loaded = 0;
-                        $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
-                            var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
-                            if (++loaded == length) {
-                                $container.find('.video50-play-pause-control').removeClass('video50-buffer');
-                                $container.find('.video').off('seeked.video50');
-                                $container.find('.video50-play-pause-control').trigger('mousedown');
+                seek: function(time, cb) {
+                    // pause + buffer
+                    var playing = !$(me.video).prop('paused');
+                    $container.find('.video50-play-pause-control').addClass('video50-pause');
+                    $container.find('.video50-play-pause-control').addClass('video50-buffer');
+                    me.cbHandlers.pause();
+                    
+                    me.video.currentTime = time; 
+                    $.each(me.subVideos, function(i, v) { v.currentTime = time; });
+                 
+                    // buffer for a bit so syncing doesn't get thrown off
+                    var loaded = 0;
+                    $container.find('video').off('seeked.video50').on('seeked.video50', function(e) {
+                        var length = me.currentSource.source[0].src.length;
+                        if (++loaded == length) {
+                            $container.find('.video50-play-pause-control').removeClass('video50-buffer');
+                            $container.find('video').off('seeked.video50');
+
+                            if (playing) {
+                                $container.find('.video50-play-pause-control').removeClass('video50-pause');
+                                me.cbHandlers.play();
                             }
-                        });
-                    }
+
+                            me.syncing = false;
+                        }
+                    });
                 },
                 duration: function() { return me.video.duration; },
                 position: function() { return me.video.currentTime; },
@@ -788,7 +791,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
             var loaded = 0;
             $container.find('.video50-play-pause-control').addClass('video50-buffer');
             $container.find('video').on('canplay.video50', function(e) {
-                var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
+                var length = me.currentSource.source[0].src.length;
                 if (++loaded == length) {
                     $container.find('.video50-play-pause-control').removeClass('video50-buffer');
                     $container.find('video').off('canplay.video50');
@@ -807,7 +810,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
             var loaded = 0;
             $.each([me.video].concat(me.subVideos), function(i, v) {
                 v.onReady(function(e) {
-                    var length = (me.currentSource.source[0].src instanceof Array) ? me.currentSource.source[0].src.length : 1;
+                    var length = me.currentSource.source[0].src.length;
                     if (++loaded == length) {
                         // restore video playback state if it exists
                         if (me.state !== undefined) {
@@ -882,7 +885,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         });
 
         // manual seeks can override other types of seeking
-        me.seeking = false;
         handlers.seek(ratio * handlers.duration());
     });    
     
@@ -1110,6 +1112,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             // ... move fullscreen controls back to the multivideo display
             $container.find('.video50-wrapper').removeClass('fullscreen');
             $container.find('.video50-fullscreen-control').removeClass('video50-active');
+            $container.find('.video50-right').show();
         } 
         // element is being fullscreened, so ...
         else {
@@ -1316,7 +1319,8 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         me.transcriptContainer.off('.video50-transcript');
     }
    
-    $container.on('click.video50.video50-transcript', '[data-time]', function(e) {
+    $container.on('click.video50.video50-transcript', '.video50-transcript-container a[data-time]', function(e) {
+        e.stopPropagation();
         var time = $(this).attr('data-time');
         
         // seeking via transcript click
@@ -1340,7 +1344,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         e.stopPropagation();
     });
 
-    $container.on('keyup.video50.video50-transcript', '.video50-transcript-search', function(e) {
+    $container.on('keyup.video50.video50-transcript', '.video50-transcript-search', function(e) { 
         me.oldScroll = me.oldScroll === undefined ? $container.find('.video50-transcript-container').scrollTop() : me.oldScroll;
         me.oldManual = me.oldManual === undefined ? me.manualScroll : me.oldManual;
         
@@ -1416,7 +1420,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         me.manualScroll = false;
         me.updateTranscriptHighlight(me.lastActiveTranscript, true);
     });
-
+    
     if (!external) {
         $container.on('click.video50.video50-transcript', '.video50-transcript-popout', function(e) {
             e.preventDefault();
@@ -1544,12 +1548,12 @@ CS50.Video.prototype.syncHTML5Videos = function() {
     var me = this;
   
     // only if we're not seeking do we try to sync
-    if (!me.seeking) {
-        for (var i = 0; i < me.subVideos.length; i++) {
+    for (var i = 0; i < me.subVideos.length; i++) {
+        if (!me.syncing && me.lol === undefined) {
             if (me.subVideos[i].readyState === 4 && 
                 (Math.abs(me.subVideos[i].currentTime - me.video.currentTime) > .1)) {
-                // XXX: add buffering icon
-                me.cbHandlers.seek(me.video.currentTime);        
+                me.syncing = true;
+                me.cbHandlers.seek(Math.floor(me.video.currentTime));        
             }
         }
     }
