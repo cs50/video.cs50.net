@@ -1746,7 +1746,7 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     // XXX: turn off resizing if a resizing handler is not defined
     $(window).on('resize.video50', function() {
         // recalcuate correct position of dragger based on old video ratio
-        // XXX: handler.resize();
+        // XXX: handler.resize(); 
         var newX = me.oldRatio * $container.width();
         me.resizeMultistream(newX);
     });
@@ -1764,6 +1764,9 @@ CS50.Video.prototype.reverseKeystone = function(desired, angle, z) {
 CS50.Video.prototype.resizeMultistream = function(x) {
     var me = this;
     var $container = $(me.playerContainer).find('.video50-wrapper');
+    
+    var subtitleFontSize = Math.max(14, $container.find('.video50-source-video').width() / 50);
+    $container.find('.video50-cc-text').css('font-size', subtitleFontSize + "px");
    
     // if we're in fullscreen mode, use a different algorithm
     if ($container.is('.fullscreen, .fullmode')) {
