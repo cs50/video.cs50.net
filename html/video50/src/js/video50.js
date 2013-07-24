@@ -203,7 +203,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 <div class="video50-timelength">-:--:--</div> \
               </div> \
               <div class="video50-right-controls"> \
-                <div class="video50-speed-toggle video50-control-icon video50-control-toggle"><div class="video50-curspeed">1.5x</div> \
+                <div class="video50-speed-toggle video50-control-icon"><div class="video50-curspeed">1.5x</div> \
                 </div><div class="video50-speed-control video50-control-icon video50-control-toggle"> \
                     <ul class="video50-speed-container video50-control-list video50-control-togglee"> \
                     <% _.each(playbackRates, function(rate, i) { %> \
@@ -236,7 +236,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                     <% }); %> \
                     </ul> \
                     <% var len = captions.length %> \
-                </div><div class="video50-captions-toggle video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
+                </div><div class="video50-captions-toggle video50-control-icon <%- len < 1 ? "video50-disabled" : "" %>"> \
                 </div><div class="video50-captions-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
@@ -908,7 +908,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     });
    
     // disable thumbnails when mousing off progress bar
-    $container.on('mouseout.video50', '.video50-timeline-wrapper', function(e) {
+    $container.on('mouseleave.video50', '.video50-timeline-wrapper', function(e) {
          if (me.thumbnailKeys.length > 0)
             $container.find('.video50-thumbnail-wrapper').hide();
     });
@@ -990,6 +990,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
     // close menus when anything else is clicked
     $container.on('click.video50', function(e) {
+        $(this).find('.video50-control-toggle').removeClass('video50-active');
         $(this).find('.video50-control-togglee').hide();
     });
 
@@ -1010,10 +1011,12 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             }
         }
 
-        if (!$(this).hasClass('video50-disabled'))
+        if (!$(this).hasClass('video50-disabled')) {
             $child.toggle();
+            $(this).toggleClass('video50-active');
+        }
     });
-    
+
     $container.on('mousedown.video50', '.video50-transcript-control', function(e) {
         var track = !e.isTrigger;
         var toggle = "";
@@ -1023,10 +1026,17 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             toggle = "on";
         } 
         else {
-            if ($container.find('.video50-transcript-contrainer-wrapper').is(':visible'))
+            if ($container.find('.video50-transcript-container-wrapper').is(':visible'))
                 toggle = "on";
             else
                 toggle = "off";
+        }
+
+        if (toggle == "on") {
+            // need set timeout to make focusing happen after mouseup
+            setTimeout(function() {
+                $(me.transcriptContainer).find('.video50-transcript-search').focus();
+            }, 0);
         }
 
         if (track) {
@@ -1038,6 +1048,41 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
     });
 
+    // toggle the captions on and off
+    $container.on('mousedown.video50', '.video50-captions-toggle', function(e) {
+        e.stopPropagation();
+
+        if ($(this).hasClass('video50-disabled'))
+            return;
+
+        // grab caption text
+        var track = "";
+        var $text = $container.find('.video50-cc-text');
+      
+        $(this).toggleClass('video50-active');
+        if ($(this).hasClass('video50-active')) {
+            // prepare to show the box for the caption
+            $text.addClass('video50-show');
+
+            // show it immediately if it already has text within
+            if ($text.text() != "")
+                $text.css('display', 'inline-block');
+
+            var track = "on";
+        }
+        else {
+            $text.removeClass('video50-show').hide();
+            var track = "off";
+        }
+        
+        // toggling of captions
+        me.track('video50/ccToggle', { 
+            source: me.currentSource, 
+            lang: me.ccLanguage,
+            toggle: track
+        });
+    });
+    
     $container.on('mouseenter.video50', '.video50-control-bar', function(e) {
         me.forceControlAppear = true;
     }).on('mouseleave.video50', '.video50-control-bar', function(e) {
@@ -1132,41 +1177,6 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         me.track('video50/download', { 
             asset: $(this).attr('href'),
             source: me.currentSource
-        });
-    });
-
-    // toggle the captions on and off
-    $container.on('mousedown.video50', '.video50-captions-toggle', function(e) {
-        e.stopPropagation();
-
-        if ($(this).hasClass('video50-disabled'))
-            return;
-
-        // grab caption text
-        var track = "";
-        var $text = $container.find('.video50-cc-text');
-        
-        $(this).toggleClass('video50-active');
-        if ($(this).hasClass('video50-active')) {
-            // prepare to show the box for the caption
-            $text.addClass('video50-show');
-
-            // show it immediately if it already has text within
-            if ($text.text() != "")
-                $text.css('display', 'inline-block');
-
-            var track = "on";
-        }
-        else {
-            $text.removeClass('video50-show').hide();
-            var track = "off";
-        }
-        
-        // toggling of captions
-        me.track('video50/ccToggle', { 
-            source: me.currentSource, 
-            lang: me.ccLanguage,
-            toggle: track
         });
     });
 
@@ -1301,7 +1311,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         $(this).siblings().removeClass('video50-active');
         $(this).addClass('video50-active');
     });
-
+    
     me.loadTranscriptHandlers($container.find('.video50-transcript-container-wrapper').parent());
 };
 
