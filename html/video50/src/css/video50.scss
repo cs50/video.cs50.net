@@ -644,6 +644,7 @@
 
 .video50-transcript-scroll {
     position: relative;
+    @include user-select(text);
 }
 
 .video50-resume-scroll {
