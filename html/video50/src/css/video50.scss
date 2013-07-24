@@ -270,6 +270,7 @@
 .video50-left-controls > *, .video50-right-controls > *, .video50-timeline {
     position: relative;
     cursor: pointer;
+    @include user-select(none);
 }
 
 .video50-left-controls, .video50-right-controls {
