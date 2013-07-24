@@ -245,7 +245,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                         </li> \
                     <% }) %> \
                     </ul> \
-                </div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
+                </div><div><div class="video50-transcript-control video50-control-toggle video50-control-icon video50-transcript-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <div class="video50-transcript-container-wrapper video50-control-togglee"> \
                         <div class="video50-transcript-search-wrapper"> \
                             <div class="video50-transcript-popout video50-transcript-icon"></div> \
@@ -261,7 +261,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                             Resume Automatic Scrolling \
                         </div> \
                     </div> \
-                </div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
+                </div></div><div class="video50-transcript-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-tlang-container video50-control-list video50-control-togglee"> \
                     <% _.each(captions, function(caption, i) { %> \
                         <li class="video50-tlang<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
@@ -991,7 +991,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // close menus when anything else is clicked
     $container.on('click.video50', function(e) {
         $(this).find('.video50-control-toggle').removeClass('video50-active');
-        $(this).find('.video50-control-togglee').hide();
+        $(this).find('.video50-control-togglee').removeClass('video50-visible');
     });
 
     // prevent clicks on menus from closing menus
@@ -1002,7 +1002,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     // toggle list controls in the control bar
     $container.on('mousedown.video50', '.video50-control-toggle', function(e) {
         var $child = $(this).find('.video50-control-togglee');
-        $container.find('.video50-control-togglee').not($child).hide();
+        $container.find('.video50-control-togglee').not($child).removeClass('video50-visible');
         
         if ($(this).is('.video50-download-control')) {
             if ($(this).find('.video50-download').length == 1) {
@@ -1012,7 +1012,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
         }
 
         if (!$(this).hasClass('video50-disabled')) {
-            $child.toggle();
+            $child.toggleClass('video50-visible');
             $(this).toggleClass('video50-active');
         }
     });

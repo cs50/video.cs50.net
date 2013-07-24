@@ -470,6 +470,11 @@
     border-top: 1px solid #444;
 }
 
+.video50-togglee.video50-hidden {
+    height: 0px;
+    visibility: hidden;
+}
+
 .video50-transcript-container-wrapper {
     position: absolute;
     bottom: 42px;
@@ -480,7 +485,7 @@
     @include box-shadow(0px 0px 3px #111);
     font-family: HelveticaNeue, Helvetica, sans-serif;
     background-color: #333;
-    display: none;
+    visibility: hidden;
 
     &.external {
         position: fixed;
@@ -684,6 +689,11 @@
     }
 }
 
+.video50-control-list, .video50-transcript-container-wrapper {
+    &.video50-visible {
+        visibility: visible;
+    }
+}
 
 .video50-control-list {
     position: absolute;
@@ -700,7 +710,7 @@
     @include box-shadow(0px 0px 3px #111);
     color: white;
     text-shadow: 0px 1px black;
-    display: none;
+    visibility: hidden;
 
     li {
         padding: 2px 8px;
