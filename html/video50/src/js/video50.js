@@ -91,7 +91,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     var templateHtml = {
         player: ' \
             <div class="video50-wrapper" tabindex="1"> \
-                <div class="video50-videos-wrapper"> \
+                <div class="video50-videos-wrapper<%= window.chrome ? " video50-chrome": "" %>"> \
                     <%= playerHTML %> \
                 </div> \
             </div> \
@@ -2077,6 +2077,7 @@ CS50.Video.prototype.loadTranscript = function(language) {
 
             // iterate over each timecode
             var n = timecodes.length;
+            var transcript = "";
             for (var i = 0; i < n; i++) {
                 // split the elements of the timecode
                 var timecode = timecodes[i].split("\n");
@@ -2088,24 +2089,25 @@ CS50.Video.prototype.loadTranscript = function(language) {
 
                     // if line starts with >> or [, then start a new line
                     if (content.match(/^(>>|\[)/) && i != 0)
-                        $container.append('<br /><br />');
+                        transcript += '<br /><br />';
                     
                     // if line starts with a speakername and colon, insert a new line
                     content = content.replace(/^(.*?:)/, function(a, b) {
                         if (i != 0)
-                            $container.append('<br />');
+                            transcript += '<br />';
                         return '<strong>' + b + '</strong>';
                     });
-
 
                     // convert from hours:minutes:seconds to seconds
                     var time = timestamp.match(/(\d+):(\d+):(\d+)/);
                     var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
 
                     // add line to transcript
-                    $container.append('<a href="#" data-time="' + seconds + '">' + content + '</a> ');
+                    transcript += '<a href="#" data-time="' + seconds + '">' + content + '</a> ';
                 }
             }
+
+            $container.append(transcript);
 
             // if there was a previously active timecode, highlight
             if (me.lastActiveTranscript)

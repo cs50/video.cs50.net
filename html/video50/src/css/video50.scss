@@ -128,6 +128,10 @@
     right: 0px;
     bottom: 0px;
 
+    &.video50-chrome .video50-main-video-wrapper {
+        -webkit-box-reflect: below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
+    }
+
     .video50-main-video-wrapper {
         position: absolute;
         left: 30px;
@@ -135,7 +139,6 @@
         top: 50%;
         margin-top: -239px;
         cursor: pointer;   
-        -webkit-box-reflect: below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)));
         background-color: black;
     }
 }
