@@ -1139,26 +1139,19 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
 
     // request a native browser fullscreen, if possible
     $container.on('mousedown.video50', '.video50-fullscreen-control', function(e) {
-        // XXX check if this works in IE/nonnative fullscreen
+        var requestFullscreen = container.requestFullscreen || container.mozRequestFullScreen || container.webkitRequestFullscreen;
+        var cancelFullscreen = container.cancelFullscreen || container.mozCancelFullScreen || container.webkitCancelFullScreen;
+
+        if (!requestFullscreen)
+            return;
 
         var container = $container.find('.video50-wrapper')[0];
         if (!$(this).hasClass('video50-active')) {
-            if (container.requestFullscreen) 
-                container.requestFullscreen();
-             else if (container.mozRequestFullScreen) 
-                container.mozRequestFullScreen();
-             else if (container.webkitRequestFullscreen) 
-                container.webkitRequestFullscreen();
-            
+            requestFullscreen();            
             me.track('video50/fullscreen', { source: me.currentSource });
         }
         else {
-            if (document.cancelFullscreen) 
-                document.cancelFullscreen();
-            else if (document.mozCancelFullScreen) 
-                document.mozCancelFullScreen();
-            else if (document.webkitCancelFullScreen) 
-                document.webkitCancelFullScreen();
+            cancelFullScreen();
         }
     });
    
@@ -2130,6 +2123,8 @@ CS50.Video.prototype.loadTranscript = function(language) {
     var player = this.player;
     var me = this;
 
+    // build a transcript array indexed by anchor index
+    me.transcriptText = [];
     if (me.keyedCaptions[language]) {
         me.transcriptLanguage = language;
         $.get(me.keyedCaptions[language].src, function(response) {
@@ -2138,9 +2133,6 @@ CS50.Video.prototype.loadTranscript = function(language) {
             // clear previous text
             var $container = $(me.transcriptContainer).find('.video50-transcript-scroll');
             $container.empty();
-
-            // build a transcript array indexed by anchor index
-            me.transcriptText = [];
 
             // iterate over each timecode
             var n = timecodes.length;

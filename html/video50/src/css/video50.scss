@@ -149,7 +149,7 @@
     bottom: 0px;
     border-top: 1px solid #555;
     @include box-shadow(0px -1px 1px #111);
-    background: url('/img/background-gradient.png');
+    background: url('../img/background-gradient.png');
     @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     height: 40px;
     left: 0px;
@@ -509,7 +509,7 @@
     right: 0px;
     height: 40px;
     border-top: 1px solid #555;
-    background: url('/img/background-gradient.png');
+    background: url('../img/background-gradient.png');
     @include background-linear-gradient(top, #333 19px, #2B2B2B 19px);
     @include box-shadow(0px 1px 1px #111);
     @include border-radius(2px 2px 0px 0px);
