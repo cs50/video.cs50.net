@@ -420,7 +420,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
         me.options.captions[0]["default"] = true;
 
     // look at each of the sources provided
-    $.each(me.options.sources, function(i, source) {  
+    $.each(me.options.sources, function(index, source) {  
         // check if the required keys are supplied, correctly
         if (!source.source) {
             throw 'Video source with label' + (source.label || 'undefined') + 'incorrectly defined. Check that you have a "source" key.';
@@ -479,7 +479,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
 
         // at least one src key must be defined, then determine if single or multistream
         if (source.source[0] && source.source[0].src) {
-            source.video50_index = i;
+            source.video50_index = index;
             if (source.source[0].src.length > 1)
                 me.multiStreamSources.push(source);
             else
@@ -576,7 +576,7 @@ CS50.Video.prototype.createPlayer = function(state) {
     // XXX: factor function that determines what type of player to instantiate
     me.mode = me.supportsHTML5 ? "video" : "flash";
     me.mode = me.currentSource.flashonly ? "flash" : me.mode;
-    me.fullmode = !(me.currentSource.source[0].src instanceof Array) || (me.currentSource.source[0].src.length == 1);
+    me.fullmode = (me.currentSource.source[0].src.length == 1);
 
     // grab HTML for the player area
     var playerHTML;
@@ -799,6 +799,7 @@ CS50.Video.prototype.startVideos = function(handlers) {
                     // restore video playback state if it exists
                     if (me.state !== undefined) {
                         me.cbHandlers.playbackRate(me.state.playbackRate || 1)
+                        $container.find('.video50-play-pause-control').trigger('mousedown');
                         me.cbHandlers.seek(me.state.currentTime || 0);
                     }
                     else 
