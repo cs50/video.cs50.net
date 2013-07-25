@@ -704,7 +704,6 @@ CS50.Video.prototype.createPlayer = function(state) {
                 playbackRate: function(speed) { 
                     if (speed === undefined)
                         return me.video.playbackRate;
-                    
                     me.video.playbackRate = speed; 
                     $.each(me.subVideos, function(i, v) { v.playbackRate = speed; });
                 }
@@ -982,7 +981,12 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             else {
                 var old = $container.find('.video50-speed-control .video50-active').attr('data-rate');
                 var speed = 1;
-                handlers.playbackRate(1.0);
+               
+                // annoying FF bug where returning to 1.0 doesn't work
+                if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+                    handlers.playbackRate(.9999999999);
+                else
+                    handlers.playbackRate(speed);
             }
             
             me.track('video50/playbackRateToggle', { 
@@ -2065,9 +2069,10 @@ CS50.Video.prototype.loadThumbnails = function() {
 }
 
 /*
- *  Searches a sorted array for a number n, returning the index of the number
- *  in the array if found, else, returning the index of the largest number
- *  smaller than n. Returns -1 if no such index.
+ *  Searches a sorted array for a number n using binary search. 
+ *  Returns the index of the number in the array if found.
+ *  Else, returns the index of the largest number in the array smaller than n. 
+ *  Returns -1 if no such index.
  * 
  *  Based on underscore.js's indexOf function.
  */
