@@ -215,7 +215,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
                         <% var unnamed = 1; %> \
                         <% if (singleStreamSources.length > 0) { %> \
-                            <li class="video50-header video50-disabled">SINGLESTREAM VIDEOS</li> \
+                            <li class="video50-header video50-disabled">SINGLESTREAM</li> \
                         <% } %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
@@ -223,7 +223,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                             </li> \
                         <% }) %> \
                         <% if (multiStreamSources.length > 0) { %> \
-                            <li class="video50-header video50-disabled">MULTISTREAM VIDEOS</li> \
+                            <li class="video50-header video50-disabled">MULTISTREAM</li> \
                         <% } %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
