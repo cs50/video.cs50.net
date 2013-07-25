@@ -1681,15 +1681,19 @@ CS50.Video.prototype.videoHandlers = function(handlers) {
     var $container = $(me.playerContainer);
     
     // handle swapping of videos
-    $container.on('mousedown.video50', '.video50-ancilliary-videos .video50-video', function(e) {
-        // track which videos were swapped
-        me.track('video50/swap', { 
-            source: me.currentSource,
-            oldMain: $container.find('.video50-source-video source').attr('src'),
-            newMain: $(this).find('source').attr('src')
-        });
-        
-        handlers.swap(this);
+    $container.on('click.video50', '.video50-ancilliary-videos .video50-video', function(e) {
+        if (!me.swapping) {
+            me.swapping = true;
+            // track which videos were swapped
+            me.track('video50/swap', { 
+                source: me.currentSource,
+                oldMain: $container.find('.video50-source-video source').attr('src'),
+                newMain: $(this).find('source').attr('src')
+            });
+            
+            handlers.swap(this);
+            me.swapping = false;
+        }
     });
 
     // handle keypress changes on the video
