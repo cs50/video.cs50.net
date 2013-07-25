@@ -263,6 +263,8 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                             <div class="video50-transcript-scroll"> \
                             </div> \
                         </div> \
+                        <div class="video50-search-container"> \
+                        </div> \
                         <div class="video50-resume-scroll"> \
                             Resume Automatic Scrolling \
                         </div> \
@@ -1336,7 +1338,7 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
         me.transcriptContainer.off('.video50-transcript');
     }
    
-    $container.on('click.video50.video50-transcript', '.video50-transcript-container a[data-time]', function(e) {
+    $container.on('click.video50.video50-transcript', '.video50-transcript-container-wrapper a[data-time]', function(e) {
         e.stopPropagation();
         var time = $(this).attr('data-time');
         
@@ -1362,46 +1364,92 @@ CS50.Video.prototype.loadTranscriptHandlers = function($container, external) {
     });
 
     $container.on('keyup.video50.video50-transcript', '.video50-transcript-search', function(e) { 
-        me.oldScroll = me.oldScroll === undefined ? $container.find('.video50-transcript-container').scrollTop() : me.oldScroll;
-        me.oldManual = me.oldManual === undefined ? me.manualScroll : me.oldManual;
-        
-        var $cancel = $container.find(".video50-transcript-cancel");
-        if ($.trim($(this).val()) == "") {
-            $cancel.removeClass('video50-cancel');
-            $container.find('.video50-search-time').remove();
-            $container.find('.video50-transcript-container').removeClass('video50-transcript-searching');
-            $container.find('[data-time], br').show().removeClass('video50-search-result');
+        var that = this;
+        clearTimeout(me.searchTimeout);
+        me.searchTimeout = setTimeout(function() {
+            me.oldScroll = me.oldScroll === undefined ? $container.find('.video50-transcript-container').scrollTop() : me.oldScroll;
+            me.oldManual = me.oldManual === undefined ? me.manualScroll : me.oldManual;
             
-            // restore old values for scroll + autoscrolling
-            $container.find('.video50-transcript-contaienr').scrollTop(me.oldScroll);
-            me.oldScroll = undefined;
-            me.manualScroll = me.oldManual;
-            me.oldManual = undefined;
+            var $cancel = $container.find(".video50-transcript-cancel");
+            if ($.trim($(that).val()) == "") {
+                $cancel.removeClass('video50-cancel');
+                $container.find(".video50-search-container").removeClass('video50-active');
 
-            if (me.manualScroll)
-                $container.find('.video50-resume-scroll').show();
-        } 
-        else {
-            // disable autoscrolling, hide resume scroll if shown before to avoid obscuring results
-            me.manualScroll = true;
-            $container.find('.video50-resume-scroll').hide();
+                // restore old values for scroll + autoscrolling
+                $container.find('.video50-transcript-container').scrollTop(me.oldScroll);
+                me.oldScroll = undefined;
+                me.manualScroll = me.oldManual;
+                me.oldManual = undefined;
 
-            // perform a search and enable clearing the field
-            $cancel.addClass('video50-cancel');
-            $container.find('.video50-transcript-container').addClass('video50-transcript-searching');
-            $container.find('[data-time], br').hide().removeClass('video50-search-result');
-            $container.find("[data-time]:Contains('" + $(this).val() + "')")
-                .show()
-                .addClass('video50-search-result');
-            
-            if ($container.find('.video50-search-time').length <= 0) {
-                $container.find('.video50-search-result').prepend(function() {
-                    return "<div class='video50-search-time'>" +
-                                me.formatTimestamp($(this).attr('data-time'), me.video.duration) +
-                            "</div>";
-                })
+                if (me.manualScroll)
+                    $container.find('.video50-resume-scroll').show();
             } 
-        }
+            else {
+                // prevent firing the same search over and over again
+                if (me.searchQuery == $(that).val())
+                    return;
+                me.searchQuery = $(that).val();
+                
+                // disable autoscrolling, hide resume scroll if shown before to avoid obscuring results
+                me.manualScroll = true;
+                $container.find('.video50-resume-scroll').hide();
+
+                // add a class to enable cancelling the video interface
+                $cancel.addClass('video50-cancel');
+                $container.find('.video50-search-container').addClass('video50-active');   
+
+                // iterate over the transcript, searching concatenated phrases for search results
+                var query = new RegExp($(that).val(), "ig");
+                var matches = [];
+                var cache = {};
+                for (var i = 0; i < me.transcriptText.length; i++) {
+                    // needed to avoid i + 1 corner case
+                    var first = me.transcriptText[i].text;
+                    var second = me.transcriptText[i + 1] ? me.transcriptText[i + 1].text : "";
+                    var concatenated = first + " " + second;
+
+                    // if no matches, just continue to next loop iteration
+                    var numMatches = (concatenated.match(query) || "").length;
+                    if (numMatches == 0) continue;
+
+                    // get the length of the matches for casework otherwise
+                    var firstMatches = cache[i] || (first.match(query) || "").length;
+                    var secondMatches = (second.match(query) || "").length;
+                    cache[i + 1] = secondMatches;
+
+                    // if all the matches are in the second, just continue, since we don't know
+                    // whether the overlap with the third will contain results. The i+1th iteration
+                    // will catch the necessary casework
+                    if (numMatches == secondMatches)
+                        continue;
+
+                    // else, we know the match is in the overlap, or solely in the first.
+                    // if there is a match in the overlap, then add the concatenated text to the result.
+                    // if all the matches are in the first, then add only the first text to the result.
+                    if (numMatches - firstMatches - secondMatches > 0)
+                        var toStrong = concatenated;
+                    else
+                        var toStrong = first;
+                    
+                    matches.push({
+                        text: toStrong.replace(query, function(match) {
+                            return "<strong>" + match + "</strong>";
+                        }),
+                        timecode: me.transcriptText[i].timecode
+                    });
+                }
+               
+                // build HTML for search results
+                var html = "";
+                for (var i = 0; i < matches.length; i++) {
+                    html += '<a class="video50-search-result" href="#" data-time="' + matches[i].timecode + '">' +
+                            '<div class="video50-search-time">' + me.formatTimestamp(matches[i].timecode) + '</div>' + 
+                            matches[i].text + '</a>';
+                }
+
+                $container.find(".video50-search-container").html(html);
+            }
+        }, 300);
     });
 
     // cancel a search
@@ -2086,6 +2134,9 @@ CS50.Video.prototype.loadTranscript = function(language) {
             var $container = $(me.transcriptContainer).find('.video50-transcript-scroll');
             $container.empty();
 
+            // build a transcript array indexed by anchor index
+            me.transcriptText = [];
+
             // iterate over each timecode
             var n = timecodes.length;
             var transcript = "";
@@ -2096,7 +2147,14 @@ CS50.Video.prototype.loadTranscript = function(language) {
                     // extract time and content from timecode
                     var timestamp = timecode[1].split(" --> ")[0];
                     timecode.splice(0, 2);
-                    var content = timecode.join(" ");
+                    var content = timecode.join(" ").replace(/\r?\n|\r/g, "");
+                    
+                    // convert from hours:minutes:seconds to seconds
+                    var time = timestamp.match(/(\d+):(\d+):(\d+)/);
+                    var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
+
+                    // add line to the transcript object
+                    me.transcriptText[i] = { text: content, timecode: seconds };
 
                     // if line starts with >> or [, then start a new line
                     if (content.match(/^(>>|\[)/) && i != 0)
@@ -2109,15 +2167,10 @@ CS50.Video.prototype.loadTranscript = function(language) {
                         return '<strong>' + b + '</strong>';
                     });
 
-                    // convert from hours:minutes:seconds to seconds
-                    var time = timestamp.match(/(\d+):(\d+):(\d+)/);
-                    var seconds = parseInt(time[1], 10) * 3600 + parseInt(time[2], 10) * 60 + parseInt(time[3], 10);
-
                     // add line to transcript
                     transcript += '<a href="#" data-time="' + seconds + '">' + content + '</a> ';
                 }
             }
-
             $container.append(transcript);
 
             // if there was a previously active timecode, highlight
