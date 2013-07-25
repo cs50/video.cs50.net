@@ -214,11 +214,17 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 </div><div class="video50-quality-control video50-control-icon video50-control-toggle <%- len <= 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-quality-container video50-control-list video50-control-togglee"> \
                         <% var unnamed = 1; %> \
+                        <% if (singleStreamSources.length > 0) { %> \
+                            <li class="video50-header video50-disabled">SINGLESTREAM VIDEOS</li> \
+                        <% } %> \
                         <% _.each(singleStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label ? source.label : "Unnamed Video #" + (unnamed++) %> \
                             </li> \
                         <% }) %> \
+                        <% if (multiStreamSources.length > 0) { %> \
+                            <li class="video50-header video50-disabled">MULTISTREAM VIDEOS</li> \
+                        <% } %> \
                         <% _.each(multiStreamSources, function(source, i) { %> \
                             <li class="video50-quality<%- (source.video50_supported) ? "" : " video50-disabled" %><%- ((dss && source["default"]) || (!dss && source.first)) ? " video50-active" : "" %>" data-index="<%- source.video50_index %>"> \
                                 <%- source.label ? source.label : "Unnamed Video #" + (unnamed++) %> \

@@ -853,6 +853,15 @@
     z-index: 5;
 }
 
+.video50-header.video50-disabled {
+    color: #888;
+    cursor: default;
+
+    &:hover {
+        color: #888;    
+    }
+}
+
 .video50-quality.video50-disabled {
     color: #666;
     cursor: not-allowed;
