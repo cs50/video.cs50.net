@@ -1774,9 +1774,6 @@ CS50.Video.prototype.reverseKeystone = function(desired, angle, z) {
 CS50.Video.prototype.resizeMultistream = function(x) {
     var me = this;
     var $container = $(me.playerContainer).find('.video50-wrapper');
-    
-    var subtitleFontSize = Math.max(14, $container.find('.video50-source-video').width() / 50);
-    $container.find('.video50-cc-text').css('font-size', subtitleFontSize + "px");
    
     // if we're in fullscreen mode, use a different algorithm
     if ($container.is('.fullscreen, .fullmode')) {
@@ -1880,6 +1877,9 @@ CS50.Video.prototype.resizeMultistream = function(x) {
               .css('margin-top', -$container.find('.video50-main-video-wrapper').height()/2);
     $container.find('.video50-ancilliary-videos')
               .css('margin-top', -$container.find('.video50-ancilliary-videos').height()/2 + 3);
+    
+    var subtitleFontSize = Math.max(14, $container.find('.video50-source-video').width() / 50);
+    $container.find('.video50-cc-text').css('font-size', subtitleFontSize + "px");
 }
 
 /*
