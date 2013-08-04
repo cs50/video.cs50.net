@@ -11,8 +11,9 @@
   right: 0px;
   bottom: 0px;
   padding: 20px;
-  background-color: #CC000000;
   background-color: rgba(0, 0, 0, 0.8);
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, endColorstr=#CC000000);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, endColorstr=#CC000000);
   z-index: 2147483647; }
   #video50-lightbox .video50-wrapper {
     box-shadow: 0px 0px 3px black;
@@ -753,8 +754,9 @@
   text-align: center;
   margin-bottom: 30px; }
   .video50-cc-container .video50-cc-text {
-    background-color: #80000000;
     background-color: rgba(0, 0, 0, 0.5);
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endColorstr=#80000000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endColorstr=#80000000);
     color: white;
     padding: 5px 8px;
     display: none; }
