@@ -13,8 +13,9 @@
 }
 
 @mixin background-color($value) {
-    background-color: ie-hex-str($value);
     background-color: $value;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str($value)}, endColorstr=#{ie-hex-str($value)});
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str($value)}, endColorstr=#{ie-hex-str($value)});
 }
 
 @mixin background-linear-gradient($direction, $first, $second) {
