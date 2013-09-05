@@ -1948,11 +1948,8 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     
     // invoke box reflect reset
     var $main = $container.find('.video50-main-video-wrapper');
-    $main.css('-webkit-box-reflect', 'none');
-    setTimeout(function() {
-        $main.css('-webkit-box-reflect', 'below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)))');
-    }, 0);
-
+    $main.hide().height();
+    $main.show();
 }
 
 /*
