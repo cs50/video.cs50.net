@@ -1895,7 +1895,7 @@ CS50.Video.prototype.resizeMultistream = function(x) {
 
     $container.find('.video50-right').css('left', x + 1);
     $container.find('.video50-dragger').css('left', x + 1);
- 
+
     // calculate and invoke keystoning for ancilliary videos
     var degreeRight = ratio <= .6 ? 0 : (.6 - ratio) * 45;
     /*@cc_on
@@ -1945,6 +1945,14 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     
     var subtitleFontSize = Math.max(14, $container.find('.video50-source-video').width() / 50);
     $container.find('.video50-cc-text').css('font-size', subtitleFontSize + "px");
+    
+    // invoke box reflect reset
+    var $main = $container.find('.video50-main-video-wrapper');
+    $main.css('-webkit-box-reflect', 'none');
+    setTimeout(function() {
+        $main.css('-webkit-box-reflect', 'below -2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, .3)))');
+    }, 0);
+
 }
 
 /*
