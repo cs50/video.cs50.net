@@ -245,7 +245,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
                 </div><div class="video50-captions-toggle video50-control-icon <%- len < 1 ? "video50-disabled" : "" %>"> \
                 </div><div class="video50-captions-lang video50-control-icon video50-control-toggle <%- len < 1 ? "video50-disabled" : "" %>"> \
                     <ul class="video50-captions-container video50-control-list video50-control-togglee"> \
-                    <% _.each(captions, function(caption, i) { %> \
+                    <% _.each(_.sortBy(captions, function(caption) { return CS50.Video.Languages[caption.srclang]; }), function(caption, i) { %> \
                         <li class="video50-caption<%- caption["default"] ? " video50-active" : ""  %>" data-lang="<%- caption.srclang %>"> \
                             <%- CS50.Video.Languages[caption.srclang] || "Unknown Language" %> \
                         </li> \
