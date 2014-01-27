@@ -27,7 +27,7 @@
         <script>
 
             $(function() {
-                new CS50.Video("#v", {"captions":[],"downloads":[{"label":"MP4","src":<?= json_encode($_GET["src") ?>}],"sources":{"source":[{"src":<?= json_encode($_GET["src") ?>,"type":"video\/mp4"}]}});
+                new CS50.Video("#v", {"captions":[],"downloads":[{"label":"MP4","src":<?= json_encode($_GET["src"]) ?>}],"sources":{"source":[{"src":<?= json_encode($_GET["src"]) ?>,"type":"video\/mp4"}]}});
             });
 
         </script>
