@@ -33,5 +33,5 @@ Outside appliance (assuming Mac):
 
 *requires that your SSH key be added to `build.x.cs50.net`*
 
-    git remote add production ssh://ec2-user@build.x.cs50.net/home/ec2-user/var/video50v2.git # once
+    git remote add production ssh://ec2-user@build.x.cs50.net/home/ec2-user/var/video50.git # once
     git push production master # thereafter
