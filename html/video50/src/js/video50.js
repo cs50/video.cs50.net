@@ -76,6 +76,11 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
     
     if (analytics && analytics.name_tag && (typeof analytics.name_tag) == "string" && analytics.name_tag.length > 0)
         me.analytics50.name_tag(analytics.name_tag);
+        
+    // track initial load of the video 
+    me.track('video50/load', { 
+        source: me.currentSource 
+    });
 
     // parse out JS path
     me.jsPath = $(document).find('script[data-library="video50"]').attr('src').split('/');
@@ -853,6 +858,13 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
     me.cbHandlers = handlers;
     
     // XXX: test for required handlers
+   
+    $(window).on('beforeunload', function(e) {
+        me.track('video50/unload', {
+            position: handlers.position(),
+            source: me.currentSource
+        });
+    });
 
     // toggle play pause
     $container.on('mousedown.video50', '.video50-play-pause-control, .video50-main-video-wrapper', function(e) {
@@ -963,6 +975,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             me.track('video50/playbackRate', { 
                 oldSpeed: $container.find('.video50-speed-control .video50-active').attr('data-rate'),
                 newSpeed: $(this).attr('data-rate'),
+                position: handlers.position(), 
                 source: me.currentSource 
             });
         });
@@ -992,6 +1005,7 @@ CS50.Video.prototype.controlBarHandlers = function(handlers) {
             me.track('video50/playbackRateToggle', { 
                 oldSpeed: old,
                 newSpeed: speed,
+                position: handlers.position(), 
                 source: me.currentSource 
             });
         });
