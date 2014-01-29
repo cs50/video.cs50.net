@@ -1,4 +1,9 @@
 <?php
+    if (!isset($_SESSION['user'])) {
+    	header('Location: https://video.cs50.net/161/login.php');
+    }
+    print_r($_SESSION['user']);
+    exit;
 
     if (!isset($_GET["src"]) || filter_var($_GET["src"], FILTER_VALIDATE_URL) === false) {
         http_response_code(404);
@@ -27,7 +32,13 @@
         <script>
 
             $(function() {
-                new CS50.Video("#v", {"analytics50": {"mixpanel": {"token": "56c3b1504dd27b8f0c82b72d653b7c94"}}, "captions":[],"downloads":[{"label":"MP4","src":<?= json_encode($_GET["src"]) ?>}],"sources":{"source":[{"src":<?= json_encode($_GET["src"]) ?>,"type":"video\/mp4"}]}});
+                new CS50.Video(
+		    "#v",
+		    {"analytics50": {"mixpanel": {"token": "56c3b1504dd27b8f0c82b72d653b7c94"}},
+		    "captions":[],"downloads":[{"label":"MP4","src":<?= json_encode($_GET["src"])
+		    ?>}],"sources":{"source":[{"src":<?= json_encode($_GET["src"]) ?>,"type":"video\/mp4"}]}},
+		    
+		);
             });
 
         </script>
