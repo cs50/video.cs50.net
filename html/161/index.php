@@ -1,5 +1,8 @@
 <?php
 
+    // configuration
+    require_once(dirname(__FILE__) . "/config.php");
+
     if (!isset($_SESSION['user'])) {
     	header('Location: https://video.cs50.net/161/login.php');
         exit;
