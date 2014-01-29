@@ -1,9 +1,9 @@
 <?php
+
     if (!isset($_SESSION['user'])) {
     	header('Location: https://video.cs50.net/161/login.php');
+        exit;
     }
-    print_r($_SESSION['user']);
-    exit;
 
     if (!isset($_GET["src"]) || filter_var($_GET["src"], FILTER_VALIDATE_URL) === false) {
         http_response_code(404);
