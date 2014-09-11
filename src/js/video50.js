@@ -2051,8 +2051,15 @@ CS50.Video.prototype.loadThumbnails = function() {
     var me = this;
     me.thumbnailKeys = [];
     me.thumbnails = {};
-    if (me.options.thumbnails && me.options.thumbnails.src) {
-        $.get(me.options.thumbnails.src, function(response) {
+
+    // look for thumbnails with type text/vtt
+    var vtt = _.find(me.options.thumbnails, function(o) {
+        return o.type === 'text/vtt';
+    });
+
+    // get thumbnails
+    if (vtt && vtt.src) {
+        $.get(vtt.src, function(response) {
             var timecodes = response.split(/\n\s*\n/);
         
             // build up an array mapping time in seconds to objects of
