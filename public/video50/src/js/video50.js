@@ -1912,23 +1912,24 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     // calculate and invoke keystoning for ancilliary videos
     var degreeRight = ratio <= .6 ? 0 : (.6 - ratio) * 45;
     
+    // apply rotateY transformation to parent div of video
     var drStr = "rotateY(" + degreeRight + "deg)";
-    $container.find('.video50-ancilliary-videos > .video50-video').css({
+    $container.find('.video50-ancilliary-videos').css({
         "-webkit-transform": drStr,
         "-moz-transform": drStr,
         "-ms-transform": drStr,
         "-o-transform": drStr,
-        "transform": drStr,
+        "transform": drStr
     });
+
+    // calculate current source's aspect ratio, else assume 16:9 by default
+    var ratio = (me.currentSource.height && me.currentSource.width) ? me.currentSource.width / me.currentSource.height : 16 / 9;
 
     // calculate new widths that will result in keystone widths fititng in containers
     var mvWidth = $container.find('.video50-main-video-wrapper').width();
-    var mvHeight = mvWidth * 9.0/16.0;
+    var mvHeight = mvWidth / ratio;
     var ovWidth = me.reverseKeystone($container.find('.video50-ancilliary-videos').width(), -degreeRight, 200);
-    var ovHeight = ovWidth * 9.0/16.0;
-
-console.log($container.find('.video50-source-video')[0].videoWidth);
-console.log($container.find('.video50-source-video')[0].videoHeight);
+    var ovHeight = ovWidth / ratio;
 
     // change the height of the main video wrapper for overflow or sizing
     $container.find(".video50-main-video-wrapper").css({
