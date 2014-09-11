@@ -504,7 +504,7 @@ CS50.Video = function(playerContainer, playerOptions, analytics) {
         }
     });
    
-    // user that they must use a better browser by this point, if nothing works
+    // inform user that they must use a better browser by this point, if nothing works
     if (me.currentSource === undefined) {
         $(me.playerContainer).html(me.templates.playerError({
             error: "<h1>Sorry, none of our video formats are supported by your browser version.</h1><h1>Try the latest version of these browsers instead.</h1>" +
@@ -596,16 +596,15 @@ CS50.Video.prototype.createPlayer = function(state) {
     switch (me.mode) {
         case "video":
             playerHTML = me.templates.playerVideo({
-                source: me.currentSource,
+                source: me.currentSource
             });
             break;
         case "flash":
             playerHTML = me.templates.playerFlash({
-                source: me.currentSource, 
+                source: me.currentSource
             });
             break;
     }
-        
     
     // don't re-execute on a quality change to avoid rebuilding a large bulk of the DOM
     if (me.first === undefined) {
@@ -1912,10 +1911,6 @@ CS50.Video.prototype.resizeMultistream = function(x) {
 
     // calculate and invoke keystoning for ancilliary videos
     var degreeRight = ratio <= .6 ? 0 : (.6 - ratio) * 45;
-    /*@cc_on
-        if (/^10/.test(@_jscript_version))
-            degreeRight = -degreeRight;
-    @*/
     
     var drStr = "rotateY(" + degreeRight + "deg)";
     $container.find('.video50-ancilliary-videos > .video50-video').css({
@@ -1931,6 +1926,9 @@ CS50.Video.prototype.resizeMultistream = function(x) {
     var mvHeight = mvWidth * 9.0/16.0;
     var ovWidth = me.reverseKeystone($container.find('.video50-ancilliary-videos').width(), -degreeRight, 200);
     var ovHeight = ovWidth * 9.0/16.0;
+
+console.log($container.find('.video50-source-video')[0].videoWidth);
+console.log($container.find('.video50-source-video')[0].videoHeight);
 
     // change the height of the main video wrapper for overflow or sizing
     $container.find(".video50-main-video-wrapper").css({
