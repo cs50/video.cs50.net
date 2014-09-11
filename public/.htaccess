@@ -1,6 +1,0 @@
-RewriteEngine on
-RewriteBase /
-
-# route /css/*.scss to scss.php
-RewriteCond %{REQUEST_URI} css/.*\.scss$
-RewriteRule .* scss.php [L]
