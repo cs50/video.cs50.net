@@ -1,0 +1,496 @@
+.video50-available-questions {
+    display: inline-block;
+    line-height: 29px;
+    height: 29px;
+    vertical-align: middle;
+}
+
+.video50-playback-controls li {
+    float: none;
+    display: inline-block;
+}
+
+.video50-playback-controls {
+    background-image: -moz-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -ms-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -webkit-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -o-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: linear-gradient(bottom, #f5f5f5, #ffffff);
+    box-shadow: 0px 1px 2px #BBB;
+    -webkit-box-shadow: 0px 1px 2px #BBB;
+    -moz-box-shadow: 0px 1px 2px #BBB;
+    border-radius: 0px 0px 3px 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    padding: 3px;
+}
+
+.video50-playback-controls .nav.nav-pills {
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.video50-playback-controls .btn-video-select, .video50-playback-controls .btn-download {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.video50-playback-controls .btn-video-select li, .video50-playback-controls .btn-download li {
+    display: block;
+}
+
+.video50-player .panel, .video50-player.panel {
+    text-align: left;
+    background-color: #FFFFFF;
+    border-top: 1px solid #DDD;
+    -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px; 
+}
+
+.video50-player {
+    position: relative;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;
+    border-radius: 4px 4px 0px 0px;
+    -moz-border-radius: 4px 4px 0px 0px;
+    -webkit-border-radius: 4px 4px 0px 0px;
+}
+
+.video50-player.fullscreen {
+    -webkit-perspective: none;
+    -moz-perspective: none;
+    -o-perspective: none;
+    perspective: none;
+}
+
+.video50-player:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+}
+
+.video50-player:-moz-full-screen {    
+    width: 100%;
+    height: 100%;
+}
+
+.video50-player .video50-player-questions {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 29px;
+    background-color: white;
+    opacity: .95;
+}
+
+.video50-player .player-navbar {
+    border: 0px;
+    border-bottom: 1px solid #ccc;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    line-height: 36px;
+    height: 36px;
+    background-image: -moz-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -ms-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -webkit-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: -o-linear-gradient(bottom, #f5f5f5, #ffffff);
+    background-image: linear-gradient(bottom, #f5f5f5, #ffffff);
+}
+
+.video50-player .player-navbar .btn-back {
+    display: none;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.video50-player .player-navbar .btn-group-right {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.video50-player .player-navbar .btn-questions {
+    display: none;
+    padding: 4px 7px 4px;
+    vertical-align: top;
+}
+
+.video50-player .player-navbar .btn-group-transcript {
+    display: none;
+    vertical-align: top;
+}
+
+.video50-player .player-navbar .btn-group-transcript .transcript-lang {
+    line-height: normal;
+    padding: 3px 10px 3px 5px;
+    min-width: 0px;
+}
+
+.video50-player .player-navbar .btn-group-transcript .transcript-lang td {
+    vertical-align: top;
+}
+
+.video50-player .player-navbar .btn-group-transcript .transcript-lang a {
+    line-height: normal;
+    text-decoration: none;
+    margin: 2px;
+    padding: 3px 20px 3px 5px;
+}
+
+.video50-player .player-navbar .btn-group-transcript .transcript-lang a.active {
+    background-color: #EEE;
+}
+
+.video50-player .player-navbar .btn-group-transcript .transcript-lang a:hover {
+    background-color: #EEE;
+}
+
+.video50-player .player-navbar .btn-transcript {
+    padding: 4px 7px 4px;
+}
+
+.video50-player .player-navbar .btn-cc {
+    padding: 4px 7px 4px;
+}
+
+.video50-player .player-navbar .cc-label {
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    background-color: #333;
+    color: white;
+    font-size: 9px;
+    line-height: normal;
+    display: inline-block;
+    padding: 1px 2px 2px 3px;
+    margin-top: -1px;
+    vertical-align: top;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
+
+.video50-player .player-navbar .btn-cc.on .cc-label {
+    background-color: #0069F0;
+}
+
+.video50-player .player-navbar .btn-questions .questions-number {
+    padding: 2px 3px 3px 4px;
+    margin-right: 2px;
+    margin-top: 1px;
+    vertical-align: top;
+    font-size: 10px;
+    line-height: 10px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    background-color: #C75646;
+    zoom:1;
+    position:relative;
+}
+
+.video50-player .video-container .noflash {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.video50-player .player-navbar-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.video50-player .flip-container {
+    position: relative;
+    -webkit-transition: -webkit-transform .7s;
+    -moz-transition: -moz-transform .7s;
+    -o-transition: -o-transform .7s;
+    transition: transform .7s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.video50-player .flip-container.flipped {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.video50-player.fullscreen .flip-container {
+    -webkit-transform-style: flat;
+    -moz-transform-style: flat;
+    -o-transform-style: flat;
+    transform-style: flat;
+}
+
+.video50-player .flip-container .video-container {
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.video50-player .flip-container .flip-question-container {
+    display: none;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.video50-player .flip-container.flipped .video-container {
+    position: absolute;
+}
+
+.video50-player .flip-container.flipped .flip-question-container {
+    display: block;
+}
+
+.video50-player .flip-container.degraded .flip-question-container, .video50-player .flip-container.flipped.degraded {
+    display: none;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
+    -webkit-backface-visibility: visible !important;
+    -moz-backface-visibility: visible !important;
+    -o-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+}
+
+.video50-player .cc-container {
+    position: absolute;
+    bottom: 28px;
+    left: 0px;
+    right: 0px;
+    z-index: 9;
+    padding: 3%;
+    text-align: center;
+    min-height: 
+}
+
+.video50-player.fullscreen .cc-container {
+    position: fixed;
+    bottom: 28px;
+    left: 0px;
+    right: 0px;
+    z-index: 2147483000;
+    padding: 3%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.video50-player .cc-text {
+    display: none;
+    text-align: center;
+    vertical-align: text-bottom;
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+    padding: 5px 8px;
+    font-weight: bold;
+    word-break: break-word;
+    min-height: 14px;
+}
+
+.video50-player.fullscreen .cc-text {
+    display: none;
+    text-align: center;
+    vertical-align: text-bottom;
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+    word-break: break-word;
+}
+
+.video50-player .transcript-container {
+    display: none;
+    position: absolute;
+    top: 0px;
+    bottom: 28px;
+    left: 0px;
+    right: 0px;
+    background: white;
+    background: rgba(255, 255, 255, .9);
+    z-index: 10;
+}
+
+.video50-player .transcript-container .transcript-text-wrapper {
+    overflow: auto;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 20px 20px 20px 20px;
+}
+
+.video50-player .transcript-container .transcript-search-wrapper {
+    position: absolute;
+    top: 0px;
+    right: 20px;  
+    padding: 5px 8px;
+    background-color: white;
+    border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    box-shadow: 0px 1px 2px #BBB;
+    -webkit-box-shadow: 0px 1px 2px #BBB;
+    -moz-box-shadow: 0px 1px 2px #BBB;
+}
+
+.video50-player .transcript-container .transcript-search-wrapper i {
+    display: inline-block;
+    margin: 1px 3px;
+    opacity: .8;
+}
+
+.video50-player .transcript-container .transcript-search-wrapper .icon-remove {
+    cursor: pointer;
+}
+
+.video50-player .transcript-container .transcript-search-wrapper .transcript-search {
+    border: 1px solid #DDD;
+    outline: 0px;
+    padding: 3px;
+}
+
+.video50-player .transcript-container .transcript-search-wrapper .transcript-search:focus {
+    border: 1px solid #BBB;
+}
+
+.video50-player .transcript-text {
+    position: relative;
+}
+
+.video50-player .transcript-text a {
+    color: black;
+}
+
+.video50-player .transcript-text a.highlight {
+    color: #08C;
+    font-weight: bold;
+}
+
+.video50-player .transcript-controls {
+    opacity: 1.0;
+    -moz-opacity: 1.0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+.video50-notifications table {
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.video50-notifications-options label {
+    margin-left: 18px !important;
+}
+
+.video50-notifications .table-striped tbody tr:nth-child(even) td, 
+.video50-notifications .table-striped tbody tr:nth-child(even) th {
+    background-color: white;
+}
+
+.video50-notifications-options strong {
+    display: block;
+    line-height: normal;
+    margin-bottom: 5px;
+}
+
+.video50-notifications table tr td {
+    border-left: 0px;
+}
+
+.video50-question {
+    border: 0px;
+    background: #fafafa;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    min-height: 100%;
+    position: relative;
+}
+
+.flip-question-container {
+    border-top: none;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.video50-notifications-options label {
+    display: inline-block !important;
+    margin-left: 0px !important;
+    margin-right: 5px !important;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+
+.video50-question label, .video50-notifications label {
+    display: inline;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.video50-question .question-content {
+    padding: 20px;
+}
+
+.video50-question .question-choices {
+    padding: 10px;
+}
+
+.video50-question .question-choices .alert {
+    margin-top: 13px;
+    margin-bottom: 4px;
+}
+
+.video50-question .btn-show-video {
+    margin-left: 10px;
+}
+
+.video50-question .alert {
+    margin-top: 10px;
+}
+
+.video50-question .panel-close {
+    position: absolute;
+    right: 10px;
+    font-size: 30px;
+    line-height: 30px;
+    opacity: .2;
+}
+
+.video50-question .btn-submit {
+    clear: both;
+    display: block;
+}

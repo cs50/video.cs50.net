@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="css/lib/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/cs50.video.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+        <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.scroll.js"></script>
+        <script type="text/javascript" src="js/lib/jwplayer.js"></script>
+        <script type="text/javascript" src="js/lib/cs50.analytics.js"></script>
+        <script type="text/javascript" src="js/lib/highlight.pack.js"></script>
+        <script type="text/javascript" src="js/cs50.video.js"></script>
+        <script type="text/javascript" src="js/cs50.video.render.js"></script>
+        <script type="text/javascript" src="js/cs50.video.languages.js"></script>
+
+        <script>
+            /*var questions = [
+                {
+                    timecode: 10,
+                    question: {
+                        id: 0,
+                        render: CS50.Video.Render.TrueFalse,
+                        answer: true,
+                        question: 'Is David wearing a v-neck?',
+                        tags: ['Linked Lists', 'Pointers']
+                    }
+                },
+                {
+                    timecode: 15,
+                    question: {
+                        id: 2,
+                        render: CS50.Video.Render.FreeResponse,
+                        answer: /^very$/i,
+                        question: 'How awesome is Tommy?',
+                        tags: ['JavaScript', 'DOM']
+                    }
+                },
+                {
+                    timecode: 20,
+                    question: {
+                        id: 3,
+                        render: CS50.Video.Render.Numeric,
+                        answer: 35,
+                        question: 'How old is David?',
+                        tags: ['Algorithms', 'Insertion Sort'],
+                        tolerance: 0.1
+                    }
+                },
+                {
+                    timecode: 5,
+                    question: {
+                        id: 3,
+                        render: CS50.Video.Render.Numeric,
+                        answer: 35,
+                        question: '&lt;code&gt;int main(void) { int x = 0; }&lt;/code&gt;',
+                        tags: ['Algorithms', 'Insertion Sort'],
+                        tolerance: 0.1
+                    }
+                }
+            ];*/
+
+            $(function() {
+                var player = new CS50.Video({
+                    autostart: true,
+                    //autojoin: '50466f5a-08c8-4643-a64e-09c50a000204',
+                    defaultVideo: '720p',
+                    download: {
+                        '360p': '2012/fall/lectures/0/week0w-360p.mp4',
+                        '720p': '2012/fall/lectures/0/week0w-720p.mp4',
+                    },
+                    playerContainer: '#video',
+                    //questions: questions,
+                    srt:
+{ "ara" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/ara/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=PUXWaD56yAwLGdGvyumvjmNqgW0%3D",
+      "chi_hans" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/chi_hans/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=NyMFwa2IlFjtt9GEzhOkQRLudus%3D",
+      "dut" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/dut/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=u8p2V%2B08QejT%2BMGytxTn%2FxmEW9g%3D",
+      "eng" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/eng/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=B8CgKplQ8jAMJHbJV6vOhvP2nQU%3D",
+      "fre_fr" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/fre_fr/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=kA%2BJXF2NOUYVayg%2Bw5TcprsiKkQ%3D",
+      "ger" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/ger/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=64skVIR4%2BEQh8%2B2wxSyJQfUFJLg%3D",
+      "hin" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/hin/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=cYs95LF448q5d3fNoAK%2FUS88rYM%3D",
+      "ita" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/ita/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=UQSs3oSrdmVfV1C3jBHH1S7eOD4%3D",
+      "jpn" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/jpn/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=KTCuwT%2FhPGzmZEARY4lGTheT%2BvU%3D",
+      "kor" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/kor/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=qxLuxP8Y5gN8jhQ6YttHpxw3%2FHM%3D",
+      "per" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/per/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=vLchxG1b69RYZLIofiMQ4GGsVdI%3D",
+      "por_pt" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/por_pt/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=8oHW0Qz9zzQ6WQjyjsc3JK0O%2B08%3D",
+      "rus" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/rus/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=fFwjauDsXg%2B7sBZ1t8kE0ZzTKdw%3D",
+      "spa" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/spa/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=IdOPX%2FETY%2F7LNmA1Kz2XaxOGYzI%3D",
+      "swa" : "http://cdn.cs50.net.s3.amazonaws.com/2012/fall/lectures/0/lang/swa/week0w-edX.srt?response-cache-control=no-cache&AWSAccessKeyId=AKIAJXVDJ7CBFTKPYYPQ&Expires=1353165351&Signature=Xh5DjuYM4Pdxk873mg0sAqq0ZW0%3D"
+    },                    
+/*{
+                        eng: 'week0w-en.srt',
+                        por_br: 'week0w-pt.srt'
+                    },*/
+                    title: 'Lecture 0: Wednesday',
+                    video: {
+                        '360p': { path: '2012/fall/lectures/0/week0w-360p.mp4' },
+                        '720p': { path: '2012/fall/lectures/0/week0w-720p.mp4' },
+                    },
+                    streamUrl: 'rtmp://stream.cs50.net/cfx/st/',
+                    videoUrl: 'http://cdn.cs50.net/',
+                    // mixpanelKey: '49c79a74811ced39cdb8f8433861ec2f',
+                    survey50: 28,
+                    survey50Url: 'http://apps.cs50.com'
+                });
+            });
+        </script>
+        <style type="text/css">
+            #navbar-border {
+              width: 100%;
+              vertical-align: top; }
+
+            #navbar-border-wrapper {
+              position: absolute;
+              height: 4px;
+              top: 55px;
+              z-index: 500;
+              width: 100%;
+              overflow: hidden; }
+
+            .navbar-inner {
+              border-radius: 0px;
+              background-color: #FEFEFE;
+              height: 55px;
+              background-image: none;
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none; }
+
+            .navbar {
+              margin-bottom: 0px;
+              left: 0px;
+              right: 0px;
+
+              z-index: 501;
+              border-bottom: 0px solid #DDD; }
+              .navbar .brand {
+                color: #333;
+                font-size: 28px;
+                letter-spacing: -1px;
+                line-height: 55px;
+                padding: 0px 0px 0px 15px;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", sans-serif;
+                font-weight: 200;
+                -webkit-font-smoothing: antialiased;
+                text-shadow: 1px 1px 0px white; }
+              .navbar .account-menu {
+                height: 35px;
+                margin: 0px; }
+              .navbar .suite.account-menu, .navbar .user.account-menu {
+                padding: 10px 10px 10px 15px; }
+              .navbar .product.account-menu {
+                padding: 10px 0px 10px 0px; }
+              .navbar .suite.account-menu {
+                border-right: 1px solid #EEE; }
+              .navbar .product.dropdown-menu {
+                left: -100px; }
+              .navbar .suite.dropdown-menu {
+                right: -9px; }
+                .navbar .suite.dropdown-menu a {
+                  text-align: right; }
+              .navbar .user.dropdown-menu {
+                right: -14px; }
+              .navbar .product.dropdown-menu, .navbar .suite.dropdown-menu, .navbar .user.dropdown-menu {
+                background-color: #FEFEFE;
+                border: none;
+                min-width: 100px;
+                top: 45px;
+                border-radius: 0px;
+                -moz-border-radius: 0px;
+                -webkit-border-radius: 0px; }
+                .navbar .product.dropdown-menu::before, .navbar .suite.dropdown-menu::before, .navbar .user.dropdown-menu::before {
+                  display: none; }
+                .navbar .product.dropdown-menu::after, .navbar .suite.dropdown-menu::after, .navbar .user.dropdown-menu::after {
+                  display: none; }
+                .navbar .product.dropdown-menu li a, .navbar .suite.dropdown-menu li a, .navbar .user.dropdown-menu li a {
+                  padding: 0px 18px 3px 22px; }
+                .navbar .product.dropdown-menu li:hover > a, .navbar .suite.dropdown-menu li:hover > a, .navbar .user.dropdown-menu li:hover > a {
+                  background-color: #F1F1F1;
+                  color: #333; }
+              .navbar .dropdown-brand {
+                color: #333;
+                font-size: 20px;
+                letter-spacing: -1px;
+                line-height: 30px;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", sans-serif;
+                font-weight: 200;
+                -webkit-font-smoothing: antialiased;
+                vertical-align: middle; }
+                .navbar .dropdown-brand img {
+                  height: 14px;
+                  margin-top: 9px;
+                  margin-right: 6px;
+                  vertical-align: top; }
+              .navbar .nav .dropdown-toggle .caret {
+                border-top-color: black !important;
+                border-bottom-color: black !important; }
+
+            .navbar-inner .container-fluid .account-menu .dropdown .dropdown-toggle .login-text {
+              color: #333;
+              font-size: 16px;
+              -webkit-font-smoothing: antialiased;
+              text-shadow: none; }
+
+            .brand {
+                margin-left: -35px !important;
+            }
+        </style>
+        <style type='text/css'>
+            html, body {
+                background-color: #FCFCFC;
+            }
+
+            #navbar-border-wrapper {
+            }
+
+            #content-wrapper-outer {
+                margin: 30px;
+            }
+
+            #content-wrapper-inner {
+                margin: 0px auto;
+            }
+
+            .panel-inset {
+                background-color: #FFFFFF;
+                border-top: 1px solid #DDD;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                -moz-box-shadow: inset rgba(0, 0, 0, 0.3) 0 0px 5px;
+                -webkit-box-shadow: inset rgba(0, 0, 0, 0.3) 0 0px 5px;
+                box-shadow: inset rgba(0, 0, 0, 0.3) 0 0px 5px;  
+            }
+
+            #video-wrapper, #transcript, #questions, #question {
+                display: inline-block;
+                vertical-align: top;
+            }
+            
+            #video-wrapper {
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+         
+            #questions, #question {
+                height: 400px;
+            }
+ 
+            #questions {
+                margin-right: 20px;
+            }
+            
+            #question {
+                width: 700px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="/">This is CS50 Video.</a>
+                </div>    
+            </div>
+        </div>
+        <div id="navbar-border-wrapper">
+            <img id="navbar-border" src="/img/bottom-border.png">
+        </div>
+        <div id="content-wrapper-outer">
+            <div id="content-wrapper-inner">
+                <div id="video-wrapper" class="panel" style="width: 720px;">
+                    <div id="video"></div>
+                </div>
+                <div id="transcript" class="panel-inset"></div>
+                <div id="questions" class="panel"></div>
+            </div>
+        </div>
+    </body>
+</html>
