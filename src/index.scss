@@ -1,0 +1,127 @@
+/* ----------------------------------
+-- Document Reset
+*/
+
+* {
+  display: block;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 1rem;
+  flex: none;
+  line-height: 1;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+script,
+style,
+head,
+sprite-sheet {
+  display: none;
+}
+
+[row] {
+  display: flex;
+}
+
+/* ----------------------------------
+-- Core Containers
+*/
+
+html {
+  font-size: calc(10px + .5vw);
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: #121212;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+aside {
+  position: absolute;
+  top: 80px;
+  right: 1.5rem;
+}
+
+aside:hover chapter-list,
+chapter-list:hover {
+  opacity: 0.8;
+  transform: translate(0%, 0%);
+}
+
+chapter-list {
+  max-height: 55vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #121212;
+  opacity: 0;
+  transform: translate(0%, -5%);
+  transition: all .3s ease-in;
+  width: 20rem;
+  margin: 0 auto;
+}
+
+/* ----------------------------------
+-- Core Elements
+*/
+
+input,
+button {
+  width: auto;
+  padding: 1.1rem;
+  font-size: 1.1rem;
+}
+
+button {
+  background: #121212;
+  color: #f2f2f2;
+}
+
+iframe {
+  flex: 1 1 auto;
+}
+
+/* ----------------------------------
+-- Custom Scrollbars
+*/
+
+@mixin scrollbars($size, $color) {
+  // For Google Chrome
+  ::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.25);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.5);
+  }
+
+  ::-webkit-scrollbar-track {
+      background: $color;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $color;
+    scrollbar-track-color: $color;
+  }
+}
+
+@include scrollbars(1rem, #212121);
