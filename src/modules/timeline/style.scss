@@ -9,10 +9,37 @@ chapter-timeline {
     }
 
     chapter- {
+      position: relative;
+      z-index: 2;
       flex: 1;
       background: rgba(0,0,0,0.8);
       &.active {
         background: #891830;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
+        background: #fff;
+        pointer-events: none;
+      }
+
+      &:hover::after {
+        content: attr(data-title);
+        position: absolute;
+        bottom: 0;
+        transform: translateY(100%);
+        background: rgba(0,0,0,0.9);
+        color: #fff;
+        pointer-events: none;
+        font-size: .75rem;
+        padding: .5rem;
       }
 
       subtitles- {
