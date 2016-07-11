@@ -1,8 +1,21 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 
+const getQueryParams = qs => {
+  qs = qs.split('+').join(' ');
+  const params = {};
+  let tokens;
+  const re = /[?&]?([^=]+)=([^&]*)/g;
+  while (tokens = re.exec(qs)) {
+    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+  }
+  return params;
+};
+
+
 export default {
   init(dest, vid) {
+    const startTime = getQueryParams(document.location.search).t || 0;
     const player = YouTubePlayer(dest, {
       width: '100%',
       height: '100%',
@@ -11,7 +24,9 @@ export default {
         showinfo: 0,
       },
     });
+
     player.loadVideoById(vid);
+    player.seekTo(startTime);
     player.playVideo();
 
     subscribe('video:seekTo', time =>
