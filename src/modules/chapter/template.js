@@ -26,7 +26,7 @@ export default (model = {}) =>
   data-end="${seconds(model.end)}">
   <header>
     <div>
-      <h1>${mins(model.start)} - ${model.title}</h1>
+      <h1>${mins(model.start)} ${model.title}</h1>
       <h2>${duration(model.start, model.end)} min | Chapter ${model.id}</h2>
     </div>
   </header>
