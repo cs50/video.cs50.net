@@ -25,7 +25,10 @@ export default {
       .then(time => player.seekTo(time - sec)));
 
     const tick = () => player.getCurrentTime()
-      .then(time => publish('video:tick', [time]));
+      .then(time => {
+        publish('video:tick', [time]);
+        window.history.replaceState({}, '', `?t=${Math.floor(time)}`);
+      });
 
     setInterval(() => player.getPlayerState()
       .then(state => (state === 1 ? tick() : false))
