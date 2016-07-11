@@ -12,6 +12,14 @@ const getQueryParams = qs => {
   return params;
 };
 
+const secondsToYoutubeTime = sec =>
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+
+const youTubeTimeToSeconds = time => {
+  const mins = parseFloat(time.match(/\d+m/)[0]);
+  const secs = parseFloat(time.match(/\d+s/)[0]);
+  return (mins * 60) + secs;
+};
 
 export default {
   init(dest, vid) {
@@ -26,7 +34,7 @@ export default {
     });
 
     player.loadVideoById(vid);
-    player.seekTo(startTime);
+    player.seekTo(youTubeTimeToSeconds(startTime));
     player.playVideo();
 
     subscribe('video:seekTo', time =>
@@ -42,7 +50,8 @@ export default {
     const tick = () => player.getCurrentTime()
       .then(time => {
         publish('video:tick', [time]);
-        window.history.replaceState({}, '', `?t=${Math.floor(time)}`);
+        window.history.replaceState({}, '',
+          `?t=${secondsToYoutubeTime(time)}`);
       });
 
     setInterval(() => player.getPlayerState()
