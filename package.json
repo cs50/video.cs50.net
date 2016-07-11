@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/cs50/player50",
   "dependencies": {
-    "minpubsub": "0.0.2",
+    "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",
     "moment": "^2.13.0",
     "whatwg-fetch": "^1.0.0"
   }
