@@ -1,0 +1,44 @@
+chapter-timeline {
+    display: flex;
+    width: 100%;
+    bottom: 60px;
+    height: 2rem;
+    background: #424242;
+    >*+* {
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+
+    chapter- {
+      flex: 1;
+      background: rgba(0,0,0,0.8);
+      &.active {
+        background: #891830;
+      }
+
+      subtitles- {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+      phrase- {
+        display: block !important;
+        flex: 1;
+        align-self: stretch;
+
+        &.matched {
+          background: darken(#891830, 10%);
+        }
+
+        p {
+          display: none;
+        }
+        &:hover {
+          background: rgba(255,255,255,0.5);
+        }
+        &.active {
+          min-width: .5rem;
+          background: rgba(0,0,0,0.2);
+        }
+      }
+    }
+}

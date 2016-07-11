@@ -1,0 +1,45 @@
+{
+  "name": "player50",
+  "version": "1.0.0",
+  "description": "A web interface for viewing CS50 videos.",
+  "main": "index.js",
+  "style": "src/**/*.scss",
+  "scripts": {
+    "init": "rm -rf dist && mkdir dist && cp src/index.html dist/index.html",
+    "build": "npm run init && npm run bundle",
+    "dev": "npm run build && parallelshell 'npm run watch' 'npm run serve'",
+    "bundle": "browserify -t babelify app.js -o dist/index.js -p [ parcelify -o dist/index.css -t sass-css-stream -d ./src ]",
+    "watch": "watchify -t babelify app.js -o dist/index.js -p [ parcelify -wo dist/index.css -t sass-css-stream -d ./src ]",
+    "serve": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cs50/player50.git"
+  },
+  "author": "Luke Jackson <lukejacksonn@gmail.com> (http://lukejacksonn.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cs50/player50/issues"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.13.0",
+    "browserify": "^13.0.1",
+    "connect-history-api-fallback": "^1.2.0",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "parallelshell": "^2.0.0",
+    "parcelify": "^2.1.0",
+    "sass-css-stream": "^0.1.6",
+    "watchify": "^3.7.0",
+    "youtube-player": "^3.0.4"
+  },
+  "homepage": "https://github.com/cs50/player50",
+  "dependencies": {
+    "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",
+    "moment": "^2.13.0",
+    "whatwg-fetch": "^1.0.0"
+  }
+}

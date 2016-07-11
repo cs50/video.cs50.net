@@ -1,0 +1,29 @@
+chapter-search {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 2rem 0 rgba(0,0,0,0.4);
+
+  input {
+    flex: 1;
+  }
+  button {
+    padding: 1rem;
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: rgba(255,255,255,0.8);
+    }
+    &:hover svg {
+      fill: rgba(255,255,255,1);
+    }
+    & + button {
+      border-left: 1px solid rgba(255,255,255,0.05);
+    }
+
+  }
+}
+
+.searched:not(.matched) {
+  display: none;
+}
