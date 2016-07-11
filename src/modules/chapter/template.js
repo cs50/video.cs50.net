@@ -27,7 +27,7 @@ export default (model = {}) =>
   <header>
     <div>
       <h1>${mins(model.start)} ${model.title}</h1>
-      <h2>${duration(model.start, model.end)} min</h2>
+      <h2>${duration(model.start, model.end)} min | ${model.id}</h2>
     </div>
   </header>
   <subtitles->
