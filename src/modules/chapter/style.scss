@@ -30,13 +30,13 @@ chapter-list chapter- {
       }
     }
 
-    svg {
-      width: 4rem;
-      background: #212121;
-      margin-right: 1rem;
-      background-position: center top;
-      background-size: 162% auto;
-    }
+    // svg {
+    //   width: 4rem;
+    //   background: #212121;
+    //   margin-right: 1rem;
+    //   background-position: center top;
+    //   background-size: 162% auto;
+    // }
 
     div {
       flex: 1 1 auto;
@@ -49,8 +49,8 @@ chapter-list chapter- {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-weight: normal;
-      font-size: 0.9rem;
+      font-weight: bold;
+      font-size: 1rem;
     }
 
     h2 {

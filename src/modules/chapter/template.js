@@ -13,11 +13,11 @@ const mins = time =>
   time.substring(0, time.length - 4)
   .substring(3);
 
-const offset = url => {
-  const regex = /#xywh=0,(.\d+?|0),/;
-  const num = regex.exec(url)[1] / 90;
-  return num * 9;
-};
+// const offset = url => {
+//   const regex = /#xywh=0,(.\d+?|0),/;
+//   const num = regex.exec(url)[1] / 90;
+//   return num * 9;
+// };
 
 export default (model = {}) =>
 `<chapter-
@@ -25,10 +25,8 @@ export default (model = {}) =>
   data-start="${seconds(model.start)}"
   data-end="${seconds(model.end)}">
   <header>
-    <svg viewBox="0 0 3 2" style="background-image:url(${model.thumb});
-      background-position:center ${offset(model.thumb)}%"></svg>
     <div>
-      <h1>${model.title}</h1>
+      <h1>${mins(model.start)} - ${model.title}</h1>
       <h2>${duration(model.start, model.end)} min | Chapter ${model.id}</h2>
     </div>
   </header>
@@ -42,4 +40,7 @@ export default (model = {}) =>
   </subtitles->
 </chapter->`;
 
+
+// <svg viewBox="0 0 3 2" style="background-image:url(${model.thumb});
+//   background-position:center ${offset(model.thumb)}%"></svg>
 // ${model.intro ? `<p>${model.intro}</p>` : ''}
