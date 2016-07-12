@@ -29,11 +29,6 @@ export default () => {
   Search.init('chapter-search', [{ target: 'chapter-list' }]);
   // Initialize video-player with youtube video ID
   Video.init('video-player', 'zFenJJtAEzE');
-  // Initialize download button with mp4 file and filename
-  Download.init('chapter-download', [{
-    href: 'http://cdn.cs50.net/2015/fall/lectures/0/w/week0w-720p.mp4',
-    name: 'Week-0-Wednesday',
-  }]);
   // Initialize playback speed widget with no options
   Playback.init('chapter-playback', [{}]);
 };
