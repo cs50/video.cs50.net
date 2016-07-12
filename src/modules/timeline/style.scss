@@ -14,9 +14,6 @@ chapter-timeline {
       z-index: 2;
       flex: 1;
       background: rgba(0,0,0,0.8);
-      &.active {
-        background: #891830;
-      }
 
       &::before {
         content: '';
@@ -48,6 +45,7 @@ chapter-timeline {
         width: 100%;
         height: 100%;
       }
+      
       phrase- {
         display: block !important;
         flex: 1;
@@ -60,12 +58,14 @@ chapter-timeline {
         p {
           display: none;
         }
+
         &:hover {
           background: rgba(255,255,255,0.5);
         }
+
         &.active {
           min-width: .5rem;
-          background: rgba(0,0,0,0.2);
+          background: #891830;
         }
       }
     }

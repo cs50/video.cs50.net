@@ -36,6 +36,9 @@ export default {
       .filter(x => x.dataset.start < time && time < x.dataset.end)[0];
       // If the current video time is within the start and end time of a phrase
       if (activePhrase) {
+        // Remove active class from all other phrases
+        [...document.querySelectorAll('chapter-timeline phrase-')]
+        .map(x => x.classList.remove('active'));
         // Make found phrase active
         addUniqueClass(activePhrase, 'active');
       }
