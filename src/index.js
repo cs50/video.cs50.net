@@ -6,7 +6,6 @@ import Chapter from './modules/chapter';
 import Timeline from './modules/timeline';
 import Search from './modules/search';
 import Video from './modules/video';
-import Download from './modules/download';
 import Playback from './modules/playback';
 
 /*
