@@ -23,24 +23,36 @@ const youTubeTimeToSeconds = time => {
 };
 
 export default {
-  init(dest, vid) {
+  init(dest, ops) {
     const startTime = getQueryParams(document.location.search).t ?
       youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
+
+    const onPlayerStateChange = e =>
+      publish('video:state:changed', [e.data]);
+
     const player = YouTubePlayer(dest, {
       width: '100%',
       height: '100%',
       playerVars: {
         rel: 0,
         showinfo: 0,
+        controls: ops.controls,
       },
     });
 
-    player.loadVideoById(vid);
+    player.loadVideoById(ops.vid);
     player.seekTo(startTime);
     player.playVideo();
 
+    player.addEventListener('onStateChange', onPlayerStateChange);
+
+    subscribe('video:state:changed', state => {
+      if (state === 1) player.playVideo();
+      if (state === 2) player.pauseVideo();
+    });
+
     // Fetch video description (chapters)
-    fetch(`https://www.googleapis.com/youtube/v3/videos?id=${vid}&key=AIzaSyBJB0_EuZdaddGDTyOC1oO3CXCRq9_EAiA&part=snippet`)
+    fetch(`https://www.googleapis.com/youtube/v3/videos?id=${ops.vid}&key=AIzaSyBJB0_EuZdaddGDTyOC1oO3CXCRq9_EAiA&part=snippet`)
     .then(data => data.json())
     .then(json => json.items[0].snippet.description)
     .then(desc => `
@@ -74,7 +86,7 @@ ${desc}
     });
 
     // Fetch video captions
-    fetch(`https://video.google.com/timedtext?lang=en&v=${vid}`)
+    fetch(`https://video.google.com/timedtext?lang=en&v=${ops.vid}`)
     .then(data => data.text())
     .then(text => xml2js.parseString(text, (err, res) => {
       const captions = res.transcript.text

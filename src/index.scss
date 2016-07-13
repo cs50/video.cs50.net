@@ -90,8 +90,17 @@ button {
   color: #f2f2f2;
 }
 
-iframe {
+#video-main {
   flex: 1 1 auto;
+}
+
+#video-support {
+  position: absolute;
+  width: 270px;
+  height: 180px;
+  background: red;
+  top: 2rem;
+  left: 2rem;
 }
 
 /* ----------------------------------
