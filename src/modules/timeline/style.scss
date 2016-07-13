@@ -2,12 +2,9 @@ chapter-timeline {
     display: flex;
     width: 100%;
     position: absolute;
-    bottom: 34px;
+    bottom: 36px;
     height: 1rem;
     background: #424242;
-    >*+* {
-      border-left: 1px solid rgba(255,255,255,0.1);
-    }
 
     chapter- {
       position: relative;
@@ -45,7 +42,7 @@ chapter-timeline {
         width: 100%;
         height: 100%;
       }
-      
+
       phrase- {
         display: block !important;
         flex: 1;
