@@ -88,8 +88,10 @@ ${desc}
       console.log(captions);
     }));
 
-    subscribe('video:seekTo', time =>
-      player.seekTo(time));
+    subscribe('video:seekTo', time => {
+      player.seekTo(time);
+      publish('video:tick', [time]);
+    });
 
     subscribe('video:playbackSpeed', time =>
       player.setPlaybackRate(time));
