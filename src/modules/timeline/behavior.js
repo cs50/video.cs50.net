@@ -12,19 +12,11 @@ export default {
   seekToPhrase() {
     // Request that the video seek to start of this phrase
     publish('video:seekTo', [this.dataset.start]);
+    // Remove active class from all other phrases
+    [...document.querySelectorAll('chapter-timeline phrase-.active')]
+    .map(x => x.classList.remove('active'));
     // Make this phrase active
-    addUniqueClass(this, 'active');
-    // Make this phrases parent chapter active
-    addUniqueClass(this.parentNode, 'active');
-  },
-  seekNext() {
-    // If this chapter is active and there is a next chapter
-    if (this.classList.contains('active') && this.nextSibling !== null) {
-      // Request that the video seek to start of next chapter
-      publish('video:seekTo', [this.nextSibling.dataset.start]);
-      // Make next chapter active
-      addUniqueClass(this.nextSibling, 'active');
-    }
+    this.classList.add('active');
   },
   update(time) {
     // If the current video time is within the start and end time of this chapter
