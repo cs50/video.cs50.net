@@ -1,7 +1,7 @@
 chapter-playback {
   position: relative;
   z-index: 1;
-  padding: 1rem;
+  padding: .5rem;
   background: rgba(0,0,0,0.9);
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@ chapter-playback {
     margin-right: 1rem;
   }
   >*+* {
-    margin-left: .2rem;
+    margin-left: .5rem;
   }
   button {
     flex: 1 1 auto;

@@ -19,9 +19,9 @@ chapter-timeline {
         z-index: 1;
         left: 0;
         top: 50%;
-        transform: translate(-50%, -50%);
-        width: .75rem;
-        height: .75rem;
+        transform: translate(50%, -50%);
+        width: 0.5rem;
+        height: 0.5rem;
         border-radius: 50%;
         background: rgba(255,255,255,0.5);
         pointer-events: none;
@@ -63,9 +63,13 @@ chapter-timeline {
         }
 
         &.active {
-          min-width: 1rem;
+          min-width: .5rem;
           background: #891830;
           transform: scaleY(1.25);
+        }
+
+        &:first-child {
+          min-width: 1rem;
         }
       }
     }

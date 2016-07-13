@@ -76,11 +76,6 @@ chapter-list chapter- {
     >*+* { margin-left: .5rem; }
     color: rgba(255,255,255,0.7);
 
-    &.active {
-      span, p {
-        color: rgba(255,255,255,1);
-      }
-    }
 
     span, p {
       font-size: .7rem;
@@ -97,6 +92,12 @@ chapter-list chapter- {
         text-decoration: underline;
         cursor: default;
         color: rgba(255,255,255,.8);
+      }
+    }
+
+    &.active {
+      span, p {
+        color: rgba(255,255,255,1);
       }
     }
   }
