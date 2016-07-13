@@ -39,13 +39,3 @@ export default (model = {}) =>
     ).join('')}
   </subtitles->
 </chapter->`;
-
-// const offset = url => {
-//   const regex = /#xywh=0,(.\d+?|0),/;
-//   const num = regex.exec(url)[1] / 90;
-//   return num * 9;
-// };
-
-// <svg viewBox="0 0 3 2" style="background-image:url(${model.thumb});
-//   background-position:center ${offset(model.thumb)}%"></svg>
-// ${model.intro ? `<p>${model.intro}</p>` : ''}

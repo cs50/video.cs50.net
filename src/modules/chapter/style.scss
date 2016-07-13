@@ -61,7 +61,6 @@ chapter-list chapter- {
   subtitles- {
     display: none;
     padding: 0 1rem 1rem;
-    border-top: 1px solid #000;
     >*+* {
       margin-top: .5rem;
     }
@@ -76,6 +75,13 @@ chapter-list chapter- {
     >*+* { margin-left: .5rem; }
     color: rgba(255,255,255,0.7);
 
+    b {
+      display: inline;
+      font-size: inherit;
+      font-weight: inherit;
+      background: yellow;
+      color: #000;
+    }
 
     span, p {
       font-size: .7rem;

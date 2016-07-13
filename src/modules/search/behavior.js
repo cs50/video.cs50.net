@@ -12,26 +12,42 @@ export default {
   filterChapters() {
     // Get search term from input value
     const pattern = new RegExp(this.value, 'i');
-    // If we are just trying to search for one character
-    if (this.value.length < 1) {
-      // Select all chapters and phrases in the dom
-      // Remove class searched and matched from all
+
+    // Remove all highlights
+    [...document.querySelectorAll('.matched b')]
+    .forEach(x => (x.outerHTML = x.innerHTML));
+    // Remove all searched classes
+    [...document.querySelectorAll('.searched')]
+    .forEach(x => x.classList.remove('searched'));
+    // Remove all matched classes
+    [...document.querySelectorAll('.matched')]
+    .forEach(x => x.classList.remove('matched'));
+
+    if (this.value.length > 1) {
+      // Select all chapters in the dom
+      // Add class searched to all chapters
+      // Filter by data-title
+      // Add matched class to matched nodes
       [...document.querySelectorAll('chapter-')]
-      .concat([...document.querySelectorAll('phrase-')])
-      .map(x => ((x.classList.remove('searched')) ? x : x))
-      .map(x => ((x.classList.remove('matched')) ? x : x));
-    } else {
-      // Select all chapters and phrases in the dom
-      // Add class searched to every potential target node
-      // Remove matched class present from any previous search
-      // Filter phrases and chapters by pattern
-      // Add class matched to any elements that passed through the filter
-      [...document.querySelectorAll('chapter-')]
-      .concat([...document.querySelectorAll('phrase-')])
-      .map(x => ((x.classList.add('searched')) ? x : x))
-      .map(x => ((x.classList.remove('matched')) ? x : x))
+      .map(x => (x.classList.add('searched') ? x : x))
+      .filter(x => x.dataset.title.match(pattern))
+      .map(x => (x.classList.add('matched') ? x : x));
+      // Select all phrases in the dom
+      // Add class searched to all phrases
+      // Filter by text-content
+      // Add matched class to matched nodes
+      // Add matched class to the containing chapter
+      // Wrap matched text in tag to highlight
+      [...document.querySelectorAll('phrase-')]
+      .map(x => (x.classList.add('searched') ? x : x))
       .filter(x => x.textContent.match(pattern))
-      .map(x => ((x.classList.add('matched')) ? x : x));
+      .map(x => (x.classList.add('matched') ? x : x))
+      .map(x => (x.parentNode.parentNode.classList.add('matched') ? x : x))
+      .map(x => {
+        x.innerHTML = x.innerHTML
+        .replace(pattern, `<b>${x.textContent.match(pattern)}</b>`);
+        return x;
+      });
     }
   },
 };
