@@ -1,9 +1,10 @@
 chapter-timeline {
     display: flex;
-    width: 100%;
+    right: 1rem;
+    left: 1rem;
     position: absolute;
-    bottom: 36px;
-    height: 1rem;
+    bottom: 60px;
+    height: 2rem;
     background: #424242;
 
     chapter- {
@@ -15,13 +16,14 @@ chapter-timeline {
       &::before {
         content: '';
         position: absolute;
+        z-index: 1;
         left: 0;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: .5rem;
-        height: .5rem;
+        width: .75rem;
+        height: .75rem;
         border-radius: 50%;
-        background: #fff;
+        background: rgba(255,255,255,0.5);
         pointer-events: none;
       }
 
@@ -61,8 +63,9 @@ chapter-timeline {
         }
 
         &.active {
-          min-width: .5rem;
+          min-width: 1rem;
           background: #891830;
+          transform: scaleY(1.25);
         }
       }
     }

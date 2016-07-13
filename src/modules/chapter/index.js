@@ -19,8 +19,8 @@ export default {
       .then(frag => Bind('header')('click')(behavior.seekTo)(frag))
       .then(frag => Bind('phrase-')('click')(behavior.seekToPhrase)(frag))
       .then(frag => Render(dest)(frag))
-      .then(() => [...document.querySelector(dest).childNodes])
-      .then(elem => Event('video:tick')(behavior.update)(elem))
+      .then(() => [...document.querySelectorAll(dest)])
+      .then(elem => Event('video:tick')(behavior.updateActivePhrase)(elem))
       .then(elem => Event('chapter:next')(behavior.seekNext)(elem));
   },
 };

@@ -13,11 +13,11 @@ export default {
   updateActivePhrase(time) {
     // Find the correct active phrse for time
     const targetPhrase =
-      [...document.querySelectorAll('chapter-timeline phrase-')]
-      .find(x => time <= parseFloat(x.dataset.start));
+      [...this.querySelectorAll('phrase-')]
+      .find(x => time < parseFloat(x.dataset.end));
     if (targetPhrase) {
       // Remove active class from all phrases
-      [...document.querySelectorAll('chapter-timeline .active')]
+      [...this.querySelectorAll('.active')]
       .map(x => x.classList.remove('active'));
       // Add active class to target phrase
       targetPhrase.classList.add('active');

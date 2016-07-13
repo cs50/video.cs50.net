@@ -108,7 +108,7 @@ ${desc}
       });
 
     setInterval(() => player.getPlayerState()
-      .then(state => ((state === 1 || state === 3) ? tick() : false))
-    , 500);
+      .then(state => (state === 1 ? tick() : false))
+    , 1000);
   },
 };
