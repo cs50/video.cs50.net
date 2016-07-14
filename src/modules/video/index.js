@@ -131,8 +131,10 @@ ${desc}
           `?t=${secondsToYoutubeTime(time)}`);
       });
 
-    setInterval(() => player.getPlayerState()
+    if (!ops.mute) {
+      setInterval(() => player.getPlayerState()
       .then(state => (state === 1 ? tick() : false))
-    , 1000);
+      , 1000);
+    }
   },
 };
