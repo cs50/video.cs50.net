@@ -27,8 +27,8 @@ export default () => {
   // Initialize chapter-search with target chapter-list
   Search.init('chapter-search', [{ target: 'chapter-list' }]);
   // Initialize video-player with youtube video ID
-  Video.init('video-main', { vid: 'zFenJJtAEzE', controls: 1 });
-  Video.init('video-support', { vid: 'zFenJJtAEzE', controls: 0 });
+  Video.init('video-main', { vid: 'zFenJJtAEzE', controls: 0 });
+  Video.init('video-support', { vid: 'BRpel-vjckA', controls: 0, mute: true });
   // Initialize playback speed widget with no options
   Playback.init('chapter-playback', [{}]);
 };

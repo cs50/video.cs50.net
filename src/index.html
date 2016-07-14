@@ -16,8 +16,18 @@
     </aside>
     <main>
       <chapter-timeline></chapter-timeline>
-      <youtube-video id="video-main"></youtube-video>
-      <youtube-video id="video-support"></youtube-video>
+      <youtube-video class="active">
+        <div id="video-main"></div>
+        <button>
+          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
+        </button>
+      </youtube-video>
+      <youtube-video>
+        <div id="video-support"></div>
+        <button>
+          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
+        </button>
+      </youtube-video>
     </main>
 
     <!-- Imported Resources -->
@@ -43,6 +53,10 @@
       <svg id="icon-forward" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <polygon points="13.2,12 1,19 1,5 "/>
         <circle cx="19.6" cy="12" r="3"/>
+      </svg>
+      <svg id="icon-switch-video" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M18 9.5V6c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-3.5l4 4v-13l-4 4zm-5 6V13H7v2.5L3.5 12 7 8.5V11h6V8.5l3.5 3.5-3.5 3.5z"/>
       </svg>
     </sprite-sheet>
 

@@ -44,7 +44,19 @@ export default {
     player.seekTo(startTime);
     player.playVideo();
 
+    if (ops.mute) { player.mute(); }
+
     player.addEventListener('onStateChange', onPlayerStateChange);
+
+    player.getIframe().then(elem => {
+      elem.nextSibling.nextSibling.addEventListener('click', () => {
+        // Remove active from any component of same type
+        [...document.querySelectorAll('youtube-video')]
+        .forEach(x => x.classList.remove('active'));
+        // Add active class to self
+        elem.parentNode.classList.add('active');
+      });
+    });
 
     subscribe('video:state:changed', state => {
       if (state === 1) player.playVideo();
