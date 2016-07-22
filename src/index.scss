@@ -48,6 +48,14 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+
+  section {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    height: 4rem;
+    width: 100%;
+  }
 }
 
 aside {
@@ -55,6 +63,11 @@ aside {
   top: 2rem;
   right: 1.5rem;
   z-index: 1;
+  transition: opacity .2s;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 aside:hover chapter-list,
@@ -95,7 +108,7 @@ youtube-video.active {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 3rem;
+  bottom: 4rem;
   right: 0;
   button {
     display: none;

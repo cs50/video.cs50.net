@@ -22,22 +22,9 @@ chapter-search {
   input {
     flex: 1;
     background: #222;
+    padding: 1.5rem;
     padding-left: 4rem;
     color: #fff;
-  }
-  button {
-    padding: 1rem;
-    svg {
-      width: 2rem;
-      height: 2rem;
-      fill: rgba(255,255,255,0.8);
-    }
-    &:hover svg {
-      fill: rgba(255,255,255,1);
-    }
-    & + button {
-      border-left: 1px solid #000;
-    }
   }
 }
 

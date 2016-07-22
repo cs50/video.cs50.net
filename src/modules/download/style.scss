@@ -1,4 +1,4 @@
-chapter-download {
+video-download {
   position: relative;
   z-index: 1;
   background: rgba(0,0,0,0.9);
@@ -16,12 +16,13 @@ chapter-download {
     font-size: 0.8rem;
     color: inherit;
     text-decoration: none;
-    padding: .5rem;
+    padding: 0 1rem;
   }
   svg {
     width: 1.2rem;
     height: 1.2rem;
     fill: currentColor;
-    margin: 1rem 1rem 1rem 0rem;
+    margin-right: 1rem;
+    margin-left: -.5rem;
   }
 }
