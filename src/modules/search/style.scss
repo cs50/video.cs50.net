@@ -4,23 +4,27 @@ chapter-search {
   z-index: 1;
   box-shadow: 0 0 2rem 0 rgba(0,0,0,0.4);
 
+  > svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: rgba(255,255,255,0.5);
+    width: 2rem;
+    height: 2rem;
+  }
+
+  input:hover ~ svg,
+  input:focus ~ svg {
+    fill: rgba(255,255,255,0.9);
+  }
+
   input {
     flex: 1;
-  }
-  button {
-    padding: 1rem;
-    svg {
-      width: 2rem;
-      height: 2rem;
-      fill: rgba(255,255,255,0.8);
-    }
-    &:hover svg {
-      fill: rgba(255,255,255,1);
-    }
-    & + button {
-      border-left: 1px solid rgba(255,255,255,0.05);
-    }
-
+    background: #222;
+    padding: 1.5rem;
+    padding-left: 4rem;
+    color: #fff;
   }
 }
 

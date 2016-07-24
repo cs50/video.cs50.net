@@ -1,25 +1,26 @@
 import { publish } from 'minpubsub';
 
-const addUniqueClass = (a, x) => {
-  [...a.parentNode.childNodes]
-  .map(sib => (sib.classList ? sib.classList.remove(x) : sib));
-  a.classList.add(x);
-};
-
 export default {
   seekToPhrase() {
+    // Request that the video seek to start of this phrase
     publish('video:seekTo', [this.dataset.start]);
-    addUniqueClass(this, 'active');
-    addUniqueClass(this.parentNode, 'active');
+    // Remove active class from all other phrases
+    [...document.querySelectorAll('chapter-timeline phrase-.active')]
+    .map(x => x.classList.remove('active'));
+    // Make this phrase active
+    this.classList.add('active');
   },
-  update(time) {
-    if (this.dataset.start < time && time < this.dataset.end) {
-      const activePhrase = [...this.querySelectorAll('phrase-')]
-      .filter(x => x.dataset.start < time && time < x.dataset.end)[0];
-      addUniqueClass(this, 'active');
-      if (activePhrase) {
-        addUniqueClass(activePhrase, 'active');
-      }
+  updateActivePhrase(time) {
+    // Find the correct active phrse for time
+    const targetPhrase =
+      [...this.querySelectorAll('phrase-')]
+      .find(x => time < parseFloat(x.dataset.end));
+    if (targetPhrase) {
+      // Remove active class from all phrases
+      [...this.querySelectorAll('.active')]
+      .map(x => x.classList.remove('active'));
+      // Add active class to target phrase
+      targetPhrase.classList.add('active');
     }
   },
 };

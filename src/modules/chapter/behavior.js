@@ -1,37 +1,33 @@
 import { publish } from 'minpubsub';
 
-const addUniqueClass = (a, x) => {
-  [...a.parentNode.childNodes]
-  .map(sib => (sib.classList ? sib.classList.remove(x) : sib));
-  a.classList.add(x);
-};
-
-const seekToStart = (x) => {
-  publish('video:seekTo', [x.dataset.start]);
-  addUniqueClass(x, 'active');
-};
-
 export default {
   seekTo() {
-    seekToStart(this.parentNode);
+    // Request that the video seek to start of this chapter
+    publish('video:seekTo', [this.parentNode.dataset.start]);
   },
   seekToPhrase() {
+    // Request that the video seek to start of this phrase
     publish('video:seekTo', [this.dataset.start]);
-    addUniqueClass(this, 'active');
   },
   seekNext() {
-    if (this.classList.contains('active') && this.nextSibling !== null) {
-      seekToStart(this.nextSibling);
+    // Find the correct active phrse for time
+    const targetChapter = this.querySelector('chapter-.active').nextSibling;
+    if (targetChapter) {
+      publish('video:seekTo', [targetChapter.dataset.start]);
     }
   },
-  update(time) {
-    if (this.dataset.start < time && time < this.dataset.end) {
-      const activePhrase = [...this.querySelectorAll('phrase-')]
-      .filter(x => x.dataset.start < time && time < x.dataset.end)[0];
-      addUniqueClass(this, 'active');
-      if (activePhrase) {
-        addUniqueClass(activePhrase, 'active');
-      }
+  updateActivePhrase(time) {
+    // Find the correct active phrse for time
+    const targetPhrase =
+      [...this.querySelectorAll('phrase-')]
+      .find(x => time < parseFloat(x.dataset.end));
+    if (targetPhrase) {
+      // Remove active class from all phrases
+      [...this.querySelectorAll('.active')]
+      .map(x => x.classList.remove('active'));
+      // Add active class to target phrase
+      targetPhrase.classList.add('active');
+      targetPhrase.parentNode.parentNode.classList.add('active');
     }
   },
 };

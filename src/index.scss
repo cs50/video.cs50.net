@@ -48,12 +48,26 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+
+  section {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    height: 4rem;
+    width: 100%;
+  }
 }
 
 aside {
   position: absolute;
-  top: 80px;
+  top: 2rem;
   right: 1.5rem;
+  z-index: 1;
+  transition: opacity .2s;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 aside:hover chapter-list,
@@ -70,7 +84,7 @@ chapter-list {
   opacity: 0;
   transform: translate(0%, -5%);
   transition: all .3s ease-in;
-  width: 20rem;
+  width: 25rem;
   margin: 0 auto;
 }
 
@@ -90,8 +104,45 @@ button {
   color: #f2f2f2;
 }
 
-iframe {
-  flex: 1 1 auto;
+youtube-video.active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 4rem;
+  right: 0;
+  button {
+    display: none;
+  }
+}
+
+youtube-video:not(.active) {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+  width: 270px;
+  height: 113px;
+  top: 2rem;
+  left: 2rem;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  iframe {
+    height: 208px;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: #fff;
+    }
+  }
 }
 
 /* ----------------------------------

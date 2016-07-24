@@ -1,18 +1,39 @@
 chapter-timeline {
     display: flex;
     width: 100%;
-    bottom: 60px;
-    height: 2rem;
-    background: #424242;
-    >*+* {
-      border-left: 1px solid rgba(255,255,255,0.1);
-    }
+    background: #222;
+    height: 100%;
 
     chapter- {
+      position: relative;
+      z-index: 2;
       flex: 1;
       background: rgba(0,0,0,0.8);
-      &.active {
-        background: #891830;
+
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        pointer-events: none;
+      }
+
+      &:hover::after {
+        content: attr(data-title);
+        position: absolute;
+        top: 0;
+        transform: translateY(-100%);
+        background: rgba(0,0,0,0.9);
+        color: #fff;
+        pointer-events: none;
+        font-size: .75rem;
+        padding: .5rem;
       }
 
       subtitles- {
@@ -20,6 +41,7 @@ chapter-timeline {
         width: 100%;
         height: 100%;
       }
+
       phrase- {
         display: block !important;
         flex: 1;
@@ -32,12 +54,19 @@ chapter-timeline {
         p {
           display: none;
         }
+
         &:hover {
           background: rgba(255,255,255,0.5);
         }
+
         &.active {
           min-width: .5rem;
-          background: rgba(0,0,0,0.2);
+          background: #891830;
+          transform: scaleY(1.25);
+        }
+
+        &:first-child {
+          min-width: 1rem;
         }
       }
     }

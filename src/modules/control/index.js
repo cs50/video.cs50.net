@@ -12,6 +12,7 @@ export default {
     return Template(template)(ops)
     .then(html => Fragment(html))
     .then(frag => Bind('.seek-back')('click')(behavior.seekBy)(frag))
+    .then(frag => Bind('.play-pause')('click')(behavior.playPause)(frag))
     .then(frag => Bind('.seek-next')('click')(behavior.seekNext)(frag))
     .then(frag => Bind('input')('keyup')(behavior.filterChapters)(frag))
     .then(frag => Render(dest)(frag));

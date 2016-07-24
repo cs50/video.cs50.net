@@ -30,14 +30,6 @@ chapter-list chapter- {
       }
     }
 
-    svg {
-      width: 4rem;
-      background: #212121;
-      margin-right: 1rem;
-      background-position: center top;
-      background-size: 162% auto;
-    }
-
     div {
       flex: 1 1 auto;
       overflow: hidden;
@@ -49,8 +41,8 @@ chapter-list chapter- {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-weight: normal;
-      font-size: 0.9rem;
+      font-weight: bold;
+      font-size: 1rem;
     }
 
     h2 {
@@ -68,8 +60,7 @@ chapter-list chapter- {
 
   subtitles- {
     display: none;
-    padding: 1rem;
-    border-top: 1px solid #000;
+    padding: 0 1rem 1rem;
     >*+* {
       margin-top: .5rem;
     }
@@ -84,10 +75,12 @@ chapter-list chapter- {
     >*+* { margin-left: .5rem; }
     color: rgba(255,255,255,0.7);
 
-    &.active {
-      span, p {
-        color: rgba(255,255,255,1);
-      }
+    b {
+      display: inline;
+      font-size: inherit;
+      font-weight: inherit;
+      background: yellow;
+      color: #000;
     }
 
     span, p {
@@ -107,5 +100,19 @@ chapter-list chapter- {
         color: rgba(255,255,255,.8);
       }
     }
+
+    &.active {
+      span, p {
+        color: rgba(255,255,255,1);
+      }
+    }
   }
 }
+
+// svg {
+//   width: 4rem;
+//   background: #212121;
+//   margin-right: 1rem;
+//   background-position: center top;
+//   background-size: 162% auto;
+// }

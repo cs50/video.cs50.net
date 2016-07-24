@@ -1,0 +1,43 @@
+video-controls {
+  display: flex;
+
+  > svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: rgba(255,255,255,0.5);
+    width: 2rem;
+    height: 2rem;
+  }
+
+  input:hover ~ svg,
+  input:focus ~ svg {
+    fill: rgba(255,255,255,0.9);
+  }
+
+  button {
+    padding: 1rem;
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: rgba(255,255,255,0.8);
+    }
+    &:hover svg {
+      fill: rgba(255,255,255,1);
+    }
+    & + button {
+      border-left: 1px solid #000;
+    }
+  }
+  .play-pause.playing {
+    svg:first-child {
+      display: none;
+    }
+  }
+  .play-pause:not(.playing) {
+    svg:last-child {
+      display: none;
+    }
+  }
+}

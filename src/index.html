@@ -11,38 +11,63 @@
       <chapter-search></chapter-search>
       <div row>
         <chapter-playback></chapter-playback>
-        <chapter-download></chapter-download>
+        <video-download></video-download>
       </div>
       <chapter-list></chapter-list>
     </aside>
     <main>
-      <chapter-timeline></chapter-timeline>
-      <youtube-video id="video-player"></youtube-video>
+      <section>
+        <video-controls></video-controls>
+        <chapter-timeline></chapter-timeline>
+      </section>
+      <youtube-video class="active">
+        <div id="video-main"></div>
+        <button>
+          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
+        </button>
+      </youtube-video>
+      <youtube-video>
+        <div id="video-support"></div>
+        <button>
+          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
+        </button>
+      </youtube-video>
     </main>
 
     <!-- Imported Resources -->
     <script src="/index.js"></script>
     <sprite-sheet>
-      <svg id="icon-history" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <defs>
-              <path d="M0 0h24v24H0V0z" id="a"/>
-          </defs>
-          <clipPath id="b">
-              <use overflow="visible" xlink:href="#a"/>
-          </clipPath>
-          <path clip-path="url(#b)" d="M12 5V1L7 6l5 5V7c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6H4c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8zm-1.1 11H10v-3.3L9 13v-.7l1.8-.6h.1V16zm4.3-1.8c0 .3 0 .6-.1.8l-.3.6s-.3.3-.5.3-.4.1-.6.1-.4 0-.6-.1-.3-.2-.5-.3-.2-.3-.3-.6-.1-.5-.1-.8v-.7c0-.3 0-.6.1-.8l.3-.6s.3-.3.5-.3.4-.1.6-.1.4 0 .6.1c.2.1.3.2.5.3s.2.3.3.6.1.5.1.8v.7zm-.9-.8v-.5s-.1-.2-.1-.3-.1-.1-.2-.2-.2-.1-.3-.1-.2 0-.3.1l-.2.2s-.1.2-.1.3v2s.1.2.1.3.1.1.2.2.2.1.3.1.2 0 .3-.1l.2-.2s.1-.2.1-.3v-1.5z"/>
+      <svg id="icon-history" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
       </svg>
       <svg id="icon-download" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
       </svg>
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
       </svg>
       <svg id="icon-forward" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
+        <polygon points="13.2,12 1,19 1,5 "/>
+        <circle cx="19.6" cy="12" r="3"/>
+      </svg>
+      <svg id="icon-switch-video" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M18 9.5V6c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-3.5l4 4v-13l-4 4zm-5 6V13H7v2.5L3.5 12 7 8.5V11h6V8.5l3.5 3.5-3.5 3.5z"/>
+      </svg>
+      <svg id="icon-search" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+      <svg id="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 5v14l11-7z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
       </svg>
     </sprite-sheet>
 
