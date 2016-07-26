@@ -1,10 +1,11 @@
 [{
     "id": "zFenJJtAEzE",
-    "episode": 1,
+    "episode": 0,
     "year": 2015,
     "youtube": {
         "main": "zFenJJtAEzE",
-        "slides": "BRpel-vjckA"
+        "slides": "BRpel-vjckA",
+        "vr": "BRpel-vjckA"
     },
     "download": {
         "360": "http://cdn.cs50.net/2015/fall/lectures/0/w/week0w-360p.mp4",
@@ -18,7 +19,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/0/w/notes0w/notes0w.pdf"
 }, {
     "id": "UuFWYOnHwGM",
-    "episode": 2,
+    "episode": 1,
     "year": 2015,
     "youtube": {
         "main": "UuFWYOnHwGM",
@@ -36,7 +37,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/0/f/notes0f/notes0f.pdf"
 }, {
     "id": "YiiHNiSfmKI",
-    "episode": 3,
+    "episode": 2,
     "year": 2015,
     "youtube": {
         "main": "YiiHNiSfmKI",
@@ -54,7 +55,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/1/w/notes1w/notes1w.pdf"
 }, {
     "id": "Y2vC3G8qVxw",
-    "episode": 4,
+    "episode": 3,
     "year": 2015,
     "youtube": {
         "main": "Y2vC3G8qVxw",
@@ -72,7 +73,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/1/f/notes1f/notes1f.pdf"
 }, {
     "id": "FgfLXemFoIo",
-    "episode": 5,
+    "episode": 4,
     "year": 2015,
     "youtube": {
         "main": "FgfLXemFoIo",
@@ -90,7 +91,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/2/m/notes2m/notes2m.pdf"
 }, {
     "id": "7ATGN54sSVQ",
-    "episode": 6,
+    "episode": 5,
     "year": 2015,
     "youtube": {
         "main": "7ATGN54sSVQ",
@@ -108,7 +109,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/2/w/notes2w/notes2w.pdf"
 }, {
     "id": "IEOO5UToo6A",
-    "episode": 7,
+    "episode": 6,
     "year": 2015,
     "youtube": {
         "main": "IEOO5UToo6A",
@@ -126,7 +127,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/3/m/notes3m/notes3m.pdf"
 }, {
     "id": "JovNemG-iu8",
-    "episode": 8,
+    "episode": 7,
     "year": 2015,
     "youtube": {
         "main": "JovNemG-iu8",
@@ -144,7 +145,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/3/w/notes3w/notes3w.pdf"
 }, {
     "id": "8Ba7SgCN2XY",
-    "episode": 9,
+    "episode": 8,
     "year": 2015,
     "youtube": {
         "main": "8Ba7SgCN2XY",
@@ -162,7 +163,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/4/m/notes4m/notes4m.pdf"
 }, {
     "id": "uYiVtZHns-A",
-    "episode": 10,
+    "episode": 9,
     "year": 2015,
     "youtube": {
         "main": "uYiVtZHns-A",
@@ -180,7 +181,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/4/w/notes4w/notes4w.pdf"
 }, {
     "id": "RsIP1gRneOs",
-    "episode": 11,
+    "episode": 10,
     "year": 2015,
     "youtube": {
         "main": "RsIP1gRneOs",
@@ -198,7 +199,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/5/m/notes5m/notes5m.pdf"
 }, {
     "id": "3p_Scm7qSfU",
-    "episode": 12,
+    "episode": 11,
     "year": 2015,
     "youtube": {
         "main": "3p_Scm7qSfU",
@@ -216,7 +217,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/5/w/notes5w/notes5w.pdf"
 }, {
     "id": "KWxwYbaAWxs",
-    "episode": 13,
+    "episode": 12,
     "year": 2015,
     "youtube": {
         "main": "KWxwYbaAWxs",
@@ -234,7 +235,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/6/m/notes6m/notes6m.pdf"
 }, {
     "id": "GUtPQIDSwrA",
-    "episode": 14,
+    "episode": 13,
     "year": 2015,
     "youtube": {
         "main": "GUtPQIDSwrA",
@@ -252,7 +253,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/7/m/notes7m/notes7m.pdf"
 }, {
     "id": "h_zmq88Ae3k",
-    "episode": 15,
+    "episode": 14,
     "year": 2015,
     "youtube": {
         "main": "h_zmq88Ae3k",
@@ -270,7 +271,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/7/w/notes7w/notes7w.pdf"
 }, {
     "id": "rJeP65u84ec",
-    "episode": 16,
+    "episode": 15,
     "year": 2015,
     "youtube": {
         "main": "rJeP65u84ec",
@@ -288,7 +289,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/8/m/notes8m/notes8m.pdf"
 }, {
     "id": "yoDrhOZCKWo",
-    "episode": 17,
+    "episode": 16,
     "year": 2015,
     "youtube": {
         "main": "yoDrhOZCKWo",
@@ -306,7 +307,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/8/w/notes8w/notes8w.pdf"
 }, {
     "id": "FKLqzTdkDMc",
-    "episode": 18,
+    "episode": 17,
     "year": 2015,
     "youtube": {
         "main": "FKLqzTdkDMc",
@@ -324,7 +325,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/9/m/notes9m/notes9m.pdf"
 }, {
     "id": "l9gEGB0eOps",
-    "episode": 19,
+    "episode": 18,
     "year": 2015,
     "youtube": {
         "main": "l9gEGB0eOps",
@@ -342,7 +343,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/9/w/notes9w/notes9w.pdf"
 }, {
     "id": "bpfiIlYzVGs",
-    "episode": 20,
+    "episode": 19,
     "year": 2015,
     "youtube": {
         "main": "bpfiIlYzVGs",
@@ -360,7 +361,7 @@
     "notes": "http://cdn.cs50.net/2015/fall/lectures/10/m/notes10m/notes10m.pdf"
 }, {
     "id": "OkYga_a-9cQ",
-    "episode": 21,
+    "episode": 20,
     "year": 2015,
     "youtube": {
         "main": "OkYga_a-9cQ",
@@ -377,53 +378,17 @@
     "transcript": "http://cdn.cs50.net/2015/fall/lectures/10/w/lang/en/week10w.txt",
     "notes": "http://cdn.cs50.net/2015/fall/lectures/10/w/notes10w/notes10w.pdf"
 }, {
-    "id": "OkYga_a-9cQ",
-    "episode": 22,
-    "year": 2015,
-    "youtube": {
-        "main": "OkYga_a-9cQ",
-        "slides": ""
-    },
-    "download": {
-        "360": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
-        "720": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
-        "1080": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4"
-    },
-    "thumbnails": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f.vtt",
-    "chapters": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.vtt",
-    "captions": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.srt",
-    "transcript": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.txt",
-    "notes": "http://cdn.cs50.net/2015/fall/lectures/11/f/notes11f/notes11f.pdf"
-}, {
     "id": "7q3VIoQinCs",
-    "episode": 23,
+    "episode": 21,
     "year": 2015,
     "youtube": {
         "main": "7q3VIoQinCs",
         "slides": ""
     },
     "download": {
-        "360": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
-        "720": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
-        "1080": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4"
-    },
-    "thumbnails": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f.vtt",
-    "chapters": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.vtt",
-    "captions": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.srt",
-    "transcript": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.txt",
-    "notes": "http://cdn.cs50.net/2015/fall/lectures/11/f/notes11f/notes11f.pdf"
-}, {
-    "id": "i9gUfhxej0I",
-    "episode": 24,
-    "year": 2015,
-    "youtube": {
-        "main": "i9gUfhxej0I",
-        "slides": ""
-    },
-    "download": {
-        "360": "http://cdn.cs50.net/2015/fall/lectures/11/m/week11m-360p.mp4",
-        "720": "http://cdn.cs50.net/2015/fall/lectures/11/m/week11m-720p.mp4",
-        "1080": "http://cdn.cs50.net/2015/fall/lectures/11/m/week11m-1080p.mp4"
+        "360": "http://cdn.cs50.net/2015/fall/lectures/11/m/m-360p.mp4",
+        "720": "http://cdn.cs50.net/2015/fall/lectures/11/m/m-720p.mp4",
+        "1080": "http://cdn.cs50.net/2015/fall/lectures/11/m/m-1080p.mp4"
     },
     "thumbnails": "http://cdn.cs50.net/2015/fall/lectures/11/m/week11m.vtt",
     "chapters": "http://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.vtt",
@@ -431,8 +396,26 @@
     "transcript": "http://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.txt",
     "notes": "http://cdn.cs50.net/2015/fall/lectures/11/m/notes11m/notes11m.pdf"
 }, {
+    "id": "i9gUfhxej0I",
+    "episode": 22,
+    "year": 2015,
+    "youtube": {
+        "main": "i9gUfhxej0I",
+        "slides": ""
+    },
+    "download": {
+        "360": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
+        "720": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
+        "1080": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4"
+    },
+    "thumbnails": "http://cdn.cs50.net/2015/fall/lectures/11/f/week11f.vtt",
+    "chapters": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.vtt",
+    "captions": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.srt",
+    "transcript": "http://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.txt",
+    "notes": "http://cdn.cs50.net/2015/fall/lectures/11/f/notes11f/notes11f.pdf"
+}, {
     "id": "l76Cz8RLO54",
-    "episode": 25,
+    "episode": 23,
     "year": 2015,
     "youtube": {
         "main": "l76Cz8RLO54",
