@@ -1,0 +1,21 @@
+episode-list {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 2rem 1.5rem 1.5rem 2rem;
+  z-index: 3;
+
+  episode- {
+    flex: none;
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.1);
+    margin: 0 .5rem .5rem 0;
+    &:hover {
+      cursor: pointer;
+    }
+    &.active {
+      background: #a41034;
+      color: #fff;
+    }
+  }
+}

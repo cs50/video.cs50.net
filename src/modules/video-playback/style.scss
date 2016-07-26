@@ -1,0 +1,19 @@
+video-playback {
+  display: flex;
+  margin-bottom: 2rem;
+  button {
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.1);
+    color: #a41034;
+    border: 1px solid transparent;
+    &.active {
+      border: 1px solid #a41034;
+    }
+  }
+  h1 {
+    background: rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    color: rgba(0,0,0,0.9);
+    flex: 2;
+  }
+}
