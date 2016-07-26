@@ -2,18 +2,21 @@ import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
 // Import components required for app
-import Chapter from './modules/chapter';
-import Timeline from './modules/timeline';
-import Search from './modules/search';
-import Video from './modules/video';
-import Playback from './modules/playback';
-import Control from './modules/control';
-import Download from './modules/download';
+// import Chapter from './modules/chapter';
+// import Timeline from './modules/timeline';
+// import Search from './modules/search';
+// import Video from './modules/video';
+// import Playback from './modules/playback';
+// import Control from './modules/control';
+// import Download from './modules/download';
 
 import Episodes from '../data/episodes/index.json';
 import EpisodeList from './modules/episode-list';
 import VideoPlayback from './modules/video-playback';
+import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
+import MarkerTimeline from './modules/marker-timeline';
+import MarkerList from './modules/marker-list';
 
 /*
 {
@@ -31,7 +34,10 @@ export default () => {
   // Render video-playback
   EpisodeList.render('episode-list', Episodes);
   VideoPlayback.render('video-playback', [0.75, 1, 1.5, 2, 3]);
+  VideoDownload.render('video-download', Episodes[0].download);
   MarkerSearch.render('marker-search');
+  MarkerTimeline.render('marker-timeline', Episodes[0]);
+  MarkerList.render('marker-list', Episodes[0]);
 
   subscribe('player:loadVideo', id => {
     console.log('Loading Video', id);

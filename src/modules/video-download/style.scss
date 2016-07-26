@@ -1,0 +1,16 @@
+video-download {
+  display: flex;
+  margin-bottom: 2rem;
+  a {
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.1);
+    color: #a41034;
+    flex: none;
+  }
+  h1 {
+    background: rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    color: rgba(0,0,0,0.9);
+    flex: 2;
+  }
+}

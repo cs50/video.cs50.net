@@ -1,0 +1,42 @@
+marker-list {
+  margin: 2rem;
+  padding: 2rem;
+  background: rgba(0,0,0,0.1);
+
+  *+* {
+    margin-top: .68rem;
+  }
+
+  [type='chapter'] {
+    display: block;
+    font-weight: bold;
+    padding: 1rem 0;
+    font-size: 1rem;
+  }
+  [type='caption'] {
+    display: block;
+    font-size: .8rem;
+    color: rgba(0,0,0,.5);
+    &.active span {
+      color: #a41034;
+    }
+  }
+  b {
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+    background: yellow;
+    color: #000;
+  }
+  span {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover {
+      color: rgba(0,0,0,.7);
+      cursor: default;
+      text-decoration: underline;
+    }
+  }
+}
