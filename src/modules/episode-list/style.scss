@@ -1,21 +1,35 @@
 episode-list {
   display: flex;
-  flex-flow: row wrap;
-  padding: 2rem 1.5rem 1.5rem 2rem;
-  z-index: 3;
+
+  button {
+    padding: .5rem;
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: rgba(255,255,255,.9);
+    }
+
+  }
+  
+  button + button {
+    border-left: 1px solid rgba(255,255,255,0.1);
+  }
 
   episode- {
-    flex: none;
-    padding: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    flex: 1 1 auto;
     text-align: center;
-    background: rgba(0,0,0,0.1);
-    margin: 0 .5rem .5rem 0;
+    color: rgba(255,255,255,.5);
+    &:not(.active) {
+      display: none;
+    }
     &:hover {
       cursor: pointer;
     }
     &.active {
-      background: #a41034;
-      color: #fff;
+      color: rgba(255,255,255,.9);
     }
   }
 }

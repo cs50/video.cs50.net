@@ -1,22 +1,42 @@
 marker-list {
-  margin: 2rem;
-  padding: 2rem;
-  background: rgba(0,0,0,0.1);
-
-  *+* {
-    margin-top: .68rem;
-  }
+  padding: 1.5rem;
+  //max-height: 50vh;
+  //overflow-y: auto;
+  margin: 0 1rem;
+  background: rgba(0,0,0,.8);
 
   [type='chapter'] {
     display: block;
-    font-weight: bold;
     padding: 1rem 0;
-    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 1rem;
+    h1 {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+      color: rgba(255,255,255,.9);
+    }
+    span {
+      font-size: .7rem;
+      color: rgba(255,255,255,.75);
+    }
   }
   [type='caption'] {
     display: block;
-    font-size: .8rem;
-    color: rgba(0,0,0,.5);
+    color: rgba(255,255,255,.5);
+    margin-bottom: .62rem;
+    span {
+      font-size: .8rem;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        color: rgba(255,255,255,.7);
+        cursor: default;
+        text-decoration: underline;
+      }
+    }
     &.active span {
       color: #a41034;
     }
@@ -27,16 +47,5 @@ marker-list {
     font-weight: inherit;
     background: yellow;
     color: #000;
-  }
-  span {
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    &:hover {
-      color: rgba(0,0,0,.7);
-      cursor: default;
-      text-decoration: underline;
-    }
   }
 }

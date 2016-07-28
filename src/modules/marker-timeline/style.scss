@@ -1,7 +1,10 @@
 marker-timeline {
   display: flex;
   width: 100%;
-  height: 2.5rem;
+  height: 2rem;
+  background: #424242;
+  box-shadow: 0 .25rem .25rem rgba(0,0,0,0.5);
+  z-index: 1;
 
   [type='chapter'] {
     display: block;
@@ -21,6 +24,9 @@ marker-timeline {
     &.active {
       min-width: .4rem;
       background: #a41034;
+    }
+    &.searched.matched {
+      border-left: 1px solid rgba(255,255,255,0.1);
     }
   }
   span {

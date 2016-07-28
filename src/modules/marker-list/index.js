@@ -53,29 +53,52 @@ const markers = ep => Promise.all([chapters(ep.chapters), captions(ep.captions)]
   return 0;
 }));
 
+const updateActiveMarker = time => {
+  // Find active caption mark in timeline
+  const target = [...document.querySelectorAll('marker-list mark-[type="caption"]')]
+  .find(x => time < parseFloat(x.getAttribute('end')));
+  // Remove active class from any active caption mark
+  [...document.querySelectorAll('marker-list mark-[type="caption"].active')]
+  .forEach(x => x.classList.remove('active'));
+  // Add active class to found marks
+  target.classList.add('active');
+};
+
+const scrollToMarker = time => {
+  // Find active caption mark in timeline
+  const target = [...document.querySelectorAll('marker-list mark-[type="caption"]')]
+  .find(x => time < parseFloat(x.getAttribute('end')));
+  target.scrollIntoView();
+  target.parentNode.scrollTop -= 50;
+};
+
 export default {
   render(selector, data) {
     markers(data)
     .then(marks => {
       const container = document.querySelector('marker-list');
       const frag = document.createDocumentFragment();
-      const template = mark => `<span>
-        ${mark.type === 'caption' ? `${secondsToTime(mark.start)} |` : ''} ${mark.title}
-      </span>`;
+      const captionTemplate = mark => `<span>${secondsToTime(mark.start)} | ${mark.title}</span>`;
+      const chapterTemplate = mark => `
+        <h1>${mark.title}</h1>
+        <span>${Math.floor((mark.end - mark.start) / 60)} mins | Chapter ${parseFloat(mark.id)}</span>
+      `;
       container.innerHTML = '';
       marks.forEach(mark => {
         const $marker = document.createElement('mark-');
         $marker.setAttribute('type', mark.type);
         $marker.setAttribute('start', mark.start);
         $marker.setAttribute('end', mark.end);
-        $marker.innerHTML = template(mark);
+        $marker.innerHTML = mark.type === 'caption' ? captionTemplate(mark) : chapterTemplate(mark);
         $marker.addEventListener('click', () => {
           publish('video:seekTo', [mark.start]);
-          publish('markers:updateActive', [mark.start]);
         });
         frag.appendChild($marker);
       });
       container.appendChild(frag);
+      subscribe('video:tick', updateActiveMarker);
+      subscribe('video:seekTo', updateActiveMarker);
+      subscribe('marker:scrollTo', scrollToMarker);
     });
   },
 };

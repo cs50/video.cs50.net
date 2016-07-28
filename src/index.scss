@@ -4,7 +4,7 @@
 
 * {
   display: block;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   border: 0;
@@ -23,70 +23,164 @@ sprite-sheet {
   display: none;
 }
 
-// [row] {
-//   display: flex;
-// }
+row- {
+  display: flex;
+}
 
 /* ----------------------------------
 -- Core Containers
 */
 
-html {
-  font-size: calc(10px + .5vw);
-}
+@media (orientation: landscape) {
 
-body {
-  width: 100%;
-  height: 100vh;
-  //background: #121212;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+  html {
+    font-size: 18px;
+  }
 
-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-
-  section {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    height: 4rem;
+  body {
     width: 100%;
+    height: 100vh;
+    background: #121212;
+    color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background: #212121;
+    padding: 0 2rem;
+
+    h1 {
+      display: flex;
+      align-items: center;
+      color: #fff;
+
+      svg {
+        width: 3rem;
+        height: 3rem;
+        margin-right: 1rem;
+      }
+      span {
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+    }
+  }
+
+  main {
+    position: fixed;
+    z-index: 0;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 5rem);
+  }
+
+  dialog {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 36rem;
+    margin: 6.5rem auto;
+    display: flex;
+    flex-direction: column;
+    transition: opacity .2s;
+    overflow: hidden;
+    background: transparent;
+    &:not(:hover) {
+      opacity: 0;
+    }
+
+  }
+
+  aside {
+    position: fixed;
+    top: 6.5rem;
+    left: 1.5rem;
+
+    > *+* h1 {
+      border-top: 1px solid #424242;
+    }
+  }
+
+}
+
+@media (orientation: portrait) {
+
+  nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background: #212121;
+    padding: 0 1rem;
+
+    h1 {
+      display: flex;
+      align-items: center;
+      color: #fff;
+
+      svg {
+        width: 3rem;
+        height: 3rem;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+
+  main {
+    position: relative;
+    padding-bottom: 50%;
+
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  dialog {
+    width: 100%;
+    background: #121212;
+    padding: 1rem;
+  }
+
+  aside {
+    position: absolute;
+    top: 6rem;
+    left: 1rem;
+
+    > *+* h1 {
+      border-top: 1px solid #424242;
+    }
+  }
+
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
   }
 }
 
-aside {
-  position: absolute;
-  top: 2rem;
-  right: 1.5rem;
-  z-index: 1;
-  transition: opacity .2s;
 
-  &.hidden {
-    opacity: 0;
-  }
-}
 
-aside:hover chapter-list,
-chapter-list:hover {
-  opacity: 0.8;
-  transform: translate(0%, 0%);
-}
-
-chapter-list {
-  max-height: 55vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: #121212;
-  opacity: 0;
-  transform: translate(0%, -5%);
-  transition: all .3s ease-in;
-  width: 25rem;
-  margin: 0 auto;
-}
 
 /* ----------------------------------
 -- Core Elements

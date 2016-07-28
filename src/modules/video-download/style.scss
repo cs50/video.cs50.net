@@ -1,16 +1,30 @@
 video-download {
   display: flex;
-  margin-bottom: 2rem;
-  a {
-    padding: 1.5rem;
-    background: rgba(0,0,0,0.1);
-    color: #a41034;
-    flex: none;
-  }
+  align-items: center;
+
   h1 {
-    background: rgba(0,0,0,0.1);
-    padding: 1.5rem;
-    color: rgba(0,0,0,0.9);
-    flex: 2;
+    padding: 1rem;
+    background: #212121;
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    fill: rgba(255,255,255, .5);
+  }
+
+  *+* {
+    margin-left: 1px;
+  }
+
+  &:not(:hover) a {
+    display: none;
+  }
+
+  a {
+    color: rgba(255, 255, 255, .5);;
+    flex: none;
+    background: #121212;
+    padding: 1rem;
   }
 }

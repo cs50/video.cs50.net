@@ -44,6 +44,17 @@ const markers = ep => Promise.all([chapters(ep.chapters), captions(ep.captions)]
   return 0;
 }));
 
+const updateActiveMarker = time => {
+  // Find active caption mark in timeline
+  const target = [...document.querySelectorAll('marker-timeline mark-[type="caption"]')]
+  .find(x => time < parseFloat(x.getAttribute('end')));
+  // Remove active class from any active caption mark
+  [...document.querySelectorAll('marker-timeline mark-[type="caption"].active')]
+  .forEach(x => x.classList.remove('active'));
+  // Add active class to found marks
+  target.classList.add('active');
+};
+
 export default {
   render(selector, data) {
     markers(data)
@@ -62,11 +73,13 @@ export default {
         div.innerHTML = template(mark);
         div.addEventListener('click', () => {
           publish('video:seekTo', [mark.start]);
-          publish('markers:updateActive', [mark.start]);
+          publish('marker:scrollTo', [mark.start]);
         });
         fragment.appendChild(div);
       });
       container.appendChild(fragment);
+      subscribe('video:tick', updateActiveMarker);
+      subscribe('video:seekTo', updateActiveMarker);
     });
   },
 };

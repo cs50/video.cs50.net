@@ -4,42 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/index.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet">
     <title>CS50 | Player</title>
   </head>
   <body>
-    <episode-list></episode-list>
-    <video-playback></video-playback>
-    <video-download></video-download>
-    <marker-search></marker-search>
-    <marker-timeline></marker-timeline>
-    <marker-list></marker-list>
-
-    <!-- <aside>
-      <chapter-search></chapter-search>
-      <div row>
-        <chapter-playback></chapter-playback>
-        <video-download></video-download>
-      </div>
-      <chapter-list></chapter-list>
-    </aside>
+    <nav>
+      <h1>
+        <svg viewBox="0 0 1 1"><use xlink:href="#icon-fifty"></use></svg>
+        <span>Player</span>
+      </h1>
+      <episode-list></episode-list>
+    </nav>
     <main>
-      <section>
-        <video-controls></video-controls>
-        <chapter-timeline></chapter-timeline>
-      </section>
-      <youtube-video class="active">
-        <div id="video-main"></div>
-        <button>
-          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
-        </button>
-      </youtube-video>
-      <youtube-video>
-        <div id="video-support"></div>
-        <button>
-          <svg viewBox="0 0 1 1"><use xlink:href="#icon-switch-video"></use></svg>
-        </button>
-      </youtube-video>
-    </main> -->
+      <video-main></video-main>
+    </main>
+    <dialog>
+      <marker-search></marker-search>
+      <marker-timeline></marker-timeline>
+      <marker-list></marker-list>
+    </dialog>
+    <aside>
+      <video-playback></video-playback>
+      <video-download></video-download>
+    </aside>
 
     <!-- Imported Resources -->
     <script src="/index.js"></script>
@@ -52,9 +39,13 @@
         <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
       </svg>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg id="icon-next" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
-        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+      </svg>
+      <svg id="icon-prev" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
       </svg>
       <svg id="icon-forward" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <polygon points="13.2,12 2,19 2,5"/>
@@ -76,7 +67,36 @@
         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
       </svg>
+      <svg id="icon-speed" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M11 17c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1zm0-14v4h2V5.08c3.39.49 6 3.39 6 6.92 0 3.87-3.13 7-7 7s-7-3.13-7-7c0-1.68.59-3.22 1.58-4.42L12 13l1.41-1.41-6.8-6.8v.02C4.42 6.45 3 9.05 3 12c0 4.97 4.02 9 9 9 4.97 0 9-4.03 9-9s-4.03-9-9-9h-1zm7 9c0-.55-.45-1-1-1s-1 .45-1 1 .45 1 1 1 1-.45 1-1zM6 12c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1z"/>
+      </svg>
+      <svg id="icon-fifty" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <defs>
+            <rect id="SVGID_1_" x="-3" y="-3.5" width="24" height="24"/>
+          </defs>
+          <clipPath id="SVGID_2_">
+            <use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+          </clipPath>
+          <path style="clip-path:url(#SVGID_2_);fill:#121212;" d="M6,4.9H1.6c0,5.8,3.1,10.2,7.4,12.9c4.3-2.7,7.4-7.1,7.4-12.9h-4.5H6z
+             M1.6,4.9h14.7V0.3H1.6V4.9z"/>
+        </g>
+        <g>
+          <path style="fill:#FFFFFF;" d="M4.1,14.1c-0.8,0-1.6-0.1-2.2-0.4c-0.6-0.3-1.2-0.7-1.7-1.1l1.4-1.6c0.4,0.4,0.8,0.6,1.2,0.8
+            c0.4,0.2,0.8,0.3,1.3,0.3c0.5,0,1-0.1,1.3-0.4c0.3-0.2,0.5-0.6,0.5-1.1v0c0-0.4-0.2-0.8-0.5-1C5,9.3,4.5,9.2,4,9.2
+            c-0.3,0-0.6,0-0.9,0.1C2.8,9.4,2.5,9.5,2.3,9.6L0.9,8.7l0.3-5.1h6.4v2H3.2L3.1,7.4c0.2,0,0.4-0.1,0.6-0.1c0.2,0,0.5-0.1,0.7-0.1
+            c0.5,0,1,0.1,1.4,0.2C6.3,7.5,6.7,7.7,7,8c0.3,0.3,0.6,0.6,0.8,1C8,9.4,8.1,9.9,8.1,10.5v0c0,0.6-0.1,1-0.3,1.5
+            c-0.2,0.4-0.5,0.8-0.8,1.1c-0.3,0.3-0.8,0.5-1.3,0.7C5.3,14,4.7,14.1,4.1,14.1z"/>
+          <path style="fill:#FFFFFF;" d="M13.2,14.1c-0.7,0-1.3-0.1-1.9-0.4c-0.6-0.3-1.1-0.6-1.5-1.1c-0.4-0.5-0.7-1-0.9-1.7
+            c-0.2-0.7-0.3-1.4-0.3-2.1v0C8.7,8,8.8,7.3,9,6.7C9.2,6,9.5,5.4,9.9,5c0.4-0.5,0.9-0.9,1.5-1.1c0.6-0.3,1.2-0.4,1.9-0.4
+            c0.7,0,1.3,0.1,1.9,0.4c0.6,0.3,1.1,0.6,1.5,1.1c0.4,0.5,0.7,1,0.9,1.7c0.2,0.7,0.3,1.4,0.3,2.1v0c0,0.8-0.1,1.5-0.3,2.1
+            c-0.2,0.7-0.5,1.2-0.9,1.7c-0.4,0.5-0.9,0.9-1.5,1.1C14.6,14,13.9,14.1,13.2,14.1z M13.3,12.1c0.3,0,0.7-0.1,0.9-0.2
+            s0.5-0.4,0.7-0.7c0.2-0.3,0.3-0.6,0.5-1c0.1-0.4,0.2-0.8,0.2-1.3v0c0-0.5-0.1-0.9-0.2-1.3c-0.1-0.4-0.3-0.7-0.5-1
+            c-0.2-0.3-0.4-0.5-0.7-0.7c-0.3-0.2-0.6-0.3-0.9-0.3c-0.3,0-0.7,0.1-0.9,0.2c-0.3,0.2-0.5,0.4-0.7,0.7c-0.2,0.3-0.3,0.6-0.5,1
+            C11,7.8,11,8.3,11,8.7v0c0,0.5,0.1,0.9,0.2,1.3c0.1,0.4,0.3,0.8,0.5,1c0.2,0.3,0.4,0.5,0.7,0.7C12.6,12,12.9,12.1,13.3,12.1z"/>
+        </g>
+      </svg>
     </sprite-sheet>
-
   </body>
 </html>

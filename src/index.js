@@ -1,82 +1,68 @@
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-// Import components required for app
-// import Chapter from './modules/chapter';
-// import Timeline from './modules/timeline';
-// import Search from './modules/search';
-// import Video from './modules/video';
-// import Playback from './modules/playback';
-// import Control from './modules/control';
-// import Download from './modules/download';
-
 import Episodes from '../data/episodes/index.json';
 import EpisodeList from './modules/episode-list';
 import VideoPlayback from './modules/video-playback';
+import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerList from './modules/marker-list';
 
-/*
-{
-  id: 'zFenJJtAEzE',
-  chapters: '/cdn/week0w/chapters/file.vtt',
-  thumbs: '/cdn/week0w/thumbnails/file.vtt',
-  thumbs: '/cdn/week0w/subtitles/file.vtt',
-  transcript: '/cdn/week0w/transcript/file.txt',
-  download: '/cdn/week0w/mp4/file.mp4'
-}
-*/
+const getQueryParams = qs => {
+  qs = qs.split('+').join(' ');
+  const params = {};
+  let tokens;
+  const re = /[?&]?([^=]+)=([^&]*)/g;
+  while (tokens = re.exec(qs)) {
+    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+  }
+  return params;
+};
+
+const secondsToYoutubeTime = sec =>
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+
+const youTubeTimeToSeconds = time => {
+  const mins = parseFloat(time.match(/\d+m/)[0]);
+  const secs = parseFloat(time.match(/\d+s/)[0]);
+  return (mins * 60) + secs;
+};
 
 export default () => {
-  // Render episode-list
-  // Render video-playback
+  // Extract the url on page load
+  const targetEpisode = window.location.pathname.split('/')[2] || 0;
+  // Modify the / url
+  if (targetEpisode === 0) {
+    window.history.replaceState({}, '', '/2015/0');
+  }
+
   EpisodeList.render('episode-list', Episodes);
   VideoPlayback.render('video-playback', [0.75, 1, 1.5, 2, 3]);
-  VideoDownload.render('video-download', Episodes[0].download);
   MarkerSearch.render('marker-search');
-  MarkerTimeline.render('marker-timeline', Episodes[0]);
-  MarkerList.render('marker-list', Episodes[0]);
+  VideoMain.render('video-main', '');
 
   subscribe('player:loadVideo', id => {
-    console.log('Loading Video', id);
-    // Get episode object from episodes
-    // Render chapter-list
-    // Render chapter-timeline
-    // Render video-download
-    // Update episode-list
-    // Update video-player
+    const startTime = getQueryParams(document.location.search).t ?
+    youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
+    VideoDownload.render('video-download', Episodes[id].download);
+    MarkerTimeline.render('marker-timeline', Episodes[id]);
+    MarkerList.render('marker-list', Episodes[id]);
+    publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
   });
 
-  subscribe('video:setPlaybackRate', rate => {
-    console.log('Setting Video Playback Rate', rate);
+  subscribe('video:seekTo', time => {
+    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
   });
 
-  // // Initialize chapter-list with the chapters JSON file
-  // Chapter.init('chapter-list', '/chapters/output.json');
-  // // Initialize chapter-timeline with the chapters JSON file
-  // Control.init('video-controls', [{}]);
-  // Download.init('video-download', [{
-  //   name: 'S15E01',
-  //   href: 'http://cdn.cs50.net/2015/fall/lectures/0/w/week0w-720p.mp4',
-  // }]);
-  // Timeline.init('chapter-timeline', '/chapters/output.json');
-  // // Initialize chapter-search with target chapter-list
-  // Search.init('chapter-search', [{ target: 'chapter-list' }]);
-  // // Initialize video-player with youtube video ID
-  // Video.init('video-main', { vid: 'zFenJJtAEzE', controls: 0 });
-  // Video.init('video-support', { vid: 'BRpel-vjckA', controls: 0, mute: true });
-  // // Initialize playback speed widget with no options
-  // Playback.init('chapter-playback', [{}]);
+  subscribe('video:tick', time => {
+    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
+  });
 
-  // const $aside = document.querySelector('aside');
-  // let hider;
-  // document.addEventListener('mousemove', () => {
-  //   if (hider !== null) clearTimeout(hider);
-  //   $aside.classList.remove('hidden');
-  //   hider = setTimeout(() => {
-  //     $aside.classList.add('hidden');
-  //   }, 3000);
-  // });
+  window.onpopstate = () => {
+    publish('player:loadVideo', [window.location.pathname.split('/')[2]]);
+  };
+
+  publish('player:loadVideo', [targetEpisode]);
 };

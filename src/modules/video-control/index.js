@@ -1,4 +1,4 @@
-import { publish } from 'minpubsub';
+import { subscribe, publish } from 'minpubsub';
 
 export default {
   render(selector, data) {
@@ -6,7 +6,7 @@ export default {
     const fragment = document.createDocumentFragment();
     const title = document.createElement('h1');
     container.innerHTML = '';
-    title.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-speed"></use></svg>';
+    title.innerHTML = 'Speed';
     fragment.appendChild(title);
     data.forEach(rate => {
       const $button = document.createElement('button');

@@ -5,7 +5,7 @@ export default {
     // Clear container element
     const container = document.querySelector(selector);
     const fragment = document.createDocumentFragment();
-    container.innerHTML = '';
+    container.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-search"></use></svg>';
     const $input = document.createElement('input');
     $input.setAttribute('placeholder', 'Search Video..');
     $input.addEventListener('keyup', (e) => {
@@ -22,7 +22,7 @@ export default {
         return x;
       });
       // If the search term was more than one character
-      if (e.target.value.length > 0) {
+      if (e.target.value.length > 1) {
         [...$markers].map(x => {
           x.classList.add('searched');
           x.classList.remove('matched');
