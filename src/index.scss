@@ -85,6 +85,13 @@ row- {
     left: 0;
     width: 100%;
     height: calc(100% - 5rem);
+
+    row- {
+      justify-content: space-between;
+      width: 100%;
+      position:absolute;
+      bottom: 0;
+    }
   }
 
   dialog {
@@ -97,7 +104,7 @@ row- {
     display: flex;
     flex-direction: column;
     background: none;
-    height: calc(100vh - 10rem);
+    height: calc(100vh - 11rem);
 
     &:not(:hover) {
       opacity: 0;
