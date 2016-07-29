@@ -91,6 +91,7 @@ row- {
       width: 100%;
       position:absolute;
       bottom: 0;
+      height: 3rem;
     }
   }
 
@@ -104,7 +105,7 @@ row- {
     display: flex;
     flex-direction: column;
     background: none;
-    height: calc(100vh - 11rem);
+    height: calc(100vh - 13rem);
 
     &:not(:hover) {
       opacity: 0;
@@ -175,13 +176,17 @@ row- {
     }
 
     row- {
+      justify-content: space-between;
       width: 100%;
+      position:absolute;
       top: auto;
       bottom: 0;
+      height: 3rem;
+      background: #121212;
     }
 
-    .video-fullscreen,
-    video-download {
+    video-download,
+    video-playback {
       display: none;
     }
   }

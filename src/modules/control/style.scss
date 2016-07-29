@@ -1,6 +1,10 @@
 video-controls {
   display: flex;
 
+  *+* {
+    border-left: 1px solid #000;
+  }
+
   button {
     padding: .75rem;
     background: #212121;
@@ -11,9 +15,6 @@ video-controls {
     }
     &:hover svg {
       fill: rgba(255,255,255,1);
-    }
-    & + button {
-      border-left: 1px solid #000;
     }
   }
   .play-pause.playing {
