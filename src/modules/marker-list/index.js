@@ -1,5 +1,8 @@
 import { subscribe, publish } from 'minpubsub';
 
+const secondsToYoutubeTime = sec =>
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+
 const timeToSeconds = time => {
   const t = time.split(':');
   const h = parseFloat(t[0]) * 60 * 60;
@@ -78,7 +81,11 @@ export default {
     .then(marks => {
       const container = document.querySelector('marker-list');
       const frag = document.createDocumentFragment();
-      const captionTemplate = mark => `<span>${secondsToTime(mark.start)} | ${mark.title}</span>`;
+      const captionTemplate = mark => `
+        <a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>
+          ${secondsToTime(mark.start)} | ${mark.title}
+        </a>
+      `;
       const chapterTemplate = mark => `
         <h1>${mark.title}</h1>
         <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
@@ -90,7 +97,8 @@ export default {
         $marker.setAttribute('start', mark.start);
         $marker.setAttribute('end', mark.end);
         $marker.innerHTML = mark.type === 'caption' ? captionTemplate(mark) : chapterTemplate(mark);
-        $marker.addEventListener('click', () => {
+        $marker.addEventListener('click', (e) => {
+          e.preventDefault();
           publish('video:seekTo', [mark.start]);
         });
         frag.appendChild($marker);

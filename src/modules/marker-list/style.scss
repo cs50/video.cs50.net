@@ -30,21 +30,22 @@ marker-list {
 
   [type='caption'] {
     display: block;
-    color: rgba(255,255,255,.5);
     margin-bottom: .62rem;
-    span {
+    a {
       font-size: .8rem;
       white-space: nowrap;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-decoration: none;
+      color: rgba(255,255,255,.5);
       &:hover {
         color: rgba(255,255,255,.7);
         cursor: default;
         text-decoration: underline;
       }
     }
-    &.active span {
+    &.active a {
       color: #a41034;
     }
     b {
