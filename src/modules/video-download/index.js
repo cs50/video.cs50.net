@@ -4,7 +4,7 @@ export default {
     container.innerHTML = '';
     const frag = document.createDocumentFragment();
     const title = document.createElement('h1');
-    title.innerHTML = '<span>Download</span><svg viewBox="0 0 1 1"><use xlink:href="#icon-download"></use></svg>';
+    title.innerHTML = '<button><svg viewBox="0 0 1 1"><use xlink:href="#icon-download"></use></svg></button>';
     frag.appendChild(title);
     Object.keys(data).forEach(key => {
       const elem = document.createElement('a');
