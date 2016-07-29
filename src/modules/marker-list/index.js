@@ -81,7 +81,7 @@ export default {
       const captionTemplate = mark => `<span>${secondsToTime(mark.start)} | ${mark.title}</span>`;
       const chapterTemplate = mark => `
         <h1>${mark.title}</h1>
-        <span>${Math.floor((mark.end - mark.start) / 60)} mins | Chapter ${parseFloat(mark.id)}</span>
+        <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
       `;
       container.innerHTML = '';
       marks.forEach(mark => {
