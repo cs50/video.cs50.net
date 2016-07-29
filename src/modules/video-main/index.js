@@ -17,7 +17,7 @@ export default {
       playerVars: {
         rel: 0,
         showinfo: 0,
-        controls: 1,
+        controls: 0,
       },
     });
 

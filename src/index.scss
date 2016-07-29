@@ -34,7 +34,7 @@ row- {
 @media (orientation: landscape) {
 
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   body {
@@ -46,7 +46,7 @@ row- {
     flex-direction: column;
     padding: 1rem;
     display: flex;
-    // overflow: hidden;
+    overflow: hidden;
   }
 
   nav {
@@ -59,7 +59,7 @@ row- {
     width: 100%;
     height: 5rem;
     background: #212121;
-    padding: 0 2rem;
+    padding: 0 1rem;
 
     h1 {
       display: flex;
@@ -88,19 +88,19 @@ row- {
   }
 
   dialog {
-    position: relative;
+    position: absolute;
     z-index: 2;
-    width: 100%;
-    max-width: 36rem;
-    margin: 6.5rem auto;
+    width: 25rem;
+    left: auto;
+    top: 6rem;
+    right: 1rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     background: none;
+    height: calc(100vh - 9rem);
 
     &:not(:hover) {
       opacity: 0;
-      height: calc(100vh - 20rem);
     }
 
     // div {
@@ -283,4 +283,4 @@ youtube-video:not(.active) {
   }
 }
 
-// @include scrollbars(1rem, #212121);
+@include scrollbars(1rem, #212121);
