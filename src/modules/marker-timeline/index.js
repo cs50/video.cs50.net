@@ -36,6 +36,17 @@ const captions = url => fetch(url)
         .replace('-', '') || '[NO SPEECH]',
 })));
 
+const thumbnails = url => fetch(url)
+.then(data => data.text())
+.then(text => text.replace('WEBVTT\n\n', '').split('\n\n'))
+.then(arry => arry.map(thumb => thumb.split('\n')))
+.then(arry => arry.map(thumb => ({
+  type: 'thumb',
+  start: timeToSeconds(thumb[0].split(' --> ')[0]),
+  end: timeToSeconds(thumb[0].split(' --> ')[1]),
+  url: thumb[1],
+})));
+
 const markers = ep => Promise.all([chapters(ep.chapters), captions(ep.captions)])
 .then(values => values[0].concat(values[1]))
 .then(items => items.sort((a, b) => {
@@ -73,13 +84,29 @@ export default {
         div.innerHTML = template(mark);
         div.addEventListener('click', () => {
           publish('video:seekTo', [mark.start]);
-          // publish('marker:scrollTo', [mark.start]);
         });
         fragment.appendChild(div);
       });
       container.appendChild(fragment);
       subscribe('video:tick', updateActiveMarker);
       subscribe('video:seekTo', updateActiveMarker);
+    });
+
+    thumbnails(data.thumbnails)
+    .then(thumbs => {
+      const container = document.querySelector('marker-timeline');
+      const preview = document.querySelector('thumb-preview');
+      container.addEventListener('mouseover', (e) => {
+        const target = document.querySelectorAll(':hover');
+        const time = target[target.length - 1].getAttribute('start');
+        const thumb = thumbs.find(x => x.start > time);
+        preview.style.opacity = 1;
+        preview.style.left = `${e.pageX - 100}px`;
+        preview.style.background = `url(${thumb.url})`;
+      });
+      container.addEventListener('mouseout', () => {
+        preview.style.opacity = '';
+      });
     });
   },
 };

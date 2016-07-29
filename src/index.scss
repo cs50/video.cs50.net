@@ -27,6 +27,17 @@ row- {
   display: flex;
 }
 
+thumb-preview {
+  position: absolute;
+  bottom: 5rem;
+  left: 100px;
+  background: red;
+  width: 200px;
+  height: 90px;
+  opacity: 0;
+  background-size: cover;
+}
+
 /* ----------------------------------
 -- Core Containers
 */
@@ -101,11 +112,11 @@ row- {
     width: 30rem;
     left: auto;
     top: 6rem;
-    right: 0rem;
+    right: 1rem;
     display: flex;
     flex-direction: column;
     background: none;
-    height: calc(100vh - 13rem);
+    height: calc(100vh - 14rem);
 
     &:not(:hover) {
       opacity: 0;
@@ -114,13 +125,6 @@ row- {
     video-controls {
       display: none;
     }
-
-    // div {
-    //   position: fixed;
-    //   width: 100%;
-    //   max-width: 36rem;
-    // }
-
   }
 
   aside {
@@ -182,7 +186,7 @@ row- {
       top: auto;
       bottom: 0;
       height: 3rem;
-      background: #121212;
+      background: #212121;
     }
 
     video-download,
