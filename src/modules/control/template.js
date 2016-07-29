@@ -6,5 +6,5 @@ export default () =>
   <svg viewBox="0 0 1 1"><use xlink:href="#icon-pause"></use></svg>
 </button>
 <button class="seek-next">
-  <svg viewBox="0 0 1 1"><use xlink:href="#icon-forward"></use></svg>
+  <svg viewBox="0 0 1 1"><use xlink:href="#icon-next"></use></svg>
 </button>`;
