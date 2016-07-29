@@ -26,6 +26,18 @@ export default {
       publish('video:tick', [time]);
     });
 
+    subscribe('video:seekBy', sec =>
+      player.getCurrentTime()
+      .then(time => player.seekTo(time + sec)));
+
+    subscribe('video:seekNextChapter', () =>
+    player.getCurrentTime()
+    .then(time => {
+      const nextChapter = [...document.querySelectorAll('mark-[type="chapter"]')]
+      .find(x => x.getAttribute('start') > time);
+      player.seekTo(nextChapter.getAttribute('start'));
+    }));
+
     subscribe('video:seekTo', player.seekTo);
     subscribe('video:setPlaybackRate', player.setPlaybackRate);
     subscribe('video:loadVideoById', player.loadVideoById);

@@ -9,6 +9,7 @@ import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerList from './modules/marker-list';
+import VideoControls from './modules/control';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -42,6 +43,7 @@ export default () => {
   VideoPlayback.render('video-playback', [0.75, 1, 1.5, 2, 3]);
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
+  VideoControls.init('video-controls', [{}]);
 
   subscribe('player:loadVideo', id => {
     const startTime = getQueryParams(document.location.search).t ?

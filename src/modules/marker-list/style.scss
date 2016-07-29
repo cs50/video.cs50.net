@@ -2,8 +2,14 @@ marker-list {
   padding: 1.5rem;
   //max-height: 50vh;
   //overflow-y: auto;
-  margin: 0 1rem;
-  background: rgba(0,0,0,.8);
+  margin: 0 1vw;
+  background: rgba(0,0,0,.9);
+
+  b {
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+  }
 
   [type='chapter'] {
     display: block;
@@ -21,6 +27,7 @@ marker-list {
       color: rgba(255,255,255,.75);
     }
   }
+
   [type='caption'] {
     display: block;
     color: rgba(255,255,255,.5);
@@ -40,12 +47,9 @@ marker-list {
     &.active span {
       color: #a41034;
     }
-  }
-  b {
-    display: inline;
-    font-size: inherit;
-    font-weight: inherit;
-    background: yellow;
-    color: #000;
+    b {
+      background: yellow;
+      color: #121212;
+    }
   }
 }

@@ -46,6 +46,7 @@ row- {
     flex-direction: column;
     padding: 1rem;
     display: flex;
+    // overflow: hidden;
   }
 
   nav {
@@ -94,12 +95,19 @@ row- {
     margin: 6.5rem auto;
     display: flex;
     flex-direction: column;
-    transition: opacity .2s;
     overflow: hidden;
-    background: transparent;
+    background: none;
+
     &:not(:hover) {
       opacity: 0;
+      height: calc(100vh - 20rem);
     }
+
+    // div {
+    //   position: fixed;
+    //   width: 100%;
+    //   max-width: 36rem;
+    // }
 
   }
 
@@ -112,7 +120,6 @@ row- {
       border-top: 1px solid #424242;
     }
   }
-
 }
 
 @media (orientation: portrait) {
@@ -127,7 +134,7 @@ row- {
     width: 100%;
     height: 5rem;
     background: #212121;
-    padding: 0 1rem;
+    padding: 0 2rem;
 
     h1 {
       display: flex;
@@ -178,6 +185,13 @@ row- {
     font-size: 14px;
   }
 }
+
+@media (max-device-width: 960px) {
+  aside {
+    display: none;
+  }
+}
+
 
 
 
@@ -269,4 +283,4 @@ youtube-video:not(.active) {
   }
 }
 
-@include scrollbars(1rem, #212121);
+// @include scrollbars(1rem, #212121);

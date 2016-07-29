@@ -46,13 +46,13 @@ const markers = ep => Promise.all([chapters(ep.chapters), captions(ep.captions)]
 
 const updateActiveMarker = time => {
   // Find active caption mark in timeline
-  const target = [...document.querySelectorAll('marker-timeline mark-[type="caption"]')]
+  const $targetCaption = [...document.querySelectorAll('marker-timeline mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
   // Remove active class from any active caption mark
   [...document.querySelectorAll('marker-timeline mark-[type="caption"].active')]
   .forEach(x => x.classList.remove('active'));
   // Add active class to found marks
-  target.classList.add('active');
+  $targetCaption.classList.add('active');
 };
 
 export default {
@@ -73,7 +73,7 @@ export default {
         div.innerHTML = template(mark);
         div.addEventListener('click', () => {
           publish('video:seekTo', [mark.start]);
-          publish('marker:scrollTo', [mark.start]);
+          // publish('marker:scrollTo', [mark.start]);
         });
         fragment.appendChild(div);
       });
