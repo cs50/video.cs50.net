@@ -4,7 +4,7 @@ marker-search {
   input {
     width: 100%;
     padding: 1.5rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 1px solid rgba(0,0,0,0.1);
     background: #212121;
     color: #f2f2f2;
@@ -12,12 +12,12 @@ marker-search {
   }
   > svg {
     position: absolute;
-    left: 1rem;
+    left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     fill: rgba(255,255,255,0.5);
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   input:hover ~ svg,

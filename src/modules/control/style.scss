@@ -1,26 +1,12 @@
 video-controls {
   display: flex;
 
-  > svg {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    fill: rgba(255,255,255,0.5);
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  input:hover ~ svg,
-  input:focus ~ svg {
-    fill: rgba(255,255,255,0.9);
-  }
-
   button {
-    padding: 1rem;
+    padding: .75rem;
+    background: #212121;
     svg {
-      width: 2rem;
-      height: 2rem;
+      width: 1.5rem;
+      height: 1.5rem;
       fill: rgba(255,255,255,0.8);
     }
     &:hover svg {
@@ -39,5 +25,16 @@ video-controls {
     svg:last-child {
       display: none;
     }
+  }
+}
+
+video-controls.mobile {
+
+  button {
+    padding: 1rem;
+  }
+
+  .seek-play-pause {
+    display: none;
   }
 }

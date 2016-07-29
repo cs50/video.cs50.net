@@ -10,10 +10,10 @@ export default {
     fragment.appendChild(title);
     data.forEach(rate => {
       const $button = document.createElement('button');
-      $button.innerHTML = rate;
-      $button.setAttribute('rate', rate);
+      $button.innerHTML = rate.label;
+      $button.setAttribute('rate', rate.rate);
       $button.addEventListener('click', (e) => {
-        publish('video:setPlaybackRate', [rate]);
+        publish('video:setPlaybackRate', [rate.rate]);
         // Remove active class from other rates
         [...e.currentTarget.parentNode.children]
         .forEach(x => x.classList.remove('active'));

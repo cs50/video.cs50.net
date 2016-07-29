@@ -90,17 +90,21 @@ row- {
   dialog {
     position: absolute;
     z-index: 2;
-    width: 25rem;
+    width: 30rem;
     left: auto;
     top: 6rem;
-    right: 1rem;
+    right: 0rem;
     display: flex;
     flex-direction: column;
     background: none;
-    height: calc(100vh - 9rem);
+    height: calc(100vh - 10rem);
 
     &:not(:hover) {
       opacity: 0;
+    }
+
+    video-controls {
+      display: none;
     }
 
     // div {
@@ -113,8 +117,8 @@ row- {
 
   aside {
     position: fixed;
-    top: 6.5rem;
-    left: 1.5rem;
+    top: 6rem;
+    left: 1rem;
 
     > *+* h1 {
       border-top: 1px solid #424242;
@@ -134,7 +138,7 @@ row- {
     width: 100%;
     height: 5rem;
     background: #212121;
-    padding: 0 2rem;
+    padding: 0 1rem;
 
     h1 {
       display: flex;
@@ -142,8 +146,8 @@ row- {
       color: #fff;
 
       svg {
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
       }
       span {
         display: none;
@@ -153,12 +157,24 @@ row- {
 
   main {
     position: relative;
-    padding-bottom: 50%;
+    padding-bottom: 55%;
 
     > * {
       position: absolute;
       top: 0;
       left: 0;
+    }
+
+    row- {
+      width: 100%;
+      top: auto;
+      bottom: 0;
+    }
+
+    .seek-next,
+    .seek-back,
+    .video-fullscreen {
+      display: none;
     }
   }
 
@@ -166,6 +182,14 @@ row- {
     width: 100%;
     background: #121212;
     padding: 1rem;
+
+    video-download {
+      display: none;
+    }
+
+    marker-list {
+      padding: 1.5rem 0;
+    }
   }
 
   aside {

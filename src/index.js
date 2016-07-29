@@ -40,10 +40,17 @@ export default () => {
   }
 
   EpisodeList.render('episode-list', Episodes);
-  VideoPlayback.render('video-playback', [0.75, 1, 1.5, 2, 3]);
+  VideoPlayback.render('video-playback', [
+    { rate: 0.75, label: '3/4' },
+    { rate: 1, label: '1' },
+    { rate: 1.5, label: '3/2' },
+    { rate: 2, label: '2' },
+    { rate: 3, label: '3' },
+  ]);
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
   VideoControls.init('video-controls', [{}]);
+  VideoControls.init('video-controls.mobile', [{}]);
 
   subscribe('player:loadVideo', id => {
     const startTime = getQueryParams(document.location.search).t ?

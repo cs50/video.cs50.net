@@ -1,31 +1,24 @@
 video-playback {
   display: flex;
-  align-items: center;
+  flex: 1 1 auto;
 
   h1 {
     padding: 1rem;
     background: #212121;
+    display: none;
   }
 
   svg {
-    width: 2rem;
-    height: 2rem;
+    width: 1.1rem;
+    height: 1.1rem;
     fill: rgba(255,255,255, .5);
-  }
-
-  *+* {
-    margin-left: 1px;
-  }
-
-  &:not(:hover) button {
-    display: none;
   }
 
   button {
     color: rgba(255, 255, 255, .5);;
-    flex: none;
+    flex: 1 1 auto;
     background: #121212;
-    padding: 1rem;
+    padding: .5rem;
 
     &.active {
       background: #a41034;
