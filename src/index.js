@@ -73,5 +73,23 @@ export default () => {
     publish('player:loadVideo', [window.location.pathname.split('/')[2]]);
   };
 
+  document.querySelector('.video-captions').addEventListener('click', (e) => {
+    if (e.currentTarget.dataset.state === 'on') {
+      publish('video:hideCaptions', []);
+      e.currentTarget.dataset.state = 'off';
+    } else {
+      publish('video:showCaptions', []);
+      e.currentTarget.dataset.state = 'on';
+    }
+  });
+
+  document.querySelector('.video-fullscreen').addEventListener('click', () => {
+    const iframe = document.querySelector('iframe');
+    var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    if (requestFullScreen) {
+      requestFullScreen.bind(iframe)();
+    }
+  });
+
   publish('player:loadVideo', [targetEpisode]);
 };

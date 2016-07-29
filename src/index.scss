@@ -148,9 +148,11 @@ row- {
       svg {
         width: 2.5rem;
         height: 2.5rem;
+        margin-right: 1rem;
       }
       span {
-        display: none;
+        font-size: 1.5rem;
+        font-weight: 300;
       }
     }
   }
@@ -171,8 +173,6 @@ row- {
       bottom: 0;
     }
 
-    .seek-next,
-    .seek-back,
     .video-fullscreen {
       display: none;
     }
@@ -187,8 +187,12 @@ row- {
       display: none;
     }
 
+    video-controls {
+      display: none;
+    }
+
     marker-list {
-      padding: 1.5rem 0;
+      padding: 1rem;
     }
   }
 

@@ -18,6 +18,7 @@ export default {
         rel: 0,
         showinfo: 0,
         controls: 0,
+        cc_load_policy: 1,
       },
     });
 
@@ -37,6 +38,14 @@ export default {
       .find(x => x.getAttribute('start') > time);
       player.seekTo(nextChapter.getAttribute('start'));
     }));
+
+    subscribe('video:hideCaptions', () => {
+      player.unloadModule('captions');
+    });
+
+    subscribe('video:showCaptions', () => {
+      player.loadModule('captions');
+    });
 
     subscribe('video:seekTo', player.seekTo);
     subscribe('video:setPlaybackRate', player.setPlaybackRate);
