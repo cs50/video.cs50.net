@@ -1,0 +1,16 @@
+video-playback {
+  position: relative;
+  display: flex;
+
+  button.active {
+    background: #a41034;
+  }
+
+  div {
+    display: flex;
+  }
+
+  div button {
+    padding: 1rem;
+  }
+}

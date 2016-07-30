@@ -1,0 +1,22 @@
+video-download {
+  position: relative;
+
+  > button:hover ~ div,
+  div:hover {
+    position: absolute;
+    bottom: 100%;
+    display: flex;
+    z-index: 5;
+    right: -50px;
+  }
+
+  a {
+    background: #212121;
+    padding: 1rem;
+    color: #fff;
+  }
+
+  div {
+    display: none;
+  }
+}

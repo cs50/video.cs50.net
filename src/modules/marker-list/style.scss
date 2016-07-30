@@ -1,0 +1,59 @@
+marker-list {
+  flex: 1 1 auto;
+  padding: 1.5rem;
+  background: rgba(0,0,0,.9);
+
+  @media (orientation: landscape) {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  b {
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  [type='chapter'] {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 1rem;
+    h1 {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+      color: rgba(255,255,255,.9);
+    }
+    span {
+      font-size: .7rem;
+      color: rgba(255,255,255,.75);
+    }
+  }
+
+  [type='caption'] {
+    display: block;
+    margin-bottom: .62rem;
+    a {
+      font-size: .8rem;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+      color: rgba(255,255,255,.5);
+      &:hover {
+        color: rgba(255,255,255,.7);
+        cursor: default;
+        text-decoration: underline;
+      }
+    }
+    &.active a {
+      color: #a41034;
+    }
+    b {
+      background: yellow;
+      color: #121212;
+    }
+  }
+}
