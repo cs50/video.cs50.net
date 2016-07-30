@@ -27,17 +27,6 @@ row- {
   display: flex;
 }
 
-thumb-preview {
-  position: absolute;
-  bottom: 5rem;
-  left: 100px;
-  background: red;
-  width: 200px;
-  height: 90px;
-  opacity: 0;
-  background-size: cover;
-}
-
 /* ----------------------------------
 -- Core Containers
 */
@@ -62,15 +51,15 @@ thumb-preview {
 
   nav {
     position: fixed;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     top: 0;
     left: 0;
-    width: 100%;
+    width: auto;
     height: 5rem;
-    background: #212121;
-    padding: 0 1rem;
+    padding: 2rem 1.5rem;
+    z-index: 10;
 
     h1 {
       display: flex;
@@ -92,10 +81,11 @@ thumb-preview {
   main {
     position: fixed;
     z-index: 0;
-    top: 5rem;
+    top: 0rem;
     left: 0;
     width: 100%;
-    height: calc(100% - 5rem);
+    height: 100%;
+    background: #121212;
 
     row- {
       justify-content: space-between;
@@ -106,39 +96,78 @@ thumb-preview {
     }
   }
 
+  dialog-trigger {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #212121;
+    padding: 1rem;
+    z-index: 20;
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      fill: #fff;
+      display: none;
+    }
+
+    &:not(.open) svg:first-child {
+      display: block;
+    }
+
+    &.open svg:last-child {
+      display: block;
+    }
+
+    &:not(.open) + dialog {
+      transform: translateX(100%);
+      box-shadow: 0 0 1rem rgba(0,0,0,0.5);
+    }
+  }
+
   dialog {
     position: absolute;
     z-index: 2;
-    width: 30rem;
+    width: 100%;
+    max-width: 30rem;
     left: auto;
-    top: 6rem;
-    right: 1rem;
+    top: 0;
+    right: 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background: none;
-    height: calc(100vh - 14rem);
-
-    &:not(:hover) {
-      opacity: 0;
-    }
+    transition: all .3s;
+    transform: translateX(0%);
 
     video-controls {
       display: none;
     }
   }
 
-  aside {
-    position: fixed;
-    top: 6rem;
-    left: 1rem;
-
-    > *+* h1 {
-      border-top: 1px solid #424242;
-    }
+  thumb-preview {
+    position: absolute;
+    bottom: 5rem;
+    left: 100px;
+    background: red;
+    width: 200px;
+    height: 90px;
+    opacity: 0;
+    background-size: cover;
+    z-index: 1;
   }
 }
 
 @media (orientation: portrait) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  thumb-preview,
+  dialog-trigger {
+    display: none;
+  }
 
   nav {
     position: relative;
@@ -190,7 +219,8 @@ thumb-preview {
     }
 
     video-download,
-    video-playback {
+    video-playback,
+    .video-fullscreen {
       display: none;
     }
   }
@@ -199,14 +229,6 @@ thumb-preview {
     width: 100%;
     background: #121212;
     padding: 1rem;
-
-    video-download {
-      display: none;
-    }
-
-    video-controls {
-      display: none;
-    }
 
     marker-list {
       padding: 1rem;
@@ -230,16 +252,6 @@ thumb-preview {
     font-size: 14px;
   }
 }
-
-@media (max-device-width: 960px) {
-  aside {
-    display: none;
-  }
-}
-
-
-
-
 
 /* ----------------------------------
 -- Core Elements
@@ -328,4 +340,4 @@ youtube-video:not(.active) {
   }
 }
 
-@include scrollbars(1rem, #212121);
+@include scrollbars(1rem, #121212);

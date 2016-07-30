@@ -47,6 +47,8 @@ export default {
       player.loadModule('captions');
     });
 
+    subscribe('video:play', player.playVideo);
+    subscribe('video:pause', player.pauseVideo);
     subscribe('video:seekTo', player.seekTo);
     subscribe('video:setPlaybackRate', player.setPlaybackRate);
     subscribe('video:loadVideoById', player.loadVideoById);

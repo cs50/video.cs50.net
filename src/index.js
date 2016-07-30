@@ -49,8 +49,6 @@ export default () => {
   ]);
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
-  VideoControls.init('video-controls', [{}]);
-  VideoControls.init('video-controls.mobile', [{}]);
 
   subscribe('player:loadVideo', id => {
     const startTime = getQueryParams(document.location.search).t ?
@@ -89,6 +87,27 @@ export default () => {
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
     }
+  });
+
+  document.querySelector('.seek-back').addEventListener('click', () => {
+    publish('video:seekBy', [-10]);
+  });
+
+  document.querySelector('.seek-next').addEventListener('click', () => {
+    publish('video:seekNextChapter');
+  });
+
+  document.querySelector('.video-play-pause').addEventListener('click', (e) => {
+    if (e.currentTarget.classList.contains('playing')) {
+      publish('video:pause');
+    } else {
+      publish('video:play');
+    }
+    e.currentTarget.classList.toggle('playing');
+  });
+
+  document.querySelector('dialog-trigger').addEventListener('click', (e) => {
+    e.currentTarget.classList.toggle('open');
   });
 
   publish('player:loadVideo', [targetEpisode]);

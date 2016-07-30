@@ -102,10 +102,12 @@ export default {
         const thumb = thumbs.find(x => x.start > time);
         preview.style.opacity = 1;
         preview.style.left = `${e.pageX - 100}px`;
+        preview.style.top = `${e.pageY - 100}px`;
         preview.style.background = `url(${thumb.url})`;
       });
       container.addEventListener('mouseout', () => {
         preview.style.opacity = '';
+        preview.style.left = '-200px';
       });
     });
   },

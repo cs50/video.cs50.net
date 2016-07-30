@@ -17,12 +17,12 @@ video-controls {
       fill: rgba(255,255,255,1);
     }
   }
-  .play-pause.playing {
+  .video-play-pause.playing {
     svg:first-child {
       display: none;
     }
   }
-  .play-pause:not(.playing) {
+  .video-play-pause:not(.playing) {
     svg:last-child {
       display: none;
     }
