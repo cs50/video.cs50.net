@@ -7,7 +7,7 @@ export default {
     const fragment = document.createDocumentFragment();
     container.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-search"></use></svg>';
     const $input = document.createElement('input');
-    $input.setAttribute('placeholder', 'Search Video..');
+    $input.setAttribute('placeholder', 'Search');
     $input.addEventListener('keyup', (e) => {
       // Get all markers in document
       const $markers = document.querySelectorAll('mark-');

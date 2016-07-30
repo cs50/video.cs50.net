@@ -1,24 +1,16 @@
 video-playback {
   position: relative;
-
-  > button:hover ~ div,
-  div:hover {
-    position: absolute;
-    bottom: 100%;
-    display: flex;
-    z-index: 5;
-    right: -100px;
-  }
+  display: flex;
 
   button.active {
     background: #a41034;
   }
 
-  div button {
-    padding: 1rem;
+  div {
+    display: flex;
   }
 
-  div {
-    display: none;
+  div button {
+    padding: 1rem;
   }
 }

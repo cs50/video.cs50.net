@@ -7,7 +7,6 @@ export default {
     const title = document.createElement('button');
     container.innerHTML = '';
     title.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-speed"></use></svg>';
-    fragment.appendChild(title);
     const div = document.createElement('div');
     data.forEach(rate => {
       const $button = document.createElement('button');
@@ -24,6 +23,7 @@ export default {
       div.appendChild($button);
     });
     fragment.appendChild(div);
+    fragment.appendChild(title);
     container.appendChild(fragment);
   },
 };

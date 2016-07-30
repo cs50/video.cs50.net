@@ -9,7 +9,6 @@ import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerList from './modules/marker-list';
-import VideoControls from './modules/control';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -45,7 +44,6 @@ export default () => {
     { rate: 1, label: '1' },
     { rate: 1.5, label: '3/2' },
     { rate: 2, label: '2' },
-    { rate: 3, label: '3' },
   ]);
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
