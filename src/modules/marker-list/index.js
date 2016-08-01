@@ -81,11 +81,7 @@ export default {
     .then(marks => {
       const container = document.querySelector('marker-list');
       const frag = document.createDocumentFragment();
-      const captionTemplate = mark => `
-        <a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>
-          ${secondsToTime(mark.start)} | ${mark.title}
-        </a>
-      `;
+      const captionTemplate = mark => `<a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>`;
       const chapterTemplate = mark => `
         <h1>${mark.title}</h1>
         <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
