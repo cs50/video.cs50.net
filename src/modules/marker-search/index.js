@@ -32,9 +32,7 @@ export default {
           if (x.classList.contains('matched')) return true;
           // Caption string plus the next one if exists
           let str = x.textContent;
-          if (i < a.length - 1) {
-            str += ` ${a[i + 1].textContent}`;
-          }
+          if (i < a.length - 1) str += ` ${a[i + 1].textContent}`;
           // Lowercase caption text to make search case insensitive
           str = str.toLowerCase();
           const io = str.indexOf(e.target.value);
@@ -44,30 +42,26 @@ export default {
             if (io > x.textContent.length) return false;
             // The match starts in this caption
             x.classList.add('matched');
+            const matchText = x.textContent.substr(io, e.target.value.length);
+            const matchElem = x.firstElementChild;
             // Hightlight from the start of match to end of match
-            x.firstElementChild.innerHTML = x.firstElementChild.innerHTML
-            .replace(x.textContent.substr(io, e.target.value.length),
-            `<b>${x.textContent.substr(io, e.target.value.length)}</b>`);
+            matchElem.innerHTML = matchElem.innerHTML.replace(matchText, `<b>${matchText}</b>`);
             // The match ends in the next capton
             if ((io + e.target.value.length) > x.textContent.length) {
+              const nextCaption = a[i + 1];
               const overlap = (io + e.target.value.length) - x.textContent.length - 1;
+              const overlapText = nextCaption.textContent.substr(0, overlap);
+              const nextElem = nextCaption.firstElementChild;
               // Mark next caption as matched
-              a[i + 1].classList.add('matched');
+              nextCaption.classList.add('matched');
               // Highlight from start of match till end of this caption
-              a[i + 1].firstElementChild.innerHTML = a[i + 1].firstElementChild.innerHTML
-              .replace(a[i + 1].textContent.substr(0, overlap),
-              `<b>${a[i + 1].textContent.substr(0, overlap)}</b>`);
+              nextElem.innerHTML = nextElem.innerHTML.replace(overlapText, `<b>${overlapText}</b>`);
             }
             return true;
           }
           // There was no match in this or the next caption
           return false;
         });
-        // .forEach(x => {
-        //   x.classList.add('matched');
-        //   x.firstElementChild.innerHTML = x.firstElementChild.innerHTML
-        //   .replace(pattern, `<b>${x.firstElementChild.textContent.match(pattern)}</b>`);
-        // });
       }
     });
     fragment.appendChild($input);
