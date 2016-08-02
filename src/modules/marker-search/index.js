@@ -11,7 +11,7 @@ export default {
     $input.addEventListener('keyup', (e) => {
       // Get all markers in document
       const $markers = document.querySelectorAll('mark-');
-      const pattern = new RegExp(e.target.value, 'i');
+      const pattern = e.target.value;
       // Remove any highlighted text
       [...document.querySelectorAll('.matched b')]
       .forEach(x => (x.outerHTML = x.innerHTML));
@@ -35,21 +35,21 @@ export default {
           if (i < a.length - 1) str += ` ${a[i + 1].textContent}`;
           // Lowercase caption text to make search case insensitive
           str = str.toLowerCase();
-          const io = str.indexOf(e.target.value);
+          const io = str.indexOf(pattern);
           // There was a match in this or the next caption
           if (io !== -1) {
             // The match starts in the next caption
             if (io > x.textContent.length) return false;
             // The match starts in this caption
             x.classList.add('matched');
-            const matchText = x.textContent.substr(io, e.target.value.length);
+            const matchText = x.textContent.substr(io, pattern.length);
             const matchElem = x.firstElementChild;
             // Hightlight from the start of match to end of match
             matchElem.innerHTML = matchElem.innerHTML.replace(matchText, `<b>${matchText}</b>`);
             // The match ends in the next capton
-            if ((io + e.target.value.length) > x.textContent.length) {
+            if ((io + pattern.length) > x.textContent.length) {
               const nextCaption = a[i + 1];
-              const overlap = (io + e.target.value.length) - x.textContent.length - 1;
+              const overlap = (io + pattern.length) - x.textContent.length - 1;
               const overlapText = nextCaption.textContent.substr(0, overlap);
               const nextElem = nextCaption.firstElementChild;
               // Mark next caption as matched
