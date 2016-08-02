@@ -2,6 +2,7 @@ marker-list {
   flex: 1 1 auto;
   padding: 1.5rem;
   background: rgba(0,0,0,.9);
+  overflow-x: hidden;
 
   @media (orientation: landscape) {
     overflow-y: scroll;
@@ -32,15 +33,16 @@ marker-list {
   }
 
   [type='caption'] {
-    display: block;
+    width: 100%;
+    display: flex;
     margin-bottom: .62rem;
     a {
-      font-size: .8rem;
-      white-space: nowrap;
-      width: 100%;
+      flex: 1 1 auto;
+      text-decoration: none;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-decoration: none;
+      white-space: nowrap;
+      font-size: .8rem;
       color: rgba(255,255,255,.5);
       &:hover {
         color: rgba(255,255,255,.7);
@@ -54,6 +56,12 @@ marker-list {
     b {
       background: yellow;
       color: #121212;
+    }
+    span {
+      color: #fff;
+      font-size: .8rem;
+      padding-right: .5rem;
+      color: rgba(255,255,255,0.75);
     }
   }
 }

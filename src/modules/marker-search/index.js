@@ -31,27 +31,27 @@ export default {
           // Caption has already been marked as a match
           if (x.classList.contains('matched')) return true;
           // Caption string plus the next one if exists
-          let str = x.textContent;
-          if (i < a.length - 1) str += ` ${a[i + 1].textContent}`;
+          let str = x.lastElementChild.textContent;
+          if (i < a.length - 1) str += ` ${a[i + 1].lastElementChild.textContent}`;
           // Lowercase caption text to make search case insensitive
           str = str.toLowerCase();
           const io = str.indexOf(pattern);
           // There was a match in this or the next caption
           if (io !== -1) {
             // The match starts in the next caption
-            if (io > x.textContent.length) return false;
+            if (io > x.lastElementChild.textContent.length) return false;
             // The match starts in this caption
             x.classList.add('matched');
-            const matchText = x.textContent.substr(io, pattern.length);
-            const matchElem = x.firstElementChild;
+            const matchElem = x.lastElementChild;
+            const matchText = matchElem.textContent.substr(io, pattern.length);
             // Hightlight from the start of match to end of match
             matchElem.innerHTML = matchElem.innerHTML.replace(matchText, `<b>${matchText}</b>`);
             // The match ends in the next capton
-            if ((io + pattern.length) > x.textContent.length) {
+            if ((io + pattern.length) > x.lastElementChild.textContent.length) {
               const nextCaption = a[i + 1];
-              const overlap = (io + pattern.length) - x.textContent.length - 1;
-              const overlapText = nextCaption.textContent.substr(0, overlap);
-              const nextElem = nextCaption.firstElementChild;
+              const overlap = (io + pattern.length) - x.lastElementChild.textContent.length - 1;
+              const nextElem = nextCaption.lastElementChild;
+              const overlapText = nextElem.textContent.substr(0, overlap);
               // Mark next caption as matched
               nextCaption.classList.add('matched');
               // Highlight from start of match till end of this caption
