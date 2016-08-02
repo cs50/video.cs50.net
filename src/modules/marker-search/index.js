@@ -11,7 +11,7 @@ export default {
     $input.addEventListener('keyup', (e) => {
       // Get all markers in document
       const $markers = document.querySelectorAll('mark-');
-      const pattern = new RegExp(e.target.value, 'i');
+      const pattern = e.target.value.trim();
       // Remove any highlighted text
       [...document.querySelectorAll('.matched b')]
       .forEach(x => (x.outerHTML = x.innerHTML));
@@ -27,11 +27,40 @@ export default {
           x.classList.add('searched');
           x.classList.remove('matched');
           return x;
-        }).filter(x => x.textContent.match(pattern))
-        .forEach(x => {
-          x.classList.add('matched');
-          x.firstElementChild.innerHTML = x.firstElementChild.innerHTML
-          .replace(pattern, `<b>${x.firstElementChild.textContent.match(pattern)}</b>`);
+        }).filter((x, i, a) => {
+          // Caption has already been marked as a match
+          if (x.classList.contains('matched')) return true;
+          // Caption string plus the next one if exists
+          let str = x.textContent;
+          if (i < a.length - 1) str += ` ${a[i + 1].textContent}`;
+          // Lowercase caption text to make search case insensitive
+          str = str.toLowerCase();
+          const io = str.indexOf(pattern);
+          // There was a match in this or the next caption
+          if (io !== -1) {
+            // The match starts in the next caption
+            if (io > x.textContent.length) return false;
+            // The match starts in this caption
+            x.classList.add('matched');
+            const matchText = x.textContent.substr(io, pattern.length);
+            const matchElem = x.firstElementChild;
+            // Hightlight from the start of match to end of match
+            matchElem.innerHTML = matchElem.innerHTML.replace(matchText, `<b>${matchText}</b>`);
+            // The match ends in the next capton
+            if ((io + pattern.length) > x.textContent.length) {
+              const nextCaption = a[i + 1];
+              const overlap = (io + pattern.length) - x.textContent.length - 1;
+              const overlapText = nextCaption.textContent.substr(0, overlap);
+              const nextElem = nextCaption.firstElementChild;
+              // Mark next caption as matched
+              nextCaption.classList.add('matched');
+              // Highlight from start of match till end of this caption
+              nextElem.innerHTML = nextElem.innerHTML.replace(overlapText, `<b>${overlapText}</b>`);
+            }
+            return true;
+          }
+          // There was no match in this or the next caption
+          return false;
         });
       }
     });
