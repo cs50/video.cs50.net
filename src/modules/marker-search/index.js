@@ -11,7 +11,7 @@ export default {
     $input.addEventListener('keyup', (e) => {
       // Get all markers in document
       const $markers = document.querySelectorAll('mark-');
-      const pattern = e.target.value;
+      const pattern = e.target.value.trim();
       // Remove any highlighted text
       [...document.querySelectorAll('.matched b')]
       .forEach(x => (x.outerHTML = x.innerHTML));
