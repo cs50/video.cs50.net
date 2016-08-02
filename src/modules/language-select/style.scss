@@ -1,0 +1,18 @@
+language-select {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+
+  @media (orientation: landscape) {
+    right: 5rem;
+  }
+
+  select {
+    height: 2rem;
+    border: 1px solid rgba(255,255,255,.5);
+    background: transparent;
+    font-size: 1rem;
+    color: #a5a5a5;
+  }
+}

@@ -47,6 +47,10 @@ export default {
       player.loadModule('captions');
     });
 
+    subscribe('player:changeLanguage', (id, lang) => {
+      player.setOption('captions', 'track', { languageCode: lang });
+    });
+
     subscribe('video:play', player.playVideo);
     subscribe('video:pause', player.pauseVideo);
     subscribe('video:seekTo', player.seekTo);

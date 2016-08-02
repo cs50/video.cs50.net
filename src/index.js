@@ -9,6 +9,7 @@ import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerList from './modules/marker-list';
+import LanguageSelect from './modules/language-select';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -33,9 +34,10 @@ const youTubeTimeToSeconds = time => {
 export default () => {
   // Extract the url on page load
   const targetEpisode = window.location.pathname.split('/')[2] || 0;
+  const targetLanguage = window.location.pathname.split('/')[3] || 'en';
   // Modify the / url
   if (targetEpisode === 0) {
-    window.history.replaceState({}, '', '/2015/0');
+    window.history.replaceState({}, '', `/2015/${targetEpisode}/${targetLanguage}`);
   }
 
   EpisodeList.render('episode-list', Episodes);
@@ -48,13 +50,20 @@ export default () => {
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
-  subscribe('player:loadVideo', id => {
+  subscribe('player:loadVideo', (id, lang) => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
     VideoDownload.render('video-download', Episodes[id].download);
-    MarkerTimeline.render('marker-timeline', Episodes[id]);
-    MarkerList.render('marker-list', Episodes[id]);
+    MarkerTimeline.render('marker-timeline', Episodes[id], lang);
+    MarkerList.render('marker-list', Episodes[id], lang);
+    LanguageSelect.render('language-select', Episodes[id], lang);
     publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
+    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+  });
+
+  subscribe('player:changeLanguage', (id, lang) => {
+    MarkerList.render('marker-list', Episodes[id], lang);
+    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
   });
 
   subscribe('video:seekTo', time => {
@@ -108,5 +117,5 @@ export default () => {
     e.currentTarget.classList.toggle('open');
   });
 
-  publish('player:loadVideo', [targetEpisode]);
+  publish('player:loadVideo', [targetEpisode, targetLanguage]);
 };

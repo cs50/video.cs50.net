@@ -140,6 +140,10 @@ row- {
     transition: all .3s;
     transform: translateX(0%);
 
+    row- {
+      position: relative;
+    }
+
     video-controls {
       display: none;
     }
@@ -229,6 +233,10 @@ row- {
     width: 100%;
     background: #121212;
     padding: 1rem;
+
+    row- {
+      position: relative;
+    }
 
     marker-list {
       padding: 1rem;
