@@ -8,6 +8,7 @@ import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
+import MarkerTeleprompter from './modules/marker-teleprompter';
 import MarkerList from './modules/marker-list';
 import LanguageSelect from './modules/language-select';
 
@@ -56,6 +57,7 @@ export default () => {
     VideoDownload.render('video-download', Episodes[id].download);
     MarkerTimeline.render('marker-timeline', Episodes[id], lang);
     MarkerList.render('marker-list', Episodes[id], lang);
+    MarkerTeleprompter.render('marker-teleprompter', Episodes[id], lang);
     LanguageSelect.render('language-select', Episodes[id], lang);
     publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
     window.history.replaceState({}, '', `/2015/${id}/${lang}`);
@@ -63,6 +65,7 @@ export default () => {
 
   subscribe('player:changeLanguage', (id, lang) => {
     MarkerList.render('marker-list', Episodes[id], lang);
+    MarkerTeleprompter.render('marker-teleprompter', Episodes[id], lang);
     window.history.replaceState({}, '', `/2015/${id}/${lang}`);
   });
 
