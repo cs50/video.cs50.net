@@ -58,10 +58,10 @@ const markers = (ep, lang) => Promise.all([chapters(ep.chapters), captions(ep.ca
 
 const updateActiveMarker = time => {
   // Find active caption mark in timeline
-  const target = [...document.querySelectorAll('marker-list mark-[type="caption"]')]
+  const target = [...document.querySelectorAll('marker-teleprompter mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
   // Remove active class from any active caption mark
-  [...document.querySelectorAll('marker-list mark-[type="caption"].active')]
+  [...document.querySelectorAll('marker-teleprompter mark-[type="caption"].active')]
   .forEach(x => x.classList.remove('active'));
   // Add active class to found marks
   target.classList.add('active');
@@ -69,7 +69,7 @@ const updateActiveMarker = time => {
 
 const scrollToMarker = time => {
   // Find active caption mark in timeline
-  const target = [...document.querySelectorAll('marker-list mark-[type="caption"]')]
+  const target = [...document.querySelectorAll('marker-teleprompter mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
   target.scrollIntoView();
   target.parentNode.scrollTop -= 50;
@@ -79,7 +79,7 @@ export default {
   render(selector, data, lang) {
     markers(data, lang)
     .then(marks => {
-      const container = document.querySelector('marker-list');
+      const container = document.querySelector('marker-teleprompter');
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `<span>${secondsToTime(mark.start)}</span><a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>`;
       const chapterTemplate = mark => `

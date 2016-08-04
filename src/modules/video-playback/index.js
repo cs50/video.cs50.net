@@ -11,6 +11,7 @@ export default {
     data.forEach(rate => {
       const $button = document.createElement('button');
       $button.innerHTML = rate.label;
+      if (rate.rate === 1) $button.classList.add('active');
       $button.setAttribute('rate', rate.rate);
       $button.addEventListener('click', (e) => {
         publish('video:setPlaybackRate', [rate.rate]);

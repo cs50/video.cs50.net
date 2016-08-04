@@ -47,7 +47,7 @@ const thumbnails = url => fetch(url)
   url: thumb[1],
 })));
 
-const markers = ep => Promise.all([chapters(ep.chapters), captions(ep.captions)])
+const markers = (ep, lang) => Promise.all([chapters(ep.chapters), captions(ep.captions[lang])])
 .then(values => values[0].concat(values[1]))
 .then(items => items.sort((a, b) => {
   if (a.start > b.start) { return 1; }
@@ -67,8 +67,8 @@ const updateActiveMarker = time => {
 };
 
 export default {
-  render(selector, data) {
-    markers(data)
+  render(selector, data, lang) {
+    markers(data, lang)
     .then(marks => {
       const container = document.querySelector('marker-timeline');
       const fragment = document.createDocumentFragment();

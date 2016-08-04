@@ -1,0 +1,36 @@
+marker-teleprompter {
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 5rem;
+  width: 100%;
+  display: flex;
+
+  &.hidden {
+    display: none;
+  }
+
+  [type='chapter'] {
+    display: none;
+  }
+
+  [type='caption'] {
+    margin: auto;
+    max-width: 100%;
+    a {
+      font-size: calc(.5rem + 1vw);
+      line-height: 1.5;
+      text-decoration: none;
+      text-align: center;
+      padding: calc(.5rem + .5vw);
+      color: #fff;
+      max-width: 70ex;
+    }
+    width: auto;
+    background: rgba(0,0,0,0.7);
+    span,
+    &:not(.active) {
+      display: none;
+    }
+  }
+}
