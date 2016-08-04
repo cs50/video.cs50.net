@@ -1,4 +1,4 @@
-import { subscribe, publish } from 'minpubsub';
+import { publish } from 'minpubsub';
 
 export default {
   render(selector, data, active) {
