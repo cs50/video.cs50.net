@@ -82,13 +82,7 @@ export default () => {
   };
 
   document.querySelector('.video-captions').addEventListener('click', (e) => {
-    if (e.currentTarget.dataset.state === 'on') {
-      publish('video:hideCaptions', []);
-      e.currentTarget.dataset.state = 'off';
-    } else {
-      publish('video:showCaptions', []);
-      e.currentTarget.dataset.state = 'on';
-    }
+    document.querySelector('marker-teleprompter').classList.toggle('hidden');
   });
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {

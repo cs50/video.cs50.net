@@ -18,7 +18,6 @@ export default {
         rel: 0,
         showinfo: 0,
         controls: 0,
-        cc_load_policy: 1,
       },
     });
 
@@ -38,18 +37,6 @@ export default {
       .find(x => x.getAttribute('start') > time);
       player.seekTo(nextChapter.getAttribute('start'));
     }));
-
-    subscribe('video:hideCaptions', () => {
-      player.unloadModule('captions');
-    });
-
-    subscribe('video:showCaptions', () => {
-      player.loadModule('captions');
-    });
-
-    subscribe('player:changeLanguage', (id, lang) => {
-      player.setOption('captions', 'track', { languageCode: lang });
-    });
 
     subscribe('video:play', player.playVideo);
     subscribe('video:pause', player.pauseVideo);
