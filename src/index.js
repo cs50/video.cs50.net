@@ -11,7 +11,10 @@ import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
 import MarkerList from './modules/marker-list';
 import LanguageSelect from './modules/language-select';
+import ThumbnailPreview from './modules/thumbnail-preview';
+
 import { markers } from './modules/marker-fetch';
+import { thumbnails } from './modules/thumbnail-fetch';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -42,7 +45,6 @@ export default () => {
     window.history.replaceState({}, '', `/2015/${targetEpisode}/${targetLanguage}`);
   }
 
-
   EpisodeList.render('episode-list', Episodes);
   VideoPlayback.render('video-playback', [
     { rate: 0.75, label: '3/4' },
@@ -56,13 +58,13 @@ export default () => {
   MarkerList.initialize();
   MarkerTeleprompter.initialize();
   MarkerTimeline.initialize();
+  ThumbnailPreview.initialize();
 
   subscribe('player:loadVideo', (id, lang) => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
-
     markers(Episodes[id], lang);
-
+    thumbnails(Episodes[id].thumbnails);
     VideoDownload.render('video-download', Episodes[id].download);
     LanguageSelect.render('language-select', Episodes[id], lang);
     publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
