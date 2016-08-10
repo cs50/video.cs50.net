@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    container_name: video50_web
+    ports:
+      - "8080:8080"
+    tty: true
+    volumes:
+      - .:/srv/www
+version: "2"
