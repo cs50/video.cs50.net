@@ -11,7 +11,8 @@
     "bundle": "browserify -t babelify app.js -o dist/index.js -p [ parcelify -o dist/index.css -t sass-css-stream -d ./src ]",
     "watch": "watchify -t babelify app.js -o dist/index.js -p [ parcelify -wo dist/index.css -t sass-css-stream -d ./src ]",
     "sync": "node browsersync",
-    "serve": "node server"
+    "serve": "node server",
+    "release": "npm run build && uglifyjs dist/index.js -o dist/index.js && echo $(uglifycss dist/index.css) > dist/index.css"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "parallelshell": "^2.0.0",
     "parcelify": "^2.1.0",
     "sass-css-stream": "^0.1.6",
+    "uglify-js": "^2.7.0",
+    "uglifycss": "0.0.20",
     "watchify": "^3.7.0"
   },
   "homepage": "https://github.com/cs50/player50",
