@@ -7,9 +7,10 @@
   "scripts": {
     "init": "rm -rf dist && mkdir dist && cp src/index.html dist/index.html",
     "build": "npm run init && npm run bundle",
-    "dev": "npm run build && parallelshell 'npm run watch' 'npm run serve'",
+    "dev": "npm run build && parallelshell 'npm run watch' 'npm run sync'",
     "bundle": "browserify -t babelify app.js -o dist/index.js -p [ parcelify -o dist/index.css -t sass-css-stream -d ./src ]",
     "watch": "watchify -t babelify app.js -o dist/index.js -p [ parcelify -wo dist/index.css -t sass-css-stream -d ./src ]",
+    "sync": "node browsersync",
     "serve": "node server"
   },
   "repository": {
@@ -33,14 +34,12 @@
     "parallelshell": "^2.0.0",
     "parcelify": "^2.1.0",
     "sass-css-stream": "^0.1.6",
-    "watchify": "^3.7.0",
-    "youtube-player": "^3.0.4"
+    "watchify": "^3.7.0"
   },
   "homepage": "https://github.com/cs50/player50",
   "dependencies": {
     "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",
-    "moment": "^2.13.0",
-    "whatwg-fetch": "^1.0.0",
-    "xml2js": "^0.4.17"
+    "whatwg-fetch": "1.0.0",
+    "youtube-player": "3.0.4"
   }
 }
