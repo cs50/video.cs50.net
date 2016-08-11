@@ -1,2 +1,2 @@
-import App from './src/index';
-export default new App();
+var App = require('./src/index');
+module.exports = App();

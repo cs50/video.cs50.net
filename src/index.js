@@ -36,7 +36,7 @@ const youTubeTimeToSeconds = time => {
   return (mins * 60) + secs;
 };
 
-export default () => {
+module.exports = () => {
   // Extract the url on page load
   const targetEpisode = window.location.pathname.split('/')[2] || 0;
   const targetLanguage = window.location.pathname.split('/')[3] || 'en';
