@@ -35,12 +35,16 @@ export default {
     .then(time => {
       const nextChapter = [...document.querySelectorAll('mark-[type="chapter"]')]
       .find(x => x.getAttribute('start') > time);
-      player.seekTo(nextChapter.getAttribute('start'));
+      publish('video:seekTo', [nextChapter.getAttribute('start')]);
     }));
+
+    subscribe('video:seekTo', time => {
+      player.seekTo(time);
+      publish('video:tick', [time]);
+    });
 
     subscribe('video:play', player.playVideo);
     subscribe('video:pause', player.pauseVideo);
-    subscribe('video:seekTo', player.seekTo);
     subscribe('video:setPlaybackRate', player.setPlaybackRate);
     subscribe('video:loadVideoById', player.loadVideoById);
 

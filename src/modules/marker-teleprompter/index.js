@@ -27,7 +27,6 @@ export default {
   initialize() {
     subscribe('markers:fetched', this.render('marker-teleprompter'));
     subscribe('video:tick', updateActiveMarker);
-    subscribe('video:seekTo', updateActiveMarker);
   },
   render(selector) {
     return data => {
