@@ -21,6 +21,12 @@ export default {
       },
     });
 
+    player.addEventListener('onStateChange', e => {
+      const $playButton = document.querySelector('.video-play-pause');
+      if (e.data === 1) $playButton.classList.add('playing');
+      if (e.data === 2) $playButton.classList.remove('playing');
+    });
+
     const tick = () => player.getCurrentTime()
     .then(time => {
       publish('video:tick', [time]);

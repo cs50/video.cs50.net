@@ -123,7 +123,7 @@ module.exports = () => {
     const $input = document.querySelector('marker-search input');
     $dialog.classList.toggle('open');
     if (e.currentTarget.classList.contains('open')) {
-      setTimeout(() => $input.focus(), 500);
+      setTimeout(() => $input.focus(), 300);
     } else $input.blur();
   });
 
