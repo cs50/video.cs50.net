@@ -2,9 +2,9 @@ const browserSync = require('browser-sync').create();
 const spa = require('connect-history-api-fallback');
 
 browserSync.init({
-  files: 'dist/*',
+  files: 'public/*',
   server: {
-    baseDir: ['dist'],
+    baseDir: ['public'],
     middleware: [spa()],
   },
 });
