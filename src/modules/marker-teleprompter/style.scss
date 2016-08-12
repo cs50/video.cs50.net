@@ -10,6 +10,12 @@ marker-teleprompter {
     display: none;
   }
 
+  b {
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
   [type='chapter'] {
     display: none;
   }

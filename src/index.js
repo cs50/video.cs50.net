@@ -119,7 +119,12 @@ module.exports = () => {
   });
 
   document.querySelector('dialog-trigger').addEventListener('click', (e) => {
-    e.currentTarget.classList.toggle('open');
+    const $dialog = e.currentTarget;
+    const $input = document.querySelector('marker-search input');
+    $dialog.classList.toggle('open');
+    if (e.currentTarget.classList.contains('open')) {
+      setTimeout(() => $input.focus(), 500);
+    } else $input.blur();
   });
 
   publish('player:loadVideo', [targetEpisode, targetLanguage]);
