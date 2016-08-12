@@ -46,7 +46,7 @@ export default {
     subscribe('video:play', player.playVideo);
     subscribe('video:pause', player.pauseVideo);
     subscribe('video:setPlaybackRate', player.setPlaybackRate);
-    subscribe('video:loadVideoById', player.loadVideoById);
+    subscribe('video:loadVideoById', player.cueVideoById);
 
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
