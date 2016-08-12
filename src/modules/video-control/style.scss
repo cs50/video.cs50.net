@@ -27,6 +27,9 @@ video-controls {
       display: none;
     }
   }
+  .video-captions.active {
+    background: #a41034;
+  }
 }
 
 video-controls.mobile {

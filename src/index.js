@@ -90,6 +90,7 @@ module.exports = () => {
 
   document.querySelector('.video-captions').addEventListener('click', (e) => {
     document.querySelector('marker-teleprompter').classList.toggle('hidden');
+    e.currentTarget.classList.toggle('active');
   });
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {
