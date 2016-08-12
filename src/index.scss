@@ -124,8 +124,7 @@ row- {
     }
 
     &:not(.open) + dialog {
-      transform: translateX(100%);
-      box-shadow: 0 0 1rem rgba(0,0,0,0.5);
+      transform: translateX(100%) rotateZ(360deg);
     }
   }
 
@@ -141,8 +140,8 @@ row- {
     display: flex;
     flex-direction: column;
     background: none;
-    transition: all .3s;
-    transform: translateX(0%);
+    transition: all .3s ease;
+    transform: translateX(0) rotateZ(360deg);
 
     row- {
       position: relative;
