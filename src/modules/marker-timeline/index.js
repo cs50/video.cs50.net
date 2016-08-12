@@ -15,7 +15,6 @@ export default {
   initialize() {
     subscribe('markers:fetched', this.render('marker-timeline'));
     subscribe('video:tick', updateActiveMarker);
-    subscribe('video:seekTo', updateActiveMarker);
   },
   render(selector) {
     return (data) => {
