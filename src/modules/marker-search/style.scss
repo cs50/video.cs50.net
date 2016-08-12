@@ -1,6 +1,12 @@
 marker-search {
   position: relative;
   flex: 1 1 auto;
+  color: rgba(255,255,255,0.7);
+
+  &:hover {
+    color: rgba(255,255,255,0.9);
+  }
+
   input {
     width: 100%;
     padding: 1.5rem;
@@ -8,16 +14,16 @@ marker-search {
     border: 1px solid rgba(0,0,0,0.1);
     background: #212121;
     color: #f2f2f2;
-    padding-left: 4rem;
+    padding-left: 4.5rem;
   }
   > svg {
     position: absolute;
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    fill: rgba(255,255,255,0.5);
-    width: 2rem;
-    height: 2rem;
+    fill: currentColor;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   input:hover ~ svg,
