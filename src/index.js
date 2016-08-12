@@ -127,5 +127,13 @@ module.exports = () => {
     } else $input.blur();
   });
 
+  document.onkeydown = (evt) => {
+    evt = evt || window.event;
+    if (evt.keyCode === 27) {
+      const $dialog = document.querySelector('dialog-trigger');
+      $dialog.classList.remove('open');
+    }
+  };
+
   publish('player:loadVideo', [targetEpisode, targetLanguage]);
 };
