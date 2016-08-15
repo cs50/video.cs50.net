@@ -130,7 +130,6 @@ row- {
       width: 2.5rem;
       height: 2.5rem;
       fill: rgba(255,255,255,0.8);
-      display: none;
     }
 
     &:not(.open).hidden {
@@ -141,12 +140,11 @@ row- {
       fill: rgba(255,255,255,1);
     }
 
-    &:not(.open) svg:first-child {
-      display: block;
+    &:not(.open) svg:last-child {
+      display: none;
     }
-
-    &.open svg:last-child {
-      display: block;
+    &.open svg:first-child {
+      display: none;
     }
 
     &:not(.open) + dialog {
