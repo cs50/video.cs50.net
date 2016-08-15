@@ -94,9 +94,25 @@ row- {
     row- {
       justify-content: space-between;
       width: 100%;
-      position:absolute;
-      bottom: 0;
       height: 3rem;
+    }
+  }
+
+  control-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    top: auto;
+    transition: all .3s ease;
+    transform: translateY(0%);
+  }
+
+  main.hidden {
+    video-main {
+      height: 100%;
+    }
+    control-bar {
+      transform: translateY(100%);
     }
   }
 
@@ -117,7 +133,7 @@ row- {
       display: none;
     }
 
-    &.hidden {
+    &:not(.open).hidden {
       transform: translateX(100%);;
     }
 
@@ -228,11 +244,13 @@ row- {
     row- {
       justify-content: space-between;
       width: 100%;
-      position:absolute;
-      top: auto;
-      bottom: 0;
+      position: relative;
       height: 3rem;
       background: #212121;
+    }
+
+    video-main {
+      height: calc(100% - 4rem);
     }
 
     video-download,
@@ -240,6 +258,15 @@ row- {
     .video-fullscreen {
       display: none;
     }
+  }
+
+  control-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    top: auto;
+    transition: all .3s ease;
+    transform: translateY(0%);
   }
 
   dialog {

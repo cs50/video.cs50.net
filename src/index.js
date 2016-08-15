@@ -137,11 +137,14 @@ module.exports = () => {
 
   let timer;
   const $dialogTrigger = document.querySelector('dialog-trigger');
+  const $main = document.querySelector('main');
   document.onmousemove = () => {
     clearTimeout(timer);
     $dialogTrigger.classList.remove('hidden');
+    $main.classList.remove('hidden');
     timer = setTimeout(() => {
       $dialogTrigger.classList.add('hidden');
+      $main.classList.add('hidden');
     }, 3000);
   };
 
