@@ -4,13 +4,17 @@ video-playback {
 
   button.active {
     background: #a41034;
+    color: #fff;
   }
 
-  div {
-    display: flex;
-  }
-
-  div button {
+  button {
     padding: 1rem;
+    font-size: .8rem;
+    user-select: none;
+    color: rgba(255,255,255,0.5);
+
+    &:hover {
+      color: rgba(255,255,255,0.8);
+    }
   }
 }

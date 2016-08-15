@@ -111,8 +111,12 @@ row- {
     svg {
       width: 2.5rem;
       height: 2.5rem;
-      fill: #fff;
+      fill: rgba(255,255,255,0.8);
       display: none;
+    }
+
+    &:hover svg {
+      fill: rgba(255,255,255,1);
     }
 
     &:not(.open) svg:first-child {
