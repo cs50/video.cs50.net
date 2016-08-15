@@ -95,7 +95,7 @@ module.exports = () => {
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {
     const iframe = document.querySelector('iframe');
-    var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
     }
@@ -133,6 +133,16 @@ module.exports = () => {
       const $dialog = document.querySelector('dialog-trigger');
       $dialog.classList.remove('open');
     }
+  };
+
+  let timer;
+  const $dialogTrigger = document.querySelector('dialog-trigger');
+  document.onmousemove = () => {
+    clearTimeout(timer);
+    $dialogTrigger.classList.remove('hidden');
+    timer = setTimeout(() => {
+      $dialogTrigger.classList.add('hidden');
+    }, 3000);
   };
 
   publish('player:loadVideo', [targetEpisode, targetLanguage]);

@@ -1,4 +1,8 @@
 video-main {
   width: 100%;
   height: calc(100% - 4rem);
+
+  iframe {
+    pointer-events: none;
+  }
 }

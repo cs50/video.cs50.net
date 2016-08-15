@@ -107,12 +107,18 @@ row- {
     background: #212121;
     padding: 1rem;
     z-index: 20;
+    transition: all .3s ease;
+    transform: translateX(0%);;
 
     svg {
       width: 2.5rem;
       height: 2.5rem;
       fill: rgba(255,255,255,0.8);
       display: none;
+    }
+
+    &.hidden {
+      transform: translateX(100%);;
     }
 
     &:hover svg {
