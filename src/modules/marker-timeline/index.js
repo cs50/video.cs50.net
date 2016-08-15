@@ -26,6 +26,7 @@ export default {
         const div = document.createElement('mark-');
         const duration = (mark.end - mark.start);
         if (mark.type === 'caption') div.style.flex = `${duration} ${duration} auto`;
+        if (mark.type === 'chapter') div.setAttribute('title', mark.title);
         div.setAttribute('type', mark.type);
         div.setAttribute('start', mark.start);
         div.setAttribute('end', mark.end);
@@ -38,8 +39,10 @@ export default {
 
       container.addEventListener('mouseover', (e) => {
         const target = document.querySelectorAll(':hover');
-        const time = target[target.length - 1].getAttribute('start');
-        publish('timeline:mouseover', [time, e]);
+        if (target[target.length - 1].getAttribute('type') !== 'chapter') {
+          const time = target[target.length - 1].getAttribute('start');
+          publish('timeline:mouseover', [time, e]);
+        } else publish('timeline:mouseleave');
       });
       container.addEventListener('mouseleave', () => {
         publish('timeline:mouseleave');
