@@ -17,31 +17,33 @@
     </nav>
     <main>
       <video-main></video-main>
-      <marker-timeline></marker-timeline>
-      <row->
-        <video-controls>
-          <button class="seek-back">
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-history"></use></svg>
-          </button>
-          <button class="video-play-pause">
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-play"></use></svg>
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-pause"></use></svg>
-          </button>
-          <button class="seek-next">
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-next"></use></svg>
-          </button>
-        </video-controls>
-        <video-controls>
-          <video-playback></video-playback>
-          <button class="video-captions">
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-captions"></use></svg>
-          </button>
-          <video-download></video-download>
-          <button class="video-fullscreen">
-            <svg viewBox="0 0 1 1"><use xlink:href="#icon-fullscreen"></use></svg>
-          </button>
-        </video-controls>
-      </row->
+      <control-bar>
+        <marker-timeline></marker-timeline>
+        <row->
+          <video-controls>
+            <button class="seek-back">
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-history"></use></svg>
+            </button>
+            <button class="video-play-pause">
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-play"></use></svg>
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-pause"></use></svg>
+            </button>
+            <button class="seek-next">
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-next"></use></svg>
+            </button>
+          </video-controls>
+          <video-controls>
+            <video-playback></video-playback>
+            <button class="video-captions">
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-captions"></use></svg>
+            </button>
+            <video-download></video-download>
+            <button class="video-fullscreen">
+              <svg viewBox="0 0 1 1"><use xlink:href="#icon-fullscreen"></use></svg>
+            </button>
+          </video-controls>
+        </row->
+      </control-bar>
       <marker-teleprompter class="hidden"></marker-teleprompter>
     </main>
     <dialog-trigger>
