@@ -10,10 +10,11 @@ export default {
     return (data, e) => {
       const container = document.querySelector(selector);
       const thumb = this.collection.find(x => x.start > data);
+      const httpsThumbUrl = thumb.url.replace('http://', 'https://');
       container.style.opacity = 1;
       container.style.left = `${e.pageX - 100}px`;
       container.style.top = `${e.pageY - 100}px`;
-      container.style.background = `url(${thumb.url})`;
+      container.style.background = `url(${httpsThumbUrl})`;
     };
   },
   hide(selector) {
