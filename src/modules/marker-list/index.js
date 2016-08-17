@@ -32,7 +32,10 @@ export default {
     return data => {
       const container = document.querySelector(selector);
       const frag = document.createDocumentFragment();
-      const captionTemplate = mark => `<span>${secondsToTime(mark.start)}</span><a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>`;
+      const captionTemplate = mark => `
+        <span>${secondsToTime(mark.start)}</span>
+        <a href='?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
+      `;
       const chapterTemplate = mark => `
         <h1>${mark.title}</h1>
         <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
