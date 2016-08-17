@@ -34,7 +34,7 @@ export default {
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
         <span>${secondsToTime(mark.start)}</span>
-        <a href='/2015/${data.episode}?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
+        <a href='?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
       `;
 
       container.innerHTML = '';
