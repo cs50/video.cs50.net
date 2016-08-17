@@ -105,6 +105,7 @@ row- {
     top: auto;
     transition: all .3s ease;
     transform: translateY(0%);
+    background: #121212;
   }
 
   main.hidden {
@@ -146,10 +147,6 @@ row- {
     &.open svg:first-child {
       display: none;
     }
-
-    &:not(.open) + dialog {
-      transform: translateX(100%) rotateZ(360deg);
-    }
   }
 
   dialog {
@@ -165,10 +162,14 @@ row- {
     flex-direction: column;
     background: none;
     transition: all .3s ease;
-    transform: translateX(0) rotateZ(360deg);
+    transform: translateX(100%) rotateZ(360deg);
 
     row- {
       position: relative;
+    }
+
+    &.open {
+      transform: translateX(0) rotateZ(360deg);
     }
 
     video-controls {
@@ -265,6 +266,7 @@ row- {
     top: auto;
     transition: all .3s ease;
     transform: translateY(0%);
+    background: #212121;
   }
 
   dialog {
