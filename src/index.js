@@ -118,11 +118,13 @@ module.exports = () => {
     e.currentTarget.classList.toggle('playing');
   });
 
-  document.querySelector('dialog-trigger').addEventListener('click', (e) => {
-    const $dialog = e.currentTarget;
+  document.querySelector('dialog-trigger').addEventListener('click', () => {
+    const $dialog = document.querySelector('dialog');
+    const $dialogTrigger = document.querySelector('dialog-trigger');
     const $input = document.querySelector('marker-search input');
     $dialog.classList.toggle('open');
-    if (e.currentTarget.classList.contains('open')) {
+    $dialogTrigger.classList.toggle('open');
+    if ($dialog.classList.contains('open')) {
       setTimeout(() => $input.focus(), 300);
     } else $input.blur();
   });
@@ -130,15 +132,17 @@ module.exports = () => {
   document.onkeydown = (evt) => {
     evt = evt || window.event;
     if (evt.keyCode === 27) {
-      const $dialog = document.querySelector('dialog-trigger');
+      const $dialog = document.querySelector('dialog');
+      const $dialogTrigger = document.querySelector('dialog-trigger');
       $dialog.classList.remove('open');
+      $dialogTrigger.classList.remove('open');
     }
   };
 
   let timer;
-  const $dialogTrigger = document.querySelector('dialog-trigger');
-  const $main = document.querySelector('main');
   document.onmousemove = () => {
+    const $dialogTrigger = document.querySelector('dialog-trigger');
+    const $main = document.querySelector('main');
     clearTimeout(timer);
     $dialogTrigger.classList.remove('hidden');
     $main.classList.remove('hidden');
