@@ -21,6 +21,7 @@ export default {
       const container = document.querySelector(selector);
       const fragment = document.createDocumentFragment();
       const template = mark => `<span>${mark.title}</span>`;
+
       container.innerHTML = '';
       data.forEach(mark => {
         const div = document.createElement('mark-');

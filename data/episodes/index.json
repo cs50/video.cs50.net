@@ -8,9 +8,11 @@
         "vr": "BRpel-vjckA"
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/en/week0w.vtt",
@@ -91,9 +93,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/en/week0f.vtt",
@@ -174,9 +178,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/en/week1w.vtt",
@@ -257,9 +263,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/en/week1f.vtt",
@@ -340,9 +348,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/en/week2m.vtt",
@@ -423,9 +433,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/en/week2w.vtt",
@@ -506,9 +518,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/en/week3m.vtt",
@@ -589,9 +603,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/en/week3w.vtt",
@@ -672,9 +688,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/en/week4m.vtt",
@@ -755,9 +773,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/en/week4w.vtt",
@@ -838,9 +858,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/en/week5m.vtt",
@@ -921,9 +943,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/en/week5w.vtt",
@@ -1004,9 +1028,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/en/week6m.vtt",
@@ -1087,9 +1113,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/en/week7m.vtt",
@@ -1170,9 +1198,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/en/week7w.vtt",
@@ -1253,9 +1283,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/en/week8m.vtt",
@@ -1336,9 +1368,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/en/week8w.vtt",
@@ -1419,9 +1453,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/en/week9m.vtt",
@@ -1502,9 +1538,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/en/week9w.vtt",
@@ -1585,9 +1623,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/en/week10m.vtt",
@@ -1668,9 +1708,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/en/week10w.vtt",
@@ -1751,9 +1793,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/11/m/week11m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.vtt",
@@ -1834,9 +1878,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.vtt",
@@ -1917,9 +1963,11 @@
         "slides": ""
     },
     "download": {
-        "360": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-360p.mp4",
-        "720": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-720p.mp4",
-        "1080": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-1080p.mp4"
+        "240p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-240p.mp4",
+        "360p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-360p.mp4",
+        "720p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-720p.mp4",
+        "1080p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-1080p.mp4",
+        "4K": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-4k.mp4"
     },
     "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m.vtt",
     "chapters": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/en/week12m.vtt",
