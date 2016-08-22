@@ -5,6 +5,8 @@ marker-teleprompter {
   bottom: 5rem;
   width: 100%;
   display: flex;
+  transform: translateY(0);
+  transition: all .3s;
 
   &.hidden {
     display: none;
@@ -39,4 +41,8 @@ marker-teleprompter {
       display: none;
     }
   }
+}
+
+main.hidden marker-teleprompter {
+  transform: translateY(3rem);
 }

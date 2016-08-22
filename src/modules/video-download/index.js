@@ -9,7 +9,7 @@ export default {
     const div = document.createElement('div');
     Object.keys(data).forEach(key => {
       const elem = document.createElement('a');
-      elem.innerHTML = `${key}p`;
+      elem.innerHTML = `${key}`;
       elem.href = data[key];
       elem.setAttribute('download', 'true');
       div.appendChild(elem);

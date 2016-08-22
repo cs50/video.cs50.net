@@ -5,15 +5,20 @@ video-download {
   div:hover {
     position: absolute;
     bottom: 100%;
-    display: flex;
+    display: block;
     z-index: 5;
-    right: -50px;
+    left: -15px;
   }
 
   a {
     background: #212121;
     padding: 1rem;
-    color: #fff;
+    color: rgba(255,255,255,0.5);
+
+    &:hover {
+      background: #424242;
+      color: rgba(255,255,255,1);
+    }
   }
 
   div {
