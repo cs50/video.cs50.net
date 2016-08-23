@@ -60,7 +60,7 @@ module.exports = () => {
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
 
-  subscribe('player:loadVideo', (id, lang) => {
+  subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
     markers(Episodes[id], lang);

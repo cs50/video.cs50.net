@@ -2,10 +2,6 @@ video-main {
   width: 100%;
   height: 100%;
 
-  iframe {
-    pointer-events: none;
-  }
-
   @media (orientation: landscape) {
     &::after {
       content: '';
