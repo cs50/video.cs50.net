@@ -6,5 +6,6 @@ browserSync.init({
   server: {
     baseDir: ['public'],
     middleware: [spa()],
+    https: true,
   },
 });
