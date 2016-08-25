@@ -97,6 +97,8 @@ row- {
     z-index: 20;
     transition: all .3s ease;
     transform: translateX(0%); }
+    dialog-trigger[disabled] {
+      display: none !important; }
     dialog-trigger svg {
       width: 2.5rem;
       height: 2.5rem;
@@ -321,6 +323,8 @@ marker-list {
   padding: 1.5rem;
   background: rgba(0, 0, 0, 0.9);
   overflow-x: hidden; }
+  marker-list.hidden {
+    display: none; }
   @media (orientation: landscape) {
     marker-list {
       overflow-y: scroll;
@@ -472,6 +476,8 @@ video-controls {
   display: flex; }
   video-controls > * + * {
     border-left: 1px solid #000; }
+  video-controls [disabled] {
+    display: none !important; }
   video-controls button {
     padding: .75rem;
     background: #212121; }

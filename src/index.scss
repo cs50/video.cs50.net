@@ -125,7 +125,11 @@ row- {
     padding: 1rem;
     z-index: 20;
     transition: all .3s ease;
-    transform: translateX(0%);;
+    transform: translateX(0%);
+
+    &[disabled] {
+      display: none !important;
+    }
 
     svg {
       width: 2.5rem;

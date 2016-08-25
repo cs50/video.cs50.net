@@ -4,6 +4,10 @@ marker-list {
   background: rgba(0,0,0,.9);
   overflow-x: hidden;
 
+  &.hidden {
+    display: none;
+  }
+
   @media (orientation: landscape) {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;

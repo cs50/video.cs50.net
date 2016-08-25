@@ -16,11 +16,13 @@ const updateActiveMarker = time => {
   // Find active caption mark in timeline
   const target = [...document.querySelectorAll('marker-list mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
-  // Remove active class from any active caption mark
-  [...document.querySelectorAll('marker-list mark-[type="caption"].active')]
-  .forEach(x => x.classList.remove('active'));
-  // Add active class to found marks
-  target.classList.add('active');
+  if (target) {
+    // Remove active class from any active caption mark
+    [...document.querySelectorAll('marker-list mark-[type="caption"].active')]
+    .forEach(x => x.classList.remove('active'));
+    // Add active class to found marks
+    target.classList.add('active');
+  }
 };
 
 export default {
@@ -31,6 +33,8 @@ export default {
   render(selector) {
     return data => {
       const container = document.querySelector(selector);
+      const trigger = document.querySelector('dialog-trigger');
+      trigger.removeAttribute('disabled');
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
         <span>${secondsToTime(mark.start)}</span>

@@ -1,8 +1,6 @@
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-import Episodes from '../data/episodes/index.json';
-import EpisodeList from './modules/episode-list';
 import VideoPlayback from './modules/video-playback';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
@@ -44,14 +42,9 @@ const youTubeTimeToSeconds = time => {
 
 module.exports = () => {
   // Extract the url on page load
-  const targetEpisode = window.location.pathname.split('/')[2] || 0;
-  const targetLanguage = window.location.pathname.split('/')[3] || 'en';
-  // Modify the / url
-  if (targetEpisode === 0) {
-    window.history.replaceState({}, '', `/2015/${targetEpisode}/${targetLanguage}`);
-  }
+  const targetEpisode = window.location.pathname;
+  const targetLanguage = 'en';
 
-  EpisodeList.render('episode-list', Episodes);
   VideoPlayback.render('video-playback', [
     { rate: 0.75, label: '3/4' },
     { rate: 1, label: '1' },
@@ -69,22 +62,26 @@ module.exports = () => {
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
-    getEpisodeData('https://cdn.cs50.net/2015/fall/lectures/0/f/index.json')
+    // Fetch episode data from CDN based on URL
+    getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
     .then(ep => {
+      const toHttps = url => url.replace('http://', 'https://');
       localStorage.setItem('episode', JSON.stringify(ep));
-      const chaptersFileUrl = ep.chapters.find(x => x.srclang === 'en').src.replace('http://', 'https://');
-      const captionsFileUrl = ep.captions.find(x => x.srclang === 'en').src.replace('http://', 'https://');
-      const thumbnailsFileUrl = ep.thumbnails.find(x => x.type === 'text/vtt').src.replace('http://', 'https://');
+      const chaptersFile = ep.chapters.find(x => x.srclang === 'en');
+      const captionsFile = ep.captions.find(x => x.srclang === 'en');
+      const thumbnailsFile = ep.thumbnails.find(x => x.type === 'text/vtt');
       const youtubeVideoId = ep.youtube.main;
       const downloadLinks = ep.downloads.filter(x => x.label.match('MP4'));
-      const availableLanguages = ep.captions.map(x => x.srclang);
-      markers(chaptersFileUrl, captionsFileUrl);
-      thumbs(thumbnailsFileUrl);
-      VideoDownload.render('video-download', downloadLinks);
-      LanguageSelect.render('language-select', availableLanguages, lang);
+      // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
-      window.history.replaceState({}, '', `/2015/${id}/${lang}`);
-    });
+      if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
+      if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
+      if (chaptersFile && captionsFile) {
+        const availableLanguages = ep.captions.map(x => x.srclang);
+        LanguageSelect.render('language-select', availableLanguages, lang);
+        markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
+      }
+    }).catch(e => alert('Could not get episode data!'));
   });
 
   subscribe('player:changeLanguage', (lang) => {
@@ -106,10 +103,6 @@ module.exports = () => {
   subscribe('video:tick', time => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
   });
-
-  window.onpopstate = () => {
-    publish('player:loadVideo', [window.location.pathname.split('/')[2]]);
-  };
 
   document.querySelector('.video-captions').addEventListener('click', (e) => {
     document.querySelector('marker-teleprompter').classList.toggle('hidden');

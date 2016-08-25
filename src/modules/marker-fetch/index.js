@@ -36,7 +36,8 @@ const captions = url => fetch(url)
         .replace('-', '') || '[NO SPEECH]',
 })));
 
-export const markers = (chaptersUrl, captionsUrl) => Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
+export const markers = (chaptersUrl, captionsUrl) =>
+Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
 .then(values => values[0].concat(values[1]))
 .then(items => items.sort((a, b) => {
   if (a.start > b.start) { return 1; }

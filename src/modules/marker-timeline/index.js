@@ -4,11 +4,13 @@ const updateActiveMarker = time => {
   // Find active caption mark in timeline
   const $targetCaption = [...document.querySelectorAll('marker-timeline mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
-  // Remove active class from any active caption mark
-  [...document.querySelectorAll('marker-timeline mark-[type="caption"].active')]
-  .forEach(x => x.classList.remove('active'));
-  // Add active class to found marks
-  $targetCaption.classList.add('active');
+  if ($targetCaption) {
+    // Remove active class from any active caption mark
+    [...document.querySelectorAll('marker-timeline mark-[type="caption"].active')]
+    .forEach(x => x.classList.remove('active'));
+    // Add active class to found marks
+    $targetCaption.classList.add('active');
+  }
 };
 
 export default {

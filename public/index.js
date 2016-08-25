@@ -4,2051 +4,7 @@
 var App = require('./src/index');
 module.exports = App();
 
-},{"./src/index":130}],2:[function(require,module,exports){
-module.exports=[{
-    "id": "zFenJJtAEzE",
-    "episode": 0,
-    "year": 2015,
-    "youtube": {
-        "main": "zFenJJtAEzE",
-        "slides": "BRpel-vjckA",
-        "vr": "BRpel-vjckA"
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/0/w/week0w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/en/week0w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/af/week0w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ar/week0w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/az/week0w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/be/week0w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/bg/week0w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/bn/week0w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ca/week0w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/cs/week0w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/cy/week0w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/da/week0w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/de/week0w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/el/week0w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/en/week0w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/eo/week0w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/es/week0w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/et/week0w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/eu/week0w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/fa/week0w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/fi/week0w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/fr/week0w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ga/week0w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/gl/week0w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/gu/week0w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/hi/week0w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/hr/week0w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ht/week0w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/hu/week0w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/id/week0w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/is/week0w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/it/week0w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/iw/week0w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ja/week0w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ka/week0w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/kn/week0w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ko/week0w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/la/week0w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/lt/week0w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/lv/week0w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/mk/week0w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ms/week0w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/mt/week0w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/nl/week0w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/no/week0w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/pl/week0w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/pt/week0w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ro/week0w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ru/week0w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sk/week0w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sl/week0w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sq/week0w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sr/week0w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sv/week0w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/sw/week0w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ta/week0w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/te/week0w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/th/week0w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/tl/week0w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/tr/week0w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/uk/week0w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/ur/week0w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/vi/week0w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/yi/week0w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/zh-CN/week0w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/zh-TW/week0w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/0/w/lang/en/week0w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/0/w/notes0w/notes0w.pdf"
-}, {
-    "id": "UuFWYOnHwGM",
-    "episode": 1,
-    "year": 2015,
-    "youtube": {
-        "main": "UuFWYOnHwGM",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/0/f/week0f.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/en/week0f.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/af/week0f.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ar/week0f.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/az/week0f.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/be/week0f.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/bg/week0f.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/bn/week0f.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ca/week0f.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/cs/week0f.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/cy/week0f.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/da/week0f.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/de/week0f.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/el/week0f.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/en/week0f.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/eo/week0f.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/es/week0f.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/et/week0f.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/eu/week0f.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/fa/week0f.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/fi/week0f.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/fr/week0f.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ga/week0f.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/gl/week0f.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/gu/week0f.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/hi/week0f.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/hr/week0f.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ht/week0f.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/hu/week0f.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/id/week0f.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/is/week0f.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/it/week0f.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/iw/week0f.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ja/week0f.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ka/week0f.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/kn/week0f.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ko/week0f.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/la/week0f.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/lt/week0f.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/lv/week0f.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/mk/week0f.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ms/week0f.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/mt/week0f.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/nl/week0f.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/no/week0f.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/pl/week0f.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/pt/week0f.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ro/week0f.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ru/week0f.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sk/week0f.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sl/week0f.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sq/week0f.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sr/week0f.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sv/week0f.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/sw/week0f.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ta/week0f.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/te/week0f.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/th/week0f.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/tl/week0f.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/tr/week0f.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/uk/week0f.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/ur/week0f.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/vi/week0f.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/yi/week0f.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/zh-CN/week0f.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/zh-TW/week0f.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/0/f/lang/en/week0f.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/0/f/notes0f/notes0f.pdf"
-}, {
-    "id": "YiiHNiSfmKI",
-    "episode": 2,
-    "year": 2015,
-    "youtube": {
-        "main": "YiiHNiSfmKI",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/1/w/week1w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/en/week1w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/af/week1w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ar/week1w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/az/week1w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/be/week1w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/bg/week1w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/bn/week1w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ca/week1w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/cs/week1w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/cy/week1w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/da/week1w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/de/week1w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/el/week1w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/en/week1w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/eo/week1w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/es/week1w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/et/week1w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/eu/week1w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/fa/week1w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/fi/week1w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/fr/week1w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ga/week1w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/gl/week1w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/gu/week1w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/hi/week1w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/hr/week1w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ht/week1w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/hu/week1w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/id/week1w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/is/week1w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/it/week1w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/iw/week1w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ja/week1w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ka/week1w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/kn/week1w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ko/week1w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/la/week1w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/lt/week1w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/lv/week1w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/mk/week1w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ms/week1w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/mt/week1w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/nl/week1w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/no/week1w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/pl/week1w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/pt/week1w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ro/week1w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ru/week1w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sk/week1w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sl/week1w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sq/week1w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sr/week1w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sv/week1w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/sw/week1w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ta/week1w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/te/week1w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/th/week1w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/tl/week1w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/tr/week1w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/uk/week1w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/ur/week1w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/vi/week1w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/yi/week1w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/zh-CN/week1w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/zh-TW/wee1wf.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/1/w/lang/en/week1w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/1/w/notes1w/notes1w.pdf"
-}, {
-    "id": "Y2vC3G8qVxw",
-    "episode": 3,
-    "year": 2015,
-    "youtube": {
-        "main": "Y2vC3G8qVxw",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/1/f/week1f.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/en/week1f.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/af/week1f.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ar/week1f.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/az/week1f.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/be/week1f.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/bg/week1f.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/bn/week1f.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ca/week1f.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/cs/week1f.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/cy/week1f.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/da/week1f.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/de/week1f.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/el/week1f.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/en/week1f.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/eo/week1f.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/es/week1f.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/et/week1f.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/eu/week1f.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/fa/week1f.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/fi/week1f.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/fr/week1f.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ga/week1f.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/gl/week1f.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/gu/week1f.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/hi/week1f.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/hr/week1f.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ht/week1f.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/hu/week1f.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/id/week1f.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/is/week1f.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/it/week1f.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/iw/week1f.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ja/week1f.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ka/week1f.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/kn/week1f.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ko/week1f.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/la/week1f.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/lt/week1f.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/lv/week1f.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/mk/week1f.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ms/week1f.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/mt/week1f.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/nl/week1f.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/no/week1f.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/pl/week1f.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/pt/week1f.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ro/week1f.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ru/week1f.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sk/week1f.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sl/week1f.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sq/week1f.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sr/week1f.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sv/week1f.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/sw/week1f.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ta/week1f.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/te/week1f.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/th/week1f.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/tl/week1f.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/tr/week1f.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/uk/week1f.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/ur/week1f.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/vi/week1f.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/yi/week1f.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/zh-CN/week1f.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/zh-TW/week1f.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/1/f/lang/en/week1f.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/1/f/notes1f/notes1f.pdf"
-}, {
-    "id": "FgfLXemFoIo",
-    "episode": 4,
-    "year": 2015,
-    "youtube": {
-        "main": "FgfLXemFoIo",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/2/m/week2m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/en/week2m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/af/week2m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ar/week2m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/az/week2m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/be/week2m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/bg/week2m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/bn/week2m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ca/week2m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/cs/week2m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/cy/week2m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/da/week2m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/de/week2m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/el/week2m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/en/week2m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/eo/week2m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/es/week2m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/et/week2m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/eu/week2m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/fa/week2m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/fi/week2m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/fr/week2m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ga/week2m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/gl/week2m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/gu/week2m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/hi/week2m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/hr/week2m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ht/week2m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/hu/week2m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/id/week2m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/is/week2m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/it/week2m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/iw/week2m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ja/week2m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ka/week2m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/kn/week2m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ko/week2m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/la/week2m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/lt/week2m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/lv/week2m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/mk/week2m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ms/week2m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/mt/week2m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/nl/week2m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/no/week2m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/pl/week2m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/pt/week2m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ro/week2m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ru/week2m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sk/week2m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sl/week2m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sq/week2m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sr/week2m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sv/week2m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/sw/week2m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ta/week2m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/te/week2m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/th/week2m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/tl/week2m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/tr/week2m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/uk/week2m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/ur/week2m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/vi/week2m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/yi/week2m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/zh-CN/week2m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/zh-TW/week2m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/2/m/lang/en/week2m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/2/m/notes2m/notes2m.pdf"
-}, {
-    "id": "7ATGN54sSVQ",
-    "episode": 5,
-    "year": 2015,
-    "youtube": {
-        "main": "7ATGN54sSVQ",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/2/w/week2w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/en/week2w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/af/week2w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ar/week2w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/az/week2w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/be/week2w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/bg/week2w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/bn/week2w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ca/week2w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/cs/week2w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/cy/week2w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/da/week2w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/de/week2w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/el/week2w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/en/week2w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/eo/week2w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/es/week2w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/et/week2w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/eu/week2w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/fa/week2w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/fi/week2w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/fr/week2w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ga/week2w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/gl/week2w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/gu/week2w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/hi/week2w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/hr/week2w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ht/week2w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/hu/week2w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/id/week2w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/is/week2w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/it/week2w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/iw/week2w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ja/week2w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ka/week2w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/kn/week2w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ko/week2w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/la/week2w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/lt/week2w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/lv/week2w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/mk/week2w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ms/week2w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/mt/week2w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/nl/week2w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/no/week2w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/pl/week2w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/pt/week2w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ro/week2w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ru/week2w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sk/week2w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sl/week2w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sq/week2w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sr/week2w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sv/week2w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/sw/week2w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ta/week2w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/te/week2w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/th/week2w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/tl/week2w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/tr/week2w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/uk/week2w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/ur/week2w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/vi/week2w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/yi/week2w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/zh-CN/week2w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/zh-TW/week2w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/2/w/lang/en/week2w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/2/w/notes2w/notes2w.pdf"
-}, {
-    "id": "IEOO5UToo6A",
-    "episode": 6,
-    "year": 2015,
-    "youtube": {
-        "main": "IEOO5UToo6A",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/3/m/week3m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/en/week3m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/af/week3m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ar/week3m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/az/week3m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/be/week3m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/bg/week3m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/bn/week3m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ca/week3m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/cs/week3m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/cy/week3m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/da/week3m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/de/week3m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/el/week3m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/en/week3m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/eo/week3m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/es/week3m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/et/week3m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/eu/week3m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/fa/week3m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/fi/week3m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/fr/week3m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ga/week3m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/gl/week3m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/gu/week3m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/hi/week3m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/hr/week3m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ht/week3m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/hu/week3m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/id/week3m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/is/week3m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/it/week3m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/iw/week3m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ja/week3m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ka/week3m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/kn/week3m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ko/week3m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/la/week3m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/lt/week3m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/lv/week3m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/mk/week3m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ms/week3m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/mt/week3m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/nl/week3m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/no/week3m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/pl/week3m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/pt/week3m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ro/week3m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ru/week3m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sk/week3m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sl/week3m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sq/week3m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sr/week3m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sv/week3m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/sw/week3m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ta/week3m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/te/week3m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/th/week3m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/tl/week3m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/tr/week3m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/uk/week3m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/ur/week3m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/vi/week3m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/yi/week3m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/zh-CN/week3m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/zh-TW/week3m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/3/m/lang/en/week3m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/3/m/notes3m/notes3m.pdf"
-}, {
-    "id": "JovNemG-iu8",
-    "episode": 7,
-    "year": 2015,
-    "youtube": {
-        "main": "JovNemG-iu8",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/3/w/week3w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/en/week3w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/af/week3w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ar/week3w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/az/week3w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/be/week3w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/bg/week3w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/bn/week3w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ca/week3w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/cs/week3w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/cy/week3w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/da/week3w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/de/week3w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/el/week3w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/en/week3w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/eo/week3w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/es/week3w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/et/week3w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/eu/week3w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/fa/week3w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/fi/week3w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/fr/week3w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ga/week3w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/gl/week3w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/gu/week3w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/hi/week3w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/hr/week3w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ht/week3w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/hu/week3w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/id/week3w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/is/week3w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/it/week3w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/iw/week3w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ja/week3w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ka/week3w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/kn/week3w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ko/week3w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/la/week3w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/lt/week3w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/lv/week3w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/mk/week3w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ms/week3w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/mt/week3w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/nl/week3w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/no/week3w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/pl/week3w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/pt/week3w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ro/week3w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ru/week3w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sk/week3w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sl/week3w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sq/week3w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sr/week3w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sv/week3w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/sw/week3w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ta/week3w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/te/week3w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/th/week3w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/tl/week3w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/tr/week3w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/uk/week3w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/ur/week3w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/vi/week3w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/yi/week3w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/zh-CN/week3w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/zh-TW/week3w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/3/w/lang/en/week3w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/3/w/notes3w/notes3w.pdf"
-}, {
-    "id": "8Ba7SgCN2XY",
-    "episode": 8,
-    "year": 2015,
-    "youtube": {
-        "main": "8Ba7SgCN2XY",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/4/m/week4m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/en/week4m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/af/week4m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ar/week4m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/az/week4m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/be/week4m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/bg/week4m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/bn/week4m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ca/week4m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/cs/week4m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/cy/week4m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/da/week4m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/de/week4m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/el/week4m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/en/week4m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/eo/week4m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/es/week4m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/et/week4m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/eu/week4m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/fa/week4m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/fi/week4m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/fr/week4m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ga/week4m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/gl/week4m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/gu/week4m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/hi/week4m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/hr/week4m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ht/week4m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/hu/week4m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/id/week4m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/is/week4m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/it/week4m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/iw/week4m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ja/week4m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ka/week4m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/kn/week4m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ko/week4m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/la/week4m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/lt/week4m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/lv/week4m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/mk/week4m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ms/week4m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/mt/week4m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/nl/week4m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/no/week4m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/pl/week4m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/pt/week4m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ro/week4m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ru/week4m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sk/week4m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sl/week4m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sq/week4m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sr/week4m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sv/week4m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/sw/week4m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ta/week4m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/te/week4m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/th/week4m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/tl/week4m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/tr/week4m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/uk/week4m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/ur/week4m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/vi/week4m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/yi/week4m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/zh-CN/week4m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/zh-TW/week4m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/4/m/lang/en/week4m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/4/m/notes4m/notes4m.pdf"
-}, {
-    "id": "uYiVtZHns-A",
-    "episode": 9,
-    "year": 2015,
-    "youtube": {
-        "main": "uYiVtZHns-A",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/4/w/week4w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/en/week4w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/af/week4w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ar/week4w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/az/week4w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/be/week4w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/bg/week4w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/bn/week4w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ca/week4w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/cs/week4w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/cy/week4w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/da/week4w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/de/week4w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/el/week4w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/en/week4w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/eo/week4w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/es/week4w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/et/week4w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/eu/week4w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/fa/week4w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/fi/week4w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/fr/week4w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ga/week4w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/gl/week4w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/gu/week4w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/hi/week4w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/hr/week4w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ht/week4w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/hu/week4w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/id/week4w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/is/week4w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/it/week4w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/iw/week4w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ja/week4w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ka/week4w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/kn/week4w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ko/week4w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/la/week4w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/lt/week4w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/lv/week4w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/mk/week4w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ms/week4w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/mt/week4w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/nl/week4w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/no/week4w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/pl/week4w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/pt/week4w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ro/week4w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ru/week4w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sk/week4w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sl/week4w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sq/week4w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sr/week4w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sv/week4w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/sw/week4w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ta/week4w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/te/week4w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/th/week4w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/tl/week4w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/tr/week4w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/uk/week4w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/ur/week4w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/vi/week4w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/yi/week4w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/zh-CN/week4w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/zh-TW/week4w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/4/w/lang/en/week4w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/4/w/notes4w/notes4w.pdf"
-}, {
-    "id": "RsIP1gRneOs",
-    "episode": 10,
-    "year": 2015,
-    "youtube": {
-        "main": "RsIP1gRneOs",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/5/m/week5m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/en/week5m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/af/week5m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ar/week5m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/az/week5m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/be/week5m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/bg/week5m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/bn/week5m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ca/week5m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/cs/week5m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/cy/week5m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/da/week5m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/de/week5m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/el/week5m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/en/week5m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/eo/week5m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/es/week5m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/et/week5m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/eu/week5m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/fa/week5m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/fi/week5m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/fr/week5m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ga/week5m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/gl/week5m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/gu/week5m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/hi/week5m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/hr/week5m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ht/week5m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/hu/week5m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/id/week5m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/is/week5m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/it/week5m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/iw/week5m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ja/week5m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ka/week5m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/kn/week5m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ko/week5m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/la/week5m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/lt/week5m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/lv/week5m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/mk/week5m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ms/week5m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/mt/week5m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/nl/week5m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/no/week5m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/pl/week5m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/pt/week5m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ro/week5m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ru/week5m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sk/week5m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sl/week5m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sq/week5m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sr/week5m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sv/week5m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/sw/week5m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ta/week5m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/te/week5m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/th/week5m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/tl/week5m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/tr/week5m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/uk/week5m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/ur/week5m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/vi/week5m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/yi/week5m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/zh-CN/week5m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/zh-TW/week5m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/5/m/lang/en/week5m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/5/m/notes5m/notes5m.pdf"
-}, {
-    "id": "3p_Scm7qSfU",
-    "episode": 11,
-    "year": 2015,
-    "youtube": {
-        "main": "3p_Scm7qSfU",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/5/w/week5w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/en/week5w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/af/week5w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ar/week5w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/az/week5w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/be/week5w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/bg/week5w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/bn/week5w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ca/week5w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/cs/week5w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/cy/week5w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/da/week5w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/de/week5w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/el/week5w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/en/week5w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/eo/week5w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/es/week5w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/et/week5w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/eu/week5w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/fa/week5w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/fi/week5w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/fr/week5w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ga/week5w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/gl/week5w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/gu/week5w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/hi/week5w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/hr/week5w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ht/week5w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/hu/week5w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/id/week5w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/is/week5w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/it/week5w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/iw/week5w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ja/week5w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ka/week5w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/kn/week5w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ko/week5w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/la/week5w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/lt/week5w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/lv/week5w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/mk/week5w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ms/week5w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/mt/week5w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/nl/week5w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/no/week5w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/pl/week5w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/pt/week5w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ro/week5w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ru/week5w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sk/week5w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sl/week5w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sq/week5w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sr/week5w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sv/week5w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/sw/week5w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ta/week5w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/te/week5w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/th/week5w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/tl/week5w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/tr/week5w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/uk/week5w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/ur/week5w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/vi/week5w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/yi/week5w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/zh-CN/week5w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/zh-TW/week5w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/5/w/lang/en/week5w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/5/w/notes5w/notes5w.pdf"
-}, {
-    "id": "KWxwYbaAWxs",
-    "episode": 12,
-    "year": 2015,
-    "youtube": {
-        "main": "KWxwYbaAWxs",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/6/m/week6m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/en/week6m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/af/week6m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ar/week6m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/az/week6m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/be/week6m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/bg/week6m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/bn/week6m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ca/week6m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/cs/week6m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/cy/week6m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/da/week6m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/de/week6m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/el/week6m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/en/week6m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/eo/week6m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/es/week6m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/et/week6m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/eu/week6m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/fa/week6m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/fi/week6m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/fr/week6m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ga/week6m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/gl/week6m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/gu/week6m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/hi/week6m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/hr/week6m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ht/week6m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/hu/week6m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/id/week6m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/is/week6m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/it/week6m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/iw/week6m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ja/week6m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ka/week6m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/kn/week6m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ko/week6m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/la/week6m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/lt/week6m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/lv/week6m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/mk/week6m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ms/week6m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/mt/week6m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/nl/week6m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/no/week6m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/pl/week6m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/pt/week6m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ro/week6m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ru/week6m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sk/week6m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sl/week6m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sq/week6m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sr/week6m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sv/week6m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/sw/week6m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ta/week6m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/te/week6m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/th/week6m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/tl/week6m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/tr/week6m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/uk/week6m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/ur/week6m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/vi/week6m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/yi/week6m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/zh-CN/week6m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/zh-TW/week6m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/6/m/lang/en/week6m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/6/m/notes6m/notes6m.pdf"
-}, {
-    "id": "GUtPQIDSwrA",
-    "episode": 13,
-    "year": 2015,
-    "youtube": {
-        "main": "GUtPQIDSwrA",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/7/m/week7m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/en/week7m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/af/week7m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ar/week7m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/az/week7m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/be/week7m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/bg/week7m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/bn/week7m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ca/week7m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/cs/week7m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/cy/week7m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/da/week7m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/de/week7m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/el/week7m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/en/week7m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/eo/week7m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/es/week7m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/et/week7m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/eu/week7m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/fa/week7m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/fi/week7m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/fr/week7m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ga/week7m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/gl/week7m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/gu/week7m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/hi/week7m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/hr/week7m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ht/week7m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/hu/week7m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/id/week7m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/is/week7m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/it/week7m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/iw/week7m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ja/week7m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ka/week7m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/kn/week7m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ko/week7m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/la/week7m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/lt/week7m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/lv/week7m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/mk/week7m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ms/week7m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/mt/week7m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/nl/week7m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/no/week7m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/pl/week7m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/pt/week7m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ro/week7m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ru/week7m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sk/week7m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sl/week7m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sq/week7m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sr/week7m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sv/week7m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/sw/week7m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ta/week7m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/te/week7m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/th/week7m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/tl/week7m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/tr/week7m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/uk/week7m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/ur/week7m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/vi/week7m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/yi/week7m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/zh-CN/week7m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/zh-TW/week7m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/7/m/lang/en/week7m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/7/m/notes7m/notes7m.pdf"
-}, {
-    "id": "h_zmq88Ae3k",
-    "episode": 14,
-    "year": 2015,
-    "youtube": {
-        "main": "h_zmq88Ae3k",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/7/w/week7w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/en/week7w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/af/week7w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ar/week7w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/az/week7w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/be/week7w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/bg/week7w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/bn/week7w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ca/week7w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/cs/week7w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/cy/week7w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/da/week7w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/de/week7w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/el/week7w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/en/week7w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/eo/week7w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/es/week7w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/et/week7w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/eu/week7w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/fa/week7w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/fi/week7w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/fr/week7w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ga/week7w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/gl/week7w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/gu/week7w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/hi/week7w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/hr/week7w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ht/week7w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/hu/week7w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/id/week7w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/is/week7w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/it/week7w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/iw/week7w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ja/week7w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ka/week7w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/kn/week7w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ko/week7w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/la/week7w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/lt/week7w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/lv/week7w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/mk/week7w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ms/week7w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/mt/week7w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/nl/week7w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/no/week7w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/pl/week7w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/pt/week7w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ro/week7w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ru/week7w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sk/week7w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sl/week7w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sq/week7w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sr/week7w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sv/week7w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/sw/week7w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ta/week7w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/te/week7w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/th/week7w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/tl/week7w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/tr/week7w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/uk/week7w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/ur/week7w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/vi/week7w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/yi/week7w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/zh-CN/week7w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/zh-TW/week7w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/7/w/lang/en/week7w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/7/w/notes7w/notes7w.pdf"
-}, {
-    "id": "rJeP65u84ec",
-    "episode": 15,
-    "year": 2015,
-    "youtube": {
-        "main": "rJeP65u84ec",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/8/m/week8m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/en/week8m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/af/week8m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ar/week8m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/az/week8m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/be/week8m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/bg/week8m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/bn/week8m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ca/week8m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/cs/week8m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/cy/week8m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/da/week8m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/de/week8m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/el/week8m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/en/week8m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/eo/week8m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/es/week8m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/et/week8m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/eu/week8m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/fa/week8m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/fi/week8m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/fr/week8m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ga/week8m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/gl/week8m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/gu/week8m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/hi/week8m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/hr/week8m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ht/week8m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/hu/week8m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/id/week8m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/is/week8m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/it/week8m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/iw/week8m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ja/week8m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ka/week8m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/kn/week8m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ko/week8m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/la/week8m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/lt/week8m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/lv/week8m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/mk/week8m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ms/week8m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/mt/week8m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/nl/week8m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/no/week8m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/pl/week8m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/pt/week8m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ro/week8m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ru/week8m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sk/week8m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sl/week8m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sq/week8m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sr/week8m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sv/week8m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/sw/week8m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ta/week8m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/te/week8m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/th/week8m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/tl/week8m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/tr/week8m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/uk/week8m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/ur/week8m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/vi/week8m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/yi/week8m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/zh-CN/week8m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/zh-TW/week8m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/8/m/lang/en/week8m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/8/m/notes8m/notes8m.pdf"
-}, {
-    "id": "yoDrhOZCKWo",
-    "episode": 16,
-    "year": 2015,
-    "youtube": {
-        "main": "yoDrhOZCKWo",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/8/w/week8w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/en/week8w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/af/week8w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ar/week8w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/az/week8w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/be/week8w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/bg/week8w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/bn/week8w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ca/week8w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/cs/week8w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/cy/week8w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/da/week8w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/de/week8w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/el/week8w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/en/week8w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/eo/week8w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/es/week8w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/et/week8w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/eu/week8w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/fa/week8w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/fi/week8w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/fr/week8w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ga/week8w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/gl/week8w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/gu/week8w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/hi/week8w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/hr/week8w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ht/week8w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/hu/week8w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/id/week8w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/is/week8w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/it/week8w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/iw/week8w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ja/week8w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ka/week8w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/kn/week8w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ko/week8w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/la/week8w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/lt/week8w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/lv/week8w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/mk/week8w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ms/week8w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/mt/week8w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/nl/week8w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/no/week8w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/pl/week8w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/pt/week8w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ro/week8w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ru/week8w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sk/week8w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sl/week8w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sq/week8w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sr/week8w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sv/week8w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/sw/week8w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ta/week8w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/te/week8w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/th/week8w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/tl/week8w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/tr/week8w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/uk/week8w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/ur/week8w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/vi/week8w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/yi/week8w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/zh-CN/week8w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/zh-TW/week8w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/8/w/lang/en/week8w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/8/w/notes8w/notes8w.pdf"
-}, {
-    "id": "FKLqzTdkDMc",
-    "episode": 17,
-    "year": 2015,
-    "youtube": {
-        "main": "FKLqzTdkDMc",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/9/m/week9m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/en/week9m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/af/week9m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ar/week9m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/az/week9m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/be/week9m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/bg/week9m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/bn/week9m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ca/week9m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/cs/week9m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/cy/week9m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/da/week9m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/de/week9m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/el/week9m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/en/week9m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/eo/week9m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/es/week9m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/et/week9m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/eu/week9m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/fa/week9m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/fi/week9m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/fr/week9m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ga/week9m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/gl/week9m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/gu/week9m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/hi/week9m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/hr/week9m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ht/week9m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/hu/week9m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/id/week9m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/is/week9m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/it/week9m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/iw/week9m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ja/week9m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ka/week9m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/kn/week9m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ko/week9m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/la/week9m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/lt/week9m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/lv/week9m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/mk/week9m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ms/week9m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/mt/week9m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/nl/week9m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/no/week9m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/pl/week9m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/pt/week9m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ro/week9m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ru/week9m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sk/week9m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sl/week9m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sq/week9m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sr/week9m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sv/week9m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/sw/week9m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ta/week9m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/te/week9m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/th/week9m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/tl/week9m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/tr/week9m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/uk/week9m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/ur/week9m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/vi/week9m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/yi/week9m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/zh-CN/week9m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/zh-TW/week9m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/9/m/lang/en/week9m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/9/m/notes9m/notes9m.pdf"
-}, {
-    "id": "l9gEGB0eOps",
-    "episode": 18,
-    "year": 2015,
-    "youtube": {
-        "main": "l9gEGB0eOps",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/9/w/week9w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/en/week9w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/af/week9w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ar/week9w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/az/week9w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/be/week9w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/bg/week9w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/bn/week9w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ca/week9w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/cs/week9w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/cy/week9w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/da/week9w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/de/week9w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/el/week9w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/en/week9w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/eo/week9w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/es/week9w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/et/week9w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/eu/week9w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/fa/week9w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/fi/week9w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/fr/week9w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ga/week9w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/gl/week9w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/gu/week9w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/hi/week9w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/hr/week9w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ht/week9w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/hu/week9w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/id/week9w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/is/week9w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/it/week9w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/iw/week9w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ja/week9w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ka/week9w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/kn/week9w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ko/week9w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/la/week9w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/lt/week9w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/lv/week9w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/mk/week9w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ms/week9w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/mt/week9w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/nl/week9w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/no/week9w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/pl/week9w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/pt/week9w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ro/week9w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ru/week9w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sk/week9w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sl/week9w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sq/week9w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sr/week9w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sv/week9w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/sw/week9w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ta/week9w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/te/week9w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/th/week9w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/tl/week9w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/tr/week9w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/uk/week9w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/ur/week9w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/vi/week9w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/yi/week9w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/zh-CN/week9w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/zh-TW/week9w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/9/w/lang/en/week9w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/9/w/notes9w/notes9w.pdf"
-}, {
-    "id": "bpfiIlYzVGs",
-    "episode": 19,
-    "year": 2015,
-    "youtube": {
-        "main": "bpfiIlYzVGs",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/10/m/week10m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/en/week10m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/af/week10m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ar/week10m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/az/week10m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/be/week10m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/bg/week10m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/bn/week10m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ca/week10m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/cs/week10m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/cy/week10m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/da/week10m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/de/week10m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/el/week10m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/en/week10m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/eo/week10m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/es/week10m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/et/week10m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/eu/week10m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/fa/week10m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/fi/week10m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/fr/week10m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ga/week10m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/gl/week10m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/gu/week10m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/hi/week10m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/hr/week10m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ht/week10m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/hu/week10m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/id/week10m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/is/week10m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/it/week10m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/iw/week10m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ja/week10m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ka/week10m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/kn/week10m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ko/week10m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/la/week10m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/lt/week10m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/lv/week10m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/mk/week10m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ms/week10m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/mt/week10m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/nl/week10m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/no/week10m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/pl/week10m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/pt/week10m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ro/week10m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ru/week10m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sk/week10m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sl/week10m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sq/week10m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sr/week10m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sv/week10m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/sw/week10m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ta/week10m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/te/week10m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/th/week10m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/tl/week10m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/tr/week10m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/uk/week10m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/ur/week10m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/vi/week10m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/yi/week10m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/zh-CN/week10m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/zh-TW/week10m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/10/m/lang/en/week10m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/10/m/notes10m/notes10m.pdf"
-}, {
-    "id": "OkYga_a-9cQ",
-    "episode": 20,
-    "year": 2015,
-    "youtube": {
-        "main": "OkYga_a-9cQ",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/10/w/week10w.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/en/week10w.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/af/week10w.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ar/week10w.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/az/week10w.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/be/week10w.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/bg/week10w.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/bn/week10w.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ca/week10w.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/cs/week10w.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/cy/week10w.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/da/week10w.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/de/week10w.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/el/week10w.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/en/week10w.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/eo/week10w.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/es/week10w.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/et/week10w.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/eu/week10w.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/fa/week10w.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/fi/week10w.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/fr/week10w.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ga/week10w.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/gl/week10w.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/gu/week10w.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/hi/week10w.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/hr/week10w.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ht/week10w.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/hu/week10w.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/id/week10w.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/is/week10w.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/it/week10w.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/iw/week10w.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ja/week10w.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ka/week10w.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/kn/week10w.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ko/week10w.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/la/week10w.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/lt/week10w.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/lv/week10w.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/mk/week10w.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ms/week10w.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/mt/week10w.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/nl/week10w.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/no/week10w.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/pl/week10w.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/pt/week10w.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ro/week10w.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ru/week10w.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sk/week10w.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sl/week10w.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sq/week10w.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sr/week10w.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sv/week10w.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/sw/week10w.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ta/week10w.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/te/week10w.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/th/week10w.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/tl/week10w.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/tr/week10w.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/uk/week10w.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/ur/week10w.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/vi/week10w.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/yi/week10w.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/zh-CN/week10w.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/zh-TW/week10w.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/10/w/lang/en/week10w.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/10/w/notes10w/notes10w.pdf"
-}, {
-    "id": "7q3VIoQinCs",
-    "episode": 21,
-    "year": 2015,
-    "youtube": {
-        "main": "7q3VIoQinCs",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/11/m/m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/11/m/week11m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/af/week11m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ar/week11m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/az/week11m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/be/week11m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/bg/week11m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/bn/week11m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ca/week11m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/cs/week11m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/cy/week11m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/da/week11m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/de/week11m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/el/week11m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/eo/week11m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/es/week11m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/et/week11m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/eu/week11m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/fa/week11m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/fi/week11m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/fr/week11m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ga/week11m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/gl/week11m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/gu/week11m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/hi/week11m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/hr/week11m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ht/week11m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/hu/week11m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/id/week11m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/is/week11m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/it/week11m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/iw/week11m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ja/week11m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ka/week11m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/kn/week11m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ko/week11m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/la/week11m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/lt/week11m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/lv/week11m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/mk/week11m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ms/week11m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/mt/week11m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/nl/week11m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/no/week11m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/pl/week11m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/pt/week11m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ro/week11m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ru/week11m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sk/week11m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sl/week11m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sq/week11m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sr/week11m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sv/week11m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/sw/week11m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ta/week11m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/te/week11m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/th/week11m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/tl/week11m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/tr/week11m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/uk/week11m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/ur/week11m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/vi/week11m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/yi/week11m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/zh-CN/week11m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/zh-TW/week11m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/11/m/lang/en/week11m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/11/m/notes11m/notes11m.pdf"
-}, {
-    "id": "i9gUfhxej0I",
-    "episode": 22,
-    "year": 2015,
-    "youtube": {
-        "main": "i9gUfhxej0I",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/11/f/week11f.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/af/week11f.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ar/week11f.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/az/week11f.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/be/week11f.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/bg/week11f.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/bn/week11f.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ca/week11f.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/cs/week11f.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/cy/week11f.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/da/week11f.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/de/week11f.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/el/week11f.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/eo/week11f.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/es/week11f.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/et/week11f.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/eu/week11f.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/fa/week11f.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/fi/week11f.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/fr/week11f.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ga/week11f.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/gl/week11f.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/gu/week11f.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/hi/week11f.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/hr/week11f.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ht/week11f.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/hu/week11f.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/id/week11f.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/is/week11f.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/it/week11f.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/iw/week11f.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ja/week11f.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ka/week11f.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/kn/week11f.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ko/week11f.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/la/week11f.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/lt/week11f.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/lv/week11f.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/mk/week11f.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ms/week11f.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/mt/week11f.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/nl/week11f.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/no/week11f.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/pl/week11f.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/pt/week11f.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ro/week11f.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ru/week11f.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sk/week11f.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sl/week11f.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sq/week11f.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sr/week11f.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sv/week11f.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/sw/week11f.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ta/week11f.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/te/week11f.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/th/week11f.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/tl/week11f.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/tr/week11f.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/uk/week11f.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/ur/week11f.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/vi/week11f.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/yi/week11f.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/zh-CN/week11f.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/zh-TW/week11f.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/11/f/lang/en/week11f.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/11/f/notes11f/notes11f.pdf"
-}, {
-    "id": "l76Cz8RLO54",
-    "episode": 23,
-    "year": 2015,
-    "youtube": {
-        "main": "l76Cz8RLO54",
-        "slides": ""
-    },
-    "download": {
-        "240p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-240p.mp4",
-        "360p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-360p.mp4",
-        "720p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-720p.mp4",
-        "1080p": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-1080p.mp4",
-        "4K": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m-4k.mp4"
-    },
-    "thumbnails": "https://cdn.cs50.net/2015/fall/lectures/12/m/week12m.vtt",
-    "chapters": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/en/week12m.vtt",
-    "captions": {
-        "af": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/af/week12m.srt",
-        "ar": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ar/week12m.srt",
-        "az": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/az/week12m.srt",
-        "be": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/be/week12m.srt",
-        "bg": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/bg/week12m.srt",
-        "bn": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/bn/week12m.srt",
-        "ca": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ca/week12m.srt",
-        "cs": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/cs/week12m.srt",
-        "cy": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/cy/week12m.srt",
-        "da": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/da/week12m.srt",
-        "de": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/de/week12m.srt",
-        "el": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/el/week12m.srt",
-        "en": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/en/week12m.srt",
-        "eo": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/eo/week12m.srt",
-        "es": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/es/week12m.srt",
-        "et": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/et/week12m.srt",
-        "eu": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/eu/week12m.srt",
-        "fa": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/fa/week12m.srt",
-        "fi": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/fi/week12m.srt",
-        "fr": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/fr/week12m.srt",
-        "ga": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ga/week12m.srt",
-        "gl": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/gl/week12m.srt",
-        "gu": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/gu/week12m.srt",
-        "hi": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/hi/week12m.srt",
-        "hr": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/hr/week12m.srt",
-        "ht": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ht/week12m.srt",
-        "hu": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/hu/week12m.srt",
-        "id": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/id/week12m.srt",
-        "is": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/is/week12m.srt",
-        "it": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/it/week12m.srt",
-        "iw": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/iw/week12m.srt",
-        "ja": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ja/week12m.srt",
-        "ka": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ka/week12m.srt",
-        "kn": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/kn/week12m.srt",
-        "ko": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ko/week12m.srt",
-        "la": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/la/week12m.srt",
-        "lt": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/lt/week12m.srt",
-        "lv": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/lv/week12m.srt",
-        "mk": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/mk/week12m.srt",
-        "ms": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ms/week12m.srt",
-        "mt": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/mt/week12m.srt",
-        "nl": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/nl/week12m.srt",
-        "no": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/no/week12m.srt",
-        "pl": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/pl/week12m.srt",
-        "pt": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/pt/week12m.srt",
-        "ro": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ro/week12m.srt",
-        "ru": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ru/week12m.srt",
-        "sk": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sk/week12m.srt",
-        "sl": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sl/week12m.srt",
-        "sq": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sq/week12m.srt",
-        "sr": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sr/week12m.srt",
-        "sv": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sv/week12m.srt",
-        "sw": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/sw/week12m.srt",
-        "ta": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ta/week12m.srt",
-        "te": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/te/week12m.srt",
-        "th": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/th/week12m.srt",
-        "tl": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/tl/week12m.srt",
-        "tr": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/tr/week12m.srt",
-        "uk": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/uk/week12m.srt",
-        "ur": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/ur/week12m.srt",
-        "vi": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/vi/week12m.srt",
-        "yi": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/yi/week12m.srt",
-        "zh-CN": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/zh-CN/week12m.srt",
-        "zh-TW": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/zh-TW/week12m.srt"
-    },
-    "transcript": "https://cdn.cs50.net/2015/fall/lectures/12/m/lang/en/week12m.txt",
-    "notes": "https://cdn.cs50.net/2015/fall/lectures/12/m/notes12m/notes12m.pdf"
-}]
-
-},{}],3:[function(require,module,exports){
+},{"./src/index":129}],2:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
@@ -7527,7 +5483,7 @@ module.exports = ret;
 },{"./es5":13}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":122}],4:[function(require,module,exports){
+},{"_process":121}],3:[function(require,module,exports){
 
 module.exports = function load (src, opts, cb) {
   var head = document.head || document.getElementsByTagName('head')[0]
@@ -7594,7 +5550,7 @@ function ieOnEnd (script, cb) {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -7603,7 +5559,7 @@ var DataView = getNative(root, 'DataView');
 
 module.exports = DataView;
 
-},{"./_getNative":54,"./_root":87}],6:[function(require,module,exports){
+},{"./_getNative":53,"./_root":86}],5:[function(require,module,exports){
 var hashClear = require('./_hashClear'),
     hashDelete = require('./_hashDelete'),
     hashGet = require('./_hashGet'),
@@ -7637,7 +5593,7 @@ Hash.prototype.set = hashSet;
 
 module.exports = Hash;
 
-},{"./_hashClear":58,"./_hashDelete":59,"./_hashGet":60,"./_hashHas":61,"./_hashSet":62}],7:[function(require,module,exports){
+},{"./_hashClear":57,"./_hashDelete":58,"./_hashGet":59,"./_hashHas":60,"./_hashSet":61}],6:[function(require,module,exports){
 var listCacheClear = require('./_listCacheClear'),
     listCacheDelete = require('./_listCacheDelete'),
     listCacheGet = require('./_listCacheGet'),
@@ -7671,7 +5627,7 @@ ListCache.prototype.set = listCacheSet;
 
 module.exports = ListCache;
 
-},{"./_listCacheClear":70,"./_listCacheDelete":71,"./_listCacheGet":72,"./_listCacheHas":73,"./_listCacheSet":74}],8:[function(require,module,exports){
+},{"./_listCacheClear":69,"./_listCacheDelete":70,"./_listCacheGet":71,"./_listCacheHas":72,"./_listCacheSet":73}],7:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -7680,7 +5636,7 @@ var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-},{"./_getNative":54,"./_root":87}],9:[function(require,module,exports){
+},{"./_getNative":53,"./_root":86}],8:[function(require,module,exports){
 var mapCacheClear = require('./_mapCacheClear'),
     mapCacheDelete = require('./_mapCacheDelete'),
     mapCacheGet = require('./_mapCacheGet'),
@@ -7714,7 +5670,7 @@ MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
 
-},{"./_mapCacheClear":75,"./_mapCacheDelete":76,"./_mapCacheGet":77,"./_mapCacheHas":78,"./_mapCacheSet":79}],10:[function(require,module,exports){
+},{"./_mapCacheClear":74,"./_mapCacheDelete":75,"./_mapCacheGet":76,"./_mapCacheHas":77,"./_mapCacheSet":78}],9:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -7723,7 +5679,7 @@ var Promise = getNative(root, 'Promise');
 
 module.exports = Promise;
 
-},{"./_getNative":54,"./_root":87}],11:[function(require,module,exports){
+},{"./_getNative":53,"./_root":86}],10:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -7732,7 +5688,7 @@ var Set = getNative(root, 'Set');
 
 module.exports = Set;
 
-},{"./_getNative":54,"./_root":87}],12:[function(require,module,exports){
+},{"./_getNative":53,"./_root":86}],11:[function(require,module,exports){
 var MapCache = require('./_MapCache'),
     setCacheAdd = require('./_setCacheAdd'),
     setCacheHas = require('./_setCacheHas');
@@ -7761,7 +5717,7 @@ SetCache.prototype.has = setCacheHas;
 
 module.exports = SetCache;
 
-},{"./_MapCache":9,"./_setCacheAdd":88,"./_setCacheHas":89}],13:[function(require,module,exports){
+},{"./_MapCache":8,"./_setCacheAdd":87,"./_setCacheHas":88}],12:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     stackClear = require('./_stackClear'),
     stackDelete = require('./_stackDelete'),
@@ -7789,7 +5745,7 @@ Stack.prototype.set = stackSet;
 
 module.exports = Stack;
 
-},{"./_ListCache":7,"./_stackClear":91,"./_stackDelete":92,"./_stackGet":93,"./_stackHas":94,"./_stackSet":95}],14:[function(require,module,exports){
+},{"./_ListCache":6,"./_stackClear":90,"./_stackDelete":91,"./_stackGet":92,"./_stackHas":93,"./_stackSet":94}],13:[function(require,module,exports){
 var root = require('./_root');
 
 /** Built-in value references. */
@@ -7797,7 +5753,7 @@ var Symbol = root.Symbol;
 
 module.exports = Symbol;
 
-},{"./_root":87}],15:[function(require,module,exports){
+},{"./_root":86}],14:[function(require,module,exports){
 var root = require('./_root');
 
 /** Built-in value references. */
@@ -7805,7 +5761,7 @@ var Uint8Array = root.Uint8Array;
 
 module.exports = Uint8Array;
 
-},{"./_root":87}],16:[function(require,module,exports){
+},{"./_root":86}],15:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -7814,7 +5770,7 @@ var WeakMap = getNative(root, 'WeakMap');
 
 module.exports = WeakMap;
 
-},{"./_getNative":54,"./_root":87}],17:[function(require,module,exports){
+},{"./_getNative":53,"./_root":86}],16:[function(require,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for
  * iteratee shorthands.
@@ -7838,7 +5794,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var baseTimes = require('./_baseTimes'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -7878,7 +5834,7 @@ function arrayLikeKeys(value, inherited) {
 
 module.exports = arrayLikeKeys;
 
-},{"./_baseTimes":39,"./_isIndex":64,"./isArguments":105,"./isArray":106,"./isString":113}],19:[function(require,module,exports){
+},{"./_baseTimes":38,"./_isIndex":63,"./isArguments":104,"./isArray":105,"./isString":112}],18:[function(require,module,exports){
 /**
  * A specialized version of `_.some` for arrays without support for iteratee
  * shorthands.
@@ -7903,7 +5859,7 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var eq = require('./eq');
 
 /**
@@ -7926,7 +5882,7 @@ function assocIndexOf(array, key) {
 
 module.exports = assocIndexOf;
 
-},{"./eq":100}],21:[function(require,module,exports){
+},{"./eq":99}],20:[function(require,module,exports){
 var baseForOwn = require('./_baseForOwn'),
     createBaseEach = require('./_createBaseEach');
 
@@ -7942,7 +5898,7 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./_baseForOwn":23,"./_createBaseEach":45}],22:[function(require,module,exports){
+},{"./_baseForOwn":22,"./_createBaseEach":44}],21:[function(require,module,exports){
 var createBaseFor = require('./_createBaseFor');
 
 /**
@@ -7960,7 +5916,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./_createBaseFor":46}],23:[function(require,module,exports){
+},{"./_createBaseFor":45}],22:[function(require,module,exports){
 var baseFor = require('./_baseFor'),
     keys = require('./keys');
 
@@ -7978,7 +5934,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"./_baseFor":22,"./keys":116}],24:[function(require,module,exports){
+},{"./_baseFor":21,"./keys":115}],23:[function(require,module,exports){
 var castPath = require('./_castPath'),
     isKey = require('./_isKey'),
     toKey = require('./_toKey');
@@ -8005,7 +5961,7 @@ function baseGet(object, path) {
 
 module.exports = baseGet;
 
-},{"./_castPath":42,"./_isKey":65,"./_toKey":98}],25:[function(require,module,exports){
+},{"./_castPath":41,"./_isKey":64,"./_toKey":97}],24:[function(require,module,exports){
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -8029,7 +5985,7 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * The base implementation of `_.hasIn` without support for deep paths.
  *
@@ -8044,7 +6000,7 @@ function baseHasIn(object, key) {
 
 module.exports = baseHasIn;
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var baseIsEqualDeep = require('./_baseIsEqualDeep'),
     isObject = require('./isObject'),
     isObjectLike = require('./isObjectLike');
@@ -8076,7 +6032,7 @@ function baseIsEqual(value, other, customizer, bitmask, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":28,"./isObject":111,"./isObjectLike":112}],28:[function(require,module,exports){
+},{"./_baseIsEqualDeep":27,"./isObject":110,"./isObjectLike":111}],27:[function(require,module,exports){
 var Stack = require('./_Stack'),
     equalArrays = require('./_equalArrays'),
     equalByTag = require('./_equalByTag'),
@@ -8160,7 +6116,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, bitmask, stack) {
 
 module.exports = baseIsEqualDeep;
 
-},{"./_Stack":13,"./_equalArrays":48,"./_equalByTag":49,"./_equalObjects":50,"./_getTag":55,"./_isHostObject":63,"./isArray":106,"./isTypedArray":115}],29:[function(require,module,exports){
+},{"./_Stack":12,"./_equalArrays":47,"./_equalByTag":48,"./_equalObjects":49,"./_getTag":54,"./_isHostObject":62,"./isArray":105,"./isTypedArray":114}],28:[function(require,module,exports){
 var Stack = require('./_Stack'),
     baseIsEqual = require('./_baseIsEqual');
 
@@ -8224,7 +6180,7 @@ function baseIsMatch(object, source, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./_Stack":13,"./_baseIsEqual":27}],30:[function(require,module,exports){
+},{"./_Stack":12,"./_baseIsEqual":26}],29:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isHostObject = require('./_isHostObject'),
     isMasked = require('./_isMasked'),
@@ -8273,7 +6229,7 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isHostObject":63,"./_isMasked":67,"./_toSource":99,"./isFunction":109,"./isObject":111}],31:[function(require,module,exports){
+},{"./_isHostObject":62,"./_isMasked":66,"./_toSource":98,"./isFunction":108,"./isObject":110}],30:[function(require,module,exports){
 var isLength = require('./isLength'),
     isObjectLike = require('./isObjectLike');
 
@@ -8344,7 +6300,7 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./isLength":110,"./isObjectLike":112}],32:[function(require,module,exports){
+},{"./isLength":109,"./isObjectLike":111}],31:[function(require,module,exports){
 var baseMatches = require('./_baseMatches'),
     baseMatchesProperty = require('./_baseMatchesProperty'),
     identity = require('./identity'),
@@ -8377,7 +6333,7 @@ function baseIteratee(value) {
 
 module.exports = baseIteratee;
 
-},{"./_baseMatches":34,"./_baseMatchesProperty":35,"./identity":104,"./isArray":106,"./property":118}],33:[function(require,module,exports){
+},{"./_baseMatches":33,"./_baseMatchesProperty":34,"./identity":103,"./isArray":105,"./property":117}],32:[function(require,module,exports){
 var isPrototype = require('./_isPrototype'),
     nativeKeys = require('./_nativeKeys');
 
@@ -8409,7 +6365,7 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{"./_isPrototype":68,"./_nativeKeys":83}],34:[function(require,module,exports){
+},{"./_isPrototype":67,"./_nativeKeys":82}],33:[function(require,module,exports){
 var baseIsMatch = require('./_baseIsMatch'),
     getMatchData = require('./_getMatchData'),
     matchesStrictComparable = require('./_matchesStrictComparable');
@@ -8433,7 +6389,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./_baseIsMatch":29,"./_getMatchData":53,"./_matchesStrictComparable":81}],35:[function(require,module,exports){
+},{"./_baseIsMatch":28,"./_getMatchData":52,"./_matchesStrictComparable":80}],34:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual'),
     get = require('./get'),
     hasIn = require('./hasIn'),
@@ -8468,7 +6424,7 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"./_baseIsEqual":27,"./_isKey":65,"./_isStrictComparable":69,"./_matchesStrictComparable":81,"./_toKey":98,"./get":102,"./hasIn":103}],36:[function(require,module,exports){
+},{"./_baseIsEqual":26,"./_isKey":64,"./_isStrictComparable":68,"./_matchesStrictComparable":80,"./_toKey":97,"./get":101,"./hasIn":102}],35:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -8484,7 +6440,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],37:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 /**
@@ -8502,7 +6458,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./_baseGet":24}],38:[function(require,module,exports){
+},{"./_baseGet":23}],37:[function(require,module,exports){
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -8535,7 +6491,7 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /**
  * The base implementation of `_.times` without support for iteratee shorthands
  * or max array length checks.
@@ -8557,7 +6513,7 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     isSymbol = require('./isSymbol');
 
@@ -8590,7 +6546,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{"./_Symbol":14,"./isSymbol":114}],41:[function(require,module,exports){
+},{"./_Symbol":13,"./isSymbol":113}],40:[function(require,module,exports){
 /**
  * The base implementation of `_.unary` without support for storing metadata.
  *
@@ -8606,7 +6562,7 @@ function baseUnary(func) {
 
 module.exports = baseUnary;
 
-},{}],42:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 var isArray = require('./isArray'),
     stringToPath = require('./_stringToPath');
 
@@ -8623,7 +6579,7 @@ function castPath(value) {
 
 module.exports = castPath;
 
-},{"./_stringToPath":97,"./isArray":106}],43:[function(require,module,exports){
+},{"./_stringToPath":96,"./isArray":105}],42:[function(require,module,exports){
 var baseSlice = require('./_baseSlice');
 
 /**
@@ -8643,7 +6599,7 @@ function castSlice(array, start, end) {
 
 module.exports = castSlice;
 
-},{"./_baseSlice":38}],44:[function(require,module,exports){
+},{"./_baseSlice":37}],43:[function(require,module,exports){
 var root = require('./_root');
 
 /** Used to detect overreaching core-js shims. */
@@ -8651,7 +6607,7 @@ var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
 
-},{"./_root":87}],45:[function(require,module,exports){
+},{"./_root":86}],44:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike');
 
 /**
@@ -8685,7 +6641,7 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./isArrayLike":107}],46:[function(require,module,exports){
+},{"./isArrayLike":106}],45:[function(require,module,exports){
 /**
  * Creates a base function for methods like `_.forIn` and `_.forOwn`.
  *
@@ -8712,7 +6668,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 var castSlice = require('./_castSlice'),
     reHasComplexSymbol = require('./_reHasComplexSymbol'),
     stringToArray = require('./_stringToArray'),
@@ -8747,7 +6703,7 @@ function createCaseFirst(methodName) {
 
 module.exports = createCaseFirst;
 
-},{"./_castSlice":43,"./_reHasComplexSymbol":86,"./_stringToArray":96,"./toString":119}],48:[function(require,module,exports){
+},{"./_castSlice":42,"./_reHasComplexSymbol":85,"./_stringToArray":95,"./toString":118}],47:[function(require,module,exports){
 var SetCache = require('./_SetCache'),
     arraySome = require('./_arraySome');
 
@@ -8832,7 +6788,7 @@ function equalArrays(array, other, equalFunc, customizer, bitmask, stack) {
 
 module.exports = equalArrays;
 
-},{"./_SetCache":12,"./_arraySome":19}],49:[function(require,module,exports){
+},{"./_SetCache":11,"./_arraySome":18}],48:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     Uint8Array = require('./_Uint8Array'),
     eq = require('./eq'),
@@ -8947,7 +6903,7 @@ function equalByTag(object, other, tag, equalFunc, customizer, bitmask, stack) {
 
 module.exports = equalByTag;
 
-},{"./_Symbol":14,"./_Uint8Array":15,"./_equalArrays":48,"./_mapToArray":80,"./_setToArray":90,"./eq":100}],50:[function(require,module,exports){
+},{"./_Symbol":13,"./_Uint8Array":14,"./_equalArrays":47,"./_mapToArray":79,"./_setToArray":89,"./eq":99}],49:[function(require,module,exports){
 var keys = require('./keys');
 
 /** Used to compose bitmasks for comparison styles. */
@@ -9039,7 +6995,7 @@ function equalObjects(object, other, equalFunc, customizer, bitmask, stack) {
 
 module.exports = equalObjects;
 
-},{"./keys":116}],51:[function(require,module,exports){
+},{"./keys":115}],50:[function(require,module,exports){
 (function (global){
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
@@ -9047,7 +7003,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 module.exports = freeGlobal;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 var isKeyable = require('./_isKeyable');
 
 /**
@@ -9067,7 +7023,7 @@ function getMapData(map, key) {
 
 module.exports = getMapData;
 
-},{"./_isKeyable":66}],53:[function(require,module,exports){
+},{"./_isKeyable":65}],52:[function(require,module,exports){
 var isStrictComparable = require('./_isStrictComparable'),
     keys = require('./keys');
 
@@ -9093,7 +7049,7 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"./_isStrictComparable":69,"./keys":116}],54:[function(require,module,exports){
+},{"./_isStrictComparable":68,"./keys":115}],53:[function(require,module,exports){
 var baseIsNative = require('./_baseIsNative'),
     getValue = require('./_getValue');
 
@@ -9112,7 +7068,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"./_baseIsNative":30,"./_getValue":56}],55:[function(require,module,exports){
+},{"./_baseIsNative":29,"./_getValue":55}],54:[function(require,module,exports){
 var DataView = require('./_DataView'),
     Map = require('./_Map'),
     Promise = require('./_Promise'),
@@ -9183,7 +7139,7 @@ if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 
 module.exports = getTag;
 
-},{"./_DataView":5,"./_Map":8,"./_Promise":10,"./_Set":11,"./_WeakMap":16,"./_baseGetTag":25,"./_toSource":99}],56:[function(require,module,exports){
+},{"./_DataView":4,"./_Map":7,"./_Promise":9,"./_Set":10,"./_WeakMap":15,"./_baseGetTag":24,"./_toSource":98}],55:[function(require,module,exports){
 /**
  * Gets the value at `key` of `object`.
  *
@@ -9198,7 +7154,7 @@ function getValue(object, key) {
 
 module.exports = getValue;
 
-},{}],57:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var castPath = require('./_castPath'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -9241,7 +7197,7 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_castPath":42,"./_isIndex":64,"./_isKey":65,"./_toKey":98,"./isArguments":105,"./isArray":106,"./isLength":110,"./isString":113}],58:[function(require,module,exports){
+},{"./_castPath":41,"./_isIndex":63,"./_isKey":64,"./_toKey":97,"./isArguments":104,"./isArray":105,"./isLength":109,"./isString":112}],57:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /**
@@ -9257,7 +7213,7 @@ function hashClear() {
 
 module.exports = hashClear;
 
-},{"./_nativeCreate":82}],59:[function(require,module,exports){
+},{"./_nativeCreate":81}],58:[function(require,module,exports){
 /**
  * Removes `key` and its value from the hash.
  *
@@ -9274,7 +7230,7 @@ function hashDelete(key) {
 
 module.exports = hashDelete;
 
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used to stand-in for `undefined` hash values. */
@@ -9306,7 +7262,7 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-},{"./_nativeCreate":82}],61:[function(require,module,exports){
+},{"./_nativeCreate":81}],60:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used for built-in method references. */
@@ -9331,7 +7287,7 @@ function hashHas(key) {
 
 module.exports = hashHas;
 
-},{"./_nativeCreate":82}],62:[function(require,module,exports){
+},{"./_nativeCreate":81}],61:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used to stand-in for `undefined` hash values. */
@@ -9355,7 +7311,7 @@ function hashSet(key, value) {
 
 module.exports = hashSet;
 
-},{"./_nativeCreate":82}],63:[function(require,module,exports){
+},{"./_nativeCreate":81}],62:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -9377,7 +7333,7 @@ function isHostObject(value) {
 
 module.exports = isHostObject;
 
-},{}],64:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -9401,7 +7357,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],65:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var isArray = require('./isArray'),
     isSymbol = require('./isSymbol');
 
@@ -9432,7 +7388,7 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"./isArray":106,"./isSymbol":114}],66:[function(require,module,exports){
+},{"./isArray":105,"./isSymbol":113}],65:[function(require,module,exports){
 /**
  * Checks if `value` is suitable for use as unique object key.
  *
@@ -9449,7 +7405,7 @@ function isKeyable(value) {
 
 module.exports = isKeyable;
 
-},{}],67:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 var coreJsData = require('./_coreJsData');
 
 /** Used to detect methods masquerading as native. */
@@ -9471,7 +7427,7 @@ function isMasked(func) {
 
 module.exports = isMasked;
 
-},{"./_coreJsData":44}],68:[function(require,module,exports){
+},{"./_coreJsData":43}],67:[function(require,module,exports){
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -9491,7 +7447,7 @@ function isPrototype(value) {
 
 module.exports = isPrototype;
 
-},{}],69:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /**
@@ -9508,7 +7464,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"./isObject":111}],70:[function(require,module,exports){
+},{"./isObject":110}],69:[function(require,module,exports){
 /**
  * Removes all key-value entries from the list cache.
  *
@@ -9522,7 +7478,7 @@ function listCacheClear() {
 
 module.exports = listCacheClear;
 
-},{}],71:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /** Used for built-in method references. */
@@ -9558,7 +7514,7 @@ function listCacheDelete(key) {
 
 module.exports = listCacheDelete;
 
-},{"./_assocIndexOf":20}],72:[function(require,module,exports){
+},{"./_assocIndexOf":19}],71:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -9579,7 +7535,7 @@ function listCacheGet(key) {
 
 module.exports = listCacheGet;
 
-},{"./_assocIndexOf":20}],73:[function(require,module,exports){
+},{"./_assocIndexOf":19}],72:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -9597,7 +7553,7 @@ function listCacheHas(key) {
 
 module.exports = listCacheHas;
 
-},{"./_assocIndexOf":20}],74:[function(require,module,exports){
+},{"./_assocIndexOf":19}],73:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -9624,7 +7580,7 @@ function listCacheSet(key, value) {
 
 module.exports = listCacheSet;
 
-},{"./_assocIndexOf":20}],75:[function(require,module,exports){
+},{"./_assocIndexOf":19}],74:[function(require,module,exports){
 var Hash = require('./_Hash'),
     ListCache = require('./_ListCache'),
     Map = require('./_Map');
@@ -9646,7 +7602,7 @@ function mapCacheClear() {
 
 module.exports = mapCacheClear;
 
-},{"./_Hash":6,"./_ListCache":7,"./_Map":8}],76:[function(require,module,exports){
+},{"./_Hash":5,"./_ListCache":6,"./_Map":7}],75:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -9664,7 +7620,7 @@ function mapCacheDelete(key) {
 
 module.exports = mapCacheDelete;
 
-},{"./_getMapData":52}],77:[function(require,module,exports){
+},{"./_getMapData":51}],76:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -9682,7 +7638,7 @@ function mapCacheGet(key) {
 
 module.exports = mapCacheGet;
 
-},{"./_getMapData":52}],78:[function(require,module,exports){
+},{"./_getMapData":51}],77:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -9700,7 +7656,7 @@ function mapCacheHas(key) {
 
 module.exports = mapCacheHas;
 
-},{"./_getMapData":52}],79:[function(require,module,exports){
+},{"./_getMapData":51}],78:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -9720,7 +7676,7 @@ function mapCacheSet(key, value) {
 
 module.exports = mapCacheSet;
 
-},{"./_getMapData":52}],80:[function(require,module,exports){
+},{"./_getMapData":51}],79:[function(require,module,exports){
 /**
  * Converts `map` to its key-value pairs.
  *
@@ -9740,7 +7696,7 @@ function mapToArray(map) {
 
 module.exports = mapToArray;
 
-},{}],81:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 /**
  * A specialized version of `matchesProperty` for source values suitable
  * for strict equality comparisons, i.e. `===`.
@@ -9762,7 +7718,7 @@ function matchesStrictComparable(key, srcValue) {
 
 module.exports = matchesStrictComparable;
 
-},{}],82:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 /* Built-in method references that are verified to be native. */
@@ -9770,7 +7726,7 @@ var nativeCreate = getNative(Object, 'create');
 
 module.exports = nativeCreate;
 
-},{"./_getNative":54}],83:[function(require,module,exports){
+},{"./_getNative":53}],82:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
@@ -9778,7 +7734,7 @@ var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
 
-},{"./_overArg":85}],84:[function(require,module,exports){
+},{"./_overArg":84}],83:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 /** Detect free variable `exports`. */
@@ -9802,7 +7758,7 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-},{"./_freeGlobal":51}],85:[function(require,module,exports){
+},{"./_freeGlobal":50}],84:[function(require,module,exports){
 /**
  * Creates a unary function that invokes `func` with its argument transformed.
  *
@@ -9819,7 +7775,7 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],86:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 /** Used to compose unicode character classes. */
 var rsAstralRange = '\\ud800-\\udfff',
     rsComboMarksRange = '\\u0300-\\u036f\\ufe20-\\ufe23',
@@ -9834,7 +7790,7 @@ var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange
 
 module.exports = reHasComplexSymbol;
 
-},{}],87:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 /** Detect free variable `self`. */
@@ -9845,7 +7801,7 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":51}],88:[function(require,module,exports){
+},{"./_freeGlobal":50}],87:[function(require,module,exports){
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
@@ -9866,7 +7822,7 @@ function setCacheAdd(value) {
 
 module.exports = setCacheAdd;
 
-},{}],89:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 /**
  * Checks if `value` is in the array cache.
  *
@@ -9882,7 +7838,7 @@ function setCacheHas(value) {
 
 module.exports = setCacheHas;
 
-},{}],90:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 /**
  * Converts `set` to an array of its values.
  *
@@ -9902,7 +7858,7 @@ function setToArray(set) {
 
 module.exports = setToArray;
 
-},{}],91:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 var ListCache = require('./_ListCache');
 
 /**
@@ -9918,7 +7874,7 @@ function stackClear() {
 
 module.exports = stackClear;
 
-},{"./_ListCache":7}],92:[function(require,module,exports){
+},{"./_ListCache":6}],91:[function(require,module,exports){
 /**
  * Removes `key` and its value from the stack.
  *
@@ -9934,7 +7890,7 @@ function stackDelete(key) {
 
 module.exports = stackDelete;
 
-},{}],93:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 /**
  * Gets the stack value for `key`.
  *
@@ -9950,7 +7906,7 @@ function stackGet(key) {
 
 module.exports = stackGet;
 
-},{}],94:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 /**
  * Checks if a stack value for `key` exists.
  *
@@ -9966,7 +7922,7 @@ function stackHas(key) {
 
 module.exports = stackHas;
 
-},{}],95:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     Map = require('./_Map'),
     MapCache = require('./_MapCache');
@@ -10000,7 +7956,7 @@ function stackSet(key, value) {
 
 module.exports = stackSet;
 
-},{"./_ListCache":7,"./_Map":8,"./_MapCache":9}],96:[function(require,module,exports){
+},{"./_ListCache":6,"./_Map":7,"./_MapCache":8}],95:[function(require,module,exports){
 /** Used to compose unicode character classes. */
 var rsAstralRange = '\\ud800-\\udfff',
     rsComboMarksRange = '\\u0300-\\u036f\\ufe20-\\ufe23',
@@ -10040,7 +7996,7 @@ function stringToArray(string) {
 
 module.exports = stringToArray;
 
-},{}],97:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 var memoize = require('./memoize'),
     toString = require('./toString');
 
@@ -10073,7 +8029,7 @@ var stringToPath = memoize(function(string) {
 
 module.exports = stringToPath;
 
-},{"./memoize":117,"./toString":119}],98:[function(require,module,exports){
+},{"./memoize":116,"./toString":118}],97:[function(require,module,exports){
 var isSymbol = require('./isSymbol');
 
 /** Used as references for various `Number` constants. */
@@ -10096,7 +8052,7 @@ function toKey(value) {
 
 module.exports = toKey;
 
-},{"./isSymbol":114}],99:[function(require,module,exports){
+},{"./isSymbol":113}],98:[function(require,module,exports){
 /** Used to resolve the decompiled source of functions. */
 var funcToString = Function.prototype.toString;
 
@@ -10121,7 +8077,7 @@ function toSource(func) {
 
 module.exports = toSource;
 
-},{}],100:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 /**
  * Performs a
  * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
@@ -10160,7 +8116,7 @@ function eq(value, other) {
 
 module.exports = eq;
 
-},{}],101:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 var arrayEach = require('./_arrayEach'),
     baseEach = require('./_baseEach'),
     baseIteratee = require('./_baseIteratee'),
@@ -10203,7 +8159,7 @@ function forEach(collection, iteratee) {
 
 module.exports = forEach;
 
-},{"./_arrayEach":17,"./_baseEach":21,"./_baseIteratee":32,"./isArray":106}],102:[function(require,module,exports){
+},{"./_arrayEach":16,"./_baseEach":20,"./_baseIteratee":31,"./isArray":105}],101:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 /**
@@ -10238,7 +8194,7 @@ function get(object, path, defaultValue) {
 
 module.exports = get;
 
-},{"./_baseGet":24}],103:[function(require,module,exports){
+},{"./_baseGet":23}],102:[function(require,module,exports){
 var baseHasIn = require('./_baseHasIn'),
     hasPath = require('./_hasPath');
 
@@ -10274,7 +8230,7 @@ function hasIn(object, path) {
 
 module.exports = hasIn;
 
-},{"./_baseHasIn":26,"./_hasPath":57}],104:[function(require,module,exports){
+},{"./_baseHasIn":25,"./_hasPath":56}],103:[function(require,module,exports){
 /**
  * This method returns the first argument it receives.
  *
@@ -10297,7 +8253,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],105:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 var isArrayLikeObject = require('./isArrayLikeObject');
 
 /** `Object#toString` result references. */
@@ -10345,7 +8301,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"./isArrayLikeObject":108}],106:[function(require,module,exports){
+},{"./isArrayLikeObject":107}],105:[function(require,module,exports){
 /**
  * Checks if `value` is classified as an `Array` object.
  *
@@ -10373,7 +8329,7 @@ var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],107:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isLength = require('./isLength');
 
@@ -10408,7 +8364,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./isFunction":109,"./isLength":110}],108:[function(require,module,exports){
+},{"./isFunction":108,"./isLength":109}],107:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike'),
     isObjectLike = require('./isObjectLike');
 
@@ -10443,7 +8399,7 @@ function isArrayLikeObject(value) {
 
 module.exports = isArrayLikeObject;
 
-},{"./isArrayLike":107,"./isObjectLike":112}],109:[function(require,module,exports){
+},{"./isArrayLike":106,"./isObjectLike":111}],108:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -10487,7 +8443,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./isObject":111}],110:[function(require,module,exports){
+},{"./isObject":110}],109:[function(require,module,exports){
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -10524,7 +8480,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],111:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -10557,7 +8513,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],112:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -10588,7 +8544,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],113:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 var isArray = require('./isArray'),
     isObjectLike = require('./isObjectLike');
 
@@ -10629,7 +8585,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"./isArray":106,"./isObjectLike":112}],114:[function(require,module,exports){
+},{"./isArray":105,"./isObjectLike":111}],113:[function(require,module,exports){
 var isObjectLike = require('./isObjectLike');
 
 /** `Object#toString` result references. */
@@ -10669,7 +8625,7 @@ function isSymbol(value) {
 
 module.exports = isSymbol;
 
-},{"./isObjectLike":112}],115:[function(require,module,exports){
+},{"./isObjectLike":111}],114:[function(require,module,exports){
 var baseIsTypedArray = require('./_baseIsTypedArray'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -10698,7 +8654,7 @@ var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedA
 
 module.exports = isTypedArray;
 
-},{"./_baseIsTypedArray":31,"./_baseUnary":41,"./_nodeUtil":84}],116:[function(require,module,exports){
+},{"./_baseIsTypedArray":30,"./_baseUnary":40,"./_nodeUtil":83}],115:[function(require,module,exports){
 var arrayLikeKeys = require('./_arrayLikeKeys'),
     baseKeys = require('./_baseKeys'),
     isArrayLike = require('./isArrayLike');
@@ -10737,7 +8693,7 @@ function keys(object) {
 
 module.exports = keys;
 
-},{"./_arrayLikeKeys":18,"./_baseKeys":33,"./isArrayLike":107}],117:[function(require,module,exports){
+},{"./_arrayLikeKeys":17,"./_baseKeys":32,"./isArrayLike":106}],116:[function(require,module,exports){
 var MapCache = require('./_MapCache');
 
 /** Used as the `TypeError` message for "Functions" methods. */
@@ -10812,7 +8768,7 @@ memoize.Cache = MapCache;
 
 module.exports = memoize;
 
-},{"./_MapCache":9}],118:[function(require,module,exports){
+},{"./_MapCache":8}],117:[function(require,module,exports){
 var baseProperty = require('./_baseProperty'),
     basePropertyDeep = require('./_basePropertyDeep'),
     isKey = require('./_isKey'),
@@ -10846,7 +8802,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"./_baseProperty":36,"./_basePropertyDeep":37,"./_isKey":65,"./_toKey":98}],119:[function(require,module,exports){
+},{"./_baseProperty":35,"./_basePropertyDeep":36,"./_isKey":64,"./_toKey":97}],118:[function(require,module,exports){
 var baseToString = require('./_baseToString');
 
 /**
@@ -10876,7 +8832,7 @@ function toString(value) {
 
 module.exports = toString;
 
-},{"./_baseToString":40}],120:[function(require,module,exports){
+},{"./_baseToString":39}],119:[function(require,module,exports){
 var createCaseFirst = require('./_createCaseFirst');
 
 /**
@@ -10900,7 +8856,7 @@ var upperFirst = createCaseFirst('toUpperCase');
 
 module.exports = upperFirst;
 
-},{"./_createCaseFirst":47}],121:[function(require,module,exports){
+},{"./_createCaseFirst":46}],120:[function(require,module,exports){
 /*!
  * MinPubSub
  * Copyright(c) 2011 Daniel Lamb <daniellmb.com>
@@ -10997,7 +8953,7 @@ module.exports = upperFirst;
 
 })(window);
 
-},{}],122:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -11159,7 +9115,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],123:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 (function (global){
 /**
 * @link https://github.com/gajus/sister for the canonical source repository
@@ -11222,7 +9178,7 @@ global.gajus.Sister = Sister;
 
 module.exports = Sister;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],124:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 (function(self) {
   'use strict';
 
@@ -11657,7 +9613,7 @@ module.exports = Sister;
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
-},{}],125:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 'use strict';
 
 var _upperFirst2 = require('lodash/upperFirst');
@@ -11744,7 +9700,7 @@ exports.default = YouTubePlayer;
 module.exports = exports['default'];
 
 
-},{"./eventNames":126,"./functionNames":127,"lodash/forEach":101,"lodash/upperFirst":120}],126:[function(require,module,exports){
+},{"./eventNames":125,"./functionNames":126,"lodash/forEach":100,"lodash/upperFirst":119}],125:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11757,7 +9713,7 @@ exports.default = ['ready', 'stateChange', 'playbackQualityChange', 'playbackRat
 module.exports = exports['default'];
 
 
-},{}],127:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11770,7 +9726,7 @@ exports.default = ['cueVideoById', 'loadVideoById', 'cueVideoByUrl', 'loadVideoB
 module.exports = exports['default'];
 
 
-},{}],128:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 'use strict';
 
 var _isString2 = require('lodash/isString');
@@ -11862,7 +9818,7 @@ exports.default = function (elementId) {
 module.exports = exports['default'];
 
 
-},{"./YouTubePlayer":125,"./loadYouTubeIframeAPI":129,"bluebird":3,"lodash/isString":113,"sister":123}],129:[function(require,module,exports){
+},{"./YouTubePlayer":124,"./loadYouTubeIframeAPI":128,"bluebird":2,"lodash/isString":112,"sister":122}],128:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11913,20 +9869,12 @@ exports.default = function () {
 module.exports = exports['default'];
 
 
-},{"bluebird":3,"load-script":4}],130:[function(require,module,exports){
+},{"bluebird":2,"load-script":3}],129:[function(require,module,exports){
 'use strict';
 
 require('whatwg-fetch');
 
 var _minpubsub = require('minpubsub');
-
-var _index = require('../data/episodes/index.json');
-
-var _index2 = _interopRequireDefault(_index);
-
-var _episodeList = require('./modules/episode-list');
-
-var _episodeList2 = _interopRequireDefault(_episodeList);
 
 var _videoPlayback = require('./modules/video-playback');
 
@@ -12008,14 +9956,9 @@ var youTubeTimeToSeconds = function youTubeTimeToSeconds(time) {
 
 module.exports = function () {
   // Extract the url on page load
-  var targetEpisode = window.location.pathname.split('/')[2] || 0;
-  var targetLanguage = window.location.pathname.split('/')[3] || 'en';
-  // Modify the / url
-  if (targetEpisode === 0) {
-    window.history.replaceState({}, '', '/2015/' + targetEpisode + '/' + targetLanguage);
-  }
+  var targetEpisode = window.location.pathname;
+  var targetLanguage = 'en';
 
-  _episodeList2.default.render('episode-list', _index2.default);
   _videoPlayback2.default.render('video-playback', [{ rate: 0.75, label: '3/4' }, { rate: 1, label: '1' }, { rate: 1.5, label: '3/2' }, { rate: 2, label: '2' }]);
   _markerSearch2.default.render('marker-search');
   _videoMain2.default.render('video-main', '');
@@ -12029,30 +9972,38 @@ module.exports = function () {
     var lang = arguments.length <= 1 || arguments[1] === undefined ? 'en' : arguments[1];
 
     var startTime = getQueryParams(document.location.search).t ? youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
-    getEpisodeData('https://cdn.cs50.net/2015/fall/lectures/0/f/index.json').then(function (ep) {
+    // Fetch episode data from CDN based on URL
+    getEpisodeData('https://cdn.cs50.net' + id + '/index.json').then(function (ep) {
+      var toHttps = function toHttps(url) {
+        return url.replace('http://', 'https://');
+      };
       localStorage.setItem('episode', JSON.stringify(ep));
-      var chaptersFileUrl = ep.chapters.find(function (x) {
+      var chaptersFile = ep.chapters.find(function (x) {
         return x.srclang === 'en';
-      }).src.replace('http://', 'https://');
-      var captionsFileUrl = ep.captions.find(function (x) {
+      });
+      var captionsFile = ep.captions.find(function (x) {
         return x.srclang === 'en';
-      }).src.replace('http://', 'https://');
-      var thumbnailsFileUrl = ep.thumbnails.find(function (x) {
+      });
+      var thumbnailsFile = ep.thumbnails.find(function (x) {
         return x.type === 'text/vtt';
-      }).src.replace('http://', 'https://');
+      });
       var youtubeVideoId = ep.youtube.main;
       var downloadLinks = ep.downloads.filter(function (x) {
         return x.label.match('MP4');
       });
-      var availableLanguages = ep.captions.map(function (x) {
-        return x.srclang;
-      });
-      (0, _markerFetch.markers)(chaptersFileUrl, captionsFileUrl);
-      (0, _thumbnailFetch.thumbs)(thumbnailsFileUrl);
-      _videoDownload2.default.render('video-download', downloadLinks);
-      _languageSelect2.default.render('language-select', availableLanguages, lang);
+      // Render components based on what episode data exists
       (0, _minpubsub.publish)('video:loadVideoById', [youtubeVideoId, startTime]);
-      window.history.replaceState({}, '', '/2015/' + id + '/' + lang);
+      if (thumbnailsFile) (0, _thumbnailFetch.thumbs)(toHttps(thumbnailsFile.src));
+      if (downloadLinks) _videoDownload2.default.render('video-download', downloadLinks);
+      if (chaptersFile && captionsFile) {
+        var availableLanguages = ep.captions.map(function (x) {
+          return x.srclang;
+        });
+        _languageSelect2.default.render('language-select', availableLanguages, lang);
+        (0, _markerFetch.markers)(toHttps(chaptersFile.src), toHttps(captionsFile.src));
+      }
+    }).catch(function (e) {
+      return alert('Could not get episode data!');
     });
   });
 
@@ -12079,10 +10030,6 @@ module.exports = function () {
   (0, _minpubsub.subscribe)('video:tick', function (time) {
     window.history.replaceState({}, '', '?t=' + secondsToYoutubeTime(time));
   });
-
-  window.onpopstate = function () {
-    (0, _minpubsub.publish)('player:loadVideo', [window.location.pathname.split('/')[2]]);
-  };
 
   document.querySelector('.video-captions').addEventListener('click', function (e) {
     document.querySelector('marker-teleprompter').classList.toggle('hidden');
@@ -12153,83 +10100,7 @@ module.exports = function () {
   (0, _minpubsub.publish)('player:loadVideo', [targetEpisode, targetLanguage]);
 };
 
-},{"../data/episodes/index.json":2,"./modules/episode-list":131,"./modules/language-select":132,"./modules/marker-fetch":133,"./modules/marker-list":134,"./modules/marker-search":135,"./modules/marker-teleprompter":136,"./modules/marker-timeline":137,"./modules/thumbnail-fetch":138,"./modules/thumbnail-preview":139,"./modules/video-download":140,"./modules/video-main":141,"./modules/video-playback":142,"minpubsub":121,"whatwg-fetch":124}],131:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _minpubsub = require('minpubsub');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-exports.default = {
-  render: function render(selector, data) {
-    var active = parseFloat(window.location.pathname.split('/')[2]) || 0;
-    // Clear container element
-    var container = document.querySelector(selector);
-    var fragment = document.createDocumentFragment();
-    container.innerHTML = '';
-    // For each episode
-    data.forEach(function (model) {
-      var $episode = document.createElement('episode-');
-      $episode.innerHTML = model.year + ' | Episode ' + model.episode;
-      $episode.setAttribute('order', model.episode);
-      if (model.episode === active) {
-        $episode.classList.add('active');
-      }
-      $episode.addEventListener('click', function (e) {
-        // Remove active class from all episodes
-        [].concat(_toConsumableArray(e.currentTarget.parentNode.children)).forEach(function (x) {
-          return x.classList.remove('active');
-        });
-        e.currentTarget.classList.add('active');
-        var id = e.currentTarget.getAttribute('order');
-        window.history.pushState({}, '', '/2015/' + id);
-        (0, _minpubsub.publish)('player:loadVideo', [id]);
-      });
-      fragment.appendChild($episode);
-    });
-
-    var $prev = document.createElement('button');
-    $prev.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-prev"></use></svg>';
-    $prev.addEventListener('click', function (e) {
-      var current = [].concat(_toConsumableArray(e.currentTarget.parentNode.children)).find(function (x) {
-        return x.classList.contains('active');
-      });
-      var id = parseFloat(current.getAttribute('order')) - 1;
-      window.history.pushState({}, '', '/2015/' + id);
-      (0, _minpubsub.publish)('player:loadVideo', [id]);
-    });
-    fragment.appendChild($prev);
-
-    var $next = document.createElement('button');
-    $next.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-next"></use></svg>';
-    $next.addEventListener('click', function (e) {
-      var current = [].concat(_toConsumableArray(e.currentTarget.parentNode.children)).find(function (x) {
-        return x.classList.contains('active');
-      });
-      var id = parseFloat(current.getAttribute('order')) + 1;
-      window.history.pushState({}, '', '/2015/' + id);
-      (0, _minpubsub.publish)('player:loadVideo', [id]);
-    });
-    fragment.appendChild($next);
-
-    (0, _minpubsub.subscribe)('player:loadVideo', function (id) {
-      // Remove active class from all episodes
-      [].concat(_toConsumableArray(document.querySelectorAll('episode-'))).forEach(function (x) {
-        return x.classList.remove('active');
-      });
-      // Add active class to the loaded episode
-      document.querySelector('episode-[order="' + id + '"]').classList.add('active');
-    });
-
-    container.appendChild(fragment);
-  }
-};
-
-},{"minpubsub":121}],132:[function(require,module,exports){
+},{"./modules/language-select":130,"./modules/marker-fetch":131,"./modules/marker-list":132,"./modules/marker-search":133,"./modules/marker-teleprompter":134,"./modules/marker-timeline":135,"./modules/thumbnail-fetch":136,"./modules/thumbnail-preview":137,"./modules/video-download":138,"./modules/video-main":139,"./modules/video-playback":140,"minpubsub":120,"whatwg-fetch":123}],130:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12259,7 +10130,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],133:[function(require,module,exports){
+},{"minpubsub":120}],131:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12343,7 +10214,7 @@ var markers = exports.markers = function markers(chaptersUrl, captionsUrl) {
   });
 };
 
-},{"minpubsub":121}],134:[function(require,module,exports){
+},{"minpubsub":120}],132:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12370,12 +10241,14 @@ var updateActiveMarker = function updateActiveMarker(time) {
   var target = [].concat(_toConsumableArray(document.querySelectorAll('marker-list mark-[type="caption"]'))).find(function (x) {
     return time < parseFloat(x.getAttribute('end'));
   });
-  // Remove active class from any active caption mark
-  [].concat(_toConsumableArray(document.querySelectorAll('marker-list mark-[type="caption"].active'))).forEach(function (x) {
-    return x.classList.remove('active');
-  });
-  // Add active class to found marks
-  target.classList.add('active');
+  if (target) {
+    // Remove active class from any active caption mark
+    [].concat(_toConsumableArray(document.querySelectorAll('marker-list mark-[type="caption"].active'))).forEach(function (x) {
+      return x.classList.remove('active');
+    });
+    // Add active class to found marks
+    target.classList.add('active');
+  }
 };
 
 exports.default = {
@@ -12386,6 +10259,8 @@ exports.default = {
   render: function render(selector) {
     return function (data) {
       var container = document.querySelector(selector);
+      var trigger = document.querySelector('dialog-trigger');
+      trigger.removeAttribute('disabled');
       var frag = document.createDocumentFragment();
       var captionTemplate = function captionTemplate(mark) {
         return '\n        <span>' + secondsToTime(mark.start) + '</span>\n        <a href=\'?t=' + secondsToYoutubeTime(mark.start) + '\'>' + mark.title + '</a>\n      ';
@@ -12411,7 +10286,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],135:[function(require,module,exports){
+},{"minpubsub":120}],133:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12492,7 +10367,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],136:[function(require,module,exports){
+},{"minpubsub":120}],134:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12519,12 +10394,14 @@ var updateActiveMarker = function updateActiveMarker(time) {
   var target = [].concat(_toConsumableArray(document.querySelectorAll('marker-teleprompter mark-[type="caption"]'))).find(function (x) {
     return time < parseFloat(x.getAttribute('end'));
   });
-  // Remove active class from any active caption mark
-  [].concat(_toConsumableArray(document.querySelectorAll('marker-teleprompter mark-[type="caption"].active'))).forEach(function (x) {
-    return x.classList.remove('active');
-  });
-  // Add active class to found marks
-  target.classList.add('active');
+  if (target) {
+    // Remove active class from any active caption mark
+    [].concat(_toConsumableArray(document.querySelectorAll('marker-teleprompter mark-[type="caption"].active'))).forEach(function (x) {
+      return x.classList.remove('active');
+    });
+    // Add active class to found marks
+    target.classList.add('active');
+  }
 };
 
 exports.default = {
@@ -12535,11 +10412,13 @@ exports.default = {
   render: function render(selector) {
     return function (data) {
       var container = document.querySelector(selector);
+      var trigger = document.querySelector('.video-captions');
       var frag = document.createDocumentFragment();
       var captionTemplate = function captionTemplate(mark) {
         return '\n        <span>' + secondsToTime(mark.start) + '</span>\n        <a href=\'?t=' + secondsToYoutubeTime(mark.start) + '\'>' + mark.title + '</a>\n      ';
       };
 
+      trigger.removeAttribute('disabled');
       container.innerHTML = '';
       data.forEach(function (mark) {
         if (mark.type === 'caption') {
@@ -12556,7 +10435,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],137:[function(require,module,exports){
+},{"minpubsub":120}],135:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12572,12 +10451,14 @@ var updateActiveMarker = function updateActiveMarker(time) {
   var $targetCaption = [].concat(_toConsumableArray(document.querySelectorAll('marker-timeline mark-[type="caption"]'))).find(function (x) {
     return time < parseFloat(x.getAttribute('end'));
   });
-  // Remove active class from any active caption mark
-  [].concat(_toConsumableArray(document.querySelectorAll('marker-timeline mark-[type="caption"].active'))).forEach(function (x) {
-    return x.classList.remove('active');
-  });
-  // Add active class to found marks
-  $targetCaption.classList.add('active');
+  if ($targetCaption) {
+    // Remove active class from any active caption mark
+    [].concat(_toConsumableArray(document.querySelectorAll('marker-timeline mark-[type="caption"].active'))).forEach(function (x) {
+      return x.classList.remove('active');
+    });
+    // Add active class to found marks
+    $targetCaption.classList.add('active');
+  }
 };
 
 exports.default = {
@@ -12625,7 +10506,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],138:[function(require,module,exports){
+},{"minpubsub":120}],136:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12685,7 +10566,7 @@ var thumbs = exports.thumbs = function thumbs(url) {
 //   });
 // });
 
-},{"minpubsub":121}],139:[function(require,module,exports){
+},{"minpubsub":120}],137:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12728,7 +10609,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}],140:[function(require,module,exports){
+},{"minpubsub":120}],138:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12755,7 +10636,7 @@ exports.default = {
   }
 };
 
-},{}],141:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12827,15 +10708,17 @@ exports.default = {
     (0, _minpubsub.subscribe)('video:play', player.playVideo);
     (0, _minpubsub.subscribe)('video:pause', player.pauseVideo);
     (0, _minpubsub.subscribe)('video:setPlaybackRate', player.setPlaybackRate);
-    (0, _minpubsub.subscribe)('video:loadVideoById', function (id) {
+    (0, _minpubsub.subscribe)('video:loadVideoById', function (id, start) {
       var mobilecheck = function mobilecheck() {
         var check = false;
+        /*eslint-disable */
         (function (a) {
           if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
         })(navigator.userAgent || navigator.vendor || window.opera);
+        /*eslint-enable */
         return check;
       };
-      if (mobilecheck()) player.cueVideoById(id);else player.loadVideoById(id);
+      if (mobilecheck()) player.cueVideoById(id, start);else player.loadVideoById(id, start);
     });
 
     setInterval(function () {
@@ -12852,7 +10735,7 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121,"youtube-player":128}],142:[function(require,module,exports){
+},{"minpubsub":120,"youtube-player":127}],140:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12887,4 +10770,4 @@ exports.default = {
   }
 };
 
-},{"minpubsub":121}]},{},[1]);
+},{"minpubsub":120}]},{},[1]);
