@@ -14,7 +14,7 @@ import LanguageSelect from './modules/language-select';
 import ThumbnailPreview from './modules/thumbnail-preview';
 
 import { markers } from './modules/marker-fetch';
-import { thumbnails } from './modules/thumbnail-fetch';
+import { thumbs } from './modules/thumbnail-fetch';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -26,6 +26,12 @@ const getQueryParams = qs => {
   }
   return params;
 };
+
+const getEpisodeData = url => fetch(url)
+.then(data => data.json())
+.then(({ youtube, captions, chapters, downloads, thumbnails }) => ({
+  youtube, captions, chapters, thumbnails, downloads,
+}));
 
 const secondsToYoutubeTime = sec =>
   `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
@@ -63,17 +69,34 @@ module.exports = () => {
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
-    markers(Episodes[id], lang);
-    thumbnails(Episodes[id].thumbnails);
-    VideoDownload.render('video-download', Episodes[id].download);
-    LanguageSelect.render('language-select', Episodes[id], lang);
-    publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
-    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+    getEpisodeData('https://cdn.cs50.net/2015/fall/lectures/0/f/index.json')
+    .then(ep => {
+      localStorage.setItem('episode', JSON.stringify(ep));
+      const chaptersFileUrl = ep.chapters.find(x => x.srclang === 'en').src.replace('http://', 'https://');
+      const captionsFileUrl = ep.captions.find(x => x.srclang === 'en').src.replace('http://', 'https://');
+      const thumbnailsFileUrl = ep.thumbnails.find(x => x.type === 'text/vtt').src.replace('http://', 'https://');
+      const youtubeVideoId = ep.youtube.main;
+      const downloadLinks = ep.downloads.filter(x => x.label.match('MP4'));
+      const availableLanguages = ep.captions.map(x => x.srclang);
+      markers(chaptersFileUrl, captionsFileUrl);
+      thumbs(thumbnailsFileUrl);
+      VideoDownload.render('video-download', downloadLinks);
+      LanguageSelect.render('language-select', availableLanguages, lang);
+      publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+    });
   });
 
-  subscribe('player:changeLanguage', (id, lang) => {
-    markers(Episodes[id], lang);
-    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+  subscribe('player:changeLanguage', (lang) => {
+    const ep = JSON.parse(localStorage.getItem('episode'));
+    const resourceUrl = (resource, y) => {
+      const desiredUrl = resource.find(x => x.srclang === y);
+      const defaultUrl = resource.find(x => x.srclang === 'en');
+      return desiredUrl !== undefined ? desiredUrl : defaultUrl;
+    };
+    const chaptersFileUrl = resourceUrl(ep.chapters, lang).src.replace('http://', 'https://');
+    const captionsFileUrl = resourceUrl(ep.captions, lang).src.replace('http://', 'https://');
+    markers(chaptersFileUrl, captionsFileUrl);
   });
 
   subscribe('video:seekTo', time => {

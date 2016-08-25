@@ -7,10 +7,10 @@ export default {
     title.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-download"></use></svg>';
     frag.appendChild(title);
     const div = document.createElement('div');
-    Object.keys(data).forEach(key => {
+    data.forEach(resource => {
       const elem = document.createElement('a');
-      elem.innerHTML = `${key}`;
-      elem.href = data[key];
+      elem.innerHTML = `${resource.label.replace('MP4 (', '').replace(')', '')}`;
+      elem.href = resource.src;
       elem.setAttribute('download', 'true');
       div.appendChild(elem);
     });

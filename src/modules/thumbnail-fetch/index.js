@@ -8,7 +8,7 @@ const timeToSeconds = time => {
   return h + m + s;
 };
 
-export const thumbnails = url => fetch(url)
+export const thumbs = url => fetch(url)
 .then(data => data.text())
 .then(text => text.replace('WEBVTT\n\n', '').split('\n\n'))
 .then(arry => arry.map(thumb => thumb.split('\n')))

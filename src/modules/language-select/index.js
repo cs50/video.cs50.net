@@ -7,9 +7,9 @@ export default {
     container.innerHTML = '';
     const $select = document.createElement('select');
     $select.addEventListener('change', () => {
-      publish('player:changeLanguage', [data.episode, $select.value]);
+      publish('player:changeLanguage', [$select.value]);
     });
-    Object.keys(data.captions).forEach(lang => {
+    data.forEach(lang => {
       const $option = document.createElement('option');
       $option.innerHTML = lang;
       if (lang === active) $option.selected = true;
