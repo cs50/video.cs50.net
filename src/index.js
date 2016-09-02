@@ -83,7 +83,6 @@ module.exports = () => {
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (chaptersFile && captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
-        console.log(chaptersFile, captionsFile, availableLanguages);
         LanguageSelect.render('language-select', availableLanguages, lang);
         markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
       }
