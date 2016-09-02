@@ -9872,6 +9872,8 @@ module.exports = exports['default'];
 },{"bluebird":2,"load-script":3}],129:[function(require,module,exports){
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 require('whatwg-fetch');
 
 var _minpubsub = require('minpubsub');
@@ -9978,19 +9980,20 @@ module.exports = function () {
         return url.replace('http://', 'https://');
       };
       localStorage.setItem('episode', JSON.stringify(ep));
-      var chaptersFile = ep.chapters.find(function (x) {
+      var youtubeVideoId = ep.youtube ? ep.youtube.main : null;
+      var chaptersFile = _typeof(ep.chapters) === 'object' ? ep.chapters.find(function (x) {
         return x.srclang === 'en';
-      });
-      var captionsFile = ep.captions.find(function (x) {
+      }) : null;
+      var captionsFile = _typeof(ep.captions) === 'object' ? ep.captions.find(function (x) {
         return x.srclang === 'en';
-      });
-      var thumbnailsFile = ep.thumbnails.find(function (x) {
+      }) : null;
+      var thumbnailsFile = _typeof(ep.thumbnails) === 'object' ? ep.thumbnails.find(function (x) {
         return x.type === 'text/vtt';
-      });
-      var youtubeVideoId = ep.youtube.main;
-      var downloadLinks = ep.downloads.filter(function (x) {
+      }) : null;
+      var downloadLinks = _typeof(ep.downloads) === 'object' ? ep.downloads.filter(function (x) {
         return x.label.match('MP4');
-      });
+      }) : null;
+
       // Render components based on what episode data exists
       (0, _minpubsub.publish)('video:loadVideoById', [youtubeVideoId, startTime]);
       if (thumbnailsFile) (0, _thumbnailFetch.thumbs)(toHttps(thumbnailsFile.src));
@@ -9999,11 +10002,10 @@ module.exports = function () {
         var availableLanguages = ep.captions.map(function (x) {
           return x.srclang;
         });
+        console.log(chaptersFile, captionsFile, availableLanguages);
         _languageSelect2.default.render('language-select', availableLanguages, lang);
         (0, _markerFetch.markers)(toHttps(chaptersFile.src), toHttps(captionsFile.src));
       }
-    }).catch(function (e) {
-      return alert('Could not get episode data!');
     });
   });
 

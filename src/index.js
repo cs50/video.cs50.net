@@ -67,21 +67,27 @@ module.exports = () => {
     .then(ep => {
       const toHttps = url => url.replace('http://', 'https://');
       localStorage.setItem('episode', JSON.stringify(ep));
-      const chaptersFile = ep.chapters.find(x => x.srclang === 'en');
-      const captionsFile = ep.captions.find(x => x.srclang === 'en');
-      const thumbnailsFile = ep.thumbnails.find(x => x.type === 'text/vtt');
-      const youtubeVideoId = ep.youtube.main;
-      const downloadLinks = ep.downloads.filter(x => x.label.match('MP4'));
+      const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
+      const chaptersFile = typeof ep.chapters === 'object' ?
+        ep.chapters.find(x => x.srclang === 'en') : null;
+      const captionsFile = typeof ep.captions === 'object' ?
+        ep.captions.find(x => x.srclang === 'en') : null;
+      const thumbnailsFile = typeof ep.thumbnails === 'object' ?
+        ep.thumbnails.find(x => x.type === 'text/vtt') : null;
+      const downloadLinks = typeof ep.downloads === 'object' ?
+        ep.downloads.filter(x => x.label.match('MP4')) : null;
+
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
       if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (chaptersFile && captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
+        console.log(chaptersFile, captionsFile, availableLanguages);
         LanguageSelect.render('language-select', availableLanguages, lang);
         markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
       }
-    }).catch(e => alert('Could not get episode data!'));
+    });
   });
 
   subscribe('player:changeLanguage', (lang) => {
