@@ -1,8 +1,6 @@
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-import Episodes from '../data/episodes/index.json';
-import EpisodeList from './modules/episode-list';
 import VideoPlayback from './modules/video-playback';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
@@ -14,7 +12,7 @@ import LanguageSelect from './modules/language-select';
 import ThumbnailPreview from './modules/thumbnail-preview';
 
 import { markers } from './modules/marker-fetch';
-import { thumbnails } from './modules/thumbnail-fetch';
+import { thumbs } from './modules/thumbnail-fetch';
 
 const getQueryParams = qs => {
   qs = qs.split('+').join(' ');
@@ -27,6 +25,12 @@ const getQueryParams = qs => {
   return params;
 };
 
+const getEpisodeData = url => fetch(url)
+.then(data => data.json())
+.then(({ youtube, captions, chapters, downloads, thumbnails }) => ({
+  youtube, captions, chapters, thumbnails, downloads,
+}));
+
 const secondsToYoutubeTime = sec =>
   `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
 
@@ -38,14 +42,9 @@ const youTubeTimeToSeconds = time => {
 
 module.exports = () => {
   // Extract the url on page load
-  const targetEpisode = window.location.pathname.split('/')[2] || 0;
-  const targetLanguage = window.location.pathname.split('/')[3] || 'en';
-  // Modify the / url
-  if (targetEpisode === 0) {
-    window.history.replaceState({}, '', `/2015/${targetEpisode}/${targetLanguage}`);
-  }
+  const targetEpisode = window.location.pathname;
+  const targetLanguage = 'en';
 
-  EpisodeList.render('episode-list', Episodes);
   VideoPlayback.render('video-playback', [
     { rate: 0.75, label: '3/4' },
     { rate: 1, label: '1' },
@@ -63,17 +62,43 @@ module.exports = () => {
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
     youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
-    markers(Episodes[id], lang);
-    thumbnails(Episodes[id].thumbnails);
-    VideoDownload.render('video-download', Episodes[id].download);
-    LanguageSelect.render('language-select', Episodes[id], lang);
-    publish('video:loadVideoById', [Episodes[id].youtube.main, startTime]);
-    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+    // Fetch episode data from CDN based on URL
+    getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
+    .then(ep => {
+      const toHttps = url => url.replace('http://', 'https://');
+      localStorage.setItem('episode', JSON.stringify(ep));
+      const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
+      const chaptersFile = typeof ep.chapters === 'object' ?
+        ep.chapters.find(x => x.srclang === 'en') : null;
+      const captionsFile = typeof ep.captions === 'object' ?
+        ep.captions.find(x => x.srclang === 'en') : null;
+      const thumbnailsFile = typeof ep.thumbnails === 'object' ?
+        ep.thumbnails.find(x => x.type === 'text/vtt') : null;
+      const downloadLinks = typeof ep.downloads === 'object' ?
+        ep.downloads.filter(x => x.label.match('MP4')) : null;
+
+      // Render components based on what episode data exists
+      publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
+      if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
+      if (chaptersFile && captionsFile) {
+        const availableLanguages = ep.captions.map(x => x.srclang);
+        LanguageSelect.render('language-select', availableLanguages, lang);
+        markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
+      }
+    });
   });
 
-  subscribe('player:changeLanguage', (id, lang) => {
-    markers(Episodes[id], lang);
-    window.history.replaceState({}, '', `/2015/${id}/${lang}`);
+  subscribe('player:changeLanguage', (lang) => {
+    const ep = JSON.parse(localStorage.getItem('episode'));
+    const resourceUrl = (resource, y) => {
+      const desiredUrl = resource.find(x => x.srclang === y);
+      const defaultUrl = resource.find(x => x.srclang === 'en');
+      return desiredUrl !== undefined ? desiredUrl : defaultUrl;
+    };
+    const chaptersFileUrl = resourceUrl(ep.chapters, lang).src.replace('http://', 'https://');
+    const captionsFileUrl = resourceUrl(ep.captions, lang).src.replace('http://', 'https://');
+    markers(chaptersFileUrl, captionsFileUrl);
   });
 
   subscribe('video:seekTo', time => {
@@ -83,10 +108,6 @@ module.exports = () => {
   subscribe('video:tick', time => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
   });
-
-  window.onpopstate = () => {
-    publish('player:loadVideo', [window.location.pathname.split('/')[2]]);
-  };
 
   document.querySelector('.video-captions').addEventListener('click', (e) => {
     document.querySelector('marker-teleprompter').classList.toggle('hidden');

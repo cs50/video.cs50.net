@@ -5,6 +5,10 @@ video-controls {
     border-left: 1px solid #000;
   }
 
+  [disabled] {
+    display: none !important;
+  }
+
   button {
     padding: .75rem;
     background: #212121;

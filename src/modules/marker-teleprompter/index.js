@@ -1,4 +1,4 @@
-import { subscribe, publish } from 'minpubsub';
+import { subscribe } from 'minpubsub';
 
 const secondsToYoutubeTime = sec =>
   `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
@@ -16,11 +16,13 @@ const updateActiveMarker = time => {
   // Find active caption mark in timeline
   const target = [...document.querySelectorAll('marker-teleprompter mark-[type="caption"]')]
   .find(x => time < parseFloat(x.getAttribute('end')));
-  // Remove active class from any active caption mark
-  [...document.querySelectorAll('marker-teleprompter mark-[type="caption"].active')]
-  .forEach(x => x.classList.remove('active'));
-  // Add active class to found marks
-  target.classList.add('active');
+  if (target) {
+    // Remove active class from any active caption mark
+    [...document.querySelectorAll('marker-teleprompter mark-[type="caption"].active')]
+    .forEach(x => x.classList.remove('active'));
+    // Add active class to found marks
+    target.classList.add('active');
+  }
 };
 
 export default {
@@ -31,12 +33,14 @@ export default {
   render(selector) {
     return data => {
       const container = document.querySelector(selector);
+      const trigger = document.querySelector('.video-captions');
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
         <span>${secondsToTime(mark.start)}</span>
         <a href='?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
       `;
 
+      trigger.removeAttribute('disabled');
       container.innerHTML = '';
       data.forEach(mark => {
         if (mark.type === 'caption') {
