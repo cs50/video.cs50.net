@@ -10707,6 +10707,7 @@ exports.default = {
     (0, _minpubsub.subscribe)('video:seekTo', function (time) {
       player.seekTo(time);
       (0, _minpubsub.publish)('video:tick', [time]);
+      player.playVideo();
     });
 
     (0, _minpubsub.subscribe)('video:play', player.playVideo);
