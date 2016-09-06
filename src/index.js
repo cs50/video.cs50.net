@@ -148,7 +148,11 @@ module.exports = () => {
     $dialog.classList.toggle('open');
     $dialogTrigger.classList.toggle('open');
     if ($dialog.classList.contains('open')) {
-      setTimeout(() => $input.focus(), 300);
+      setTimeout(() => {
+        const $marker = document.querySelector('marker-list .active');
+        if ($marker) $marker.scrollIntoView();
+        $input.focus();
+      }, 300);
     } else $input.blur();
   });
 

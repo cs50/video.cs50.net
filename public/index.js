@@ -10071,7 +10071,9 @@ module.exports = function () {
     $dialogTrigger.classList.toggle('open');
     if ($dialog.classList.contains('open')) {
       setTimeout(function () {
-        return $input.focus();
+        var $marker = document.querySelector('marker-list .active');
+        if ($marker) $marker.scrollIntoView();
+        $input.focus();
       }, 300);
     } else $input.blur();
   });
