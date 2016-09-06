@@ -54,7 +54,7 @@ export default {
       `;
       const chapterTemplate = mark => `
         <h1>${mark.title}</h1>
-        <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
+        <span>${Math.ceil((mark.end - mark.start) / 60)} mins</span>
       `;
       container.innerHTML = '';
       let chapter = 0;
