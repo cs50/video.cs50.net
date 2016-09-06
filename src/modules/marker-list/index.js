@@ -25,9 +25,13 @@ const updateActiveMarker = time => {
     target.classList.add('active');
     // Check if first caption in chapter
     const previousElem = target.previousElementSibling;
+    const nextElem = target.nextElementSibling;
     const breakToggle = document.querySelector('break-toggle input');
-    if (previousElem.getAttribute('type') === 'chapter' && !previousElem.classList.contains('passed') && breakToggle.checked) {
-      previousElem.classList.add('passed');
+    if (nextElem.getAttribute('type') === 'chapter') {
+      nextElem.classList.add('should-pause');
+    }
+    if (previousElem.getAttribute('type') === 'chapter' && previousElem.classList.contains('should-pause') && breakToggle.checked) {
+      previousElem.classList.remove('should-pause');
       publish('video:timeout', [previousElem.querySelector('h1').textContent]);
     }
   }
