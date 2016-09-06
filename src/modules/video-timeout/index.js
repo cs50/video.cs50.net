@@ -12,7 +12,7 @@ export default {
       clearTimeout(timer);
     };
     const showOverlay = next => {
-      let counter = 5;
+      let counter = 10;
       $container.innerHTML = `<section>
         <h3>Coming up Next</h3>
         <h1>${next}</h1>
