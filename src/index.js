@@ -31,13 +31,15 @@ const getEpisodeData = url => fetch(url)
   youtube, captions, chapters, thumbnails, downloads,
 }));
 
-const secondsToYoutubeTime = sec =>
-  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+const secondsToYoutubeTime = sec => (sec > 3600 ?
+  `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`);
 
 const youTubeTimeToSeconds = time => {
+  const hours = time.match(/\d+h/) ? parseFloat(time.match(/\d+h/)[0]) : 0;
   const mins = parseFloat(time.match(/\d+m/)[0]);
   const secs = parseFloat(time.match(/\d+s/)[0]);
-  return (mins * 60) + secs;
+  return (hours * 3600) + (mins * 60) + secs;
 };
 
 module.exports = () => {
