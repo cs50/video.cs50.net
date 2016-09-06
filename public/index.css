@@ -318,6 +318,7 @@ language-select {
     background: #424242;
     color: rgba(0, 0, 0, 0.6);
     border: 1px solid #424242; }
+@charset "UTF-8";
 marker-list {
   flex: 1 1 auto;
   padding: 1.5rem;
@@ -334,22 +335,40 @@ marker-list {
     font-size: inherit;
     font-weight: inherit; }
   marker-list [type='chapter'] {
+    position: relative;
     display: block;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 1rem; }
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    marker-list [type='chapter']:hover h1 {
+      text-decoration: underline; }
+    marker-list [type='chapter']::after {
+      display: block;
+      position: absolute;
+      top: 1.7rem;
+      right: 0;
+      color: rgba(255, 255, 255, 0.25); }
+    marker-list [type='chapter']:not(.folded) {
+      margin-bottom: 1rem; }
+      marker-list [type='chapter']:not(.folded)::after {
+        content: '▼'; }
+    marker-list [type='chapter'].folded::after {
+      content: '◀'; }
     marker-list [type='chapter'] h1 {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: .5rem;
-      color: rgba(255, 255, 255, 0.9); }
+      color: rgba(255, 255, 255, 0.8); }
     marker-list [type='chapter'] span {
       font-size: .7rem;
       color: rgba(255, 255, 255, 0.75); }
+  marker-list .folded:not(.searched) + [type='caption'].active {
+    margin-top: 1rem; }
   marker-list [type='caption'] {
     width: 100%;
     display: flex;
     margin-bottom: .62rem; }
+    marker-list [type='caption'].folded:not(.searched):not(.active) {
+      display: none; }
     marker-list [type='caption'] a {
       flex: 1 1 auto;
       text-decoration: none;

@@ -20,15 +20,36 @@ marker-list {
   }
 
   [type='chapter'] {
+    position: relative;
     display: block;
     padding: 1rem 0;
     border-bottom: 1px solid rgba(255,255,255,.1);
-    margin-bottom: 1rem;
+    &:hover h1 {
+      text-decoration: underline;
+    }
+
+    &::after {
+      display: block;
+      position: absolute;
+      top: 1.7rem;
+      right: 0;
+      color: rgba(255,255,255,0.25);
+    }
+
+    &:not(.folded) {
+      margin-bottom: 1rem;
+      &::after {
+        content: '▼';
+      }
+    }
+    &.folded::after {
+      content: '◀';
+    }
     h1 {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: .5rem;
-      color: rgba(255,255,255,.9);
+      color: rgba(255,255,255,.8);
     }
     span {
       font-size: .7rem;
@@ -36,10 +57,17 @@ marker-list {
     }
   }
 
+  .folded:not(.searched) + [type='caption'].active {
+    margin-top: 1rem;
+  }
+
   [type='caption'] {
     width: 100%;
     display: flex;
     margin-bottom: .62rem;
+    &.folded:not(.searched):not(.active) {
+      display: none;
+    }
     a {
       flex: 1 1 auto;
       text-decoration: none;

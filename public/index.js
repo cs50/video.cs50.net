@@ -10230,7 +10230,7 @@ var _minpubsub = require('minpubsub');
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var secondsToYoutubeTime = function secondsToYoutubeTime(sec) {
-  return Math.floor(sec / 60) + 'm' + Math.floor(sec % 60) + 's';
+  return sec > 3600 ? Math.floor(sec / 3600) + 'h' + Math.floor(sec / 60 % 60) + 'm' + Math.floor(sec % 60) + 's' : Math.floor(sec / 60) + 'm' + Math.floor(sec % 60) + 's';
 };
 
 var secondsToTime = function secondsToTime(seconds) {
@@ -10273,16 +10273,34 @@ exports.default = {
         return '\n        <h1>' + mark.title + '</h1>\n        <span>' + Math.floor((mark.end - mark.start) / 60) + ' mins</span>\n      ';
       };
       container.innerHTML = '';
+      var chapter = 0;
       data.forEach(function (mark) {
         var $marker = document.createElement('mark-');
         $marker.setAttribute('type', mark.type);
         $marker.setAttribute('start', mark.start);
         $marker.setAttribute('end', mark.end);
-        $marker.innerHTML = mark.type === 'caption' ? captionTemplate(mark) : chapterTemplate(mark);
-        $marker.addEventListener('click', function (e) {
-          e.preventDefault();
-          (0, _minpubsub.publish)('video:seekTo', [mark.start]);
-        });
+
+        if (mark.type === 'chapter') {
+          chapter = mark.id;
+          $marker.innerHTML = chapterTemplate(mark);
+          $marker.addEventListener('click', function (e) {
+            e.currentTarget.classList.toggle('folded');
+            [].concat(_toConsumableArray(container.querySelectorAll('mark-[chapter="' + mark.id + '"]'))).forEach(function (x) {
+              return x.classList.toggle('folded');
+            });
+          });
+        }
+
+        if (mark.type === 'caption') {
+          $marker.setAttribute('chapter', chapter);
+          $marker.innerHTML = captionTemplate(mark);
+          $marker.addEventListener('click', function (e) {
+            e.preventDefault();
+            (0, _minpubsub.publish)('video:seekTo', [mark.start]);
+          });
+        }
+
+        if (chapter > 0) $marker.classList.add('folded');
         frag.appendChild($marker);
       });
       container.appendChild(frag);

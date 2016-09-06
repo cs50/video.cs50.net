@@ -1,7 +1,8 @@
 import { subscribe, publish } from 'minpubsub';
 
-const secondsToYoutubeTime = sec =>
-  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+const secondsToYoutubeTime = sec => (sec > 3600 ?
+  `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`);
 
 const secondsToTime = seconds => {
   const h = parseInt(seconds / 3600, 10) % 24;
@@ -45,16 +46,33 @@ export default {
         <span>${Math.floor((mark.end - mark.start) / 60)} mins</span>
       `;
       container.innerHTML = '';
+      let chapter = 0;
       data.forEach(mark => {
         const $marker = document.createElement('mark-');
         $marker.setAttribute('type', mark.type);
         $marker.setAttribute('start', mark.start);
         $marker.setAttribute('end', mark.end);
-        $marker.innerHTML = mark.type === 'caption' ? captionTemplate(mark) : chapterTemplate(mark);
-        $marker.addEventListener('click', (e) => {
-          e.preventDefault();
-          publish('video:seekTo', [mark.start]);
-        });
+
+        if (mark.type === 'chapter') {
+          chapter = mark.id;
+          $marker.innerHTML = chapterTemplate(mark);
+          $marker.addEventListener('click', (e) => {
+            e.currentTarget.classList.toggle('folded');
+            [...container.querySelectorAll(`mark-[chapter="${mark.id}"]`)]
+            .forEach(x => x.classList.toggle('folded'));
+          });
+        }
+
+        if (mark.type === 'caption') {
+          $marker.setAttribute('chapter', chapter);
+          $marker.innerHTML = captionTemplate(mark);
+          $marker.addEventListener('click', (e) => {
+            e.preventDefault();
+            publish('video:seekTo', [mark.start]);
+          });
+        }
+
+        if (chapter > 0) $marker.classList.add('folded');
         frag.appendChild($marker);
       });
       container.appendChild(frag);
