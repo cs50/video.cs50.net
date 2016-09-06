@@ -40,5 +40,6 @@ export default {
       publish('video:pause');
     };
     subscribe('video:timeout', showOverlay);
+    subscribe('video:hideTimeout', hideOverlay);
   },
 };
