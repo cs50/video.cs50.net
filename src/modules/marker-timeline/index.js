@@ -26,7 +26,13 @@ export default {
 
       container.innerHTML = '';
       data.forEach(mark => {
-        const div = document.createElement('mark-');
+        let div;
+        if (mark.type === 'chapter') {
+          div = document.createElement('chapter-');
+        }
+        if (mark.type === 'caption') {
+          div = document.createElement('mark-');
+        }
         const duration = (mark.end - mark.start);
         if (mark.type === 'caption') div.style.flex = `${duration} ${duration} auto`;
         if (mark.type === 'chapter') div.setAttribute('title', mark.title);

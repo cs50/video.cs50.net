@@ -479,13 +479,17 @@ marker-timeline {
         padding: 5px;
         z-index: 9999;
         white-space: nowrap; }
+    marker-timeline [type='chapter']:nth-of-type(1):hover::after, marker-timeline [type='chapter']:nth-of-type(2):hover::after, marker-timeline [type='chapter']:nth-of-type(3):hover::after {
+      transform: translate(0%, -125%); }
+    marker-timeline [type='chapter']:nth-last-of-type(1):hover::after, marker-timeline [type='chapter']:nth-last-of-type(2):hover::after, marker-timeline [type='chapter']:nth-last-of-type(3):hover::after {
+      transform: translate(-100%, -125%); }
   marker-timeline [type='caption'] {
     display: block;
     background: rgba(0, 0, 0, 0.1); }
     marker-timeline [type='caption']:hover {
       background: rgba(0, 0, 0, 0.2); }
     marker-timeline [type='caption'].searched.matched {
-      border-left: 1px solid rgba(255, 255, 255, 0.1); }
+      border-left: 1px solid yellow; }
     marker-timeline [type='caption'].active {
       min-width: 2px;
       background: #a41034; }

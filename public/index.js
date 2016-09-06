@@ -10498,7 +10498,13 @@ exports.default = {
 
       container.innerHTML = '';
       data.forEach(function (mark) {
-        var div = document.createElement('mark-');
+        var div = void 0;
+        if (mark.type === 'chapter') {
+          div = document.createElement('chapter-');
+        }
+        if (mark.type === 'caption') {
+          div = document.createElement('mark-');
+        }
         var duration = mark.end - mark.start;
         if (mark.type === 'caption') div.style.flex = duration + ' ' + duration + ' auto';
         if (mark.type === 'chapter') div.setAttribute('title', mark.title);
