@@ -23,6 +23,13 @@ const updateActiveMarker = time => {
     .forEach(x => x.classList.remove('active'));
     // Add active class to found marks
     target.classList.add('active');
+    // Check if first caption in chapter
+    const previousElem = target.previousElementSibling;
+    const breakToggle = document.querySelector('break-toggle input');
+    if (previousElem.getAttribute('type') === 'chapter' && !previousElem.classList.contains('passed') && breakToggle.checked) {
+      previousElem.classList.add('passed');
+      publish('video:timeout', [previousElem.querySelector('h1').textContent]);
+    }
   }
 };
 

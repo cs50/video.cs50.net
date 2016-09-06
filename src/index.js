@@ -4,6 +4,7 @@ import { subscribe, publish } from 'minpubsub';
 import VideoPlayback from './modules/video-playback';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
+import VideoTimeout from './modules/video-timeout';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
@@ -60,6 +61,7 @@ module.exports = () => {
   MarkerTeleprompter.initialize();
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
+  VideoTimeout.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?

@@ -1,0 +1,47 @@
+video-timeout {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+
+  section {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    > *+* {
+      margin-top: 2rem;
+    }
+  }
+
+  div {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    > *+* {
+      margin-left: .5rem;
+    }
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  span {
+    display: inline;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}

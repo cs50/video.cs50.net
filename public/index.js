@@ -9890,6 +9890,10 @@ var _videoDownload = require('./modules/video-download');
 
 var _videoDownload2 = _interopRequireDefault(_videoDownload);
 
+var _videoTimeout = require('./modules/video-timeout');
+
+var _videoTimeout2 = _interopRequireDefault(_videoTimeout);
+
 var _markerSearch = require('./modules/marker-search');
 
 var _markerSearch2 = _interopRequireDefault(_markerSearch);
@@ -9970,6 +9974,7 @@ module.exports = function () {
   _markerTeleprompter2.default.initialize();
   _markerTimeline2.default.initialize();
   _thumbnailPreview2.default.initialize();
+  _videoTimeout2.default.initialize();
 
   (0, _minpubsub.subscribe)('player:loadVideo', function (id) {
     var lang = arguments.length <= 1 || arguments[1] === undefined ? 'en' : arguments[1];
@@ -10104,7 +10109,7 @@ module.exports = function () {
   (0, _minpubsub.publish)('player:loadVideo', [targetEpisode, targetLanguage]);
 };
 
-},{"./modules/language-select":130,"./modules/marker-fetch":131,"./modules/marker-list":132,"./modules/marker-search":133,"./modules/marker-teleprompter":134,"./modules/marker-timeline":135,"./modules/thumbnail-fetch":136,"./modules/thumbnail-preview":137,"./modules/video-download":138,"./modules/video-main":139,"./modules/video-playback":140,"minpubsub":120,"whatwg-fetch":123}],130:[function(require,module,exports){
+},{"./modules/language-select":130,"./modules/marker-fetch":131,"./modules/marker-list":132,"./modules/marker-search":133,"./modules/marker-teleprompter":134,"./modules/marker-timeline":135,"./modules/thumbnail-fetch":136,"./modules/thumbnail-preview":137,"./modules/video-download":138,"./modules/video-main":139,"./modules/video-playback":140,"./modules/video-timeout":141,"minpubsub":120,"whatwg-fetch":123}],130:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10252,6 +10257,13 @@ var updateActiveMarker = function updateActiveMarker(time) {
     });
     // Add active class to found marks
     target.classList.add('active');
+    // Check if first caption in chapter
+    var previousElem = target.previousElementSibling;
+    var breakToggle = document.querySelector('break-toggle input');
+    if (previousElem.getAttribute('type') === 'chapter' && !previousElem.classList.contains('passed') && breakToggle.checked) {
+      previousElem.classList.add('passed');
+      (0, _minpubsub.publish)('video:timeout', [previousElem.querySelector('h1').textContent]);
+    }
   }
 };
 
@@ -10796,6 +10808,51 @@ exports.default = {
       fragment.appendChild($button);
     });
     container.appendChild(fragment);
+  }
+};
+
+},{"minpubsub":120}],141:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _minpubsub = require('minpubsub');
+
+exports.default = {
+  initialize: function initialize() {
+    var timer = void 0;
+    var $container = document.querySelector('video-timeout');
+    var hideOverlay = function hideOverlay() {
+      $container.classList.add('hidden');
+      (0, _minpubsub.publish)('video:play');
+    };
+    var stopTimer = function stopTimer() {
+      clearTimeout(timer);
+    };
+    var showOverlay = function showOverlay(next) {
+      var counter = 5;
+      $container.innerHTML = '<section>\n        <h3>Coming up Next</h3>\n        <h1>' + next + '</h1>\n        <div>\n          <button class=\'cancel\'>Pause</button>\n          <button class=\'continue\'>Continue (<span>' + counter + '</span>)</button>\n        </div>\n      </section>';
+
+      var $counter = $container.querySelector('span');
+      var $continue = $container.querySelector('.continue');
+      var $cancel = $container.querySelector('.cancel');
+
+      $continue.addEventListener('click', hideOverlay);
+      $cancel.addEventListener('click', stopTimer);
+
+      $container.classList.remove('hidden');
+      timer = setInterval(function () {
+        $counter.innerHTML = counter--;
+        if (counter === -1) {
+          clearTimeout(timer);
+          hideOverlay();
+        }
+      }, 1000);
+      (0, _minpubsub.publish)('video:pause');
+    };
+    (0, _minpubsub.subscribe)('video:timeout', showOverlay);
   }
 };
 
