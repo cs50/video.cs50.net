@@ -17,6 +17,7 @@
     </nav>
     <main>
       <video-main></video-main>
+      <video-timeout class="hidden"></video-timeout>
       <marker-teleprompter class="hidden"></marker-teleprompter>
       <control-bar>
         <marker-timeline></marker-timeline>
@@ -56,6 +57,10 @@
         <video-controls class="mobile"></video-controls>
         <language-select></language-select>
       </row->
+      <break-toggle>
+        <label>Pause at the end of chapters</label>
+        <input type="checkbox"/>
+      </break-toggle>
       <marker-list></marker-list>
     </dialog>
     <thumb-preview></thumb-preview>

@@ -4,6 +4,7 @@ import { subscribe, publish } from 'minpubsub';
 import VideoPlayback from './modules/video-playback';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
+import VideoTimeout from './modules/video-timeout';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
@@ -31,13 +32,15 @@ const getEpisodeData = url => fetch(url)
   youtube, captions, chapters, thumbnails, downloads,
 }));
 
-const secondsToYoutubeTime = sec =>
-  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`;
+const secondsToYoutubeTime = sec => (sec > 3600 ?
+  `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
+  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`);
 
 const youTubeTimeToSeconds = time => {
+  const hours = time.match(/\d+h/) ? parseFloat(time.match(/\d+h/)[0]) : 0;
   const mins = parseFloat(time.match(/\d+m/)[0]);
   const secs = parseFloat(time.match(/\d+s/)[0]);
-  return (mins * 60) + secs;
+  return (hours * 3600) + (mins * 60) + secs;
 };
 
 module.exports = () => {
@@ -58,6 +61,7 @@ module.exports = () => {
   MarkerTeleprompter.initialize();
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
+  VideoTimeout.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
@@ -146,7 +150,11 @@ module.exports = () => {
     $dialog.classList.toggle('open');
     $dialogTrigger.classList.toggle('open');
     if ($dialog.classList.contains('open')) {
-      setTimeout(() => $input.focus(), 300);
+      setTimeout(() => {
+        const $marker = document.querySelector('marker-list .active');
+        if ($marker) $marker.scrollIntoView();
+        $input.focus();
+      }, 300);
     } else $input.blur();
   });
 

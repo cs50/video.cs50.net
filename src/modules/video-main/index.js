@@ -47,6 +47,8 @@ export default {
     subscribe('video:seekTo', time => {
       player.seekTo(time);
       publish('video:tick', [time]);
+      publish('video:hideTimeout');
+      player.playVideo();
     });
 
     subscribe('video:play', player.playVideo);

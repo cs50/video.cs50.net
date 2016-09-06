@@ -27,6 +27,16 @@ marker-timeline {
         white-space: nowrap;
       }
     }
+    &:nth-of-type(1):hover::after,
+    &:nth-of-type(2):hover::after,
+    &:nth-of-type(3):hover::after {
+      transform: translate(-0%, -125%);
+    }
+    &:nth-last-of-type(1):hover::after,
+    &:nth-last-of-type(2):hover::after,
+    &:nth-last-of-type(3):hover::after {
+      transform: translate(-100%, -125%);
+    }
   }
 
   [type='caption'] {
@@ -36,7 +46,7 @@ marker-timeline {
       background: rgba(0,0,0,0.2);
     }
     &.searched.matched {
-      border-left: 1px solid rgba(255,255,255,0.1);
+      border-left: 1px solid yellow;
     }
     &.active {
       min-width: 2px;
