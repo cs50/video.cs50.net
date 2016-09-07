@@ -32,6 +32,10 @@ row- {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 /* ----------------------------------
 -- Core Containers
 */
@@ -265,8 +269,7 @@ row- {
     }
 
     video-download,
-    video-playback,
-    .video-fullscreen {
+    video-playback {
       display: none;
     }
   }
