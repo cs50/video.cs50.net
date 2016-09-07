@@ -12,9 +12,9 @@ marker-timeline {
     position: relative;
     display: block;
     width: .25rem;
-    background: rgba(0,0,0,0.3);
+    background: #222;
     &:hover {
-      background: rgba(0,0,0,0.5);
+      background: #111;
       &::after {
         content: attr(title);
         position: absolute;
@@ -41,9 +41,9 @@ marker-timeline {
 
   [type='caption'] {
     display: block;
-    background: rgba(0,0,0,0.1);
+    background: #333;
     &:hover {
-      background: rgba(0,0,0,0.2);
+      background: #111;
     }
     &.searched.matched {
       border-left: 1px solid yellow;

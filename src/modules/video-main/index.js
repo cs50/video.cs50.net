@@ -29,8 +29,14 @@ export default {
 
     const tick = () => player.getCurrentTime()
     .then(time => {
-      publish('video:tick', [time]);
+      player.getDuration().then(duration => {
+        publish('video:tick', [time, duration]);
+      });
     });
+
+    subscribe('video:seekToPercent', percent =>
+      player.getDuration()
+      .then(duration => publish('video:seekTo', [duration * percent])));
 
     subscribe('video:seekBy', sec =>
       player.getCurrentTime()
