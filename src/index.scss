@@ -106,6 +106,10 @@ row- {
     transition: all .3s ease;
     transform: translateY(0%);
     background: #121212;
+
+    .hidden {
+      display: none;
+    }
   }
 
   main.hidden {
@@ -265,8 +269,7 @@ row- {
     }
 
     video-download,
-    video-playback,
-    .video-fullscreen {
+    video-playback {
       display: none;
     }
   }

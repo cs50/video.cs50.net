@@ -86,6 +86,8 @@ module.exports = () => {
       if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (chaptersFile && captionsFile) {
+        const seekNextButton = document.querySelector('.seek-next');
+        seekNextButton.classList.remove('hidden');
         const availableLanguages = ep.captions.map(x => x.srclang);
         LanguageSelect.render('language-select', availableLanguages, lang);
         markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
