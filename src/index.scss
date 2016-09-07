@@ -32,10 +32,6 @@ row- {
   display: flex;
 }
 
-.hidden {
-  display: none;
-}
-
 /* ----------------------------------
 -- Core Containers
 */
@@ -110,6 +106,10 @@ row- {
     transition: all .3s ease;
     transform: translateY(0%);
     background: #121212;
+
+    .hidden {
+      display: none;
+    }
   }
 
   main.hidden {
