@@ -14,7 +14,9 @@ export default {
     const $container = document.querySelector('video-timer');
     $container.innerHTML = '<span>0:00</span>&nbsp;/&nbsp;<span>0:00</span>';
     subscribe('video:tick', (current, duration) => {
-      $container.innerHTML = `<span>${secondsToTime(current)}</span>&nbsp;/&nbsp;<span>${secondsToTime(duration)}</span>`;
+      if (current && duration) {
+        $container.innerHTML = `<span>${secondsToTime(current)}</span>&nbsp;/&nbsp;<span>${secondsToTime(duration)}</span>`;
+      }
     });
   },
 };
