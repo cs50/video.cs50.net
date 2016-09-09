@@ -1,0 +1,10 @@
+video-timer {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  color: #999;
+  span {
+    font-size: .75rem;
+    display: inline;
+  }
+}

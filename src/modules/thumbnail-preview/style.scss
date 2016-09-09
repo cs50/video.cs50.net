@@ -1,1 +1,11 @@
-thumbnail-preview {}
+thumb-preview {
+  position: relative;
+  &::after {
+    content: attr(data-time);
+    position: absolute;
+    padding: .5rem;
+    font-size: .75rem;
+    bottom: 0;
+    background: #212121;
+  }
+}

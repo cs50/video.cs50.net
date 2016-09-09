@@ -5,6 +5,7 @@ import VideoPlayback from './modules/video-playback';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
+import VideoTimer from './modules/video-timer';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
@@ -65,6 +66,7 @@ module.exports = () => {
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
   VideoTimeout.initialize();
+  VideoTimer.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     const startTime = getQueryParams(document.location.search).t ?
