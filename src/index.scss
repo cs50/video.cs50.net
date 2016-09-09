@@ -285,6 +285,9 @@ row- {
     transition: all .3s ease;
     transform: translateY(0%);
     background: #212121;
+    .hidden {
+      display: none;
+    }
   }
 
   dialog {
@@ -298,6 +301,10 @@ row- {
 
     marker-list {
       padding: 1rem;
+    }
+
+    &.hidden {
+      display: none;
     }
   }
 
