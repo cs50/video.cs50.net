@@ -45,8 +45,11 @@ const youTubeTimeToSeconds = time => {
 
 module.exports = () => {
   // Extract the url on page load
-  const targetEpisode = window.location.pathname;
+  const targetEpisode = window.location.pathname === '/' ?
+    '/2016/fall/lectures/0' : window.location.pathname.replace(/\/$/, '');
   const targetLanguage = 'en';
+
+  window.history.replaceState(null, null, targetEpisode);
 
   VideoPlayback.render('video-playback', [
     { rate: 0.75, label: '3/4' },
