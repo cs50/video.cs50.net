@@ -174,17 +174,32 @@ module.exports = () => {
     }
   };
 
-  let timer;
-  document.onmousemove = () => {
+  const hidePlayerChrome = () => {
     const $dialogTrigger = document.querySelector('dialog-trigger');
     const $main = document.querySelector('main');
-    clearTimeout(timer);
+    $dialogTrigger.classList.add('hidden');
+    $main.classList.add('hidden');
+  };
+
+  const showPlayerChrome = () => {
+    const $dialogTrigger = document.querySelector('dialog-trigger');
+    const $main = document.querySelector('main');
     $dialogTrigger.classList.remove('hidden');
     $main.classList.remove('hidden');
-    timer = setTimeout(() => {
-      $dialogTrigger.classList.add('hidden');
-      $main.classList.add('hidden');
-    }, 3000);
+  };
+
+  let timer;
+  document.onmousemove = (e) => {
+    const elem = document.elementFromPoint(e.clientX, e.clientY);
+    showPlayerChrome();
+    clearTimeout(timer);
+    if (elem.tagName === 'VIDEO-MAIN') {
+      timer = setTimeout(hidePlayerChrome, 3000);
+    }
+  };
+
+  document.onmouseleave = () => {
+    timer = setTimeout(hidePlayerChrome, 3000);
   };
 
   publish('player:loadVideo', [targetEpisode, targetLanguage]);
