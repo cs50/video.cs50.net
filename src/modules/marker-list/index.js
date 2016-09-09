@@ -45,8 +45,6 @@ export default {
   render(selector) {
     return data => {
       const container = document.querySelector(selector);
-      const trigger = document.querySelector('dialog-trigger');
-      trigger.removeAttribute('disabled');
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
         <span>${secondsToTime(mark.start)}</span>
