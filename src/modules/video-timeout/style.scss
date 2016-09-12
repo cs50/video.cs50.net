@@ -44,4 +44,11 @@ video-timeout {
   &.hidden {
     display: none;
   }
+
+  .continue-no-breaks {
+    background: transparent;
+    padding: 0;
+    text-decoration: underline;
+    color: rgba(255,255,255,.5);
+  }
 }
