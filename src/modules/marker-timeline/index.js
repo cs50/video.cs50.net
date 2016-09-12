@@ -50,24 +50,28 @@ export default {
 
       container.innerHTML = '';
       data.forEach(mark => {
+        const duration = (mark.end - mark.start);
         let div;
         if (mark.type === 'chapter') {
           div = document.createElement('chapter-');
+          div.setAttribute('title', mark.title);
+          div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            publish('video:seekTo', [e.currentTarget.nextElementSibling.getAttribute('start')]);
+          });
         }
         if (mark.type === 'caption') {
           div = document.createElement('mark-');
+          div.style.flex = `${duration} ${duration} auto`;
+          div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            publish('video:seekTo', [mark.start]);
+          });
         }
-        const duration = (mark.end - mark.start);
-        if (mark.type === 'caption') div.style.flex = `${duration} ${duration} auto`;
-        if (mark.type === 'chapter') div.setAttribute('title', mark.title);
         div.setAttribute('type', mark.type);
         div.setAttribute('start', mark.start);
         div.setAttribute('end', mark.end);
         div.innerHTML = template(mark);
-        div.addEventListener('click', (e) => {
-          e.stopPropagation();
-          publish('video:seekTo', [mark.start]);
-        });
         fragment.appendChild(div);
       });
 

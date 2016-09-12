@@ -25,11 +25,9 @@ marker-list {
 
   [type='chapter'] {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 1rem 0;
-    &:hover h1 {
-      text-decoration: underline;
-    }
 
     &::after {
       display: block;
@@ -38,24 +36,35 @@ marker-list {
       right: 0;
       color: rgba(255,255,255,0.25);
     }
-
-    &:not(.folded) {
-      &::after {
-        content: '▼';
-      }
-    }
-    &.folded::after {
-      content: '◀';
-    }
     h1 {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: .5rem;
       color: rgba(255,255,255,.8);
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     span {
       font-size: .7rem;
       color: rgba(255,255,255,.75);
+    }
+    div {
+      flex: 1 1 100%;
+    }
+    button {
+      padding: .5rem;
+      font-size: .5rem;
+      &:hover {
+        background: #212121;
+      }
+      &:not(.folded)::before {
+        content: '\25C0';
+      }
+      &.folded::before {
+        content: '\25BC';
+      }
     }
   }
 

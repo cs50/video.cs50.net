@@ -51,8 +51,11 @@ export default {
         <a href='?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
       `;
       const chapterTemplate = mark => `
-        <h1>${mark.title}</h1>
-        <span>${Math.ceil((mark.end - mark.start) / 60)} mins</span>
+        <div>
+          <h1>${mark.title}</h1>
+          <span>${Math.ceil((mark.end - mark.start) / 60)} mins</span>
+        </div>
+        <button></button>
       `;
       container.innerHTML = '';
       let chapter = 0;
@@ -65,10 +68,15 @@ export default {
         if (mark.type === 'chapter') {
           chapter = mark.id;
           $marker.innerHTML = chapterTemplate(mark);
-          $marker.addEventListener('click', (e) => {
+          $marker.querySelector('button').addEventListener('click', (e) => {
+            e.stopPropagation();
             e.currentTarget.classList.toggle('folded');
             [...container.querySelectorAll(`mark-[chapter="${mark.id}"]`)]
             .forEach(x => x.classList.toggle('folded'));
+          });
+          $marker.addEventListener('click', (e) => {
+            e.preventDefault();
+            publish('video:seekTo', [e.currentTarget.nextElementSibling.getAttribute('start')]);
           });
         }
 
