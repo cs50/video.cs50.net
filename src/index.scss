@@ -293,7 +293,11 @@ row- {
   dialog {
     width: 100%;
     background: #121212;
-    padding: 1rem;
+    padding-top: .5rem;
+    
+    @media (min-width: 360px) {
+      padding: 1rem;
+    }
 
     row- {
       position: relative;
