@@ -37,6 +37,13 @@ video-timeout {
     color: rgba(255,255,255,0.5);
   }
 
+  button {
+    color: rgba(255,255,255,0.5);
+    &:hover {
+      color: rgba(255,255,255,0.8);
+    }
+  }
+
   span {
     display: inline;
   }

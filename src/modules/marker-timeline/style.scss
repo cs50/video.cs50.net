@@ -44,6 +44,7 @@ marker-timeline {
     background: #333;
     &:hover {
       background: #111;
+      min-width: 2px;
     }
     &.searched.matched {
       border-left: 1px solid yellow;
