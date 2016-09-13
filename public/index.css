@@ -514,7 +514,8 @@ marker-timeline {
     display: block;
     background: #333; }
     marker-timeline [type='caption']:hover {
-      background: #111; }
+      background: #111;
+      min-width: 2px; }
     marker-timeline [type='caption'].searched.matched {
       border-left: 1px solid yellow; }
     marker-timeline [type='caption'].active {
