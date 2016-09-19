@@ -155,15 +155,28 @@ module.exports = () => {
     const $dialog = document.querySelector('dialog');
     const $dialogTrigger = document.querySelector('dialog-trigger');
     const $input = document.querySelector('marker-search input');
+    // Is going to open dialog
+    if (!$dialog.classList.contains('open')) {
+      // Find active marker
+      let $marker = document.querySelector('marker-list .active');
+      if ($marker && $marker.classList.contains('folded')) {
+        // Find active chapter
+        while ($marker.getAttribute('type') !== 'chapter') {
+          $marker = $marker.previousElementSibling;
+        }
+        // Scroll to active chapter
+        if ($marker.getAttribute('start') !== '0') {
+          $marker.scrollIntoView();
+        }
+      } else if ($marker) {
+        // Scroll to active marker
+        $marker.previousElementSibling.scrollIntoView();
+      }
+      $input.focus();
+    }
+
     $dialog.classList.toggle('open');
     $dialogTrigger.classList.toggle('open');
-    if ($dialog.classList.contains('open')) {
-      setTimeout(() => {
-        const $marker = document.querySelector('marker-list .active');
-        if ($marker) $marker.scrollIntoView();
-        $input.focus();
-      }, 300);
-    } else $input.blur();
   });
 
   document.onkeydown = (evt) => {

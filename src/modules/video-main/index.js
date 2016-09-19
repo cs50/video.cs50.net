@@ -47,7 +47,7 @@ export default {
     .then(time => {
       const nextChapter = [...document.querySelectorAll('mark-[type="chapter"]')]
       .find(x => x.getAttribute('start') > time);
-      publish('video:seekTo', [nextChapter.getAttribute('start')]);
+      publish('video:seekTo', [nextChapter.nextElementSibling.getAttribute('start')]);
     }));
 
     subscribe('video:seekTo', time => {
