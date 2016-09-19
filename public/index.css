@@ -17,7 +17,7 @@
 script,
 style,
 head,
-sprite-sheet {
+svg#sheet {
   display: none; }
 
 html {

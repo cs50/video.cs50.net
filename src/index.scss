@@ -19,7 +19,7 @@
 script,
 style,
 head,
-sprite-sheet {
+svg#sheet {
   display: none;
 }
 
@@ -294,7 +294,7 @@ row- {
     width: 100%;
     background: #121212;
     padding-top: .5rem;
-    
+
     @media (min-width: 360px) {
       padding: 1rem;
     }
