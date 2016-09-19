@@ -10808,7 +10808,7 @@ exports.default = {
         var nextChapter = [].concat(_toConsumableArray(document.querySelectorAll('mark-[type="chapter"]'))).find(function (x) {
           return x.getAttribute('start') > time;
         });
-        (0, _minpubsub.publish)('video:seekTo', [nextChapter.getAttribute('start')]);
+        (0, _minpubsub.publish)('video:seekTo', [nextChapter.nextElementSibling.getAttribute('start')]);
       });
     });
 
