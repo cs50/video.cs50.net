@@ -58,6 +58,7 @@ export default {
           div.addEventListener('click', (e) => {
             e.stopPropagation();
             publish('video:seekTo', [e.currentTarget.nextElementSibling.getAttribute('start')]);
+            window.ga('send', 'event', 'chapter', 'click', mark.title, mark.start);
           });
         }
         if (mark.type === 'caption') {
@@ -66,6 +67,7 @@ export default {
           div.addEventListener('click', (e) => {
             e.stopPropagation();
             publish('video:seekTo', [mark.start]);
+            window.ga('send', 'event', 'caption', 'click', mark.title, mark.start);
           });
         }
         div.setAttribute('type', mark.type);

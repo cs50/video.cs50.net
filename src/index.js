@@ -111,6 +111,7 @@ module.exports = () => {
     const chaptersFileUrl = resourceUrl(ep.chapters, lang).src.replace('http://', 'https://');
     const captionsFileUrl = resourceUrl(ep.captions, lang).src.replace('http://', 'https://');
     markers(chaptersFileUrl, captionsFileUrl);
+    window.ga('send', 'event', 'language', 'changed', lang);
   });
 
   subscribe('video:seekTo', time => {
@@ -124,6 +125,9 @@ module.exports = () => {
   document.querySelector('.video-captions').addEventListener('click', (e) => {
     document.querySelector('marker-teleprompter').classList.toggle('hidden');
     e.currentTarget.classList.toggle('active');
+    if (e.currentTarget.classList.contains('active')) {
+      window.ga('send', 'event', 'captions', 'enabled');
+    }
   });
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {
@@ -132,6 +136,7 @@ module.exports = () => {
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
     }
+    window.ga('send', 'event', 'video', 'fullscreen');
   });
 
   document.querySelector('.seek-back').addEventListener('click', () => {
@@ -173,6 +178,7 @@ module.exports = () => {
         $marker.previousElementSibling.scrollIntoView();
       }
       $input.focus();
+      window.ga('send', 'event', 'sidebar', 'open');
     }
 
     $dialog.classList.toggle('open');
