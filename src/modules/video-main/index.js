@@ -51,7 +51,7 @@ export default {
       const nextChapter = [...document.querySelectorAll('marker-list mark-[type="chapter"]')]
       .find(x => x.getAttribute('start') > time);
       publish('video:seekTo', [nextChapter.nextElementSibling.getAttribute('start')]);
-      window.ga('send', 'event', 'video', 'seekNext', nextChapter.getAttribute('title'), time);
+      window.ga('send', 'event', 'video', 'seekNext', window.location.pathname, time);
     }));
 
     subscribe('video:seekTo', time => {
