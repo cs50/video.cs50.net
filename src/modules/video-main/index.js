@@ -40,14 +40,18 @@ export default {
 
     subscribe('video:seekBy', sec =>
       player.getCurrentTime()
-      .then(time => player.seekTo(time + sec)));
+      .then(time => {
+        window.ga('send', 'event', 'video', 'seekBack', window.location.pathname, time);
+        player.seekTo(time + sec);
+      }));
 
     subscribe('video:seekNextChapter', () =>
     player.getCurrentTime()
     .then(time => {
-      const nextChapter = [...document.querySelectorAll('mark-[type="chapter"]')]
+      const nextChapter = [...document.querySelectorAll('marker-list mark-[type="chapter"]')]
       .find(x => x.getAttribute('start') > time);
       publish('video:seekTo', [nextChapter.nextElementSibling.getAttribute('start')]);
+      window.ga('send', 'event', 'video', 'seekNext', nextChapter.getAttribute('title'), time);
     }));
 
     subscribe('video:seekTo', time => {
@@ -75,6 +79,7 @@ export default {
       };
       if (isMobile() || isIframe()) player.cueVideoById(id, start);
       else player.loadVideoById(id, start);
+      window.ga('send', 'event', 'video', 'loaded', id);
     });
 
     setInterval(() => player.getPlayerState()

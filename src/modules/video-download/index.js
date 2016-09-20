@@ -13,6 +13,9 @@ export default {
       elem.href = resource.src;
       elem.setAttribute('download', 'true');
       div.appendChild(elem);
+      elem.addEventListener('click', () => {
+        window.ga('send', 'event', 'download', window.location.pathname, resource.label);
+      });
     });
     frag.appendChild(div);
     container.appendChild(frag);

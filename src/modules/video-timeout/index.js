@@ -5,13 +5,16 @@ export default {
     let timer;
     const $container = document.querySelector('video-timeout');
     const hideOverlay = () => {
+      window.ga('send', 'event', 'break', 'skipped');
       $container.classList.add('hidden');
       publish('video:play');
     };
     const stopTimer = () => {
+      window.ga('send', 'event', 'break', 'taken');
       clearTimeout(timer);
     };
     const disableBreaks = () => {
+      window.ga('send', 'event', 'break', 'disabled');
       document.querySelector('break-toggle input').checked = false;
       hideOverlay();
     };

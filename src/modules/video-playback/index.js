@@ -16,6 +16,7 @@ export default {
         .forEach(x => x.classList.remove('active'));
         // Make this rate active
         $button.classList.add('active');
+        window.ga('send', 'event', 'speed', 'changed', rate.rate);
       });
       fragment.appendChild($button);
     });

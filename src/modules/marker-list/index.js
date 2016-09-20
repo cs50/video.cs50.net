@@ -77,6 +77,7 @@ export default {
           $marker.addEventListener('click', (e) => {
             e.preventDefault();
             publish('video:seekTo', [e.currentTarget.nextElementSibling.getAttribute('start')]);
+            window.ga('send', 'event', 'chapter', 'click', mark.title, mark.start);
           });
         }
 
@@ -86,6 +87,7 @@ export default {
           $marker.addEventListener('click', (e) => {
             e.preventDefault();
             publish('video:seekTo', [mark.start]);
+            window.ga('send', 'event', 'caption', 'click', mark.title, mark.start);
           });
         }
 
