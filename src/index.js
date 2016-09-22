@@ -136,7 +136,7 @@ module.exports = () => {
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
     }
-    window.ga('send', 'event', 'video', 'fullscreen');
+    window.ga('send', 'event', 'control', 'fullscreen');
   });
 
   document.querySelector('.seek-back').addEventListener('click', () => {
