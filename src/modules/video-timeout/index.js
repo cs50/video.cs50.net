@@ -5,7 +5,7 @@ export default {
     let timer;
     const $container = document.querySelector('video-timeout');
     const hideOverlay = () => {
-      window.ga('send', 'event', 'break', 'skipped');
+      window.ga('send', 'event', 'break', 'continued');
       $container.classList.add('hidden');
       publish('video:play');
     };
