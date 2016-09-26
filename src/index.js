@@ -193,6 +193,14 @@ module.exports = () => {
       $dialog.classList.remove('open');
       $dialogTrigger.classList.remove('open');
     }
+    if (evt.keyCode === 32) {
+      const $elem = document.querySelector('.video-play-pause');
+      if ($elem.classList.contains('playing')) {
+        publish('video:pause');
+      } else publish('video:play');
+    }
+    if (evt.keyCode === 39) publish('video:seekBy', [5]);
+    if (evt.keyCode === 37) publish('video:seekBy', [-5]);
   };
 
   const hidePlayerChrome = () => {
