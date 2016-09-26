@@ -55,7 +55,10 @@ export default {
           <h1>${mark.title}</h1>
           <span>${Math.ceil((mark.end - mark.start) / 60)} mins</span>
         </div>
-        <button></button>
+        <button>
+          <svg><use xlink:href='#icon-left-arrow' /></svg>
+          <svg><use xlink:href='#icon-down-arrow' /></svg>
+        </button>
       `;
       container.innerHTML = '';
       let chapter = 0;
