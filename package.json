@@ -23,6 +23,7 @@
   "bugs": {
     "url": "https://github.com/cs50/player50/issues"
   },
+  "engines": {"node": ">=4.5"},
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
