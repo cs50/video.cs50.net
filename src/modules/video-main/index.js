@@ -18,6 +18,7 @@ export default {
         rel: 0,
         showinfo: 0,
         controls: 0,
+        html5: 1,
       },
     });
 
