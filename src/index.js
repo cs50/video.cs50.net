@@ -1,4 +1,4 @@
-import 'es6-promise/auto';
+import 'babel-polyfill';
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
