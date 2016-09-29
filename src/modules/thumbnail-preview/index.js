@@ -17,8 +17,11 @@ export default {
   },
   render(selector) {
     return (data, e) => {
+      const duration = this.collection[this.collection.length - 1].end;
+      data = data * duration;
       const container = document.querySelector(selector);
       const thumb = this.collection.find(x => x.start > data);
+      console.log(thumb);
       const httpsThumbUrl = thumb.url.replace('http://', 'https://');
       const dimensions = httpsThumbUrl.split(',');
       const width = dimensions[dimensions.length - 2];

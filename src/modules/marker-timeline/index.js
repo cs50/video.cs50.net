@@ -41,6 +41,16 @@ export default {
       const percent = round(e.pageX / window.innerWidth, 2);
       publish('video:seekToPercent', [percent]);
     });
+    container.addEventListener('mousemove', (e) => {
+      const target = document.querySelectorAll(':hover');
+      if (target[target.length - 1].getAttribute('type') !== 'chapter') {
+        const pos = (e.pageX - container.offsetLeft) / container.offsetWidth;
+        publish('timeline:mouseover', [pos.toFixed(3), e]);
+      } else publish('timeline:mouseleave');
+    });
+    container.addEventListener('mouseleave', () => {
+      publish('timeline:mouseleave');
+    });
   },
   render(selector) {
     return (data) => {
@@ -75,17 +85,6 @@ export default {
         div.setAttribute('end', mark.end);
         div.innerHTML = template(mark);
         fragment.appendChild(div);
-      });
-
-      container.addEventListener('mouseover', (e) => {
-        const target = document.querySelectorAll(':hover');
-        if (target[target.length - 1].getAttribute('type') === 'caption') {
-          const time = target[target.length - 1].getAttribute('start');
-          publish('timeline:mouseover', [time, e]);
-        } else publish('timeline:mouseleave');
-      });
-      container.addEventListener('mouseleave', () => {
-        publish('timeline:mouseleave');
       });
 
       container.appendChild(fragment);
