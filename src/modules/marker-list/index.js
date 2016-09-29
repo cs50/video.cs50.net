@@ -30,7 +30,7 @@ const updateActiveMarker = time => {
     if (nextElem.getAttribute('type') === 'chapter') {
       nextElem.classList.add('should-pause');
     }
-    if (previousElem.getAttribute('type') === 'chapter' && previousElem.classList.contains('should-pause') && breakToggle.checked) {
+    if (previousElem && previousElem.getAttribute('type') === 'chapter' && previousElem.classList.contains('should-pause') && breakToggle.checked) {
       previousElem.classList.remove('should-pause');
       publish('video:timeout', [previousElem.querySelector('h1').textContent]);
     }
@@ -44,6 +44,9 @@ export default {
   },
   render(selector) {
     return data => {
+      document.querySelector('dialog').classList.remove('hidden');
+      document.querySelector('dialog-trigger').removeAttribute('disabled');
+
       const container = document.querySelector(selector);
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `

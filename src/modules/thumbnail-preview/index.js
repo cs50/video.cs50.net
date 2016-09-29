@@ -17,22 +17,22 @@ export default {
   },
   render(selector) {
     return (data, e) => {
-      const duration = this.collection[this.collection.length - 1].end;
-      data = data * duration;
-      const container = document.querySelector(selector);
-      const thumb = this.collection.find(x => x.start > data);
-      console.log(thumb);
-      const httpsThumbUrl = thumb.url.replace('http://', 'https://');
-      const dimensions = httpsThumbUrl.split(',');
-      const width = dimensions[dimensions.length - 2];
-      const height = dimensions[dimensions.length - 1];
-      container.style.opacity = 1;
-      container.style.width = `${width}px`;
-      container.style.height = `${height}px`;
-      container.style.left = `${e.pageX - 100}px`;
-      container.style.top = `${e.pageY - 130}px`;
-      container.style.background = `url(${httpsThumbUrl})`;
-      container.dataset.time = secondsToTime(data);
+      if (this.collection) {
+        data = data * this.collection[this.collection.length - 1].end;
+        const container = document.querySelector(selector);
+        const thumb = this.collection.find(x => x.start > data);
+        const httpsThumbUrl = thumb.url.replace('http://', 'https://');
+        const dimensions = httpsThumbUrl.split(',');
+        const width = dimensions[dimensions.length - 2];
+        const height = dimensions[dimensions.length - 1];
+        container.style.opacity = 1;
+        container.style.width = `${width}px`;
+        container.style.height = `${height}px`;
+        container.style.left = `${e.pageX - 100}px`;
+        container.style.top = `${e.pageY - 130}px`;
+        container.style.background = `#121212 url(${httpsThumbUrl})`;
+        container.dataset.time = secondsToTime(data);
+      }
     };
   },
   hide(selector) {

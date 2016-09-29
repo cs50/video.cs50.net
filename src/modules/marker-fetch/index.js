@@ -10,7 +10,7 @@ const timeToSeconds = time => {
 
 const chapters = url => fetch(url)
 .then(data => data.text())
-.then(text => text.replace('WEBVTT\n\n', '').split('\n\n'))
+.then(text => text ? text.replace('WEBVTT\n\n', '').split('\n\n') : [])
 .then(arry => arry.map(chapter => chapter.split('\n')))
 .then(arry => arry.map(chapter => ({
   type: 'chapter',
@@ -39,10 +39,12 @@ const captions = url => fetch(url)
 
 export const markers = (chaptersUrl, captionsUrl) =>
 Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
-.then(values => values[0].concat(values[1]))
+.then(values => [].concat(values[0], values[1]))
 .then(items => items.sort((a, b) => {
   if (a.start > b.start) { return 1; }
   if (a.start < b.start) { return -1; }
   return 0;
 }))
-.then(data => publish('markers:fetched', [data]));
+.then(data => data.length > 0 ?
+  publish('markers:fetched', [data]) :
+  null);

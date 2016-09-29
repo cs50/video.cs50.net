@@ -1,5 +1,6 @@
 thumb-preview {
   position: relative;
+  border: 3px solid #212121;
   &::after {
     content: attr(data-time);
     position: absolute;
