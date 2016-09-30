@@ -92,9 +92,6 @@ module.exports = () => {
       if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (chaptersFile && captionsFile) {
-        document.querySelector('.seek-next').classList.remove('hidden');
-        document.querySelector('dialog').classList.remove('hidden');
-        document.querySelector('dialog-trigger').removeAttribute('disabled');
         const availableLanguages = ep.captions.map(x => x.srclang);
         LanguageSelect.render('language-select', availableLanguages, lang);
         markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
@@ -164,14 +161,14 @@ module.exports = () => {
     // Is going to open dialog
     if (!$dialog.classList.contains('open')) {
       // Find active marker
-      let $marker = document.querySelector('marker-list .active');
+      let $marker = document.querySelector('marker-list [type="chapter"].active');
       if ($marker && $marker.classList.contains('folded')) {
         // Find active chapter
         while ($marker.getAttribute('type') !== 'chapter') {
           $marker = $marker.previousElementSibling;
         }
         // Scroll to active chapter
-        if ($marker.getAttribute('start') !== '0') {
+        if ($marker !== undefined && $marker.getAttribute('start') !== '0') {
           $marker.scrollIntoView();
         }
       } else if ($marker) {

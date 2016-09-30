@@ -51,7 +51,7 @@ export default {
     .then(time => {
       const nextChapter = [...document.querySelectorAll('marker-list mark-[type="chapter"]')]
       .find(x => x.getAttribute('start') > time);
-      publish('video:seekTo', [nextChapter.nextElementSibling.getAttribute('start')]);
+      publish('video:seekTo', [parseInt(nextChapter.getAttribute('start'), 10) + 5]);
       window.ga('send', 'event', 'video', 'seekNext', window.location.pathname, time);
     }));
 
@@ -85,7 +85,7 @@ export default {
 
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
-    , 1000);
+    , 500);
 
     document.querySelector('video-main').addEventListener('click', () => {
       player.getPlayerState()
