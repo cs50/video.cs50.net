@@ -24,11 +24,8 @@ export default {
       publish('video:seekToPercent', [pos]);
     });
     container.addEventListener('mousemove', (e) => {
-      const target = document.querySelectorAll(':hover');
-      if (target[target.length - 1].getAttribute('type') !== 'chapter') {
-        const pos = (e.pageX - container.offsetLeft) / container.offsetWidth;
-        publish('timeline:mouseover', [pos, e]);
-      } else publish('timeline:mouseleave');
+      const pos = (e.pageX - container.offsetLeft) / container.offsetWidth;
+      publish('timeline:mouseover', [pos, e]);
     });
     container.addEventListener('mouseleave', () => {
       publish('timeline:mouseleave');
@@ -53,6 +50,10 @@ export default {
             setProgress(e.pageX - container.offsetLeft, container.offsetWidth);
             publish('video:seekTo', [mark.start + 5]);
             window.ga('send', 'event', 'chapter', 'click', mark.title, mark.start);
+          });
+          div.addEventListener('mousemove', (e) => {
+            e.stopPropagation();
+            publish('timeline:mouseleave');
           });
           div.style.left = `${pos * 100}%`;
           div.setAttribute('type', mark.type);

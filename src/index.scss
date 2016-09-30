@@ -169,11 +169,14 @@ row- {
     display: flex;
     flex-direction: column;
     background: none;
-    transition: all .3s ease;
     transform: translateX(100%) rotateZ(360deg);
 
     row- {
       position: relative;
+    }
+
+    &:not(.open) {
+      transition: transform .3s ease;
     }
 
     &.open {
