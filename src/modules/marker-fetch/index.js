@@ -23,7 +23,7 @@ const chapters = url => fetch(url)
 const captions = url => fetch(url)
 .then(data => data.text())
 .then(text => text.replace(/\n\n\n/g, '\n\n'))
-.then(text => text.split('\n\n'))
+.then(text => text ? text.split('\n\n') : [])
 .then(arry => arry.map(caption => caption.split('\n')))
 .then(arry => arry.filter(caption => caption[1] !== undefined))
 .then(arry => arry.map(caption => ({
