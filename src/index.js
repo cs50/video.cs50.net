@@ -46,6 +46,13 @@ const youTubeTimeToSeconds = time => {
 };
 
 module.exports = () => {
+  // Determine if youtube is accessible
+  const image = new Image();
+  image.onerror = () => {
+    document.querySelector('video-main').classList.add('blocked');
+  };
+  image.src = 'https://youtube.com/favicon.ico';
+
   // Extract the url on page load
   const targetEpisode = window.location.pathname === '/' ?
     '/2016/fall/lectures/0' : window.location.pathname.replace(/\/$/, '');
