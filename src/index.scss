@@ -33,7 +33,7 @@ row- {
 }
 
 video-main.blocked::before {
-  content: 'We are having trouble loading this video. Please check your internet connection and make sure https://youtube.com is not blocked on your network.';
+  content: 'We are having trouble loading this video. Be sure that you\'re connected to the internet and that youtube.com isn\'t blocked on your network!';
   position: absolute;
   width: 85%;
   max-width: 70ex;
