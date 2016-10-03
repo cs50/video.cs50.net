@@ -32,6 +32,21 @@ row- {
   display: flex;
 }
 
+video-main.blocked::before {
+  content: 'We are having trouble loading this video. Please check your internet connection and make sure https://youtube.com is not blocked on your network.';
+  position: absolute;
+  width: 85%;
+  max-width: 70ex;
+  font-size: .8rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgba(255,255,255,.5);
+  line-height: 150%;
+  z-index: -1;
+}
+
 /* ----------------------------------
 -- Core Containers
 */
