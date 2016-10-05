@@ -3,7 +3,7 @@ video-main {
   height: 100%;
 
   @media (orientation: landscape) {
-    &::after {
+    &:not([camera='vr'])::after {
       content: '';
       position: absolute;
       top: 0;

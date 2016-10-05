@@ -83,6 +83,13 @@ export default {
       window.ga('send', 'event', 'video', 'loaded', id);
     });
 
+    subscribe('video:swapCamera', id => {
+      player.getCurrentTime()
+      .then(time => {
+        player.loadVideoById(id, time);
+      });
+    });
+
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
     , 500);
