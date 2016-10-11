@@ -233,7 +233,7 @@ module.exports = () => {
     const elem = document.elementFromPoint(e.clientX, e.clientY);
     showPlayerChrome();
     clearTimeout(timer);
-    if (elem.tagName === 'VIDEO-MAIN') {
+    if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
       timer = setTimeout(hidePlayerChrome, 3000);
     }
   };

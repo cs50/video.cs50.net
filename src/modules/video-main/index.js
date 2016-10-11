@@ -2,16 +2,38 @@ import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 
 export default {
-  render(selector) {
-    const container = document.querySelector(selector);
-    container.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    const $div = document.createElement('div');
-    $div.setAttribute('id', 'main-youtube-player');
-    fragment.appendChild($div);
-    container.appendChild(fragment);
+  render() {
+    const $videoMain = document.querySelector('video-main');
+    const $videoAlt = document.querySelector('video-alt');
+
+    const $videoToggle = document.querySelector('video-toggle');
+    $videoToggle.addEventListener('click', () => {
+      $videoMain.classList.toggle('primary');
+      $videoAlt.classList.toggle('primary');
+    });
+
+    $videoMain.classList.add('primary');
+
+    const $main = document.createElement('div');
+    $main.setAttribute('id', 'main-youtube-player');
+    $videoMain.appendChild($main);
+
+    const $alt = document.createElement('div');
+    $alt.setAttribute('id', 'alt-youtube-player');
+    $videoAlt.appendChild($alt);
 
     const player = YouTubePlayer('main-youtube-player', {
+      width: '100%',
+      height: '100%',
+      playerVars: {
+        rel: 0,
+        showinfo: 0,
+        controls: 0,
+        html5: 1,
+      },
+    });
+
+    const player2 = YouTubePlayer('alt-youtube-player', {
       width: '100%',
       height: '100%',
       playerVars: {
@@ -56,15 +78,33 @@ export default {
     }));
 
     subscribe('video:seekTo', time => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.seekTo(time);
       player.seekTo(time);
       publish('video:tick', [time]);
       publish('video:hideTimeout');
+      if (mode === 'ms') player2.playVideo();
       player.playVideo();
     });
 
-    subscribe('video:play', player.playVideo);
-    subscribe('video:pause', player.pauseVideo);
-    subscribe('video:setPlaybackRate', player.setPlaybackRate);
+    subscribe('video:play', () => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.playVideo();
+      player.playVideo();
+    });
+
+    subscribe('video:pause', () => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.pauseVideo();
+      player.pauseVideo();
+    });
+
+    subscribe('video:setPlaybackRate', (rate) => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.setPlaybackRate(rate);
+      player.setPlaybackRate(rate);
+    });
+
     subscribe('video:loadVideoById', (id, start) => {
       const isMobile = () => {
         let check = false;
@@ -83,10 +123,21 @@ export default {
       window.ga('send', 'event', 'video', 'loaded', id);
     });
 
-    subscribe('video:swapCamera', id => {
+    subscribe('video:swapCamera', (exp, data) => {
       player.getCurrentTime()
       .then(time => {
-        player.loadVideoById(id, time);
+        document.querySelector('video-main').setAttribute('camera', exp);
+        if (exp === 'pr') player.loadVideoById(data.main, time);
+        if (exp === 'vr') player.loadVideoById(data.vr, time);
+        if (exp === 'ms') {
+          player.loadVideoById(data.cameras, time);
+          player2.loadVideoById(data.screens, time);
+          player2.mute();
+        } else {
+          $videoMain.classList.add('primary');
+          $videoAlt.classList.remove('primary');
+          player2.pause();
+        }
       });
     });
 
@@ -94,9 +145,14 @@ export default {
     .then(state => (state === 1 ? tick() : false))
     , 500);
 
-    document.querySelector('video-main').addEventListener('click', () => {
+    const playPause = () => {
       player.getPlayerState()
-      .then(state => (state === 1 ? player.pauseVideo() : player.playVideo()));
-    });
+      .then(state => (state === 1 ?
+        publish('video:pause') :
+        publish('video:play')));
+    };
+
+    document.querySelector('video-main').addEventListener('click', playPause);
+    document.querySelector('video-alt').addEventListener('click', playPause);
   },
 };
