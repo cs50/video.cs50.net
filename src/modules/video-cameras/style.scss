@@ -17,6 +17,12 @@ video-cameras {
     user-select: none;
     color: rgba(255,255,255,0.5);
 
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: #fff;
+    }
+
     &:hover {
       color: rgba(255,255,255,0.8);
     }

@@ -6,12 +6,6 @@ export default {
     const $videoMain = document.querySelector('video-main');
     const $videoAlt = document.querySelector('video-alt');
 
-    const $videoToggle = document.querySelector('video-toggle');
-    $videoToggle.addEventListener('click', () => {
-      $videoMain.classList.toggle('primary');
-      $videoAlt.classList.toggle('primary');
-    });
-
     $videoMain.classList.add('primary');
 
     const $main = document.createElement('div');
@@ -145,14 +139,52 @@ export default {
     .then(state => (state === 1 ? tick() : false))
     , 500);
 
-    const playPause = () => {
+    const playPause = (e) => {
       player.getPlayerState()
-      .then(state => (state === 1 ?
-        publish('video:pause') :
-        publish('video:play')));
+      .then(state => {
+        if (e.target.classList.contains('primary')) {
+          state === 1 ? publish('video:pause') : publish('video:play');
+        } else if ($videoMain.getAttribute('camera') === 'ms' &&
+            !e.target.classList.contains('primary')) {
+          $videoMain.classList.toggle('primary');
+          $videoAlt.classList.toggle('primary');
+          e.target.style.width = '';
+        }
+      });
     };
 
-    document.querySelector('video-main').addEventListener('click', playPause);
-    document.querySelector('video-alt').addEventListener('click', playPause);
+    const draggable = function(e) {
+      const h = this.offsetHeight;
+      const w = this.offsetWidth;
+      const t = this.offsetTop;
+      const l = this.offsetLeft;
+      const y = t + h - e.pageY;
+      const x = l + w - e.pageX;
+      const hasMoved = () => !(t === this.offsetTop && l === this.offsetLeft);
+      const follow = (e) => {
+        this.style.top = `${e.pageY + y - h}px`;
+        this.style.left = `${e.pageX + x - w}px`;
+      };
+      const unfollow = (e) => {
+        document.removeEventListener('mousemove', follow);
+        document.removeEventListener('mouseup', unfollow);
+        if (!hasMoved(e)) this.dispatchEvent(new Event('clicked', e));
+        else this.dispatchEvent(new Event('moved', e));
+      };
+      if (x > 5 && y > 5) {
+        document.addEventListener('mousemove', follow);
+        document.addEventListener('mouseup', unfollow);
+        e.preventDefault();
+      }
+    };
+
+    document.querySelector('video-alt').addEventListener('mousedown', draggable);
+    document.querySelector('video-main').addEventListener('mousedown', draggable);
+
+    document.querySelector('video-alt').addEventListener('clicked', playPause);
+    document.querySelector('video-main').addEventListener('clicked', playPause);
+
+
+
   },
 };

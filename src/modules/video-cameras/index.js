@@ -7,7 +7,7 @@ export default {
 
     if (data.main) {
       const $ex1 = document.createElement('button');
-      $ex1.innerHTML = 'EX1';
+      $ex1.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-videocam"></use></svg>';
       $ex1.classList.add('active');
 
       $ex1.addEventListener('click', (e) => {
@@ -23,7 +23,7 @@ export default {
 
     if (data.cameras && data.screens) {
       const $ex2 = document.createElement('button');
-      $ex2.innerHTML = 'EX2';
+      $ex2.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-featured-video"></use></svg>';
 
       $ex2.addEventListener('click', (e) => {
         publish('video:swapCamera', ['ms', data]);
@@ -38,7 +38,7 @@ export default {
 
     if (data.vr) {
       const $ex3 = document.createElement('button');
-      $ex3.innerHTML = 'EX3';
+      $ex3.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-3d"></use></svg>';
 
       $ex3.addEventListener('click', (e) => {
         publish('video:swapCamera', ['vr', data]);
@@ -51,22 +51,6 @@ export default {
       fragment.appendChild($ex3);
     }
 
-    // Object.keys(data).forEach(key => {
-    //   const $button = document.createElement('button');
-    //   $button.innerHTML = key;
-    //   if (key === 'main') $button.classList.add('active');
-    //   $button.addEventListener('click', (e) => {
-    //     publish('video:swapCamera', [data[key]]);
-    //     // Remove active class from other keys
-    //     [...e.currentTarget.parentNode.children]
-    //     .forEach(x => x.classList.remove('active'));
-    //     // Make this key active
-    //     $button.classList.add('active');
-    //     document.querySelector('video-main').setAttribute('camera', key);
-    //     window.ga('send', 'event', 'camera', 'swap', key);
-    //   });
-    //   fragment.appendChild($button);
-    // });
     container.appendChild(fragment);
   },
 };

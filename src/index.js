@@ -62,9 +62,8 @@ module.exports = () => {
   window.history.replaceState(null, null, targetEpisode);
 
   VideoPlayback.render('video-playback', [
-    { rate: 0.75, label: '3/4' },
     { rate: 1, label: '1' },
-    { rate: 1.5, label: '3/2' },
+    { rate: 1.5, label: '1.5' },
     { rate: 2, label: '2' },
   ]);
   MarkerSearch.render('marker-search');
