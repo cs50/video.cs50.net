@@ -59,6 +59,8 @@ export default {
       player.getCurrentTime()
       .then(time => {
         window.ga('send', 'event', 'video', 'seekBack', window.location.pathname, time);
+        const mode = $videoMain.getAttribute('camera');
+        if (mode === 'ms') player2.seekTo(time);
         player.seekTo(time + sec);
       }));
 
@@ -128,6 +130,7 @@ export default {
           player2.loadVideoById(data.screens, time);
           player2.mute();
         } else {
+          $videoMain.removeAttribute('style');
           $videoMain.classList.add('primary');
           $videoAlt.classList.remove('primary');
           player2.pause();
@@ -137,18 +140,24 @@ export default {
 
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
-    , 500);
+    , 1000);
 
     const playPause = (e) => {
       player.getPlayerState()
       .then(state => {
         if (e.target.classList.contains('primary')) {
           state === 1 ? publish('video:pause') : publish('video:play');
-        } else if ($videoMain.getAttribute('camera') === 'ms' &&
-            !e.target.classList.contains('primary')) {
-          $videoMain.classList.toggle('primary');
-          $videoAlt.classList.toggle('primary');
-          e.target.style.width = '';
+        } else {
+          let $nextTarget;
+          if ($videoMain.classList.contains('primary')) {
+            $nextTarget = $videoMain;
+          } else $nextTarget = $videoAlt;
+          $nextTarget.style.top = e.target.style.top;
+          $nextTarget.style.left = e.target.style.left;
+          $nextTarget.style.width = e.target.style.width;
+          $nextTarget.classList.remove('primary');
+          e.target.classList.add('primary');
+          e.target.removeAttribute('style');
         }
       });
     };
@@ -183,8 +192,5 @@ export default {
 
     document.querySelector('video-alt').addEventListener('clicked', playPause);
     document.querySelector('video-main').addEventListener('clicked', playPause);
-
-
-
   },
 };

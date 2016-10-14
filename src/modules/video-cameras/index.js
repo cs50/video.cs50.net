@@ -38,7 +38,7 @@ export default {
 
     if (data.vr) {
       const $ex3 = document.createElement('button');
-      $ex3.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-3d"></use></svg>';
+      $ex3.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-vr"></use></svg>';
 
       $ex3.addEventListener('click', (e) => {
         publish('video:swapCamera', ['vr', data]);
