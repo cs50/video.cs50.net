@@ -6,6 +6,10 @@ video-cameras {
   display: flex;
   transition: transform .3s;
 
+  @media (orientation: portrait) {
+    display: none;
+  }
+
   button.active {
     background: #a41034;
     color: #fff;
