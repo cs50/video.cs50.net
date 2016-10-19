@@ -128,9 +128,6 @@ video-main.blocked::before {
   }
 
   main.hidden {
-    video-main {
-      height: 100%;
-    }
     control-bar {
       transform: translateY(100%);
     }
@@ -285,7 +282,7 @@ video-main.blocked::before {
       background: #212121;
     }
 
-    video-main {
+    .primary {
       height: calc(100% - 4rem);
     }
 

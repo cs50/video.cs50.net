@@ -2,16 +2,32 @@ import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 
 export default {
-  render(selector) {
-    const container = document.querySelector(selector);
-    container.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    const $div = document.createElement('div');
-    $div.setAttribute('id', 'main-youtube-player');
-    fragment.appendChild($div);
-    container.appendChild(fragment);
+  render() {
+    const $videoMain = document.querySelector('video-main');
+    const $videoAlt = document.querySelector('video-alt');
+
+    $videoMain.classList.add('primary');
+
+    const $main = document.createElement('div');
+    $main.setAttribute('id', 'main-youtube-player');
+    $videoMain.appendChild($main);
+
+    const $alt = document.createElement('div');
+    $alt.setAttribute('id', 'alt-youtube-player');
+    $videoAlt.appendChild($alt);
 
     const player = YouTubePlayer('main-youtube-player', {
+      width: '100%',
+      height: '100%',
+      playerVars: {
+        rel: 0,
+        showinfo: 0,
+        controls: 0,
+        html5: 1,
+      },
+    });
+
+    const player2 = YouTubePlayer('alt-youtube-player', {
       width: '100%',
       height: '100%',
       playerVars: {
@@ -43,6 +59,8 @@ export default {
       player.getCurrentTime()
       .then(time => {
         window.ga('send', 'event', 'video', 'seekBack', window.location.pathname, time);
+        const mode = $videoMain.getAttribute('camera');
+        if (mode === 'ms') player2.seekTo(time);
         player.seekTo(time + sec);
       }));
 
@@ -56,15 +74,33 @@ export default {
     }));
 
     subscribe('video:seekTo', time => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.seekTo(time);
       player.seekTo(time);
       publish('video:tick', [time]);
       publish('video:hideTimeout');
+      if (mode === 'ms') player2.playVideo();
       player.playVideo();
     });
 
-    subscribe('video:play', player.playVideo);
-    subscribe('video:pause', player.pauseVideo);
-    subscribe('video:setPlaybackRate', player.setPlaybackRate);
+    subscribe('video:play', () => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.playVideo();
+      player.playVideo();
+    });
+
+    subscribe('video:pause', () => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.pauseVideo();
+      player.pauseVideo();
+    });
+
+    subscribe('video:setPlaybackRate', (rate) => {
+      const mode = $videoMain.getAttribute('camera');
+      if (mode === 'ms') player2.setPlaybackRate(rate);
+      player.setPlaybackRate(rate);
+    });
+
     subscribe('video:loadVideoById', (id, start) => {
       const isMobile = () => {
         let check = false;
@@ -83,13 +119,78 @@ export default {
       window.ga('send', 'event', 'video', 'loaded', id);
     });
 
+    subscribe('video:swapCamera', (exp, data) => {
+      player.getCurrentTime()
+      .then(time => {
+        document.querySelector('video-main').setAttribute('camera', exp);
+        if (exp === 'pr') player.loadVideoById(data.main, time);
+        if (exp === 'vr') player.loadVideoById(data.vr, time);
+        if (exp === 'ms') {
+          player.loadVideoById(data.cameras, time);
+          player2.loadVideoById(data.screens, time);
+          player2.mute();
+        } else {
+          $videoMain.removeAttribute('style');
+          $videoMain.classList.add('primary');
+          $videoAlt.classList.remove('primary');
+          if (player2) player2.pauseVideo();
+        }
+      });
+    });
+
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
-    , 500);
+    , 1000);
 
-    document.querySelector('video-main').addEventListener('click', () => {
+    const playPause = (e) => {
       player.getPlayerState()
-      .then(state => (state === 1 ? player.pauseVideo() : player.playVideo()));
-    });
+      .then(state => {
+        if (e.target.classList.contains('primary')) {
+          state === 1 ? publish('video:pause') : publish('video:play');
+        } else {
+          let $nextTarget;
+          if ($videoMain.classList.contains('primary')) {
+            $nextTarget = $videoMain;
+          } else $nextTarget = $videoAlt;
+          $nextTarget.style.top = e.target.style.top;
+          $nextTarget.style.left = e.target.style.left;
+          $nextTarget.style.width = e.target.style.width;
+          $nextTarget.classList.remove('primary');
+          e.target.classList.add('primary');
+          e.target.removeAttribute('style');
+        }
+      });
+    };
+
+    const draggable = function(e) {
+      const h = this.offsetHeight;
+      const w = this.offsetWidth;
+      const t = this.offsetTop;
+      const l = this.offsetLeft;
+      const y = t + h - e.pageY;
+      const x = l + w - e.pageX;
+      const hasMoved = () => !(t === this.offsetTop && l === this.offsetLeft);
+      const follow = (e) => {
+        this.style.top = `${e.pageY + y - h}px`;
+        this.style.left = `${e.pageX + x - w}px`;
+      };
+      const unfollow = (e) => {
+        document.removeEventListener('mousemove', follow);
+        document.removeEventListener('mouseup', unfollow);
+        if (!hasMoved(e)) this.dispatchEvent(new Event('clicked', e));
+        else this.dispatchEvent(new Event('moved', e));
+      };
+      if (x > 5 && y > 5) {
+        document.addEventListener('mousemove', follow);
+        document.addEventListener('mouseup', unfollow);
+        e.preventDefault();
+      }
+    };
+
+    document.querySelector('video-alt').addEventListener('mousedown', draggable);
+    document.querySelector('video-main').addEventListener('mousedown', draggable);
+
+    document.querySelector('video-alt').addEventListener('clicked', playPause);
+    document.querySelector('video-main').addEventListener('clicked', playPause);
   },
 };

@@ -7,6 +7,7 @@ import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
 import VideoTimer from './modules/video-timer';
+import VideoCameras from './modules/video-cameras';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
@@ -62,7 +63,7 @@ module.exports = () => {
 
   VideoPlayback.render('video-playback', [
     { rate: 1, label: '1' },
-    { rate: 1.5, label: '3/2' },
+    { rate: 1.5, label: '1.5' },
     { rate: 2, label: '2' },
   ]);
   MarkerSearch.render('marker-search');
@@ -92,6 +93,8 @@ module.exports = () => {
         ep.thumbnails.find(x => x.type === 'text/vtt') : null;
       const downloadLinks = typeof ep.downloads === 'object' ?
         ep.downloads.filter(x => x.label.match('MP4')) : null;
+
+      VideoCameras.render('video-cameras', ep.youtube);
 
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
@@ -210,8 +213,11 @@ module.exports = () => {
   const hidePlayerChrome = () => {
     const $dialogTrigger = document.querySelector('dialog-trigger');
     const $main = document.querySelector('main');
-    $dialogTrigger.classList.add('hidden');
-    $main.classList.add('hidden');
+    const $video = document.querySelector('video-main');
+    if ($video.getAttribute('camera') !== 'vr') {
+      $dialogTrigger.classList.add('hidden');
+      $main.classList.add('hidden');
+    }
   };
 
   const showPlayerChrome = () => {
@@ -226,7 +232,7 @@ module.exports = () => {
     const elem = document.elementFromPoint(e.clientX, e.clientY);
     showPlayerChrome();
     clearTimeout(timer);
-    if (elem.tagName === 'VIDEO-MAIN') {
+    if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
       timer = setTimeout(hidePlayerChrome, 3000);
     }
   };

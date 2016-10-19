@@ -1,0 +1,38 @@
+video-cameras {
+  position: absolute;
+  bottom: 5.5rem;
+  top: auto;
+  left: 1rem;
+  display: flex;
+  transition: transform .3s;
+
+  @media (orientation: portrait) {
+    display: none;
+  }
+
+  button.active {
+    background: #a41034;
+    color: #fff;
+  }
+
+  button {
+    padding: 1rem;
+    font-size: .8rem;
+    user-select: none;
+    color: rgba(255,255,255,0.5);
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: #fff;
+    }
+
+    &:hover {
+      color: rgba(255,255,255,0.8);
+    }
+  }
+}
+
+.hidden video-cameras {
+  transform: translateY(10rem);
+}
