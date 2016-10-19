@@ -12,6 +12,7 @@ export default {
 
       $ex1.addEventListener('click', (e) => {
         publish('video:swapCamera', ['pr', data]);
+        window.ga('send', 'event', 'experience', 'swap', 'primary');
         // Remove active class from other keys
         [...e.currentTarget.parentNode.children]
         .forEach(x => x.classList.remove('active'));
@@ -27,6 +28,7 @@ export default {
 
       $ex2.addEventListener('click', (e) => {
         publish('video:swapCamera', ['ms', data]);
+        window.ga('send', 'event', 'experience', 'swap', 'multiscreen');
         // Remove active class from other keys
         [...e.currentTarget.parentNode.children]
         .forEach(x => x.classList.remove('active'));
@@ -42,6 +44,7 @@ export default {
 
       $ex3.addEventListener('click', (e) => {
         publish('video:swapCamera', ['vr', data]);
+        window.ga('send', 'event', 'experience', 'swap', 'vr');
         // Remove active class from other keys
         [...e.currentTarget.parentNode.children]
         .forEach(x => x.classList.remove('active'));
