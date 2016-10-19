@@ -133,7 +133,7 @@ export default {
           $videoMain.removeAttribute('style');
           $videoMain.classList.add('primary');
           $videoAlt.classList.remove('primary');
-          player2.pause();
+          if (player2) player2.pauseVideo();
         }
       });
     });
