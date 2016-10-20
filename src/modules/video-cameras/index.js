@@ -5,7 +5,7 @@ export default {
     const container = document.querySelector(selector);
     const fragment = document.createDocumentFragment();
 
-    if (data.main) {
+    if (data.main && ((data.cameras && data.screens) || data.vr)) {
       const $ex1 = document.createElement('button');
       $ex1.innerHTML = '<svg viewBox="0 0 1 1"><use xlink:href="#icon-videocam"></use></svg>';
       $ex1.classList.add('active');
