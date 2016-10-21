@@ -282,10 +282,6 @@ video-main.blocked::before {
       background: #212121;
     }
 
-    .primary {
-      height: calc(100% - 4rem);
-    }
-
     video-download,
     video-playback {
       display: none;
