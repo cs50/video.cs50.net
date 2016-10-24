@@ -13,14 +13,17 @@ video-main[camera='ms']:not(.primary) + video-alt {
     height: calc(100% - 4rem);
   }
 
-  &:not([camera='vr'])::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
+
+  @media (orientation: landscape) {
+    &:not([camera='vr'])::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
   }
 }
 
