@@ -54,6 +54,10 @@ module.exports = () => {
   };
   image.src = 'https://youtube.com/favicon.ico';
 
+  // Extract the desired start time on page load
+  const startTime = getQueryParams(document.location.search).t ?
+  youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
+
   // Extract the url on page load
   const targetEpisode = window.location.pathname === '/' ?
     '/2016/fall/lectures/0' : window.location.pathname.replace(/\/$/, '');
@@ -77,8 +81,6 @@ module.exports = () => {
   VideoTimer.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
-    const startTime = getQueryParams(document.location.search).t ?
-    youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
     // Fetch episode data from CDN based on URL
     getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
     .then(ep => {
@@ -93,11 +95,9 @@ module.exports = () => {
         ep.thumbnails.find(x => x.type === 'text/vtt') : null;
       const downloadLinks = typeof ep.downloads === 'object' ?
         ep.downloads.filter(x => x.label.match('MP4')) : null;
-
-      VideoCameras.render('video-cameras', ep.youtube);
-
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      VideoCameras.render('video-cameras', ep.youtube);
       if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (chaptersFile && captionsFile) {
