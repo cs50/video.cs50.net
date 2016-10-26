@@ -84,8 +84,6 @@ module.exports = () => {
     // Fetch episode data from CDN based on URL
     getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
     .then(ep => {
-      const toHttps = url => url.replace('http://', 'https://');
-      localStorage.setItem('episode', JSON.stringify(ep));
       const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
       const chaptersFile = typeof ep.chapters === 'object' ?
         ep.chapters.find(x => x.srclang === 'en') : null;
@@ -97,13 +95,13 @@ module.exports = () => {
         ep.downloads.filter(x => x.label.match('MP4')) : null;
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      markers(chaptersFile, captionsFile);
+      thumbs(thumbnailsFile);
       VideoCameras.render('video-cameras', ep.youtube);
-      if (thumbnailsFile) thumbs(toHttps(thumbnailsFile.src));
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
-      if (chaptersFile && captionsFile) {
+      if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
         LanguageSelect.render('language-select', availableLanguages, lang);
-        markers(toHttps(chaptersFile.src), toHttps(captionsFile.src));
       }
     });
   });
@@ -138,7 +136,7 @@ module.exports = () => {
   });
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {
-    const iframe = document.querySelector('iframe');
+    const iframe = document.querySelector('.primary iframe');
     const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
