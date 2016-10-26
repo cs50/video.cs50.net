@@ -88,6 +88,7 @@ export default {
         }
 
         if (mark.type === 'caption') {
+          container.classList.add('contains-captions');
           $marker.setAttribute('chapter', chapter);
           $marker.innerHTML = captionTemplate(mark);
           $marker.addEventListener('click', (e) => {
