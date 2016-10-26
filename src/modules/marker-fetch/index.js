@@ -1,4 +1,4 @@
-import { subscribe, publish } from 'minpubsub';
+import { publish } from 'minpubsub';
 
 const timeToSeconds = time => {
   const t = time.split(':');
@@ -8,7 +8,7 @@ const timeToSeconds = time => {
   return h + m + s;
 };
 
-const chapters = url => fetch(url)
+const chapters = obj => obj ? fetch(obj.src)
 .then(data => data.text())
 .then(text => text ? text.replace('WEBVTT\n\n', '').split('\n\n') : [])
 .then(arry => arry.map(chapter => chapter.split('\n')))
@@ -18,9 +18,9 @@ const chapters = url => fetch(url)
   start: timeToSeconds(chapter[1].split(' --> ')[0]),
   end: timeToSeconds(chapter[1].split(' --> ')[1]),
   title: chapter[2],
-})));
+}))) : [];
 
-const captions = url => fetch(url)
+const captions = obj => obj ? fetch(obj.src)
 .then(data => data.text())
 .then(text => text.replace(/\n\n\n/g, '\n\n'))
 .then(text => text ? text.split('\n\n') : [])
@@ -35,7 +35,7 @@ const captions = url => fetch(url)
         .join(' ')
         .replace('>> ', '')
         .replace('-', '') || '[NO SPEECH]',
-})));
+}))) : [];
 
 export const markers = (chaptersUrl, captionsUrl) =>
 Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
