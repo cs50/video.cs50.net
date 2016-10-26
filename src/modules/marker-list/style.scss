@@ -24,6 +24,10 @@ marker-list {
     padding-top: 0;
   }
 
+  &:not(.contains-captions) [type='chapter'] button {
+    display: none;
+  }
+
   [type='chapter'] {
     position: relative;
     display: flex;
