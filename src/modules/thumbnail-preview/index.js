@@ -25,11 +25,13 @@ export default {
         const width = dimensions[2];
         const height = dimensions[3];
         const top = dimensions[1];
+
+        container.style.position = 'absolute';
+        container.style.bottom = '4.5rem';
         container.style.opacity = 1;
         container.style.width = `${width}px`;
         container.style.height = `${height}px`;
         container.style.left = `${e.pageX - 100}px`;
-        container.style.top = `${e.pageY - 130}px`;
         container.style.background = `#121212 url(${thumb.url})`;
         container.style.backgroundPosition = `0 ${top}px`;
         container.dataset.time = secondsToTime(data);
