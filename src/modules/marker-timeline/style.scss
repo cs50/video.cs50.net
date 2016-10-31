@@ -8,13 +8,27 @@ marker-timeline {
   box-shadow: 0 .25rem .25rem rgba(0,0,0,0.5);
   z-index: 1;
 
+  seek-indicator,
+  progress-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: .25rem;
+    background: #212121;
+  }
+
+  progress-indicator {
+    background: #a41034;
+  }
+
   [type='chapter'] {
     position: absolute;
     display: block;
     width: .5rem;
     max-width: 1%;
     height: 100%;
-    transform: translateX(-50%);
+    transform: translateX(-100%);
     background: rgba(0,0,0,.25);
     &:hover {
       background: #111;

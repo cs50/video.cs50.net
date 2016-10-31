@@ -1,16 +1,11 @@
 import { subscribe, publish } from 'minpubsub';
 
+let $progressIndicator;
+let $seekIndicator;
+
 const setProgress = (time, duration) => {
-  const container = document.querySelector('marker-timeline');
   const progress = (time / duration) * 100;
-  container.style['background-image'] =
-    `linear-gradient(to right,
-      #333 0px,
-      #333 ${progress}%,
-      #a41034 ${progress}%,
-      #a41034 ${progress + 0.25}%,
-      #333 ${progress + 0.25}%,
-      #333 100%)`;
+  $progressIndicator.style.left = `${progress}%`;
 };
 
 export default {
@@ -25,20 +20,33 @@ export default {
     });
     container.addEventListener('mousemove', (e) => {
       const pos = (e.pageX - container.offsetLeft) / container.offsetWidth;
+      $seekIndicator.style.display = 'block';
+      $seekIndicator.style.left = `${e.pageX}px`;
       publish('timeline:mouseover', [pos, e]);
     });
     container.addEventListener('mouseleave', () => {
       publish('timeline:mouseleave');
+      $seekIndicator.style.display = 'none';
     });
   },
   render(selector) {
     return (data) => {
       const container = document.querySelector(selector);
       const fragment = document.createDocumentFragment();
+      const progressIndicator = document.createElement('progress-indicator');
+      const seekIndicator = document.createElement('seek-indicator');
       const template = mark => `<span>${mark.title}</span>`;
       const length = data[data.length - 1].end;
 
       container.innerHTML = '';
+
+      container.appendChild(seekIndicator);
+      container.appendChild(progressIndicator);
+
+      $progressIndicator = container.querySelector('progress-indicator');
+      $seekIndicator = container.querySelector('seek-indicator');
+
+
       data.forEach(mark => {
         const pos = mark.start / length;
         if (mark.type === 'chapter') {
