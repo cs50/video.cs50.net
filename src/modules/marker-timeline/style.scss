@@ -11,8 +11,10 @@ marker-timeline {
   [type='chapter'] {
     position: absolute;
     display: block;
-    width: .25rem;
+    width: .5rem;
+    max-width: 1%;
     height: 100%;
+    transform: translateX(-50%);
     background: rgba(0,0,0,.25);
     &:hover {
       background: #111;
@@ -37,6 +39,12 @@ marker-timeline {
     &:nth-last-of-type(2):hover::after,
     &:nth-last-of-type(3):hover::after {
       transform: translate(-100%, -125%);
+    }
+  }
+
+  @media (orientation: portrait) {
+    [type='chapter'] {
+      display: none;
     }
   }
 
