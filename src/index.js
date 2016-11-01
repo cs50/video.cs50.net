@@ -190,7 +190,7 @@ module.exports = () => {
     $dialogTrigger.classList.toggle('open');
   });
 
-  document.onkeydown = (evt) => {
+  document.onkeyup = (evt) => {
     evt = evt || window.event;
     if (evt.keyCode === 27) {
       const $dialog = document.querySelector('dialog');
