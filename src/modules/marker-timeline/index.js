@@ -45,6 +45,9 @@ export default {
       const template = mark => `<span>${mark.title}</span>`;
       const length = data[data.length - 1].end;
 
+      [...container.querySelectorAll('chapter-')]
+      .forEach(x => container.removeChild(x));
+
       data.forEach(mark => {
         const pos = mark.start / length;
         if (mark.type === 'chapter') {
