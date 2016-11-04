@@ -114,8 +114,8 @@ module.exports = () => {
       const defaultUrl = resource.find(x => x.srclang === 'en');
       return desiredUrl !== undefined ? desiredUrl : defaultUrl;
     };
-    const chaptersFileUrl = resourceUrl(ep.chapters, lang).src.replace('http://', 'https://');
-    const captionsFileUrl = resourceUrl(ep.captions, lang).src.replace('http://', 'https://');
+    const chaptersFileUrl = resourceUrl(ep.chapters, lang);
+    const captionsFileUrl = resourceUrl(ep.captions, lang);
     markers(chaptersFileUrl, captionsFileUrl);
     window.ga('send', 'event', 'language', 'changed', lang);
   });
