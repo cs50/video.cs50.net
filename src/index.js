@@ -84,6 +84,7 @@ module.exports = () => {
     // Fetch episode data from CDN based on URL
     getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
     .then(ep => {
+      localStorage.setItem('episode', JSON.stringify(ep));
       const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
       const chaptersFile = typeof ep.chapters === 'object' ?
         ep.chapters.find(x => x.srclang === 'en') : null;

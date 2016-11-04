@@ -11,6 +11,15 @@ const setProgress = (time, duration) => {
 export default {
   initialize() {
     const container = document.querySelector('marker-timeline');
+    const progressIndicator = document.createElement('progress-indicator');
+    const seekIndicator = document.createElement('seek-indicator');
+
+    container.appendChild(seekIndicator);
+    container.appendChild(progressIndicator);
+
+    $progressIndicator = container.querySelector('progress-indicator');
+    $seekIndicator = container.querySelector('seek-indicator');
+
     subscribe('markers:fetched', this.render('marker-timeline'));
     subscribe('video:tick', setProgress);
     container.addEventListener('click', (e) => {
@@ -33,19 +42,8 @@ export default {
     return (data) => {
       const container = document.querySelector(selector);
       const fragment = document.createDocumentFragment();
-      const progressIndicator = document.createElement('progress-indicator');
-      const seekIndicator = document.createElement('seek-indicator');
       const template = mark => `<span>${mark.title}</span>`;
       const length = data[data.length - 1].end;
-
-      container.innerHTML = '';
-
-      container.appendChild(seekIndicator);
-      container.appendChild(progressIndicator);
-
-      $progressIndicator = container.querySelector('progress-indicator');
-      $seekIndicator = container.querySelector('seek-indicator');
-
 
       data.forEach(mark => {
         const pos = mark.start / length;
