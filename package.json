@@ -47,6 +47,6 @@
   "dependencies": {
     "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",
     "whatwg-fetch": "1.0.0",
-    "youtube-player": "3.0.4"
+    "youtube-player": "3.0.5"
   }
 }
