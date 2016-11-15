@@ -27,8 +27,8 @@ video-cameras {
       fill: #fff;
     }
 
-    &:hover {
-      color: rgba(255,255,255,0.8);
+    &:not(.active):hover {
+      background-color: #212121;
     }
   }
 }

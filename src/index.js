@@ -8,6 +8,7 @@ import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
 import VideoTimer from './modules/video-timer';
 import VideoCameras from './modules/video-cameras';
+import VideoScreenshot from './modules/video-screenshot';
 import MarkerSearch from './modules/marker-search';
 import MarkerTimeline from './modules/marker-timeline';
 import MarkerTeleprompter from './modules/marker-teleprompter';
@@ -99,6 +100,7 @@ module.exports = () => {
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       VideoCameras.render('video-cameras', ep.youtube);
+      VideoScreenshot.render('video-screenshot', id);
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);

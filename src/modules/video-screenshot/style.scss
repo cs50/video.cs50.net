@@ -1,0 +1,45 @@
+video-screenshot {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+  transition: transform .3s;
+  button {
+    border-radius: 50%;
+    &:hover {
+      background-color: #212121;
+    }
+  }
+
+  &:not(.working) {
+    button svg:last-child {
+      display: none;
+    }
+  }
+
+  &.working {
+    button svg:first-child {
+      display: none;
+    }
+    button svg:last-child {
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  @media (orientation: portrait) {
+    display: none;
+  }
+
+}
+
+.hidden video-screenshot {
+  transform: translateY(10rem);
+}
+
+@keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
