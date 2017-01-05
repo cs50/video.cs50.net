@@ -32,8 +32,8 @@ const getQueryParams = qs => {
 
 const getEpisodeData = url => fetch(url)
 .then(data => data.json())
-.then(({ youtube, captions, chapters, downloads, thumbnails }) => ({
-  youtube, captions, chapters, thumbnails, downloads,
+.then(({ youtube, captions, chapters, downloads, thumbnails, sources }) => ({
+  youtube, captions, chapters, thumbnails, downloads, sources,
 }));
 
 const secondsToYoutubeTime = sec => (sec > 3600 ?
