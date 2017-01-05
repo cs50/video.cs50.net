@@ -65,10 +65,17 @@ export default {
 
     $button.addEventListener('click', () => {
       const video = document.querySelector('main .primary');
-      const src = video.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
+      const mode = document.querySelector('video-main').getAttribute('camera');
+      let url;
+      if (mode === 'ms') {
+        const src = video.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
+        url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`;
+      } else {
+        url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-720p.mp4`;
+      }
       $container.classList.add('working');
-      screenshotVideo(`https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`, currentTime)
-      .then(() => $container.classList.remove('working'));
+      screenshotVideo(url, currentTime)
+        .then(() => $container.classList.remove('working'));
     });
 
     $container.appendChild($button);
