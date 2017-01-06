@@ -95,12 +95,13 @@ module.exports = () => {
         ep.thumbnails.find(x => x.type === 'text/vtt') : null;
       const downloadLinks = typeof ep.downloads === 'object' ?
         ep.downloads.filter(x => x.label.match('MP4')) : null;
+      const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, startTime]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       VideoCameras.render('video-cameras', ep.youtube);
-      VideoScreenshot.render('video-screenshot', id);
+      if(screenshotSources.length === 2) VideoScreenshot.render('video-screenshot', id);
       if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
