@@ -6,7 +6,11 @@ const screenshotVideo = (src, time) => new Promise((resolve) => {
   video.src = src;
   video.crossOrigin = 'Anonymous';
   video.currentTime = time;
-  video.play().then(() => {
+  video.muted = true;
+  video.play()
+
+  video.addEventListener('loadeddata', () => {
+
     // Pause the video at time
     video.pause();
 
@@ -37,7 +41,10 @@ const screenshotVideo = (src, time) => new Promise((resolve) => {
     // Remove the temporary link and free video element
     document.body.removeChild(document.body.lastElementChild);
     video = null;
+
+    // Resolve promise
     resolve();
+
   });
 });
 
