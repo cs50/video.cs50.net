@@ -47,7 +47,7 @@ const youTubeTimeToSeconds = time => {
   return (hours * 3600) + (mins * 60) + secs;
 };
 
-module.exports = () => {
+module.exports = (() => {
   // Determine if youtube is accessible
   const image = new Image();
   image.onerror = () => {
@@ -244,4 +244,4 @@ module.exports = () => {
   };
 
   publish('player:loadVideo', [targetEpisode, targetLanguage]);
-};
+})();
