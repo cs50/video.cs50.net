@@ -2,7 +2,8 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-import VideoPlayback from './modules/video-playback';
+import PlaybackRates from './modules/playback-rates';
+import PlayButton from './modules/play-button';
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
@@ -19,58 +20,28 @@ import ThumbnailPreview from './modules/thumbnail-preview';
 import { markers } from './modules/marker-fetch';
 import { thumbs } from './modules/thumbnail-fetch';
 
-const getQueryParams = qs => {
-  qs = qs.split('+').join(' ');
-  const params = {};
-  let tokens;
-  const re = /[?&]?([^=]+)=([^&]*)/g;
-  while (tokens = re.exec(qs)) {
-    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-  }
-  return params;
-};
+import { secondsToYoutubeTime,
+         youTubeTimeToSeconds,
+         youTubeIsReachable,
+         youTubeTimeFromUrl } from './helpers/youtube.js';
 
-const getEpisodeData = url => fetch(url)
-.then(data => data.json())
-.then(({ youtube, captions, chapters, downloads, thumbnails, sources }) => ({
-  youtube, captions, chapters, thumbnails, downloads, sources,
-}));
-
-const secondsToYoutubeTime = sec => (sec > 3600 ?
-  `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
-  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`);
-
-const youTubeTimeToSeconds = time => {
-  const hours = time.match(/\d+h/) ? parseFloat(time.match(/\d+h/)[0]) : 0;
-  const mins = parseFloat(time.match(/\d+m/)[0]);
-  const secs = parseFloat(time.match(/\d+s/)[0]);
-  return (hours * 3600) + (mins * 60) + secs;
-};
+import { cdnEpisodefromUrl } from './helpers/cdn.js';
 
 module.exports = (() => {
-  // Determine if youtube is accessible
-  const image = new Image();
-  image.onerror = () => {
-    document.querySelector('video-main').classList.add('blocked');
-  };
-  image.src = 'https://youtube.com/favicon.ico';
 
-  // Extract the desired start time on page load
-  const startTime = getQueryParams(document.location.search).t ?
-  youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
+  // Determine if youtube is accessible
+  youTubeIsReachable()
+  .catch(() => document.querySelector('video-main').classList.add('blocked'));
 
   // Extract the url on page load
-  const targetEpisode = window.location.pathname === '/' ?
-    '/2016/fall/lectures/0' : window.location.pathname.replace(/\/$/, '');
-  const targetLanguage = 'en';
-
+  const targetEpisode = cdnEpisodefromUrl();
   window.history.replaceState(null, null, targetEpisode);
 
-  VideoPlayback.render('video-playback', [
-    { rate: 1, label: '1' },
-    { rate: 1.5, label: '1.5' },
-    { rate: 2, label: '2' },
-  ]);
+  const $ = selector => document.querySelector(selector);
+
+  $('video-controls').appendChild(PlayButton())
+  $('video-controls').appendChild(PlaybackRates())
+
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
@@ -83,7 +54,8 @@ module.exports = (() => {
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
-    getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
+    fetch(`https://cdn.cs50.net${id}/index.json`)
+    .then(data => data.json())
     .then(ep => {
       localStorage.setItem('episode', JSON.stringify(ep));
       const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
@@ -97,7 +69,7 @@ module.exports = (() => {
         ep.downloads.filter(x => x.label.match('MP4')) : null;
       const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
-      publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      publish('video:loadVideoById', [youtubeVideoId, youTubeTimeFromUrl()]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       VideoCameras.render('video-cameras', ep.youtube);
@@ -156,15 +128,6 @@ module.exports = (() => {
     publish('video:seekNextChapter');
   });
 
-  document.querySelector('.video-play-pause').addEventListener('click', (e) => {
-    if (e.currentTarget.classList.contains('playing')) {
-      publish('video:pause');
-    } else {
-      publish('video:play');
-    }
-    e.currentTarget.classList.toggle('playing');
-  });
-
   document.querySelector('dialog-trigger').addEventListener('click', () => {
     const $dialog = document.querySelector('dialog');
     const $dialogTrigger = document.querySelector('dialog-trigger');
@@ -203,7 +166,7 @@ module.exports = (() => {
       $dialogTrigger.classList.remove('open');
     }
     if (evt.keyCode === 32) {
-      const $elem = document.querySelector('.video-play-pause');
+      const $elem = document.querySelector('play-button button');
       if ($elem.classList.contains('playing')) {
         publish('video:pause');
       } else publish('video:play');
@@ -243,5 +206,5 @@ module.exports = (() => {
     timer = setTimeout(hidePlayerChrome, 3000);
   };
 
-  publish('player:loadVideo', [targetEpisode, targetLanguage]);
+  publish('player:loadVideo', [targetEpisode, 'en']);
 })();

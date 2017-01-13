@@ -1,0 +1,12 @@
+play-button {
+  .playing {
+    svg:first-child {
+      display: none;
+    }
+  }
+  :not(.playing) {
+    svg:last-child {
+      display: none;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-video-playback {
+playback-rates {
   position: relative;
   display: flex;
 
@@ -8,7 +8,7 @@ video-playback {
   }
 
   button {
-    padding: 1rem;
+    width: 3rem;
     font-size: .8rem;
     user-select: none;
     color: rgba(255,255,255,0.5);
