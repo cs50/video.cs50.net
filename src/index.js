@@ -4,6 +4,9 @@ import { subscribe, publish } from 'minpubsub';
 
 import PlaybackRates from './modules/playback-rates';
 import PlayButton from './modules/play-button';
+import NextChapterButton from './modules/next-chapter-button';
+import SeekBackButton from './modules/seek-back-button';
+
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
@@ -39,7 +42,9 @@ module.exports = (() => {
 
   const $ = selector => document.querySelector(selector);
 
+  $('video-controls').appendChild(SeekBackButton())
   $('video-controls').appendChild(PlayButton())
+  $('video-controls').appendChild(NextChapterButton())
   $('video-controls').appendChild(PlaybackRates())
 
   MarkerSearch.render('marker-search');
@@ -118,14 +123,6 @@ module.exports = (() => {
       requestFullScreen.bind(iframe)();
     }
     window.ga('send', 'event', 'control', 'fullscreen');
-  });
-
-  document.querySelector('.seek-back').addEventListener('click', () => {
-    publish('video:seekBy', [-10]);
-  });
-
-  document.querySelector('.seek-next').addEventListener('click', () => {
-    publish('video:seekNextChapter');
   });
 
   document.querySelector('dialog-trigger').addEventListener('click', () => {

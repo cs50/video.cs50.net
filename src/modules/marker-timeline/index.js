@@ -51,7 +51,6 @@ export default {
       data.forEach(mark => {
         const pos = mark.start / length;
         if (mark.type === 'chapter') {
-          document.querySelector('.seek-next').classList.remove('hidden');
           const div = document.createElement('chapter-');
           div.setAttribute('title', mark.title);
           div.addEventListener('click', (e) => {

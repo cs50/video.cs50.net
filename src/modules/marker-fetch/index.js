@@ -18,7 +18,11 @@ const chapters = obj => obj ? fetch(obj.src)
   start: timeToSeconds(chapter[1].split(' --> ')[0]),
   end: timeToSeconds(chapter[1].split(' --> ')[1]),
   title: chapter[2],
-}))) : [];
+})))
+.then(chapters => {
+  publish('chapters:loaded', [])
+  return chapters;
+}) : [];
 
 const captions = obj => obj ? fetch(obj.src)
 .then(data => data.text())
