@@ -8,11 +8,11 @@ import NextChapterButton from './modules/next-chapter-button';
 import SeekBackButton from './modules/seek-back-button';
 import CaptionsButton from './modules/captions-button';
 import FullscreenButton from './modules/fullscreen-button';
+import DownloadLinks from './modules/download-links';
+import ProgressTimer from './modules/progress-timer';
 
 import VideoMain from './modules/video-main';
-import VideoDownload from './modules/video-download';
 import VideoTimeout from './modules/video-timeout';
-import VideoTimer from './modules/video-timer';
 import VideoCameras from './modules/video-cameras';
 import VideoScreenshot from './modules/video-screenshot';
 import MarkerSearch from './modules/marker-search';
@@ -31,6 +31,7 @@ import { secondsToYoutubeTime,
          youTubeTimeFromUrl } from './helpers/youtube.js';
 
 import { cdnEpisodefromUrl } from './helpers/cdn.js';
+const $ = selector => document.querySelector(selector);
 
 module.exports = (() => {
 
@@ -42,14 +43,16 @@ module.exports = (() => {
   const targetEpisode = cdnEpisodefromUrl();
   window.history.replaceState(null, null, targetEpisode);
 
-  const $ = selector => document.querySelector(selector);
-
-  $('video-controls').appendChild(SeekBackButton())
-  $('video-controls').appendChild(PlayButton())
-  $('video-controls').appendChild(NextChapterButton())
-  $('video-controls').appendChild(PlaybackRates())
-  $('video-controls').appendChild(CaptionsButton())
-  $('video-controls').appendChild(FullscreenButton())
+  // Control components
+  const $controls = $('video-controls');
+  $controls.appendChild(SeekBackButton())
+  $controls.appendChild(PlayButton())
+  $controls.appendChild(NextChapterButton())
+  $controls.appendChild(ProgressTimer())
+  $controls.appendChild(PlaybackRates())
+  $controls.appendChild(CaptionsButton())
+  $controls.appendChild(DownloadLinks())
+  $controls.appendChild(FullscreenButton())
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
@@ -59,7 +62,6 @@ module.exports = (() => {
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
   VideoTimeout.initialize();
-  VideoTimer.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
@@ -83,7 +85,7 @@ module.exports = (() => {
       thumbs(thumbnailsFile);
       VideoCameras.render('video-cameras', ep.youtube);
       if(screenshotSources.length === 2) VideoScreenshot.render('video-screenshot', id);
-      if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
+      if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
         LanguageSelect.render('language-select', availableLanguages, lang);
