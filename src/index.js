@@ -7,6 +7,7 @@ import PlayButton from './modules/play-button';
 import NextChapterButton from './modules/next-chapter-button';
 import SeekBackButton from './modules/seek-back-button';
 import CaptionsButton from './modules/captions-button';
+import FullscreenButton from './modules/fullscreen-button';
 
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
@@ -48,6 +49,7 @@ module.exports = (() => {
   $('video-controls').appendChild(NextChapterButton())
   $('video-controls').appendChild(PlaybackRates())
   $('video-controls').appendChild(CaptionsButton())
+  $('video-controls').appendChild(FullscreenButton())
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
@@ -108,15 +110,6 @@ module.exports = (() => {
 
   subscribe('video:tick', time => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
-  });
-
-  document.querySelector('.video-fullscreen').addEventListener('click', () => {
-    const iframe = document.querySelector('.primary iframe');
-    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-    if (requestFullScreen) {
-      requestFullScreen.bind(iframe)();
-    }
-    window.ga('send', 'event', 'control', 'fullscreen');
   });
 
   document.querySelector('dialog-trigger').addEventListener('click', () => {
