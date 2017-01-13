@@ -51,6 +51,32 @@ video-main.blocked::before {
 -- Core Containers
 */
 
+video-controls {
+  display: flex;
+
+  > *+* {
+    border-left: 1px solid #000;
+  }
+
+  .active {
+    background: #a41034;
+  }
+
+  button {
+    padding: .75rem;
+    background: #212121;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: rgba(255,255,255,0.8);
+    }
+
+    &:hover svg {
+      fill: rgba(255,255,255,1);
+    }
+  }
+}
+
 @media (orientation: landscape) {
 
   html {
