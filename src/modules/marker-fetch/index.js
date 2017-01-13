@@ -20,7 +20,7 @@ const chapters = obj => obj ? fetch(obj.src)
   title: chapter[2],
 })))
 .then(chapters => {
-  publish('chapters:loaded', [])
+  publish('chapters:loaded')
   return chapters;
 }) : [];
 
@@ -39,7 +39,11 @@ const captions = obj => obj ? fetch(obj.src)
         .join(' ')
         .replace('>> ', '')
         .replace('-', '') || '[NO SPEECH]',
-}))) : [];
+})))
+.then(captions => {
+  publish('captions:loaded')
+  return captions;
+}) : [];
 
 export const markers = (chaptersUrl, captionsUrl) =>
 Promise.all([chapters(chaptersUrl), captions(captionsUrl)])

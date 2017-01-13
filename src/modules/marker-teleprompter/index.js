@@ -33,14 +33,12 @@ export default {
   render(selector) {
     return data => {
       const container = document.querySelector(selector);
-      const trigger = document.querySelector('.video-captions');
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
         <span>${secondsToTime(mark.start)}</span>
         <a href='?t=${secondsToYoutubeTime(mark.start)}'>${mark.title}</a>
       `;
 
-      trigger.removeAttribute('disabled');
       container.innerHTML = '';
       data.forEach(mark => {
         if (mark.type === 'caption') {

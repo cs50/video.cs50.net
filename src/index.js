@@ -6,6 +6,7 @@ import PlaybackRates from './modules/playback-rates';
 import PlayButton from './modules/play-button';
 import NextChapterButton from './modules/next-chapter-button';
 import SeekBackButton from './modules/seek-back-button';
+import CaptionsButton from './modules/captions-button';
 
 import VideoMain from './modules/video-main';
 import VideoDownload from './modules/video-download';
@@ -46,6 +47,7 @@ module.exports = (() => {
   $('video-controls').appendChild(PlayButton())
   $('video-controls').appendChild(NextChapterButton())
   $('video-controls').appendChild(PlaybackRates())
+  $('video-controls').appendChild(CaptionsButton())
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
@@ -106,14 +108,6 @@ module.exports = (() => {
 
   subscribe('video:tick', time => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
-  });
-
-  document.querySelector('.video-captions').addEventListener('click', (e) => {
-    document.querySelector('marker-teleprompter').classList.toggle('hidden');
-    e.currentTarget.classList.toggle('active');
-    if (e.currentTarget.classList.contains('active')) {
-      window.ga('send', 'event', 'captions', 'enabled');
-    }
   });
 
   document.querySelector('.video-fullscreen').addEventListener('click', () => {

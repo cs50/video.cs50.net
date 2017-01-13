@@ -9,6 +9,10 @@ video-controls {
     display: none !important;
   }
 
+  .active {
+    background: #a41034;
+  }
+
   button {
     padding: .75rem;
     background: #212121;
