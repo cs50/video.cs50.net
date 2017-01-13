@@ -136,7 +136,7 @@ export default {
         }
       });
     });
-
+    
     setInterval(() => player.getPlayerState()
     .then(state => (state === 1 ? tick() : false))
     , 1000);

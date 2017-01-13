@@ -53,6 +53,6 @@ Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
   if (a.start < b.start) { return -1; }
   return 0;
 }))
-.then(data => data.length > 0 ?
-  publish('markers:fetched', [data]) :
-  null);
+.then(markers => markers.length > 0 ?
+  publish('markers:fetched', [markers]) : null
+);

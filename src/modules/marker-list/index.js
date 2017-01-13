@@ -44,9 +44,6 @@ export default {
   },
   render(selector) {
     return data => {
-      document.querySelector('dialog').classList.remove('hidden');
-      document.querySelector('dialog-trigger').removeAttribute('disabled');
-
       const container = document.querySelector(selector);
       const frag = document.createDocumentFragment();
       const captionTemplate = mark => `
