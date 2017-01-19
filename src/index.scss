@@ -79,6 +79,19 @@ video-controls {
   }
 }
 
+break-toggle {
+  padding: 1rem;
+  background: #121212;
+  color: rgba(255,255,255,0.5);
+  label {
+    display: flex;
+    align-items: center;
+    > *+* { margin-left: .75rem; }
+    span { font-size: .75rem; }
+    -webkit-user-select: none;
+  }
+}
+
 @media (orientation: landscape) {
 
   html {
@@ -148,29 +161,6 @@ video-controls {
       transform: translateX(0) rotateZ(360deg);
     }
   }
-
-  break-toggle {
-    padding: 1rem;
-    background: #121212;
-    color: rgba(255,255,255,0.5);
-    label {
-      display: flex;
-      align-items: center;
-      > *+* { margin-left: .75rem; }
-      -webkit-user-select: none;
-    }
-  }
-
-  thumb-preview {
-    position: absolute;
-    bottom: 5rem;
-    left: 100px;
-    width: 200px;
-    height: 90px;
-    opacity: 0;
-    background-size: cover;
-    z-index: 1;
-  }
 }
 
 @media (orientation: portrait) {
@@ -231,18 +221,6 @@ video-controls {
 
     marker-list {
       padding: 1rem;
-    }
-  }
-
-  break-toggle {
-    padding: 1rem;
-    background: #121212;
-    color: rgba(255,255,255,0.5);
-    label {
-      display: flex;
-      align-items: center;
-      > *+* { margin-left: .75rem; }
-      -webkit-user-select: none;
     }
   }
 
@@ -351,4 +329,4 @@ youtube-video:not(.active) {
   }
 }
 
-@include scrollbars(.61rem, #121212);
+@include scrollbars(.5rem, #121212);

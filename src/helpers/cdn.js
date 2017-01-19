@@ -1,4 +1,5 @@
 import { publish } from 'minpubsub';
+import { secondsToYoutubeTime } from './youtube.js';
 
 const timeToSeconds = time => {
   const t = time.split(':');
@@ -96,7 +97,7 @@ export const videoScreenshotFromUrl = (episode, time) =>
       const a = document.createElement('a');
       window.URL = window.URL || window.webkitURL;
       a.href = window.URL.createObjectURL(f);
-      a.download = 'screenshot.png';
+      a.download = `Screenshot${cdnEpisodefromUrl()}-at-${secondsToYoutubeTime(time)}.png`;
       document.body.appendChild(a);
       a.click();
 

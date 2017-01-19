@@ -1,6 +1,8 @@
 playback-rates {
   position: relative;
   display: flex;
+  align-items: center;
+  height: 3rem;
 
   button.active {
     background: #a41034;
@@ -8,13 +10,29 @@ playback-rates {
   }
 
   button {
-    width: 3rem;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
     font-size: .8rem;
     user-select: none;
     color: rgba(255,255,255,0.5);
+    border-radius: .5rem;
+    margin-right: .5rem;
 
     &:hover {
       color: rgba(255,255,255,0.8);
+    }
+
+    &:after {
+      content: attr(rate);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

@@ -6,13 +6,15 @@ thumb-preview {
   height: 0;
   border: 3px solid #212121;
   z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   &::after {
     content: attr(data-time);
-    position: absolute;
-    padding: .5rem;
+    padding: .4rem .4rem .2rem;
     font-size: .75rem;
-    bottom: 0;
     background: #212121;
     color: #fff;
+    text-align: center;
   }
 }

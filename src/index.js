@@ -2,34 +2,22 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-// Control components
-import PlaybackRates from './components/playback-rates';
-import PlayButton from './components/play-button';
-import NextChapterButton from './components/next-chapter-button';
-import SeekBackButton from './components/seek-back-button';
-import CaptionsButton from './components/captions-button';
-import FullscreenButton from './components/fullscreen-button';
-import DownloadLinks from './components/download-links';
-import ProgressTimer from './components/progress-timer';
-import SidebarButton from './components/sidebar-button';
-import ExperienceModes from './components/experience-modes';
-import ScreenshotButton from './components/screenshot-button';
+import VideoMain from './components/video-main';
+import VideoControls from './components/video-controls';
 
+import ScreenshotButton from './components/screenshot-button';
+import ExperienceModes from './components/experience-modes';
+import SidebarButton from './components/sidebar-button';
 import ThumbnailPreview from './components/thumbnail-preview';
 import BreakOverlay from './components/break-overlay';
 
-import VideoControls from './components/video-controls';
-
-// Video components
-import VideoMain from './components/video-main';
-
-// Marker components
 import MarkerSearch from './components/marker-search';
 import MarkerTimeline from './components/marker-timeline';
 import MarkerTeleprompter from './components/marker-teleprompter';
 import MarkerList from './components/marker-list';
 import LanguageSelect from './components/language-select';
 
+import documentHelpers from './helpers/document.js';
 import {
   secondsToYoutubeTime,
   youTubeTimeToSeconds,
@@ -43,7 +31,6 @@ import {
   thumbs,
 } from './helpers/cdn.js';
 
-import documentHelpers from './helpers/document.js';
 
 const $ = selector => document.querySelector(selector);
 

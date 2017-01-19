@@ -22,7 +22,7 @@ export default () => {
     { rate: 2, label: '2' }
   ])
   .then(Node(({rate, label, active}) => `
-    <button class='${ active ? 'active' : '' }' rate='${rate}'>${label}</button>
+    <button class='${ active ? 'active' : '' }' rate='${rate}'></button>
   `))
   .then(Bind('button')('click')(action.select))
   .then(Draw($container));
