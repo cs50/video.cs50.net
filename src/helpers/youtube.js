@@ -1,11 +1,11 @@
-// Converts (int) seconds => (str) hh:mm:ss
+// Converts (int) seconds => (str) 00h00m00s
 export const secondsToYoutubeTime = sec =>
   (sec > 3600 ?
     `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
     `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`
   );
 
-// Converts (str) hh:mm:ss => (int) seconds
+// Converts (str) 00h00m00s => (int) seconds
 export const youTubeTimeToSeconds = time => {
   const hours = time.match(/\d+h/) ? parseFloat(time.match(/\d+h/)[0]) : 0;
   const mins = parseFloat(time.match(/\d+m/)[0]);

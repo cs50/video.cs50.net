@@ -3,41 +3,46 @@ import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
 // Control components
-import PlaybackRates from './modules/playback-rates';
-import PlayButton from './modules/play-button';
-import NextChapterButton from './modules/next-chapter-button';
-import SeekBackButton from './modules/seek-back-button';
-import CaptionsButton from './modules/captions-button';
-import FullscreenButton from './modules/fullscreen-button';
-import DownloadLinks from './modules/download-links';
-import ProgressTimer from './modules/progress-timer';
-import SidebarButton from './modules/sidebar-button';
+import PlaybackRates from './components/playback-rates';
+import PlayButton from './components/play-button';
+import NextChapterButton from './components/next-chapter-button';
+import SeekBackButton from './components/seek-back-button';
+import CaptionsButton from './components/captions-button';
+import FullscreenButton from './components/fullscreen-button';
+import DownloadLinks from './components/download-links';
+import ProgressTimer from './components/progress-timer';
+import SidebarButton from './components/sidebar-button';
+import ExperienceModes from './components/experience-modes';
+import ScreenshotButton from './components/screenshot-button';
 
-// Advanced components
-import VideoCameras from './modules/video-cameras';
-import VideoScreenshot from './modules/video-screenshot';
+import ThumbnailPreview from './components/thumbnail-preview';
+import BreakOverlay from './components/break-overlay';
+
+import VideoControls from './components/video-controls';
 
 // Video components
-import VideoMain from './modules/video-main';
-import VideoTimeout from './modules/video-timeout';
-import ThumbnailPreview from './modules/thumbnail-preview';
+import VideoMain from './components/video-main';
 
 // Marker components
-import MarkerSearch from './modules/marker-search';
-import MarkerTimeline from './modules/marker-timeline';
-import MarkerTeleprompter from './modules/marker-teleprompter';
-import MarkerList from './modules/marker-list';
-import LanguageSelect from './modules/language-select';
+import MarkerSearch from './components/marker-search';
+import MarkerTimeline from './components/marker-timeline';
+import MarkerTeleprompter from './components/marker-teleprompter';
+import MarkerList from './components/marker-list';
+import LanguageSelect from './components/language-select';
 
-import { markers } from './modules/marker-fetch';
-import { thumbs } from './modules/thumbnail-fetch';
+import {
+  secondsToYoutubeTime,
+  youTubeTimeToSeconds,
+  youTubeIsReachable,
+  youTubeTimeFromUrl,
+} from './helpers/youtube.js';
 
-import { secondsToYoutubeTime,
-         youTubeTimeToSeconds,
-         youTubeIsReachable,
-         youTubeTimeFromUrl } from './helpers/youtube.js';
+import {
+  cdnEpisodefromUrl,
+  markers,
+  thumbs,
+} from './helpers/cdn.js';
 
-import { cdnEpisodefromUrl } from './helpers/cdn.js';
 import documentHelpers from './helpers/document.js';
 
 const $ = selector => document.querySelector(selector);
@@ -57,28 +62,24 @@ module.exports = (() => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
   });
 
-  // Control components
-  const $controls = $('video-controls');
-  $controls.appendChild(SeekBackButton())
-  $controls.appendChild(PlayButton())
-  $controls.appendChild(NextChapterButton())
-  $controls.appendChild(ProgressTimer())
-  $controls.appendChild(PlaybackRates())
-  $controls.appendChild(CaptionsButton())
-  $controls.appendChild(DownloadLinks())
-  $controls.appendChild(FullscreenButton())
-
+  // Body Components
   const $body = $('body');
-  $body.appendChild(SidebarButton());
+  $body.appendChild(SidebarButton())
+  const $main = $('main');
+  $main.appendChild(BreakOverlay())
+  // Control components
+  const $control = $('control-bar');
+  $control.appendChild(MarkerTeleprompter())
+  $control.appendChild(ExperienceModes())
+  $control.appendChild(ScreenshotButton())
+  $control.appendChild(VideoControls());
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
   MarkerList.initialize();
-  MarkerTeleprompter.initialize();
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
-  VideoTimeout.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
@@ -98,10 +99,10 @@ module.exports = (() => {
       const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
       publish('video:loadVideoById', [youtubeVideoId, youTubeTimeFromUrl()]);
+      publish('youtube:fetched', [ep.youtube]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
-      VideoCameras.render('video-cameras', ep.youtube);
-      if(screenshotSources.length === 2) VideoScreenshot.render('video-screenshot', id);
+      if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);
       if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);

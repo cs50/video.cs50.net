@@ -1,0 +1,43 @@
+experience-modes {
+  position: absolute;
+  bottom: 5.5rem;
+  top: auto;
+  left: 1rem;
+  display: flex;
+  transition: transform .3s;
+
+  @media (orientation: portrait) {
+    display: none;
+  }
+
+  .mouse-idle & {
+    transform: translateY(10rem);
+  }
+
+  [active] {
+    background: #a41034;
+    color: #fff;
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  button {
+    padding: 1rem;
+    font-size: .8rem;
+    user-select: none;
+    color: rgba(255,255,255,0.5);
+    background-color: #121212;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: #fff;
+    }
+
+    &:not([active]):hover {
+      background-color: #212121;
+    }
+  }
+}

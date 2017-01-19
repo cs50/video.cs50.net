@@ -1,0 +1,25 @@
+marker-teleprompter {
+  position: absolute;
+  top: auto !important;
+  bottom: 5rem;
+  width: 100%;
+  display: flex;
+  transform: translateY(0);
+  transition: all .3s;
+
+  &[hidden] {
+    display: none;
+  }
+
+  a {
+    font-size: calc(.5rem + 1vw);
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: center;
+    padding: calc(.5rem + .25vw);
+    color: #fff;
+    max-width: 70ex;
+    margin: 0 auto;
+    background: rgba(0,0,0,.8);
+  }
+}

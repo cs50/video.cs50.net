@@ -1,3 +1,4 @@
+import { publish } from 'minpubsub';
 const $ = selector => document.querySelector(selector);
 export default () => {
 

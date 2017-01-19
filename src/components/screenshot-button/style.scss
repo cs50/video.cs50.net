@@ -1,0 +1,57 @@
+screenshot-button {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+  transition: transform .3s;
+  border: 0;
+
+  [hidden] {
+    display: none;
+  }
+
+  .mouse-idle & {
+    transform: translateY(10rem);
+  }
+
+  svg {
+    width: 2rem !important;
+    height: 2rem !important;
+    fill: #fff;
+  }
+
+  button {
+    border-radius: 50%;
+    &:hover {
+      background-color: #212121;
+    }
+  }
+
+  button:not(.working) {
+    svg:last-child {
+      display: none;
+    }
+  }
+
+  button.working {
+    svg:first-child {
+      display: none;
+    }
+    svg:last-child {
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  @media (orientation: portrait) {
+    display: none;
+  }
+
+}
+
+@keyframes rotating {
+  from{
+    -webkit-transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(360deg);
+  }
+}
