@@ -13,7 +13,6 @@ video-main[camera='ms']:not(.primary) + video-alt {
     height: calc(100% - 3.5rem);
   }
 
-
   @media (orientation: landscape) {
     &:not([camera='vr'])::after {
       content: '';
@@ -31,8 +30,8 @@ video-main[camera='ms'].primary + video-alt,
 video-main[camera='ms']:not(.primary) {
   position: absolute;
   display: block;
-  top: 1rem;
-  left: 1rem;
+  top: 2rem;
+  left: 2rem;
   width: 20%;
   overflow: hidden;
   z-index: 2;

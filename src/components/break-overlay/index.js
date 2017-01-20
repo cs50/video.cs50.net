@@ -38,25 +38,34 @@ export default () => {
   const showOverlay = ({title}) => {
     publish('video:pause');
 
-    let counter = 10;
+    let counter = 9;
     $container.innerHTML = `<section>
-      <h3>Coming up Next</h3>
+      <h3>Next Chapter</h3>
       <h1>${title}</h1>
       <div>
-        <button class='cancel'>Pause</button>
-        <button class='continue'>Continue (<span>${counter}</span>)</button>
+        <button class='cancel'>
+          <svg viewBox="0 0 1 1"><use xlink:href="#icon-pause"></use></svg>
+        </button>
+        <button class='continue'>
+          Continue Watching &nbsp;(<span>${counter}</span>)
+        </button>
       </div>
-      <button class='continue-no-breaks'>Continue without breaks</button>
+      <break-toggle>
+        <label>
+          <input type="checkbox" checked />
+          <span>Breaks between chapters</span>
+        </label>
+      </break-toggle>
     </section>`;
 
     const $counter = $container.querySelector('span');
     const $continue = $container.querySelector('.continue');
     const $cancel = $container.querySelector('.cancel');
-    const $continueNoBreaks = $container.querySelector('.continue-no-breaks');
+    //const $continueNoBreaks = $container.querySelector('.continue-no-breaks');
 
     $continue.addEventListener('click', hideOverlay);
     $cancel.addEventListener('click', stopTimer);
-    $continueNoBreaks.addEventListener('click', disableBreaks);
+    //$continueNoBreaks.addEventListener('click', disableBreaks);
 
     $container.removeAttribute('hidden');
     timer = setInterval(() => {

@@ -5,7 +5,7 @@ break-overlay {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.9);
   z-index: 2;
 
   section {
@@ -28,8 +28,9 @@ break-overlay {
     display: flex;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0 0 1rem rgba(0,0,0,1);
     > *+* {
-      margin-left: .5rem;
+      margin-left: 1px;
     }
   }
 
@@ -46,7 +47,7 @@ break-overlay {
     font-weight: normal;
     text-transform: uppercase;
     letter-spacing: .1rem;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.25);
   }
 
   button {
@@ -64,10 +65,17 @@ break-overlay {
     display: none;
   }
 
-  .continue-no-breaks {
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #fff;
+  }
+
+  break-toggle {
+    width: auto;
+    margin: 0 auto;
     background: transparent;
     padding: 0;
-    text-decoration: underline;
-    color: rgba(255,255,255,.5);
+    margin-top: 1rem;
   }
 }
