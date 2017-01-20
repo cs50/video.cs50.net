@@ -10,7 +10,7 @@ video-main[camera='ms']:not(.primary) + video-alt {
   height: 100%;
 
   @media (orientation: portrait) {
-    height: calc(100% - 4rem);
+    height: calc(100% - 3.5rem);
   }
 
 

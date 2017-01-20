@@ -27,7 +27,7 @@ export default {
         const top = dimensions[1];
 
         container.style.position = 'absolute';
-        container.style.bottom = '4.5rem';
+        container.style.bottom = '4rem';
         container.style.opacity = 1;
         container.style.width = `${width}px`;
         container.style.height = `${height}px`;

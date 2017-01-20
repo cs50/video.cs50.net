@@ -5,7 +5,7 @@ let $seekIndicator;
 
 const setProgress = (time, duration) => {
   const progress = (time / duration) * 100;
-  $progressIndicator.style.left = `${progress}%`;
+  $progressIndicator.style.width = `${progress}%`;
 };
 
 export default {

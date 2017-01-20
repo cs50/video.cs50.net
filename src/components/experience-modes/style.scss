@@ -1,6 +1,6 @@
 experience-modes {
   position: absolute;
-  bottom: 5.5rem;
+  bottom: 5rem;
   top: auto;
   left: 1rem;
   display: flex;
@@ -11,7 +11,7 @@ experience-modes {
   }
 
   .mouse-idle & {
-    transform: translateY(10rem);
+    transform: translateY(5rem);
   }
 
   [active] {

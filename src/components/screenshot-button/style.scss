@@ -1,6 +1,6 @@
 screenshot-button {
   position: fixed;
-  bottom: 5rem;
+  bottom: 4.5rem;
   right: 1rem;
   transition: transform .3s;
   border: 0;
@@ -10,7 +10,7 @@ screenshot-button {
   }
 
   .mouse-idle & {
-    transform: translateY(10rem);
+    transform: translateY(5rem);
   }
 
   svg {

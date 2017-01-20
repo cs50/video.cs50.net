@@ -3,7 +3,7 @@ marker-timeline {
   flex: 1 1 auto;
   display: flex;
   width: 100%;
-  height: 1.1rem;
+  height: .5rem;
   background: #333;
   z-index: 1;
 
@@ -13,7 +13,7 @@ marker-timeline {
     top: 0;
     left: 0;
     height: 100%;
-    width: .25rem;
+    width: 2px;
     background: #212121;
   }
 
@@ -27,7 +27,7 @@ marker-timeline {
     width: .5rem;
     max-width: 1%;
     height: 100%;
-    transform: translateX(-100%);
+    transform: translateX(-90%);
     background: rgba(0,0,0,.25);
     &:hover {
       background: #111;
