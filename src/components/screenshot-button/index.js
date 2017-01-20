@@ -4,15 +4,13 @@ import { videoScreenshotFromUrl,
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
-  request(e) { publish('video:getCurrentTime'); },
+  request(e) { publish('video:getCurrentTime', [':screenshotButton']); },
   screenshot(time) {
     const $elem = document.querySelector('screenshot-button button');
     const episode = cdnEpisodefromUrl().split('/').pop();
     $elem.classList.add('working');
-      videoScreenshotFromUrl(episode, time)
-      .then(() =>
-      $elem.classList.remove('working')
-    )
+    videoScreenshotFromUrl(episode, time)
+    .then(() => $elem.classList.remove('working'))
   }
 }
 
@@ -29,7 +27,7 @@ export default () => {
   .then(Bind('button')('click')(action.request))
   .then(Draw($container));
 
-  subscribe('video:currentTime', action.screenshot);
+  subscribe('video:currentTime:screenshotButton', action.screenshot);
   subscribe('screenshots:fetched', render);
   return $container;
 }

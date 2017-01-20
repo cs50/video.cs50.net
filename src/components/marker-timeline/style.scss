@@ -5,6 +5,7 @@ marker-timeline {
   width: 100%;
   height: 1.1rem;
   background: #333;
+  z-index: 1;
 
   seek-indicator,
   progress-indicator {

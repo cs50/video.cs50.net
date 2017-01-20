@@ -59,12 +59,14 @@ module.exports = (() => {
   $control.appendChild(MarkerTeleprompter())
   $control.appendChild(ExperienceModes())
   $control.appendChild(ScreenshotButton())
-  $control.appendChild(VideoControls());
+  $control.appendChild(VideoControls())
+
+  const $dialog = $('dialog');
+  $dialog.appendChild(MarkerList())
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
-  MarkerList.initialize();
   MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
 

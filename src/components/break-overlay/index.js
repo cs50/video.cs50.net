@@ -2,6 +2,7 @@ import { subscribe, publish } from 'minpubsub';
 
 export default () => {
   let timer;
+  let data = [];
   const $container = document.createElement('break-overlay');
   $container.setAttribute('hidden', true);
 
@@ -22,11 +23,25 @@ export default () => {
     hideOverlay();
   };
 
-  const showOverlay = next => {
+  const setup = (chapters) => {
+    data = chapters;
+  }
+
+  const check = (time) => {
+    const next = data.find(x => x.start - 1 === Math.floor(time));
+    if (next) {
+      data = data.filter(x => x.start - 1 !== Math.floor(time));
+      showOverlay(next);
+    }
+  }
+
+  const showOverlay = ({title}) => {
+    publish('video:pause');
+
     let counter = 10;
     $container.innerHTML = `<section>
       <h3>Coming up Next</h3>
-      <h1>${next}</h1>
+      <h1>${title}</h1>
       <div>
         <button class='cancel'>Pause</button>
         <button class='continue'>Continue (<span>${counter}</span>)</button>
@@ -51,10 +66,9 @@ export default () => {
         hideOverlay();
       }
     }, 1000);
-    publish('video:pause');
   };
 
-  subscribe('video:timeout', showOverlay);
-  subscribe('video:hideTimeout', hideOverlay);
+  subscribe('chapters:loaded', setup);
+  subscribe('video:tick', check);
   return $container;
 };

@@ -50,9 +50,9 @@ export default {
       });
     });
 
-    subscribe('video:getCurrentTime', () =>
+    subscribe('video:getCurrentTime', (requester) =>
       player.getCurrentTime()
-      .then(time => publish('video:currentTime', [time]))
+      .then(time => publish(`video:currentTime${requester}`, [time]))
     );
 
     subscribe('video:seekToPercent', percent =>
@@ -68,22 +68,15 @@ export default {
         player.seekTo(time + sec);
       }));
 
-    subscribe('video:seekNextChapter', () =>
-    player.getCurrentTime()
-    .then(time => {
-      const nextChapter = [...document.querySelectorAll('marker-list mark-[type="chapter"]')]
-      .find(x => x.getAttribute('start') > time);
-      publish('video:seekTo', [parseInt(nextChapter.getAttribute('start'), 10) + 5]);
-      window.ga('send', 'event', 'video', 'seekNext', window.location.pathname, time);
-    }));
-
     subscribe('video:seekTo', time => {
       const mode = $videoMain.getAttribute('camera');
       if (mode === 'ms') player2.seekTo(time);
       player.seekTo(time);
-      publish('video:tick', [time]);
       if (mode === 'ms') player2.playVideo();
       player.playVideo();
+      player.getDuration().then(duration => {
+        publish('video:tick', [time, duration]);
+      });
     });
 
     subscribe('video:play', () => {
