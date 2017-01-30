@@ -1,5 +1,6 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
+import { draggable } from '../../helpers/document.js';
 
 export default {
   render() {
@@ -156,31 +157,6 @@ export default {
           e.target.removeAttribute('style');
         }
       });
-    };
-
-    const draggable = function(e) {
-      const h = this.offsetHeight;
-      const w = this.offsetWidth;
-      const t = this.offsetTop;
-      const l = this.offsetLeft;
-      const y = t + h - e.pageY;
-      const x = l + w - e.pageX;
-      const hasMoved = () => !(t === this.offsetTop && l === this.offsetLeft);
-      const follow = (e) => {
-        this.style.top = `${e.pageY + y - h}px`;
-        this.style.left = `${e.pageX + x - w}px`;
-      };
-      const unfollow = (e) => {
-        document.removeEventListener('mousemove', follow);
-        document.removeEventListener('mouseup', unfollow);
-        if (!hasMoved(e)) this.dispatchEvent(new Event('clicked', e));
-        else this.dispatchEvent(new Event('moved', e));
-      };
-      if (x > 5 && y > 5) {
-        document.addEventListener('mousemove', follow);
-        document.addEventListener('mouseup', unfollow);
-        e.preventDefault();
-      }
     };
 
     document.querySelector('video-alt').addEventListener('mousedown', draggable);
