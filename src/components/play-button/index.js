@@ -3,10 +3,9 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   toggle(e) {
-    const $class = e.currentTarget.classList;
-    if ($class.contains('playing')) publish('video:pause');
-    else publish('video:play');
-    $class.toggle('playing');
+    this.data.playing ? publish('video:pause') : publish('video:play');
+    this.data.playing = !this.data.playing;
+    e.target.classList.toggle('playing');
   }
 }
 
