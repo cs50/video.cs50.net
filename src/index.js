@@ -56,10 +56,11 @@ module.exports = (() => {
   $main.appendChild(BreakOverlay())
   // Control components
   const $control = $('control-bar');
-  $control.appendChild(MarkerTeleprompter())
+  $control.appendChild(MarkerTimeline());
   $control.appendChild(ExperienceModes())
   $control.appendChild(ScreenshotButton())
   $control.appendChild(VideoControls())
+  $control.appendChild(MarkerTeleprompter())
 
   const $dialog = $('dialog');
   $dialog.appendChild(MarkerList())
@@ -67,7 +68,6 @@ module.exports = (() => {
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
-  MarkerTimeline.initialize();
   ThumbnailPreview.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
