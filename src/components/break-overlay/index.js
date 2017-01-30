@@ -1,4 +1,5 @@
 import { subscribe, publish } from 'minpubsub';
+import BreakToggle from '../break-toggle';
 
 export default () => {
   let timer;
@@ -29,7 +30,7 @@ export default () => {
 
   const check = (time) => {
     const next = data.find(x => x.start - 1 === Math.floor(time));
-    if (next) {
+    if (next && document.body.getAttribute('breaks') === 'true') {
       data = data.filter(x => x.start - 1 !== Math.floor(time));
       showOverlay(next);
     }
@@ -50,22 +51,16 @@ export default () => {
           Continue Watching &nbsp;(<span>${counter}</span>)
         </button>
       </div>
-      <break-toggle>
-        <label>
-          <input type="checkbox" checked />
-          <span>Breaks between chapters</span>
-        </label>
-      </break-toggle>
     </section>`;
+
+    $container.querySelector('section').appendChild(BreakToggle());
 
     const $counter = $container.querySelector('span');
     const $continue = $container.querySelector('.continue');
     const $cancel = $container.querySelector('.cancel');
-    //const $continueNoBreaks = $container.querySelector('.continue-no-breaks');
 
     $continue.addEventListener('click', hideOverlay);
     $cancel.addEventListener('click', stopTimer);
-    //$continueNoBreaks.addEventListener('click', disableBreaks);
 
     $container.removeAttribute('hidden');
     timer = setInterval(() => {

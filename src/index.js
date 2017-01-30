@@ -10,6 +10,7 @@ import ExperienceModes from './components/experience-modes';
 import SidebarButton from './components/sidebar-button';
 import ThumbnailPreview from './components/thumbnail-preview';
 import BreakOverlay from './components/break-overlay';
+import BreakToggle from './components/break-toggle';
 
 import MarkerSearch from './components/marker-search';
 import MarkerTimeline from './components/marker-timeline';
@@ -64,6 +65,9 @@ module.exports = (() => {
 
   const $dialog = $('dialog');
   $dialog.appendChild(MarkerList())
+
+  const $dialogRow2 = $('dialog row-:nth-child(2)');
+  $dialogRow2.appendChild(BreakToggle());
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
