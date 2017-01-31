@@ -101,7 +101,7 @@ module.exports = (() => {
       if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
-        LanguageSelect.render('language-select', availableLanguages, lang);
+        LanguageSelect(availableLanguages, lang);
       }
     });
   });
