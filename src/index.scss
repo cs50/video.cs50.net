@@ -158,8 +158,8 @@ break-toggle {
       background: #121212;
     }
 
-    &.open {
-      transform: translateX(0) rotateZ(360deg);
+    .dialog-open & {
+      transform: translate3d(0,0,0);
     }
   }
 }

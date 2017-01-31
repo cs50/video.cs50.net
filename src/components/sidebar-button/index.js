@@ -3,12 +3,7 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   toggle(e) {
-    const $dialog = document.querySelector('dialog');
-    const $input = document.querySelector('marker-search input');
-    e.currentTarget.classList.toggle('open');
-    $dialog.classList.toggle('open');
-    if($dialog.classList.contains('open')) $input.focus()
-    else $input.blur();
+    document.body.classList.toggle('dialog-open');
     window.ga('send', 'event', 'sidebar', 'open');
   }
 }
