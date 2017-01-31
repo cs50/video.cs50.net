@@ -13,7 +13,7 @@ export default () => {
       Fetch([{current, duration}])
       .then(Node(({current, duration}) => `
         <span>${secondsToHHMMSS(current)}</span>
-        &nbsp;/&nbsp;
+        <span>&nbsp;/&nbsp;</span>
         <span>${secondsToHHMMSS(duration)}</span>
       `))
       .then(Draw($container));

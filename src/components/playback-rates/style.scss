@@ -3,6 +3,7 @@ playback-rates {
   display: flex;
   align-items: center;
   height: 3rem;
+  border-left: 0 !important;
 
   button.active {
     background: #a41034;

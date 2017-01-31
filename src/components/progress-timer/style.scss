@@ -8,4 +8,8 @@ progress-timer {
     font-size: .75rem;
     display: inline;
   }
+
+  @media (max-width: 430px) {
+    span { display: none; }
+  }
 }

@@ -15,6 +15,7 @@ import BreakToggle from './components/break-toggle';
 import MarkerSearch from './components/marker-search';
 import MarkerTimeline from './components/marker-timeline';
 import MarkerTeleprompter from './components/marker-teleprompter';
+import DownloadLinks from './components/download-links';
 import MarkerList from './components/marker-list';
 import LanguageSelect from './components/language-select';
 
@@ -68,6 +69,7 @@ module.exports = (() => {
 
   const $dialogRow2 = $('dialog row-:nth-child(2)');
   $dialogRow2.appendChild(BreakToggle());
+  $dialogRow2.appendChild(DownloadLinks());
 
   MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
