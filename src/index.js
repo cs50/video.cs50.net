@@ -33,7 +33,6 @@ import {
   thumbs,
 } from './helpers/cdn.js';
 
-
 const $ = selector => document.querySelector(selector);
 
 module.exports = (() => {
@@ -43,13 +42,14 @@ module.exports = (() => {
   .catch(() => $('video-main').classList.add('blocked'));
 
   // Extract the url on page load
+  const queryString = document.location.search;
   const targetEpisode = cdnEpisodefromUrl();
-  window.history.replaceState(null, null, targetEpisode);
+  window.history.replaceState(null, null, targetEpisode+queryString);
 
   // Ensure url times stays synced with player
-  subscribe('video:tick', time => {
-    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
-  });
+  subscribe('video:tick', time =>
+    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`)
+  );
 
   // Body Components
   const $body = $('body');

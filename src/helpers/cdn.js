@@ -49,7 +49,7 @@ const captions = obj => obj ? fetch(obj.src)
 // Extract CDN path from widow url or default
 export const cdnEpisodefromUrl = () =>
   window.location.pathname === '/' ?
-    '/2016/fall/lectures/0' :
+    window.location.pathname.replace(/\//, '/2016/fall/lectures/0'):
     window.location.pathname.replace(/\/$/, '');
 
 // Take a screenshot of given episode at given timestamp
