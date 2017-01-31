@@ -5,8 +5,8 @@ break-overlay {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.9);
   z-index: 2;
+  background: rgba(0,0,0,9);
 
   section {
     display: flex;
@@ -25,12 +25,29 @@ break-overlay {
   }
 
   div {
+    position: relative;
     display: flex;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 1rem rgba(0,0,0,1);
     > *+* {
       margin-left: 1px;
+    }
+  }
+
+  &:not(.stopped) div {
+    padding-top: .3rem;
+    &::before {
+      -webkit-animation: animatedBackground 10s linear infinite;
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      border-top: .3rem solid #a41034;
     }
   }
 
@@ -51,9 +68,11 @@ break-overlay {
   }
 
   button {
-    color: rgba(255,255,255,0.5);
+    background: #121212;
+    color: rgba(255,255,255,0.8);
     &:hover {
-      color: rgba(255,255,255,0.8);
+      background: #212121;
+      color: rgba(255,255,255,1);
     }
   }
 
@@ -68,7 +87,8 @@ break-overlay {
   svg {
     width: 1.5rem;
     height: 1.5rem;
-    fill: #fff;
+    fill: rgba(255,255,255,0.8);
+    &:hover { fill: rgba(255,255,255,1); }
   }
 
   break-toggle {
@@ -78,4 +98,9 @@ break-overlay {
     padding: 0;
     margin-top: 1rem;
   }
+}
+
+@keyframes animatedBackground {
+	from { width: 0; }
+	to { width: 100%; }
 }

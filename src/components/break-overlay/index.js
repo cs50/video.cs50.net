@@ -10,11 +10,13 @@ export default () => {
   const hideOverlay = () => {
     window.ga('send', 'event', 'break', 'continued');
     $container.setAttribute('hidden', true);
+    $container.classList.remove('stopped');
     publish('video:play');
   };
 
   const stopTimer = () => {
     window.ga('send', 'event', 'break', 'taken');
+    $container.classList.add('stopped');
     clearTimeout(timer);
   };
 
@@ -37,25 +39,20 @@ export default () => {
   }
 
   const showOverlay = ({title}) => {
-    publish('video:pause');
-
-    let counter = 9;
-    $container.innerHTML = `<section>
+    $container.innerHTML = `
+    <section>
       <h3>Next Chapter</h3>
       <h1>${title}</h1>
       <div>
         <button class='cancel'>
           <svg viewBox="0 0 1 1"><use xlink:href="#icon-pause"></use></svg>
         </button>
-        <button class='continue'>
-          Continue Watching &nbsp;(<span>${counter}</span>)
-        </button>
+        <button class='continue'>Continue Watching</button>
       </div>
     </section>`;
 
     $container.querySelector('section').appendChild(BreakToggle());
 
-    const $counter = $container.querySelector('span');
     const $continue = $container.querySelector('.continue');
     const $cancel = $container.querySelector('.cancel');
 
@@ -63,13 +60,8 @@ export default () => {
     $cancel.addEventListener('click', stopTimer);
 
     $container.removeAttribute('hidden');
-    timer = setInterval(() => {
-      $counter.innerHTML = counter--;
-      if (counter === -1) {
-        clearTimeout(timer);
-        hideOverlay();
-      }
-    }, 1000);
+    timer = setTimeout(hideOverlay, 10000);
+    publish('video:pause');
   };
 
   subscribe('chapters:loaded', setup);
