@@ -36,4 +36,8 @@ playback-rates {
       justify-content: center;
     }
   }
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 }
