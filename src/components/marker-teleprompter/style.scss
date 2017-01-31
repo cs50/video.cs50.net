@@ -3,9 +3,16 @@ marker-teleprompter {
   top: auto !important;
   bottom: 4.5rem;
   width: 100%;
-  display: flex;
+  max-width: 100%;
+  padding: 0 1rem;
   transform: translateY(0);
+  display: flex;
+  justify-content: center;
   transition: all .3s;
+
+  @media (orientation: portrait) {
+    bottom: 4rem;  
+  }
 
   &[hidden] {
     display: none;
@@ -18,7 +25,7 @@ marker-teleprompter {
     text-align: center;
     padding: calc(.5rem + .25vw);
     color: #fff;
-    max-width: 70ex;
+    max-width: 100%;
     margin: 0 auto;
     background: rgba(0,0,0,.8);
   }
