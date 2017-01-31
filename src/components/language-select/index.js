@@ -1,12 +1,12 @@
-import { publish } from 'minpubsub';
+import { publish, subscribe } from 'minpubsub';
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
-export default (languages=[], selected) => {
-  const $container = document.querySelector('language-select');
+export default () => {
+  const $container = document.createElement('language-select');
   const $select = document.createElement('select');
   $container.appendChild($select);
 
-  const render = () => {
+  const render = (languages=[], selected) => {
     $select.innerHTML = '';
     Fetch(languages)
     .then(Node(lang => `
@@ -19,6 +19,6 @@ export default (languages=[], selected) => {
     publish('player:changeLanguage', [$select.value])
   );
 
-  render();
+  subscribe('languages:fetched', render);
   return $container;
 }

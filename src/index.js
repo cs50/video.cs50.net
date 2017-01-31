@@ -67,11 +67,14 @@ module.exports = (() => {
   const $dialog = $('dialog');
   $dialog.appendChild(MarkerList())
 
+  const $dialogRow = $('dialog row-:first-child');
+  $dialogRow.appendChild(MarkerSearch());
+  $dialogRow.appendChild(LanguageSelect());
+
   const $dialogRow2 = $('dialog row-:nth-child(2)');
   $dialogRow2.appendChild(BreakToggle());
   $dialogRow2.appendChild(DownloadLinks());
 
-  MarkerSearch.render('marker-search');
   VideoMain.render('video-main', '');
 
   ThumbnailPreview.initialize();
@@ -101,7 +104,7 @@ module.exports = (() => {
       if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
-        LanguageSelect(availableLanguages, lang);
+        publish('languages:fetched', [availableLanguages, lang]);
       }
     });
   });
