@@ -66,7 +66,7 @@ export default {
         window.ga('send', 'event', 'video', 'seekBack', window.location.pathname, time);
         const mode = $videoMain.getAttribute('camera');
         if (mode === 'ms') player2.seekTo(time);
-        player.seekTo(time + sec);
+        publish('video:seekTo', [time + sec]);
       }));
 
     subscribe('video:seekTo', time => {
