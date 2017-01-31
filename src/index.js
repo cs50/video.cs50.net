@@ -53,16 +53,16 @@ module.exports = (() => {
 
   // Body Components
   const $body = $('body');
-  $body.appendChild(SidebarButton())
+  $body.appendChild(SidebarButton());
   const $main = $('main');
-  $main.appendChild(BreakOverlay())
+  $main.appendChild(BreakOverlay());
   // Control components
   const $control = $('control-bar');
+  $control.appendChild(MarkerTeleprompter());
   $control.appendChild(MarkerTimeline());
-  $control.appendChild(ExperienceModes())
-  $control.appendChild(ScreenshotButton())
-  $control.appendChild(VideoControls())
-  $control.appendChild(MarkerTeleprompter())
+  $control.appendChild(ExperienceModes());
+  $control.appendChild(ScreenshotButton());
+  $control.appendChild(VideoControls());
 
   const $dialog = $('dialog');
   $dialog.appendChild(MarkerList())

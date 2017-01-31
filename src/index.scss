@@ -150,7 +150,7 @@ break-toggle {
     display: flex;
     flex-direction: column;
     background: none;
-    transform: translateX(100%) rotateZ(360deg);
+    transform: translate3d(100%,0,0);
     transition: transform .3s ease;
 
     row- {
