@@ -13,10 +13,7 @@ export default () => {
     if(e.target && e.target.nodeName === 'BUTTON') {
       const id = e.target.parentNode.getAttribute('chapter');
       [...$container.querySelectorAll(`mark-[chapter="${id}"]`)]
-        .forEach(x => x.getAttribute('folded') ?
-          x.removeAttribute('folded') :
-          x.setAttribute('folded', true)
-        );
+        .forEach(x => x.classList.toggle('folded'));
     }
   });
 
@@ -27,7 +24,7 @@ export default () => {
     $container.innerHTML = '';
     Fetch(data)
     .then(Node(({type, start, end, title}) => type === 'chapter' ?
-      `<mark- type='${type}' chapter='${++chapter}' folded='true' >
+      `<mark- type='${type}' chapter='${++chapter}' class='${chapter > 1 ? 'folded' : '' }' >
         <div>
           <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
           <span>${Math.ceil((end - start) / 60)} mins</span>
@@ -37,7 +34,7 @@ export default () => {
           <svg><use xlink:href='#icon-down-arrow' /></svg>
         </button>
        </mark->` :
-      `<mark- type='${type}' chapter='${chapter}' folded='true'>
+      `<mark- type='${type}' chapter='${chapter}' class='${chapter > 1 ? 'folded' : '' }' >
         <span>${secondsToHHMMSS(start)}</span>
         <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
        </mark->`

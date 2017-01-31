@@ -73,10 +73,10 @@ marker-list {
         background: #212121;
       }
     }
-    &:not([folded='true']) svg:last-child {
+    &:not(.folded) svg:last-child {
       display: block;
     }
-    &[folded='true'] svg:first-child {
+    &.folded svg:first-child {
       display: block;
     }
   }
@@ -85,7 +85,7 @@ marker-list {
     width: 100%;
     display: flex;
     margin-bottom: .62rem;
-    &[folded]:not(.searched):not(.active) {
+    &.folded:not(.searched):not(.active) {
       display: none;
     }
     a {
