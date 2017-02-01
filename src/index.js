@@ -51,12 +51,12 @@ module.exports = (() => {
     window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`)
   );
 
-  // Body Components
   const $body = $('body');
   $body.appendChild(SidebarButton());
+
   const $main = $('main');
   $main.appendChild(BreakOverlay());
-  // Control components
+
   const $control = $('control-bar');
   $control.appendChild(MarkerTeleprompter());
   $control.appendChild(MarkerTimeline());

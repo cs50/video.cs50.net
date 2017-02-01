@@ -11,13 +11,9 @@ marker-teleprompter {
   transition: all .3s;
 
   @media (orientation: portrait) {
-    bottom: 4rem;  
+    bottom: 4rem;
   }
-
-  &[hidden] {
-    display: none;
-  }
-
+  
   a {
     font-size: calc(.5rem + 1vw);
     line-height: 1.5;

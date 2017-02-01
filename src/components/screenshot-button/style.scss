@@ -5,10 +5,6 @@ screenshot-button {
   transition: transform .3s;
   border: 0;
 
-  [hidden] {
-    display: none;
-  }
-
   .mouse-idle & {
     transform: translateY(5rem);
   }
