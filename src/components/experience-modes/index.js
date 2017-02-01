@@ -1,16 +1,34 @@
 import { publish, subscribe } from 'minpubsub';
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
+import { youTubeTimeFromUrl } from '../../helpers/youtube.js';
 
 const action = {
   select(e) {
-    publish('video:swapCamera', [this.data.type, this.data.state]);
+    const time = youTubeTimeFromUrl();
+    // Multiscreen experience mode
+    if(this.data.type === 'ms') {
+      publish('video:loadMainVideoById', [this.data.state.cameras, time]);
+      publish('video:loadAltVideoById', [this.data.state.screens, time]);
+    }
+    // Production experience mode
+    if(this.data.type === 'pr') {
+      publish('video:loadMainVideoById', [this.data.state.main, time]);
+      publish('video:hideAltVideo');
+    }
+    // Virtual reality experience mode
+    if(this.data.type === 'vr') {
+      publish('video:loadMainVideoById', [this.data.state.vr, time]);
+      publish('video:hideAltVideo');
+    }
     // Remove active class from other keys
     [...e.currentTarget.parentNode.children]
     .forEach(x => x.removeAttribute('active'));
     // Make this element active
     e.currentTarget.setAttribute('active', true);
+    // Set experience mode of body
+    document.body.setAttribute('experience', this.data.type);
   }
-}
+};
 
 export default () => {
   const $container = document.createElement('experience-modes');
@@ -33,4 +51,4 @@ export default () => {
 
   subscribe('youtube:fetched', render);
   return $container;
-}
+};

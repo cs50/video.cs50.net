@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
 import VideoMain from './components/video-main';
+import VideoAlt from './components/video-alt';
 import VideoControls from './components/video-controls';
 
 import ScreenshotButton from './components/screenshot-button';
@@ -75,7 +76,6 @@ module.exports = (() => {
   $dialogRow2.appendChild(BreakToggle());
   $dialogRow2.appendChild(DownloadLinks());
 
-  VideoMain.render('video-main', '');
 
   ThumbnailPreview.initialize();
 
@@ -85,7 +85,7 @@ module.exports = (() => {
     .then(data => data.json())
     .then(ep => {
       localStorage.setItem('episode', JSON.stringify(ep));
-      const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
+      const mainVideoId = ep.youtube ? ep.youtube.main : null;
       const chaptersFile = typeof ep.chapters === 'object' ?
         ep.chapters.find(x => x.srclang === 'en') : null;
       const captionsFile = typeof ep.captions === 'object' ?
@@ -96,7 +96,7 @@ module.exports = (() => {
         ep.downloads.filter(x => x.label.match('MP4')) : null;
       const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
-      publish('video:loadVideoById', [youtubeVideoId, youTubeTimeFromUrl()]);
+      publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
       publish('youtube:fetched', [ep.youtube]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
@@ -123,6 +123,9 @@ module.exports = (() => {
   });
 
   documentHelpers();
+  VideoMain();
+  VideoAlt();
+
   publish('player:loadVideo', [targetEpisode, 'en']);
 
 })();
