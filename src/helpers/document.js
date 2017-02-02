@@ -27,7 +27,7 @@ export default () => {
   // Idle mouse listener
 
   const hidePlayerChrome = () =>
-    $('video-main').getAttribute('camera') === 'vr' ? null :
+    document.body.getAttribute('experience') === 'vr' ? null :
     document.body.classList.add('mouse-idle');
   const showPlayerChrome = () =>
     document.body.classList.remove('mouse-idle');

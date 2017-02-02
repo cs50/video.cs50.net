@@ -4,12 +4,21 @@ import { videoScreenshotFromUrl,
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
-  request(e) { publish('video:getCurrentTime', [':screenshotButton']); },
+  request(e) {
+    publish('video:getCurrentTime', [':screenshotButton']);
+  },
   screenshot(time) {
     const $elem = document.querySelector('screenshot-button button');
     const episode = cdnEpisodefromUrl().split('/').pop();
+    const primary = document.querySelector('main .primary');
+    const mode = document.body.getAttribute('experience');
+    let url;
+    if (mode === 'ms') {
+      const src = primary.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
+      url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`;
+    } else url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-720p.mp4`;
     $elem.classList.add('working');
-    videoScreenshotFromUrl(episode, time)
+    videoScreenshotFromUrl(url, time)
     .then(() => $elem.classList.remove('working'))
   }
 }

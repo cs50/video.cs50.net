@@ -53,17 +53,8 @@ export const cdnEpisodefromUrl = () =>
     window.location.pathname.replace(/\/$/, '');
 
 // Take a screenshot of given episode at given timestamp
-export const videoScreenshotFromUrl = (episode, time) =>
+export const videoScreenshotFromUrl = (url, time) =>
   new Promise((resolve) => {
-
-    const primary = document.querySelector('main .primary');
-    const mode = document.querySelector('video-main').getAttribute('camera');
-    let url;
-    if (mode === 'ms') {
-      const src = primary.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
-      url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`;
-    } else url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-720p.mp4`;
-
     // Create a video element with source and seek to time
     let video = document.createElement('video');
     video.src = url;
