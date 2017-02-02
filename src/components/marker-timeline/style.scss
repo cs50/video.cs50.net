@@ -31,6 +31,7 @@ marker-timeline {
     width: .5rem;
     max-width: 1%;
     height: 100%;
+    z-index: 1;
     transform: translateX(-100%);
     background: rgba(0,0,0,.015);
     &:hover {

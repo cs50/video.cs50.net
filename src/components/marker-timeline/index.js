@@ -1,14 +1,17 @@
 import { subscribe, publish } from 'minpubsub';
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
+import { youTubeTimeFromUrl } from '../../helpers/youtube.js';
 
 export default () => {
   const $container = document.createElement('marker-timeline');
   const percent = (pageX) => (pageX - $container.offsetLeft) / $container.offsetWidth;
 
-  const setProgress = (time, duration) => {
+  const setProgress = (time=0, duration=0) => {
     const $progressIndicator = $container.querySelector('progress-indicator');
-    const progress = (time / duration) * 100;
-    $progressIndicator.style.width = `${progress}%`;
+    if($progressIndicator) {
+      const progress = (time / duration) * 100;
+      $progressIndicator.style.width = `${progress}%`;
+    }
   };
 
   const seekTo = (e) => {
@@ -34,16 +37,17 @@ export default () => {
 
   const render = (chapters=[]) => {
     $container.innerHTML = '';
-    const length = chapters.length > 0 ? chapters[chapters.length - 1].end : 0;
+    const duration = chapters.length > 0 ? chapters[chapters.length - 1].end : 0;
     Fetch(chapters)
     .then(Node(() => `
       ${ chapters.map(x =>
-        `<chapter- title="${x.title}" start="${x.start}" style="left:${(x.start/length)*100}%"></chapter->`
+        `<chapter- title="${x.title}" start="${x.start}" style="left:${(x.start/duration)*100}%"></chapter->`
       ).join('') }
       <progress-indicator></progress-indicator>
       <seek-indicator></seek-indicator>
     `))
     .then(Draw($container))
+    .then(() => setProgress(youTubeTimeFromUrl(), duration));
   }
 
   $container.addEventListener('click', seekTo);
