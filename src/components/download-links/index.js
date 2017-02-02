@@ -18,6 +18,10 @@ export default () => {
     <div></div>
   `;
 
+  $container.addEventListener('click', () => {
+    $container.classList.toggle('open');
+  });
+
   subscribe('downloads:loaded', (data) => {
     Fetch(data)
     .then(Node(({ label, src }) => `
@@ -25,7 +29,7 @@ export default () => {
         ${ label.replace('MP4 (', '').replace(')', '') }
       </a>
     `))
-    .then(Bind('button-')('click')(action.select))
+    .then(Bind('a')('click')(action.select))
     .then(Draw($container.querySelector('div')));
   });
 

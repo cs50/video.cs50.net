@@ -24,8 +24,7 @@ download-links {
     }
   }
 
-  > button-:hover ~ div,
-  div:hover {
+  &.open div {
     position: absolute;
     top: 100%;
     display: block;
