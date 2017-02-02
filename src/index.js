@@ -64,6 +64,7 @@ module.exports = (() => {
   $control.appendChild(ExperienceModes());
   $control.appendChild(ScreenshotButton());
   $control.appendChild(VideoControls());
+  $control.appendChild(ThumbnailPreview());
 
   const $dialog = $('dialog');
   $dialog.appendChild(MarkerList())
@@ -75,9 +76,6 @@ module.exports = (() => {
   const $dialogRow2 = $('dialog row-:nth-child(2)');
   $dialogRow2.appendChild(BreakToggle());
   $dialogRow2.appendChild(DownloadLinks());
-
-
-  ThumbnailPreview.initialize();
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
