@@ -102,9 +102,6 @@ marker-list {
         text-decoration: underline;
       }
     }
-    &.active a {
-      color: #a41034;
-    }
     b {
       background: yellow;
       color: #121212;
@@ -120,4 +117,13 @@ marker-list {
   .searched:not(.matched) {
     display: none;
   }
+}
+
+.active:not(.searched) + mark-[type='caption'] a {
+  color: #a41034;
+}
+.active:not(.searched) + mark-[type='caption'],
+.active:not(.searched) + mark-[type='caption'] + mark-[type='caption'],
+.active:not(.searched) + mark-[type='caption'] + mark-[type='caption'] + mark-[type='caption'] {
+  display: flex !important;
 }

@@ -5,10 +5,17 @@ import { secondsToYoutubeTime,
 
 export default () => {
   const $container = document.createElement('marker-list');
+  let markers = [];
   $container.addEventListener('click', (e) => {
     if(e.target && e.target.nodeName === 'A') {
       e.preventDefault();
-      publish('video:seekTo', [e.target.getAttribute('start')]);
+      const $parent = e.target.parentNode.parentNode;
+      if($parent.getAttribute('type') === 'chapter' && $parent.nextElementSibling.getAttribute('type') === 'caption') {
+        const nextCaption = $parent.nextElementSibling.querySelector('a');
+        publish('video:seekTo', [nextCaption.getAttribute('start')]);
+      } else {
+        publish('video:seekTo', [e.target.getAttribute('start')]);
+      }
     }
     if(e.target && e.target.nodeName === 'BUTTON') {
       const id = e.target.parentNode.getAttribute('chapter');
@@ -17,14 +24,25 @@ export default () => {
     }
   });
 
+  const highlight = (time) => {
+    const activeMarkIndex = markers.findIndex(x => x.type === 'caption' && time < x.end);
+    if(activeMarkIndex > -1) {
+      [...$container.querySelectorAll('mark-.active')]
+      .forEach(x => x.classList.remove('active'));
+      const mark = $container.querySelector(`mark-:nth-child(${activeMarkIndex})`);
+      mark.classList.add('active');
+    }
+  }
+
   const render = (data=[]) => {
-    const hasCaptions = !!data.find(x => x.type === 'caption');
+    markers = data;
+    const hasCaptions = !!markers.find(x => x.type === 'caption');
     if(hasCaptions) $container.setAttribute('captions', true);
     let chapter = 0;
     $container.innerHTML = '';
-    Fetch(data)
+    Fetch(markers)
     .then(Node(({type, start, end, title}) => type === 'chapter' ?
-      `<mark- type='${type}' chapter='${++chapter}' class='${chapter > 1 ? 'folded' : '' }' >
+      `<mark- type='${type}' chapter='${++chapter}' class='folded' >
         <div>
           <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
           <span>${Math.ceil((end - start) / 60)} mins</span>
@@ -34,7 +52,7 @@ export default () => {
           <svg><use xlink:href='#icon-down-arrow' /></svg>
         </button>
        </mark->` :
-      `<mark- type='${type}' chapter='${chapter}' class='${chapter > 1 ? 'folded' : '' }' >
+      `<mark- type='${type}' chapter='${chapter}' class='folded' >
         <span>${secondsToHHMMSS(start)}</span>
         <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
        </mark->`
@@ -43,5 +61,6 @@ export default () => {
   }
 
   subscribe('markers:fetched', render);
+  subscribe('video:tick', highlight);
   return $container;
 }
