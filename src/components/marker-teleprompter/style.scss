@@ -1,19 +1,18 @@
 marker-teleprompter {
   position: absolute;
+  display: flex;
   top: auto !important;
   bottom: 4.5rem;
-  width: 100%;
-  max-width: 100%;
+  right: 0;
+  left: 0;
   padding: 0 1rem;
   transform: translateY(0);
-  display: flex;
-  justify-content: center;
   transition: all .3s;
 
   @media (orientation: portrait) {
     bottom: 4rem;
   }
-  
+
   a {
     font-size: calc(.5rem + 1vw);
     line-height: 1.5;
