@@ -8,7 +8,7 @@ export default () => {
   $container.innerHTML = '<span>00:00</span>&nbsp;/&nbsp;<span>00:00</span>';
 
   subscribe('video:tick', (current, duration) => {
-    if (current && duration) {
+    if (current >= 0 && duration >= 0) {
       $container.innerHTML = '';
       Fetch([{current, duration}])
       .then(Node(({current, duration}) => `
