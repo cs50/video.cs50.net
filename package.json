@@ -8,8 +8,8 @@
     "init": "rm -rf public && mkdir public && cp src/index.html public/index.html",
     "build": "npm run init && npm run bundle",
     "dev": "npm run build && parallelshell 'npm run watch' 'npm run sync'",
-    "bundle": "browserify -t babelify app.js -o public/index.js -p [ parcelify -o public/index.css -t sass-css-stream -d ./src ]",
-    "watch": "watchify -t babelify app.js -o public/index.js -p [ parcelify -wo public/index.css -t sass-css-stream -d ./src ]",
+    "bundle": "browserify -t babelify src/index.js -o public/index.js -p [ parcelify -o public/index.css -t sass-css-stream -d ./src ]",
+    "watch": "watchify -t babelify src/index.js -o public/index.js -p [ parcelify -wo public/index.css -t sass-css-stream -d ./src ]",
     "sync": "node browsersync",
     "serve": "node server",
     "release": "npm run build && uglifyjs public/index.js -o public/index.js && echo $(uglifycss public/index.css) > public/index.css"

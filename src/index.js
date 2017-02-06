@@ -2,90 +2,88 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 import { subscribe, publish } from 'minpubsub';
 
-import VideoPlayback from './modules/video-playback';
-import VideoMain from './modules/video-main';
-import VideoDownload from './modules/video-download';
-import VideoTimeout from './modules/video-timeout';
-import VideoTimer from './modules/video-timer';
-import VideoCameras from './modules/video-cameras';
-import MarkerSearch from './modules/marker-search';
-import MarkerTimeline from './modules/marker-timeline';
-import MarkerTeleprompter from './modules/marker-teleprompter';
-import MarkerList from './modules/marker-list';
-import LanguageSelect from './modules/language-select';
-import ThumbnailPreview from './modules/thumbnail-preview';
+import VideoMain from './components/video-main';
+import VideoAlt from './components/video-alt';
+import VideoControls from './components/video-controls';
 
-import { markers } from './modules/marker-fetch';
-import { thumbs } from './modules/thumbnail-fetch';
+import ScreenshotButton from './components/screenshot-button';
+import ExperienceModes from './components/experience-modes';
+import SidebarButton from './components/sidebar-button';
+import ThumbnailPreview from './components/thumbnail-preview';
+import BreakOverlay from './components/break-overlay';
+import BreakToggle from './components/break-toggle';
 
-const getQueryParams = qs => {
-  qs = qs.split('+').join(' ');
-  const params = {};
-  let tokens;
-  const re = /[?&]?([^=]+)=([^&]*)/g;
-  while (tokens = re.exec(qs)) {
-    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-  }
-  return params;
-};
+import MarkerSearch from './components/marker-search';
+import MarkerTimeline from './components/marker-timeline';
+import MarkerTeleprompter from './components/marker-teleprompter';
+import DownloadLinks from './components/download-links';
+import MarkerList from './components/marker-list';
+import LanguageSelect from './components/language-select';
 
-const getEpisodeData = url => fetch(url)
-.then(data => data.json())
-.then(({ youtube, captions, chapters, downloads, thumbnails }) => ({
-  youtube, captions, chapters, thumbnails, downloads,
-}));
+import documentHelpers from './helpers/document.js';
+import {
+  secondsToYoutubeTime,
+  youTubeTimeToSeconds,
+  youTubeIsReachable,
+  youTubeTimeFromUrl,
+} from './helpers/youtube.js';
 
-const secondsToYoutubeTime = sec => (sec > 3600 ?
-  `${Math.floor(sec / 3600)}h${Math.floor((sec / 60) % 60)}m${Math.floor(sec % 60)}s` :
-  `${Math.floor(sec / 60)}m${Math.floor(sec % 60)}s`);
+import {
+  cdnEpisodefromUrl,
+  markers,
+  thumbs,
+} from './helpers/cdn.js';
 
-const youTubeTimeToSeconds = time => {
-  const hours = time.match(/\d+h/) ? parseFloat(time.match(/\d+h/)[0]) : 0;
-  const mins = parseFloat(time.match(/\d+m/)[0]);
-  const secs = parseFloat(time.match(/\d+s/)[0]);
-  return (hours * 3600) + (mins * 60) + secs;
-};
+const $ = selector => document.querySelector(selector);
 
-module.exports = () => {
+module.exports = (() => {
+
   // Determine if youtube is accessible
-  const image = new Image();
-  image.onerror = () => {
-    document.querySelector('video-main').classList.add('blocked');
-  };
-  image.src = 'https://youtube.com/favicon.ico';
-
-  // Extract the desired start time on page load
-  const startTime = getQueryParams(document.location.search).t ?
-  youTubeTimeToSeconds(getQueryParams(document.location.search).t) : 0;
+  youTubeIsReachable()
+  .catch(() => $('video-main').classList.add('blocked'));
 
   // Extract the url on page load
-  const targetEpisode = window.location.pathname === '/' ?
-    '/2016/fall/lectures/0' : window.location.pathname.replace(/\/$/, '');
-  const targetLanguage = 'en';
+  const queryString = document.location.search;
+  const targetEpisode = cdnEpisodefromUrl();
+  window.history.replaceState(null, null, targetEpisode+queryString);
 
-  window.history.replaceState(null, null, targetEpisode);
+  // Ensure url times stays synced with player
+  subscribe('video:tick', time =>
+    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`)
+  );
 
-  VideoPlayback.render('video-playback', [
-    { rate: 1, label: '1' },
-    { rate: 1.5, label: '1.5' },
-    { rate: 2, label: '2' },
-  ]);
-  MarkerSearch.render('marker-search');
-  VideoMain.render('video-main', '');
+  const $body = $('body');
+  $body.appendChild(SidebarButton());
 
-  MarkerList.initialize();
-  MarkerTeleprompter.initialize();
-  MarkerTimeline.initialize();
-  ThumbnailPreview.initialize();
-  VideoTimeout.initialize();
-  VideoTimer.initialize();
+  const $main = $('main');
+  $main.appendChild(BreakOverlay());
+
+  const $control = $('control-bar');
+  $control.appendChild(MarkerTeleprompter());
+  $control.appendChild(MarkerTimeline());
+  $control.appendChild(ExperienceModes());
+  $control.appendChild(ScreenshotButton());
+  $control.appendChild(VideoControls());
+  $control.appendChild(ThumbnailPreview());
+
+  const $dialog = $('dialog');
+  $dialog.appendChild(MarkerList())
+
+  const $dialogRow = $('dialog row-:first-child');
+  $dialogRow.appendChild(MarkerSearch());
+  $dialogRow.appendChild(LanguageSelect());
+
+  const $dialogRow2 = $('dialog row-:nth-child(2)');
+  $dialogRow2.appendChild(BreakToggle());
+  $dialogRow2.appendChild(DownloadLinks());
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
-    getEpisodeData(`https://cdn.cs50.net${id}/index.json`)
+    fetch(`https://cdn.cs50.net${id}/index.json`)
+    .then(data => data.json())
     .then(ep => {
       localStorage.setItem('episode', JSON.stringify(ep));
-      const youtubeVideoId = ep.youtube ? ep.youtube.main : null;
+      const mainVideoId = ep.youtube ? ep.youtube.main : null;
       const chaptersFile = typeof ep.chapters === 'object' ?
         ep.chapters.find(x => x.srclang === 'en') : null;
       const captionsFile = typeof ep.captions === 'object' ?
@@ -94,15 +92,17 @@ module.exports = () => {
         ep.thumbnails.find(x => x.type === 'text/vtt') : null;
       const downloadLinks = typeof ep.downloads === 'object' ?
         ep.downloads.filter(x => x.label.match('MP4')) : null;
+      const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
-      publish('video:loadVideoById', [youtubeVideoId, startTime]);
+      publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
+      publish('youtube:fetched', [ep.youtube]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
-      VideoCameras.render('video-cameras', ep.youtube);
-      if (downloadLinks) VideoDownload.render('video-download', downloadLinks);
+      if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);
+      if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
-        LanguageSelect.render('language-select', availableLanguages, lang);
+        publish('languages:fetched', [availableLanguages, lang]);
       }
     });
   });
@@ -120,125 +120,10 @@ module.exports = () => {
     window.ga('send', 'event', 'language', 'changed', lang);
   });
 
-  subscribe('video:seekTo', time => {
-    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
-  });
+  documentHelpers();
+  VideoMain();
+  VideoAlt();
 
-  subscribe('video:tick', time => {
-    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`);
-  });
+  publish('player:loadVideo', [targetEpisode, 'en']);
 
-  document.querySelector('.video-captions').addEventListener('click', (e) => {
-    document.querySelector('marker-teleprompter').classList.toggle('hidden');
-    e.currentTarget.classList.toggle('active');
-    if (e.currentTarget.classList.contains('active')) {
-      window.ga('send', 'event', 'captions', 'enabled');
-    }
-  });
-
-  document.querySelector('.video-fullscreen').addEventListener('click', () => {
-    const iframe = document.querySelector('.primary iframe');
-    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-    if (requestFullScreen) {
-      requestFullScreen.bind(iframe)();
-    }
-    window.ga('send', 'event', 'control', 'fullscreen');
-  });
-
-  document.querySelector('.seek-back').addEventListener('click', () => {
-    publish('video:seekBy', [-10]);
-  });
-
-  document.querySelector('.seek-next').addEventListener('click', () => {
-    publish('video:seekNextChapter');
-  });
-
-  document.querySelector('.video-play-pause').addEventListener('click', (e) => {
-    if (e.currentTarget.classList.contains('playing')) {
-      publish('video:pause');
-    } else {
-      publish('video:play');
-    }
-    e.currentTarget.classList.toggle('playing');
-  });
-
-  document.querySelector('dialog-trigger').addEventListener('click', () => {
-    const $dialog = document.querySelector('dialog');
-    const $dialogTrigger = document.querySelector('dialog-trigger');
-    const $input = document.querySelector('marker-search input');
-    // Is going to open dialog
-    if (!$dialog.classList.contains('open')) {
-      // Find active marker
-      let $marker = document.querySelector('marker-list [type="chapter"].active');
-      if ($marker && $marker.classList.contains('folded')) {
-        // Find active chapter
-        while ($marker.getAttribute('type') !== 'chapter') {
-          $marker = $marker.previousElementSibling;
-        }
-        // Scroll to active chapter
-        if ($marker !== undefined && $marker.getAttribute('start') !== '0') {
-          $marker.scrollIntoView();
-        }
-      } else if ($marker) {
-        // Scroll to active marker
-        $marker.previousElementSibling.scrollIntoView();
-      }
-      $input.focus();
-      window.ga('send', 'event', 'sidebar', 'open');
-    }
-
-    $dialog.classList.toggle('open');
-    $dialogTrigger.classList.toggle('open');
-  });
-
-  document.onkeyup = (evt) => {
-    evt = evt || window.event;
-    if (evt.keyCode === 27) {
-      const $dialog = document.querySelector('dialog');
-      const $dialogTrigger = document.querySelector('dialog-trigger');
-      $dialog.classList.remove('open');
-      $dialogTrigger.classList.remove('open');
-    }
-    if (evt.keyCode === 32) {
-      const $elem = document.querySelector('.video-play-pause');
-      if ($elem.classList.contains('playing')) {
-        publish('video:pause');
-      } else publish('video:play');
-    }
-    if (evt.keyCode === 39) publish('video:seekBy', [5]);
-    if (evt.keyCode === 37) publish('video:seekBy', [-5]);
-  };
-
-  const hidePlayerChrome = () => {
-    const $dialogTrigger = document.querySelector('dialog-trigger');
-    const $main = document.querySelector('main');
-    const $video = document.querySelector('video-main');
-    if ($video.getAttribute('camera') !== 'vr') {
-      $dialogTrigger.classList.add('hidden');
-      $main.classList.add('hidden');
-    }
-  };
-
-  const showPlayerChrome = () => {
-    const $dialogTrigger = document.querySelector('dialog-trigger');
-    const $main = document.querySelector('main');
-    $dialogTrigger.classList.remove('hidden');
-    $main.classList.remove('hidden');
-  };
-
-  let timer;
-  document.onmousemove = (e) => {
-    const elem = document.elementFromPoint(e.clientX, e.clientY);
-    showPlayerChrome();
-    clearTimeout(timer);
-    if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
-      timer = setTimeout(hidePlayerChrome, 3000);
-    }
-  };
-
-  document.onmouseleave = () => {
-    timer = setTimeout(hidePlayerChrome, 3000);
-  };
-
-  publish('player:loadVideo', [targetEpisode, targetLanguage]);
-};
+})();
