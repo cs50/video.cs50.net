@@ -66,18 +66,17 @@ marker-list {
         width: 1rem;
         height: 1rem;
         fill: #fff;
-        display: none;
         pointer-events: none;
       }
       &:hover {
         background: #212121;
       }
     }
-    &:not(.folded) svg:last-child {
-      display: block;
+    &:not(.folded) svg:first-child {
+      display: none;
     }
-    &.folded svg:first-child {
-      display: block;
+    &.folded svg:last-child {
+      display: none;
     }
   }
 
