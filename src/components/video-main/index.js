@@ -46,6 +46,7 @@ export default () => {
       showinfo: 0,
       controls: 0,
       html5: 1,
+      playsinline: 1,
     },
   });
 
