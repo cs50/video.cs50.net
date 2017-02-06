@@ -10,13 +10,15 @@ export default () => {
 
   const setup = (xs) => { data = xs; }
   const render = (time) => {
-    const caption = data.find(x => time < x.end) || data[0];
-    $container.innerHTML = '';
-    Fetch([caption])
-    .then(Node(({start, title}) => `
-      <a>${title}</a>
-    `))
-    .then(Draw($container))
+    if(time > 0) {
+      const caption = data.find(x => time < x.end) || data[0];
+      $container.innerHTML = '';
+      Fetch([caption])
+      .then(Node(({start, title}) => `
+        <a>${title}</a>
+      `))
+      .then(Draw($container))
+    }
   }
 
   subscribe('captions:loaded', setup);
