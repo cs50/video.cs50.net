@@ -4,6 +4,9 @@
   "description": "A web interface for viewing CS50 videos.",
   "main": "index.js",
   "style": "src/**/*.scss",
+  "directories": {
+    "app": "public"
+  },
   "scripts": {
     "init": "rm -rf public && mkdir public && cp src/index.html public/index.html",
     "build": "npm run init && npm run bundle",
