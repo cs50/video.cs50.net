@@ -25,7 +25,7 @@ playback-rates {
     }
 
     &:after {
-      content: attr(rate);
+      content: attr(label);
       position: absolute;
       top: 0;
       right: 0;

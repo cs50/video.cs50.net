@@ -18,11 +18,11 @@ export default () => {
 
   Fetch([
     { rate: 1, label: '1', active: true },
-    { rate: 1.5, label: '1.5' },
+    { rate: 1.5, label: '3\u22152' },
     { rate: 2, label: '2' }
   ])
   .then(Node(({rate, label, active}) => `
-    <button class='${ active ? 'active' : '' }' rate='${rate}'></button>
+    <button class='${ active ? 'active' : '' }' rate='${rate}' label='${label}'></button>
   `))
   .then(Bind('button')('click')(action.select))
   .then(Draw($container));
