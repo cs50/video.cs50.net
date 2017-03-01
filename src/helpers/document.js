@@ -15,7 +15,7 @@ export default () => {
       $dialog.classList.remove('open');
       $dialogTrigger.classList.remove('open');
     }
-    if (evt.keyCode === 32) {
+    if (evt.keyCode === 32 || evt.keyCode === 75) {
       const $elem = $('play-button button');
       if ($elem.classList.contains('playing')) publish('video:pause');
       else publish('video:play');
