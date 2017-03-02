@@ -3,12 +3,7 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   select(e) {
-    const iframe = document.querySelector('.primary iframe');
-    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-    if (requestFullScreen) {
-      requestFullScreen.bind(iframe)();
-    }
-    window.ga('send', 'event', 'control', 'fullscreen');
+    publish('video:fullscreen');
   }
 }
 

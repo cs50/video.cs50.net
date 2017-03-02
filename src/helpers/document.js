@@ -17,12 +17,7 @@ export default () => {
         $dialogTrigger.classList.remove('open');
         break;
       case 70:
-        const iframe = document.querySelector('.primary iframe');
-        const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-        if (requestFullScreen) {
-          requestFullScreen.bind(iframe)();
-        }
-        window.ga('send', 'event', 'control', 'fullscreen');
+        publish('video:fullscreen');
         break;
       case 32:
       case 75:
@@ -47,30 +42,30 @@ export default () => {
         break;
       }
     }
-  };
 
-  // Idle mouse listener
+    // Idle mouse listener
 
-  const hidePlayerChrome = () =>
-    document.body.getAttribute('experience') === 'vr' ? null :
-    document.body.classList.add('mouse-idle');
-  const showPlayerChrome = () =>
-    document.body.classList.remove('mouse-idle');
+    const hidePlayerChrome = () =>
+      document.body.getAttribute('experience') === 'vr' ? null :
+      document.body.classList.add('mouse-idle');
+    const showPlayerChrome = () =>
+      document.body.classList.remove('mouse-idle');
 
-  let timer;
-  document.onmousemove = (e) => {
-    const elem = document.elementFromPoint(e.clientX, e.clientY);
-    showPlayerChrome();
-    clearTimeout(timer);
-    if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
+    let timer;
+    document.onmousemove = (e) => {
+      const elem = document.elementFromPoint(e.clientX, e.clientY);
+      showPlayerChrome();
+      clearTimeout(timer);
+      if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
+        timer = setTimeout(hidePlayerChrome, 3000);
+      }
+    };
+    document.onmouseleave = () => {
       timer = setTimeout(hidePlayerChrome, 3000);
-    }
-  };
-  document.onmouseleave = () => {
-    timer = setTimeout(hidePlayerChrome, 3000);
-  };
-  document.onmouseenter = showPlayerChrome;
-}
+    };
+    document.onmouseenter = showPlayerChrome;
+
+};
 
 export const draggable = function(e) {
   const h = this.offsetHeight;
