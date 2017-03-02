@@ -3,7 +3,6 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   toggle(e) {
-    e.currentTarget.classList.toggle('open');
     document.body.classList.toggle('dialog-open');
     window.ga('send', 'event', 'sidebar', 'open');
   }
