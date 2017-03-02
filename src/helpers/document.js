@@ -9,30 +9,44 @@ export default () => {
 
   document.onkeyup = (evt) => {
     evt = evt || window.event;
-    if (evt.keyCode === 27) {
-      const $dialog = $('dialog');
-      const $dialogTrigger = $('sidebar-button button');
-      $dialog.classList.remove('open');
-      $dialogTrigger.classList.remove('open');
-    }
-    if (evt.keyCode === 70) {
-      const iframe = document.querySelector('.primary iframe');
-      const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-      if (requestFullScreen) {
-        requestFullScreen.bind(iframe)();
+    switch (evt.keyCode) {
+      case 27:
+        const $dialog = $('dialog');
+        const $dialogTrigger = $('sidebar-button button');
+        $dialog.classList.remove('open');
+        $dialogTrigger.classList.remove('open');
+        break;
+      case 70:
+        const iframe = document.querySelector('.primary iframe');
+        const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+        if (requestFullScreen) {
+          requestFullScreen.bind(iframe)();
+        }
+        window.ga('send', 'event', 'control', 'fullscreen');
+        break;
+      case 32:
+      case 75:
+        const $elem = $('play-button button');
+        if ($elem.classList.contains('playing')) publish('video:pause');
+        else publish('video:play');
+        break;
+      case 39:
+        publish('video:seekBy', [5]);
+        break;
+      case 37:
+        publish('video:seekBy', [-5]);
+        break;
+      case 38:
+        publish('video:volumeBy', [5]);
+        break;
+      case 40:
+        publish('video:volumeBy', [-5]);
+        break;
+      case 77:
+        publish('video:toggleMute');
+        break;
       }
-      window.ga('send', 'event', 'control', 'fullscreen');
     }
-    if (evt.keyCode === 32 || evt.keyCode === 75) {
-      const $elem = $('play-button button');
-      if ($elem.classList.contains('playing')) publish('video:pause');
-      else publish('video:play');
-    }
-    if (evt.keyCode === 39) publish('video:seekBy', [5]);
-    if (evt.keyCode === 37) publish('video:seekBy', [-5]);
-    if (evt.keyCode === 38) publish('video:volumeBy', [5]);
-    if (evt.keyCode === 40) publish('video:volumeBy', [-5]);
-    if (evt.keyCode === 77) publish('video:toggleMute');
   };
 
   // Idle mouse listener
