@@ -10,36 +10,20 @@ export default () => {
   document.onkeyup = (evt) => {
     evt = evt || window.event;
     switch (evt.keyCode) {
-      case 27:
-        const $dialog = $('dialog');
-        const $dialogTrigger = $('sidebar-button button');
-        $dialog.classList.remove('open');
-        $dialogTrigger.classList.remove('open');
-        break;
-      case 70:
-        publish('video:fullscreen');
-        break;
       case 32:
       case 75:
         const $elem = $('play-button button');
         if ($elem.classList.contains('playing')) publish('video:pause');
         else publish('video:play');
-        break;
-      case 39:
-        publish('video:seekBy', [5]);
-        break;
-      case 37:
-        publish('video:seekBy', [-5]);
-        break;
-      case 38:
-        publish('video:volumeBy', [5]);
-        break;
-      case 40:
-        publish('video:volumeBy', [-5]);
-        break;
-      case 77:
-        publish('video:toggleMute');
-        break;
+      break;
+      case 27: document.body.classList.remove('dialog-open'); break;
+      case 70: publish('video:fullscreen'); break;
+      case 39: publish('video:seekBy', [5]); break;
+      case 37: publish('video:seekBy', [-5]); break;
+      case 38: publish('video:volumeBy', [5]); break;
+      case 40: publish('video:volumeBy', [-5]); break;
+      case 77: publish('video:toggleMute'); break;
+      case 67: publish('captions:toggle'); break;
       }
     }
 

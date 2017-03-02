@@ -3,11 +3,12 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   toggle(e) {
-    e.currentTarget.classList.toggle('active');
-    if(this.data.active = !this.data.active) {
+    const btn = document.querySelector("captions-button button");
+    if(!btn.classList.contains('active')) {
       window.ga('send', 'event', 'captions', 'enabled');
       publish('captions:show');
     } else publish('captions:hide');
+    btn.classList.toggle('active');
   }
 }
 
@@ -26,6 +27,7 @@ export default () => {
   .then(Bind('button')('click')(action.toggle))
   .then(Draw($container));
 
+  subscribe('captions:toggle', action.toggle);
   subscribe('captions:loaded', show);
   return $container;
 }
