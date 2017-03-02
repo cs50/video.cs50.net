@@ -79,6 +79,16 @@ export default () => {
   subscribe('video:seekTo', (time) =>
     player.seekTo(time) && setTimeout(tick, 100)
   );
+  subscribe('video:volumeTo', (percent) =>
+    player.setVolume(percent)
+  );
+
+  // Proxy volumeBy to offset currentVolume by percent
+  subscribe('video:volumeBy', percent =>
+    player.getVolume().then(volume =>
+      publish('video:volumeTo', [volume + percent])
+    )
+  );
 
   // Proxy seekTo to offset currentTime by seconds
   subscribe('video:seekBy', sec =>

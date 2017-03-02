@@ -30,6 +30,8 @@ export default () => {
     }
     if (evt.keyCode === 39) publish('video:seekBy', [5]);
     if (evt.keyCode === 37) publish('video:seekBy', [-5]);
+    if (evt.keyCode === 38) publish('video:volumeBy', [5]);
+    if (evt.keyCode === 40) publish('video:volumeBy', [-5]);
     if (evt.keyCode === 77) publish('video:toggleMute');
   };
 
