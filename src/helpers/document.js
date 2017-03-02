@@ -15,6 +15,14 @@ export default () => {
       $dialog.classList.remove('open');
       $dialogTrigger.classList.remove('open');
     }
+    if (evt.keyCode === 70) {
+      const iframe = document.querySelector('.primary iframe');
+      const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+      if (requestFullScreen) {
+        requestFullScreen.bind(iframe)();
+      }
+      window.ga('send', 'event', 'control', 'fullscreen');
+    }
     if (evt.keyCode === 32 || evt.keyCode === 75) {
       const $elem = $('play-button button');
       if ($elem.classList.contains('playing')) publish('video:pause');
