@@ -30,6 +30,7 @@ export default () => {
     }
     if (evt.keyCode === 39) publish('video:seekBy', [5]);
     if (evt.keyCode === 37) publish('video:seekBy', [-5]);
+    if (evt.keyCode === 77) publish('video:toggleMute');
   };
 
   // Idle mouse listener

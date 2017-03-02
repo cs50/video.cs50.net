@@ -70,6 +70,11 @@ export default () => {
   // Expose actions on video channel
   subscribe('video:play', player.playVideo);
   subscribe('video:pause', player.pauseVideo);
+  subscribe('video:toggleMute', () =>
+    player.isMuted().then(muted =>
+      muted ? player.unMute() : player.mute()
+    )
+  );
   subscribe('video:setPlaybackRate', player.setPlaybackRate);
   subscribe('video:seekTo', (time) =>
     player.seekTo(time) && setTimeout(tick, 100)
