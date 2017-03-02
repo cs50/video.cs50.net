@@ -10,7 +10,7 @@ marker-teleprompter {
   transition: all .3s;
 
   @media (orientation: portrait) {
-    bottom: 4rem;
+    bottom: 4.5rem;
   }
 
   a {
@@ -18,7 +18,7 @@ marker-teleprompter {
     line-height: 1.5;
     text-decoration: none;
     text-align: center;
-    padding: calc(.5rem + .25vw);
+    padding: calc(.25rem + .25vw);
     color: #fff;
     max-width: 100%;
     margin: 0 auto;

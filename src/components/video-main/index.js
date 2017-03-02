@@ -70,9 +70,24 @@ export default () => {
   // Expose actions on video channel
   subscribe('video:play', player.playVideo);
   subscribe('video:pause', player.pauseVideo);
+  subscribe('video:toggleMute', () =>
+    player.isMuted().then(muted =>
+      muted ? player.unMute() : player.mute()
+    )
+  );
   subscribe('video:setPlaybackRate', player.setPlaybackRate);
   subscribe('video:seekTo', (time) =>
     player.seekTo(time) && setTimeout(tick, 100)
+  );
+  subscribe('video:volumeTo', (percent) =>
+    player.setVolume(percent)
+  );
+
+  // Proxy volumeBy to offset currentVolume by percent
+  subscribe('video:volumeBy', percent =>
+    player.getVolume().then(volume =>
+      publish('video:volumeTo', [volume + percent])
+    )
   );
 
   // Proxy seekTo to offset currentTime by seconds
@@ -102,5 +117,14 @@ export default () => {
       time => publish(`video:currentTime${requester}`, [time])
     )
   );
+
+  subscribe('video:fullscreen', () => {
+    const iframe = document.querySelector('.primary iframe');
+    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    if (requestFullScreen) {
+      requestFullScreen.bind(iframe)();
+    }
+    window.ga('send', 'event', 'control', 'fullscreen');
+  });
 
 }

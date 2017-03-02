@@ -9,43 +9,47 @@ export default () => {
 
   document.onkeyup = (evt) => {
     evt = evt || window.event;
-    if (evt.keyCode === 27) {
-      const $dialog = $('dialog');
-      const $dialogTrigger = $('sidebar-button button');
-      $dialog.classList.remove('open');
-      $dialogTrigger.classList.remove('open');
+    switch (evt.keyCode) {
+      case 32:
+      case 75:
+        const $elem = $('play-button button');
+        if ($elem.classList.contains('playing')) publish('video:pause');
+        else publish('video:play');
+      break;
+      case 27: document.body.classList.remove('dialog-open'); break;
+      case 70: publish('video:fullscreen'); break;
+      case 39: publish('video:seekBy', [5]); break;
+      case 37: publish('video:seekBy', [-5]); break;
+      case 38: publish('video:volumeBy', [5]); break;
+      case 40: publish('video:volumeBy', [-5]); break;
+      case 77: publish('video:toggleMute'); break;
+      case 67: publish('captions:toggle'); break;
+      }
     }
-    if (evt.keyCode === 32) {
-      const $elem = $('play-button button');
-      if ($elem.classList.contains('playing')) publish('video:pause');
-      else publish('video:play');
-    }
-    if (evt.keyCode === 39) publish('video:seekBy', [5]);
-    if (evt.keyCode === 37) publish('video:seekBy', [-5]);
-  };
 
-  // Idle mouse listener
+    // Idle mouse listener
 
-  const hidePlayerChrome = () =>
-    document.body.getAttribute('experience') === 'vr' ? null :
-    document.body.classList.add('mouse-idle');
-  const showPlayerChrome = () =>
-    document.body.classList.remove('mouse-idle');
+    const hidePlayerChrome = () =>
+      document.body.getAttribute('experience') === 'vr' ? null :
+      document.body.classList.add('mouse-idle');
+    const showPlayerChrome = () =>
+      document.body.classList.remove('mouse-idle');
 
-  let timer;
-  document.onmousemove = (e) => {
-    const elem = document.elementFromPoint(e.clientX, e.clientY);
-    showPlayerChrome();
-    clearTimeout(timer);
-    if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
+    let timer;
+    document.onmousemove = (e) => {
+      const elem = document.elementFromPoint(e.clientX, e.clientY);
+      showPlayerChrome();
+      clearTimeout(timer);
+      if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
+        timer = setTimeout(hidePlayerChrome, 3000);
+      }
+    };
+    document.onmouseleave = () => {
       timer = setTimeout(hidePlayerChrome, 3000);
-    }
-  };
-  document.onmouseleave = () => {
-    timer = setTimeout(hidePlayerChrome, 3000);
-  };
-  document.onmouseenter = showPlayerChrome;
-}
+    };
+    document.onmouseenter = showPlayerChrome;
+
+};
 
 export const draggable = function(e) {
   const h = this.offsetHeight;
