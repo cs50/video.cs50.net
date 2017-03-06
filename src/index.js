@@ -8,6 +8,7 @@ import VideoControls from './components/video-controls';
 
 import ScreenshotButton from './components/screenshot-button';
 import ExperienceModes from './components/experience-modes';
+import ExplainedOverlay from './components/explained-overlay';
 import SidebarButton from './components/sidebar-button';
 import ThumbnailPreview from './components/thumbnail-preview';
 import BreakOverlay from './components/break-overlay';
@@ -57,6 +58,7 @@ module.exports = (() => {
 
   const $main = $('main');
   $main.appendChild(BreakOverlay());
+  $main.appendChild(ExplainedOverlay());
 
   const $control = $('control-bar');
   $control.appendChild(MarkerTeleprompter());
@@ -96,6 +98,21 @@ module.exports = (() => {
       // Render components based on what episode data exists
       publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
       publish('youtube:fetched', [ep.youtube]);
+      publish('explained:fetched', [[{
+        title: 'This is CS50',
+        youtube: {
+          main: 'o4SGkB_8fFs',
+          vr: 'o4SGkB_8fFs',
+        },
+        start: 10,
+      },{
+        title: 'Binary',
+        youtube: {
+          main: 'a8Fyf3gwvfM',
+          vr: 'a8Fyf3gwvfM',
+        },
+        start: 30,
+      }]]);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);
