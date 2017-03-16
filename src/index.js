@@ -49,7 +49,7 @@ module.exports = (() => {
 
   // Ensure url times stays synced with player
   subscribe('video:tick', time =>
-    window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`)
+    time > 0 ? window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`) : null
   );
 
   const $body = $('body');
