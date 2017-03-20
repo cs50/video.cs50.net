@@ -38,7 +38,7 @@ export default () => {
   const render = (chapters=[]) => {
     $container.innerHTML = '';
     const duration = chapters.length > 0 ? chapters[chapters.length - 1].end : 0;
-    Fetch(chapters)
+    Fetch([{}])
     .then(Node(() => `
       ${ chapters.map(x =>
         `<chapter- title="${x.title}" start="${x.start}" style="left:${(x.start/duration)*100}%"></chapter->`
