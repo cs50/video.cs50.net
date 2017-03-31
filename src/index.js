@@ -33,6 +33,7 @@ import {
   cdnEpisodefromUrl,
   markers,
   thumbs,
+  explained,
 } from './helpers/cdn.js';
 
 const $ = selector => document.querySelector(selector);
@@ -98,21 +99,7 @@ module.exports = (() => {
       // Render components based on what episode data exists
       publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
       publish('youtube:fetched', [ep.youtube]);
-      publish('explained:fetched', [[{
-        title: 'This is CS50',
-        youtube: {
-          main: 'o4SGkB_8fFs',
-          vr: 'o4SGkB_8fFs',
-        },
-        start: 10,
-      },{
-        title: 'Binary',
-        youtube: {
-          main: 'a8Fyf3gwvfM',
-          vr: 'a8Fyf3gwvfM',
-        },
-        start: 30,
-      }]]);
+      explained(ep.explained);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);

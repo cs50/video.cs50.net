@@ -102,26 +102,41 @@ export const videoScreenshotFromUrl = (url, time) =>
     });
   });
 
-  export const markers = (chaptersUrl, captionsUrl) =>
-    Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
-    .then(values => [].concat(values[0], values[1]))
-    .then(items => items.sort((a, b) => {
-      if (a.start > b.start) { return 1; }
-      if (a.start < b.start) { return -1; }
-      return 0;
-    }))
-    .then(markers => markers.length > 0 ?
-      publish('markers:fetched', [markers]) : null
-    );
+export const markers = (chaptersUrl, captionsUrl) =>
+  Promise.all([chapters(chaptersUrl), captions(captionsUrl)])
+  .then(values => [].concat(values[0], values[1]))
+  .then(items => items.sort((a, b) => {
+    if (a.start > b.start) { return 1; }
+    if (a.start < b.start) { return -1; }
+    return 0;
+  }))
+  .then(markers => markers.length > 0 ?
+    publish('markers:fetched', [markers]) : null
+  );
 
-  export const thumbs = obj => obj ? fetch(obj.src)
-    .then(data => data.text())
-    .then(text => text.replace('WEBVTT\n\n', '').split('\n\n'))
-    .then(arry => arry.map(thumb => thumb.split('\n')))
-    .then(arry => arry.map(thumb => ({
-      type: 'thumb',
-      start: timeToSeconds(thumb[0].split(' --> ')[0]),
-      end: timeToSeconds(thumb[0].split(' --> ')[1]),
-      url: thumb[1],
-    })))
-    .then(data => publish('thumbnails:fetched', [data])) : [];
+export const thumbs = obj => obj ? fetch(obj.src)
+  .then(data => data.text())
+  .then(text => text.replace('WEBVTT\n\n', '').split('\n\n'))
+  .then(arry => arry.map(thumb => thumb.split('\n')))
+  .then(arry => arry.map(thumb => ({
+    type: 'thumb',
+    start: timeToSeconds(thumb[0].split(' --> ')[0]),
+    end: timeToSeconds(thumb[0].split(' --> ')[1]),
+    url: thumb[1],
+  })))
+  .then(data => publish('thumbnails:fetched', [data])) : [];
+
+export const explained = src => src ? fetch(src)
+  .then(data => data.text())
+  .then(text => text ? text.replace('WEBVTT\n\n', '').split('\n\n') : [])
+  .then(arry => arry.map(explained => explained.split('\n')))
+  .then(arry => arry.map(explained => ({
+    title: explained[2],
+    youtube: {
+      main: explained[3],
+      vr: explained[4],
+    },
+    start: timeToSeconds(explained[1].split(' --> ')[0]),
+    end: timeToSeconds(explained[1].split(' --> ')[1])
+   })))
+  .then(data => publish('explained:fetched', [data])) : [];
