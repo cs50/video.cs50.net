@@ -10,7 +10,7 @@ export default () => {
 
   const setup = (xs) => { data = xs; }
   const render = (time) => {
-    if(time > 0) {
+    if(time > 0 && data.length > 0) {
       const caption = data.find(x => time < x.end) || data[0];
       $container.innerHTML = '';
       Fetch([caption])
