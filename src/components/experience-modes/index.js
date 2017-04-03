@@ -34,15 +34,15 @@ export default () => {
   const $container = document.createElement('experience-modes');
   const render = (state) =>
   Fetch([
-    { icon:'videocam', type:'pr', active:true, state,
+    { label: 'Main Cameras', icon:'videocam', type:'pr', active:true, state,
       hidden: !(state.main && ((state.cameras && state.screens) || state.vr)) },
-    { icon:'featured-video', type:'ms', state,
+    { label: 'Multi Screen', icon:'featured-video', type:'ms', state,
       hidden: !(state.cameras && state.screens) },
-    { icon:'vr', type:'vr', state,
+    { label: '360 Video', icon:'vr', type:'vr', state,
       hidden: !(state.vr) },
   ])
-  .then(Node(({icon,type,active,hidden}) => `
-    <button ${ active ? 'active' : '' } ${ hidden ? 'hidden' : '' }>
+  .then(Node(({label,icon,type,active,hidden}) => `
+    <button data-label='${label}' ${ active ? 'active' : '' } ${ hidden ? 'hidden' : '' }>
       <svg viewBox="0 0 1 1"><use xlink:href="#icon-${icon}"></use></svg>
     </button>
   `))
