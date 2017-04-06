@@ -4,11 +4,11 @@ import { subscribe, publish } from 'minpubsub';
 
 import VideoMain from './components/video-main';
 import VideoAlt from './components/video-alt';
+import VideoExp from './components/video-exp';
 import VideoControls from './components/video-controls';
 
 import ScreenshotButton from './components/screenshot-button';
 import ExperienceModes from './components/experience-modes';
-import ExplainedOverlay from './components/explained-overlay';
 import SidebarButton from './components/sidebar-button';
 import ThumbnailPreview from './components/thumbnail-preview';
 import BreakOverlay from './components/break-overlay';
@@ -59,7 +59,6 @@ module.exports = (() => {
 
   const $main = $('main');
   $main.appendChild(BreakOverlay());
-  $main.appendChild(ExplainedOverlay());
 
   const $control = $('control-bar');
   $control.appendChild(MarkerTeleprompter());
@@ -127,8 +126,10 @@ module.exports = (() => {
   });
 
   documentHelpers();
+
   VideoMain();
   VideoAlt();
+  VideoExp();
 
   publish('player:loadVideo', [targetEpisode, 'en']);
 
