@@ -70,6 +70,8 @@ export default () => {
   // Expose actions on video channel
   subscribe('video:play', player.playVideo);
   subscribe('video:pause', player.pauseVideo);
+  subscribe('video:muteMainVideo', player.mute);
+  subscribe('video:unmuteMainVideo', player.unMute);
   subscribe('video:toggleMute', () =>
     player.isMuted().then(muted =>
       muted ? player.unMute() : player.mute()
