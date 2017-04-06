@@ -11,7 +11,7 @@ const action = {
       publish('video:loadAltVideoById', [this.data.state.screens, time]);
     }
     // Production experience mode
-    if(this.data.type === 'pr') {
+    if(this.data.type === 'pr' || this.data.type === 'ex') {
       publish('video:loadMainVideoById', [this.data.state.main, time]);
       publish('video:hideAltVideo');
     }
