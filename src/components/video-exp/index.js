@@ -25,26 +25,32 @@ export default () => {
     },
   });
 
-  // Array of explained video meta
-  var data = [];
-  var currentId;
+  // Explained video meta
+  let data = [];
+  let currentId;
+
   const setup = (xs) => { data = xs; };
   const showing = () => $container.classList.contains('showing');
+  const show = () => $container.classList.add('showing');
+  const hide = () => $container.classList.remove('showing');
+
   const render = (time) => {
 
     const explained = data.find(x => time > x.start && time < x.end) || false;
     const exMode = document.body.getAttribute('experience') === 'ex';
-    const IdHasChanged = explained && currentId !== explained.youtube.main;
+    const idHasChanged = explained && currentId !== explained.youtube.main;
 
-    if((exMode && explained && !showing()) || (exMode && IdHasChanged)) {
+    // There is reasons to show the player
+    if((exMode && explained && !showing()) || (exMode && idHasChanged)) {
       currentId = explained.youtube.main;
-      $container.classList.add('showing');
       player.loadVideoById(currentId, time - explained.start);
       publish('video:muteMainVideo');
+      show();
+    // There is reason to hide the player
     } else if (!exMode || (exMode && !explained && showing())) {
-      $container.classList.remove('showing');
       player.pauseVideo();
       publish('video:unmuteMainVideo');
+      hide();
     }
 
   };
@@ -54,8 +60,10 @@ export default () => {
   subscribe('video:pause', () => showing() ? player.pauseVideo() : null);
   subscribe('video:seekTo', time => {
     const explained = data.find(x => time > x.start && time < x.end) || false;
+    // Offset seekTo time by start time of current video
     if(explained && currentId === explained.youtube.main)
       player.seekTo(time - explained.start)
+    // Seeked out of explained segment
     else render()
   });
 
