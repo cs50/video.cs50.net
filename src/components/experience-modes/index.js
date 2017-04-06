@@ -40,6 +40,8 @@ export default () => {
       hidden: !(state.cameras && state.screens) },
     { label: '360 Video', icon:'vr', type:'vr', state,
       hidden: !(state.vr) },
+    { label: 'Explained', icon:'explained', type:'ex', state,
+      hidden: !(state.explained) },
   ])
   .then(Node(({label,icon,type,active,hidden}) => `
     <button data-label='${label}' ${ active ? 'active' : '' } ${ hidden ? 'hidden' : '' }>

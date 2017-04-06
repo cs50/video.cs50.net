@@ -98,7 +98,9 @@ module.exports = (() => {
       const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
       publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
-      publish('youtube:fetched', [ep.youtube]);
+      publish('youtube:fetched', [
+        Object.assign({}, ep.youtube, { explained: ep.explained })
+      ]);
       explained(ep.explained);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
