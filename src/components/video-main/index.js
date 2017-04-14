@@ -119,10 +119,10 @@ export default () => {
   );
 
   subscribe('video:fullscreen', () => {
-    const iframe = document.querySelector('.primary iframe');
-    const requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    const $elem = document.querySelector('main')
+    const requestFullScreen = $elem.requestFullScreen || $elem.mozRequestFullScreen || $elem.webkitRequestFullScreen;
     if (requestFullScreen) {
-      requestFullScreen.bind(iframe)();
+      requestFullScreen.bind($elem)();
     }
     window.ga('send', 'event', 'control', 'fullscreen');
   });
