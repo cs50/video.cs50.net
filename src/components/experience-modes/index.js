@@ -1,5 +1,6 @@
 import { publish, subscribe } from 'minpubsub';
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
+import { isMobile } from '../../helpers/document.js';
 import { youTubeTimeFromUrl } from '../../helpers/youtube.js';
 
 const action = {
@@ -17,8 +18,13 @@ const action = {
     }
     // Virtual reality experience mode
     if(this.data.type === 'vr') {
-      publish('video:loadMainVideoById', [this.data.state.vr, time]);
-      publish('video:hideAltVideo');
+      if(isMobile()) {
+        publish('video:pause')
+        window.open(`https://youtube.com/watch/${this.data.state.vr}&t=${time}`, '_blank')
+      } else {
+        publish('video:loadMainVideoById', [this.data.state.vr, time]);
+        publish('video:hideAltVideo');
+      }
     }
     // Remove active class from other keys
     [...e.currentTarget.parentNode.children]

@@ -1,6 +1,7 @@
 import { subscribe, publish } from 'minpubsub';
 import { videoScreenshotFromUrl,
          cdnEpisodefromUrl } from '../../helpers/cdn.js';
+import { isMobile } from '../../helpers/document.js';
 import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
@@ -37,6 +38,6 @@ export default () => {
   .then(Draw($container));
 
   subscribe('video:currentTime:screenshotButton', action.screenshot);
-  subscribe('screenshots:fetched', render);
+  subscribe('screenshots:fetched', isMobile() ? null : render);
   return $container;
 }
