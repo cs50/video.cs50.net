@@ -1,10 +1,12 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 import { draggable, isMobile, isIframe } from '../../helpers/document.js';
+import { expCaptions } from '../../helpers/cdn.js';
 
 export default () => {
   const $container = document.querySelector('video-exp');
   const $wrapper = document.createElement('video-');
+  const $captions = document.createElement('captions-');
 
   // Assign random ID to wrapper
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
@@ -12,6 +14,9 @@ export default () => {
 
   // Append wrapper element to be replaced by iframe
   $container.appendChild($wrapper);
+  // Append captions container
+  $container.appendChild($captions);
+  $captions.classList.add('hidden');
 
   // Initialize player in wrapper
   const player = YouTubePlayer(id, {
@@ -27,12 +32,16 @@ export default () => {
 
   // Explained video meta
   let data = [];
+  let caps = [];
   let currentId;
 
-  const setup = (xs) => { data = xs; };
+  const setup = (xs) => { data = xs };
   const showing = () => $container.classList.contains('showing');
   const show = () => $container.classList.add('showing');
   const hide = () => $container.classList.remove('showing');
+
+  const hideCaptions = () => $captions.classList.add('hidden');
+  const showCaptions = () => $captions.classList.remove('hidden');
 
   const render = (time) => {
 
@@ -42,6 +51,10 @@ export default () => {
 
     // There is reasons to show the player
     if((exMode && explained && !showing()) || (exMode && idHasChanged)) {
+      // Fetch captions
+      expCaptions({ src: explained.captions })
+      .then(captions => { caps = captions })
+      // Set current videoId and play video at timecode
       currentId = explained.youtube.main;
       player.loadVideoById(currentId, time - explained.start);
       publish('video:muteMainVideo');
@@ -49,8 +62,14 @@ export default () => {
     // There is reason to hide the player
     } else if (!exMode || (exMode && !explained && showing())) {
       player.pauseVideo();
+      caps = [];
       publish('video:unmuteMainVideo');
       hide();
+    }
+
+    if(caps.length) {
+      const caption = caps.find(x => time - explained.start < x.end);
+      $captions.innerHTML = `<div><a>${caption.title}</a></div>`;
     }
 
   };
@@ -70,5 +89,7 @@ export default () => {
   subscribe('video:setPlaybackRate', player.setPlaybackRate);
   subscribe('video:tick', render);
   subscribe('explained:fetched', setup);
+  subscribe('captions:hide', hideCaptions);
+  subscribe('captions:show', showCaptions);
 
 }

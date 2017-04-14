@@ -41,4 +41,35 @@ video-exp {
       transform: translate(-50%, -50%);
     }
   }
+
+  captions- {
+    position: absolute;
+    top: auto;
+    bottom: .25rem;
+    right: 0;
+    left: 0;
+    display: flex;
+
+    &.hidden {
+      display: none;
+    }
+
+    div {
+      margin: auto;
+      max-width: 100%;
+    }
+
+    a {
+      font-size: 50%;
+      line-height: 1.5;
+      text-decoration: none;
+      text-align: center;
+      padding: calc(.1rem + .25vw);
+      color: #fff;
+      max-width: 100%;
+      margin: 0 auto;
+      background: rgba(0,0,0,.8);
+    }
+  }
+
 }
