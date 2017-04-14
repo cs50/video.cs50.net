@@ -1,6 +1,5 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
-import { draggable, isMobile, isIframe } from '../../helpers/document.js';
 import { expCaptions } from '../../helpers/cdn.js';
 
 export default () => {
