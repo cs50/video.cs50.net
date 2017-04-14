@@ -6,33 +6,38 @@ import { youTubeTimeFromUrl } from '../../helpers/youtube.js';
 const action = {
   select(e) {
     const time = youTubeTimeFromUrl();
+    const setMode = () => {
+      // Remove active class from other keys
+      [...e.currentTarget.parentNode.children]
+      .forEach(x => x.removeAttribute('active'));
+      // Make this element active
+      e.currentTarget.setAttribute('active', true);
+      // Set experience mode of body
+      document.body.setAttribute('experience', this.data.type);
+    }
     // Multiscreen experience mode
     if(this.data.type === 'ms') {
       publish('video:loadMainVideoById', [this.data.state.cameras, time]);
       publish('video:loadAltVideoById', [this.data.state.screens, time]);
+      setMode();
     }
     // Production experience mode
     if(this.data.type === 'pr') {
       publish('video:loadMainVideoById', [this.data.state.main, time]);
       publish('video:hideAltVideo');
+      setMode();
     }
     // Virtual reality experience mode
     if(this.data.type === 'vr') {
-      if(isMobile()) {
-        publish('video:pause')
-        window.open(`https://youtube.com/watch/${this.data.state.vr}&t=${time}`, '_blank')
-      } else {
+      if(!isMobile()) {
         publish('video:loadMainVideoById', [this.data.state.vr, time]);
         publish('video:hideAltVideo');
+        setMode();
+      } else {
+        publish('video:pause')
+        window.open(`https://youtube.com/watch/${this.data.state.vr}&t=${time}`, '_blank')
       }
     }
-    // Remove active class from other keys
-    [...e.currentTarget.parentNode.children]
-    .forEach(x => x.removeAttribute('active'));
-    // Make this element active
-    e.currentTarget.setAttribute('active', true);
-    // Set experience mode of body
-    document.body.setAttribute('experience', this.data.type);
   }
 };
 
