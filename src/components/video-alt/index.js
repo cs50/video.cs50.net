@@ -52,8 +52,8 @@ export default () => {
   // Mute support video, use audio from main
   player.mute();
 
-  $container.style.left = '2rem';
-  $container.style.top = '2rem';
+  $container.style.left = '1rem';
+  $container.style.top = '1rem';
 
   // Expose actions on video channel
   subscribe('video:play', player.playVideo);

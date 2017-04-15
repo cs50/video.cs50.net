@@ -4,6 +4,7 @@ import { subscribe, publish } from 'minpubsub';
 
 import VideoMain from './components/video-main';
 import VideoAlt from './components/video-alt';
+import VideoExp from './components/video-exp';
 import VideoControls from './components/video-controls';
 
 import ScreenshotButton from './components/screenshot-button';
@@ -32,6 +33,7 @@ import {
   cdnEpisodefromUrl,
   markers,
   thumbs,
+  explained,
 } from './helpers/cdn.js';
 
 const $ = selector => document.querySelector(selector);
@@ -95,7 +97,10 @@ module.exports = (() => {
       const screenshotSources = ep.sources.filter(x => x.label === '720p');
       // Render components based on what episode data exists
       publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
-      publish('youtube:fetched', [ep.youtube]);
+      publish('youtube:fetched', [
+        Object.assign({}, ep.youtube, { explained: ep.explained })
+      ]);
+      explained(ep.explained);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
       if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);
@@ -121,8 +126,10 @@ module.exports = (() => {
   });
 
   documentHelpers();
+
   VideoMain();
   VideoAlt();
+  VideoExp();
 
   publish('player:loadVideo', [targetEpisode, 'en']);
 
