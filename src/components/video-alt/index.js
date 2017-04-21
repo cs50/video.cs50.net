@@ -46,14 +46,15 @@ export default () => {
       showinfo: 0,
       controls: 0,
       html5: 1,
+      playsinline: 1,
     },
   });
 
   // Mute support video, use audio from main
   player.mute();
 
-  $container.style.left = '1rem';
-  $container.style.top = '1rem';
+  $container.style.left = '2rem';
+  $container.style.top = '2rem';
 
   // Expose actions on video channel
   subscribe('video:play', player.playVideo);
