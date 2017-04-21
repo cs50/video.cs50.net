@@ -14,10 +14,9 @@ export default () => {
 
   Fetch([{ checked: breaks }])
   .then(Node(({checked}) => `
-    <label>
-      <input type="checkbox" ${ checked ? 'checked' : '' } />
-      <span>Breaks between chapters</span>
-    </label>
+    <input type="checkbox" ${ checked ? 'checked' : '' } />
+    <label><i></i></label>
+    <span>Breaks between chapters</span>
   `))
   .then(Bind('input')('click')(actions.toggle))
   .then(Draw($container));
