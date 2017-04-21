@@ -121,7 +121,7 @@ export default () => {
   );
 
   subscribe('video:fullscreen', () => {
-    const $elem = document.querySelector('main')
+    const $elem = document.querySelector('.wrapper');
     const requestFullScreen = $elem.requestFullScreen || $elem.mozRequestFullScreen || $elem.webkitRequestFullScreen;
     if (requestFullScreen) {
       requestFullScreen.bind($elem)();
