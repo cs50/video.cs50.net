@@ -54,8 +54,8 @@ module.exports = (() => {
     time > 0 ? window.history.replaceState({}, '', `?t=${secondsToYoutubeTime(time)}`) : null
   );
 
-  const $body = $('body');
-  $body.appendChild(SidebarButton());
+  const $wrapper = $('.wrapper');
+  $wrapper.appendChild(SidebarButton());
 
   const $main = $('main');
   $main.appendChild(BreakOverlay());
