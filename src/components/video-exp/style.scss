@@ -49,6 +49,7 @@ video-exp {
     right: 0;
     left: 0;
     display: flex;
+    font-size: calc(6px + .1vmin);
 
     &.hidden {
       display: none;
@@ -57,10 +58,11 @@ video-exp {
     div {
       margin: auto;
       max-width: 100%;
+      font-size: inherit;
     }
 
     a {
-      font-size: 50%;
+      font-size: 1em;
       line-height: 1.5;
       text-decoration: none;
       text-align: center;

@@ -1,6 +1,7 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 import { expCaptions } from '../../helpers/cdn.js';
+import { draggable } from '../../helpers/document.js';
 
 export default () => {
   const $container = document.querySelector('video-exp');
@@ -16,6 +17,20 @@ export default () => {
   // Append captions container
   $container.appendChild($captions);
   $captions.classList.add('hidden');
+  // Activate dragging and resizing
+  $container.addEventListener('mousedown', (e) => {
+    draggable.apply($container, [e]);
+    $captions.style.opacity = 0;
+  });
+  // Apply opacity to the captions after interaction
+  $container.addEventListener('mouseup', (e) => {
+    $captions.style.opacity = 1;
+  });
+  // Update font-size when element resizes
+  $container.addEventListener('resized', (e) => {
+    $captions.style.fontSize = `${$container.offsetWidth * 0.02}px`;
+    $captions.style.opacity = 1;
+  });
 
   // Initialize player in wrapper
   const player = YouTubePlayer(id, {
