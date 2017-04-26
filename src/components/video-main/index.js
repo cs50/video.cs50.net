@@ -5,6 +5,7 @@ import { draggable, isMobile, isIframe } from '../../helpers/document.js';
 export default () => {
   const $container = document.querySelector('video-main');
   const $wrapper = document.createElement('video-');
+  const $resize = document.createElement('resize-');
 
   // Assign random ID to wrapper
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
@@ -12,6 +13,7 @@ export default () => {
 
   // Append wrapper element to be replaced by iframe
   $container.appendChild($wrapper);
+  $container.appendChild($resize);
 
   // Activate dragging if not primary video
   $container.addEventListener('mousedown', (e) => {
@@ -29,10 +31,11 @@ export default () => {
     } else {
       $container.nextElementSibling.style.left = $container.style.left;
       $container.nextElementSibling.style.top = $container.style.top;
-      $container.nextElementSibling.classList.remove('primary');
+      $container.nextElementSibling.style.width = $container.style.width;
       $container.style.top = null;
       $container.style.left = null;
       $container.style.width = null;
+      $container.nextElementSibling.classList.remove('primary');
       $container.classList.add('primary');
     }
   });

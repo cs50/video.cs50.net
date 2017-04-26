@@ -1,11 +1,13 @@
 import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 import { expCaptions } from '../../helpers/cdn.js';
+import { draggable } from '../../helpers/document.js';
 
 export default () => {
   const $container = document.querySelector('video-exp');
   const $wrapper = document.createElement('video-');
   const $captions = document.createElement('captions-');
+  const $resize = document.createElement('resize-');
 
   // Assign random ID to wrapper
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
@@ -15,7 +17,23 @@ export default () => {
   $container.appendChild($wrapper);
   // Append captions container
   $container.appendChild($captions);
+  $container.appendChild($resize);
+  // Hide by default
   $captions.classList.add('hidden');
+  // Activate dragging and resizing
+  $container.addEventListener('mousedown', (e) => {
+    draggable.apply($container, [e]);
+    $captions.style.opacity = 0;
+  });
+  // Apply opacity to the captions after interaction
+  $container.addEventListener('mouseup', (e) => {
+    $captions.style.opacity = 1;
+  });
+  // Update font-size when element resizes
+  $container.addEventListener('resized', (e) => {
+    $captions.style.fontSize = `${$container.offsetWidth * 0.02}px`;
+    $captions.style.opacity = 1;
+  });
 
   // Initialize player in wrapper
   const player = YouTubePlayer(id, {

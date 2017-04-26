@@ -1,6 +1,8 @@
 video-alt:not(.primary) {
   position: absolute;
   display: none;
+  top: 0;
+  left: 0;
 
   [experience='ms'] & {
     position: absolute;
@@ -8,7 +10,6 @@ video-alt:not(.primary) {
     width: 25%;
     overflow: hidden;
     z-index: 2;
-    resize: horizontal;
     border: 2px solid #212121;
 
     @media (orientation: portrait) {
@@ -37,6 +38,28 @@ video-alt:not(.primary) {
       left: 50%;
       height: 250%;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  &:hover resize-  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #a41034;
+    }
+
+    &::after {
+      content: '\2198';
+      color: rgba(255,255,255,.8);
+      font-size: 12px;
     }
   }
 }

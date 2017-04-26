@@ -50,12 +50,28 @@ export default () => {
     .then(() => setProgress(youTubeTimeFromUrl(), duration));
   }
 
+  let explained = [];
+  const renderExplained = (xs, duration) => {
+    const nodes = Node(({start}) =>
+      `<explained- style='left:${(start/duration)*100}%'></explained->`
+    )(xs)
+    nodes.forEach(x => $container.appendChild(x))
+    explained = [];
+  }
+
   $container.addEventListener('click', seekTo);
   $container.addEventListener('mousemove', showThumb);
   $container.addEventListener('mouseleave', hideThumb);
 
+  subscribe('explained:fetched', xs => explained = xs);
   subscribe('chapters:loaded', render);
-  subscribe('video:tick', setProgress);
+  subscribe('video:tick', (time, duration) => {
+    setProgress(time, duration);
+    if(explained.length > 0 && duration > 0) {
+      renderExplained(explained, duration);
+    }
+  });
+
 
   render();
   return $container;
