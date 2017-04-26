@@ -16,7 +16,6 @@ video-main:not(.primary) {
     width: 25%;
     overflow: hidden;
     z-index: 2;
-    resize: horizontal;
     border: 2px solid #212121;
 
     @media (orientation: portrait) {
@@ -47,6 +46,29 @@ video-main:not(.primary) {
       transform: translate(-50%, -50%);
     }
   }
+
+  &:not(.primary):hover resize-  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #a41034;
+    }
+
+    &::after {
+      content: '\2198';
+      color: rgba(255,255,255,.8);
+      font-size: 12px;
+    }
+  }
+
 }
 
 body:not([experience='vr']) video-main {
@@ -60,72 +82,3 @@ body:not([experience='vr']) video-main {
     background: transparent;
   }
 }
-
-
-
-
-
-// video-main.primary,
-// video-main[camera='ms']:not(.primary) + video-alt {
-//   display: block;
-//   width: 100%;
-//   height: 100%;
-//
-//   @media (orientation: portrait) {
-//     height: calc(100% - 3.5rem);
-//   }
-//
-//   @media (orientation: landscape) {
-//     &:not([camera='vr'])::after {
-//       content: '';
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       width: 100%;
-//       height: 100%;
-//       background: transparent;
-//     }
-//   }
-// }
-//
-// video-main[camera='ms'].primary + video-alt,
-// video-main[camera='ms']:not(.primary) {
-//   position: absolute;
-//   display: block;
-//   top: 2rem;
-//   left: 2rem;
-//   width: 20%;
-//   overflow: hidden;
-//   z-index: 2;
-//   resize: horizontal;
-//   border: 2px solid #212121;
-//
-//   @media (orientation: portrait) {
-//     display: none;
-//   }
-//
-//   &::before {
-//     display: block;
-//     content: '';
-//     width: 100%;
-//     padding-top: 42%;
-//   }
-//
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background: transparent;
-//   }
-//
-//   iframe {
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     height: 250%;
-//     transform: translate(-50%, -50%);
-//   }
-// }
