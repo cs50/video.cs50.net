@@ -7,6 +7,7 @@ export default () => {
   const $container = document.querySelector('video-exp');
   const $wrapper = document.createElement('video-');
   const $captions = document.createElement('captions-');
+  const $resize = document.createElement('resize-');
 
   // Assign random ID to wrapper
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
@@ -16,6 +17,8 @@ export default () => {
   $container.appendChild($wrapper);
   // Append captions container
   $container.appendChild($captions);
+  $container.appendChild($resize);
+  // Hide by default
   $captions.classList.add('hidden');
   // Activate dragging and resizing
   $container.addEventListener('mousedown', (e) => {
