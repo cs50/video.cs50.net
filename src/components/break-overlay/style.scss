@@ -18,7 +18,7 @@ break-overlay {
     > *+* {
       margin-top: 2rem;
     }
-    @media (orientation: portrait) {
+    @media (orientation: portrait), (max-height: 480px) {
       > *+* {
         margin-top: 1rem;
       }

@@ -28,15 +28,25 @@ const srtToJson = src => fetch(src)
 
 const chapters = obj => obj ? fetch(obj.src)
   .then(data => data.text())
-  .then(text => text ? text.replace('WEBVTT\n\n', '').split('\n\n') : [])
+  .then(text => text ? text.trim().replace('WEBVTT\n\n', '').split('\n\n') : [])
   .then(arry => arry.map(chapter => chapter.split('\n')))
-  .then(arry => arry.map(chapter => ({
-    type: 'chapter',
-    id: chapter[0],
-    start: timeToSeconds(chapter[1].split(' --> ')[0]),
-    end: timeToSeconds(chapter[1].split(' --> ')[1]),
-    title: chapter[2],
-  })))
+  .then(arry =>
+    arry.map(chapter => chapter.length === 3
+      ? ({
+        type: 'chapter',
+        id: chapter[0],
+        start: timeToSeconds(chapter[1].split(' --> ')[0]),
+        end: timeToSeconds(chapter[1].split(' --> ')[1]),
+        title: chapter[2],
+      })
+      : ({
+        type: 'chapter',
+        start: timeToSeconds(chapter[0].split(' --> ')[0]),
+        end: timeToSeconds(chapter[0].split(' --> ')[1]),
+        title: chapter[1],
+      })
+    )
+  )
   .then(chapters => {
     publish('chapters:loaded', [chapters])
     return chapters;
