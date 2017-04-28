@@ -61,6 +61,7 @@ const isTabbing = function () {
   }
   const isDialogElement = els.filter(x => x.tagName === 'DIALOG').length;
   if(isDialogElement) document.body.classList.add('dialog-open');
+  else document.body.classList.remove('dialog-open');
   if(tabTimer) clearTimeout(tabTimer);
   document.body.classList.add('is-tabbing');
   document.body.classList.remove('mouse-idle');
