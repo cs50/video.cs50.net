@@ -49,11 +49,11 @@ export default () => {
     { label: 'Main Cameras', icon:'videocam', type:'pr', active:true, state,
       hidden: !(state.main && ((state.cameras && state.screens) || state.vr)) },
     { label: 'Multi Screen', icon:'featured-video', type:'ms', state,
-      hidden: !(state.cameras && state.screens) },
+      hidden: !(state.cameras && state.screens && !isMobile()) },
     { label: '360 Video', icon:'vr', type:'vr', state,
       hidden: !(state.vr) },
     { label: 'Explained', icon:'explained', type:'ex', state,
-      hidden: !(state.explained) },
+      hidden: !(state.explained && !isMobile()) },
   ])
   .then(Node(({label,icon,type,active,hidden}) => `
     <button data-label='${label}' ${ active ? 'active' : '' } ${ hidden ? 'hidden' : '' }>
