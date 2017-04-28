@@ -55,6 +55,7 @@ export default () => {
 
     const $continue = $container.querySelector('.continue');
     const $cancel = $container.querySelector('.cancel');
+    const $title = $container.querySelector('h1');
 
     $continue.addEventListener('click', hideOverlay);
     $cancel.addEventListener('click', stopTimer);
@@ -62,6 +63,8 @@ export default () => {
     $container.removeAttribute('hidden');
     timer = setTimeout(hideOverlay, 10000);
     publish('video:pause');
+
+    $cancel.focus();
   };
 
   subscribe('chapters:loaded', setup);

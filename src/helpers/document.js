@@ -53,19 +53,13 @@ export default () => {
 
 let tabTimer;
 const isTabbing = function () {
-
   let a = document.activeElement;
-
-  console.log(a);
-
   const els = [];
   while (a) {
     els.unshift(a);
     a = a.parentNode;
   }
-
   const isDialogElement = els.filter(x => x.tagName === 'DIALOG').length;
-
   if(isDialogElement) document.body.classList.add('dialog-open');
   if(tabTimer) clearTimeout(tabTimer);
   document.body.classList.add('is-tabbing');
@@ -75,7 +69,6 @@ const isTabbing = function () {
     document.body.classList.remove('is-tabbing');
     document.body.classList.remove('dialog-open');
   }, 3000);
-
 }
 
 export const draggable = function(e) {
