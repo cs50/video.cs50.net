@@ -16,6 +16,7 @@ export default () => {
         if ($elem.classList.contains('playing')) publish('video:pause');
         else publish('video:play');
       break;
+      case 9: isTabbing(); break;
       case 27: document.body.classList.remove('dialog-open'); break;
       case 70: publish('video:fullscreen'); break;
       case 39: publish('video:seekBy', [5]); break;
@@ -28,10 +29,9 @@ export default () => {
     }
 
     // Idle mouse listener
-
     const hidePlayerChrome = () =>
-      document.body.getAttribute('experience') === 'vr' ? null :
-      document.body.classList.add('mouse-idle');
+      document.body.getAttribute('experience') === 'vr' || document.body.classList.contains('is-tabbing')
+      ? null : document.body.classList.add('mouse-idle');
     const showPlayerChrome = () =>
       document.body.classList.remove('mouse-idle');
 
@@ -50,6 +50,27 @@ export default () => {
     document.onmouseenter = showPlayerChrome;
 
 };
+
+let tabTimer;
+const isTabbing = function () {
+  let a = document.activeElement;
+  const els = [];
+  while (a) {
+    els.unshift(a);
+    a = a.parentNode;
+  }
+  const isDialogElement = els.filter(x => x.tagName === 'DIALOG').length;
+  if(isDialogElement) document.body.classList.add('dialog-open');
+  else document.body.classList.remove('dialog-open');
+  if(tabTimer) clearTimeout(tabTimer);
+  document.body.classList.add('is-tabbing');
+  document.body.classList.remove('mouse-idle');
+  tabTimer = setTimeout(_ => {
+    document.body.classList.add('mouse-idle');
+    document.body.classList.remove('is-tabbing');
+    document.body.classList.remove('dialog-open');
+  }, 3000);
+}
 
 export const draggable = function(e) {
   // Elements initial width and height

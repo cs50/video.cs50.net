@@ -72,7 +72,6 @@ export default () => {
     }
   });
 
-
   render();
   return $container;
 }

@@ -5,6 +5,7 @@ import { secondsToYoutubeTime,
 
 export default () => {
   const $container = document.createElement('marker-list');
+  $container.setAttribute('role', 'tree');
   let markers = [];
   $container.addEventListener('click', (e) => {
     if(e.target && e.target.nodeName === 'A') {
@@ -42,7 +43,7 @@ export default () => {
     $container.innerHTML = '';
     Fetch(markers)
     .then(Node(({type, start, end, title}) => type === 'chapter' ?
-      `<mark- type='${type}' chapter='${++chapter}' class='folded' >
+      `<mark- type='${type}' chapter='${++chapter}' class='folded' role='treeitem'>
         <div>
           <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
           <span>${Math.ceil((end - start) / 60)} mins</span>
@@ -52,7 +53,7 @@ export default () => {
           <svg><use xlink:href='#icon-down-arrow' /></svg>
         </button>
        </mark->` :
-      `<mark- type='${type}' chapter='${chapter}' class='folded' >
+      `<mark- type='${type}' chapter='${chapter}' class='folded'>
         <span>${secondsToHHMMSS(start)}</span>
         <a start='${start}' href='?t=${secondsToYoutubeTime(start)}'>${title}</a>
        </mark->`
