@@ -6,6 +6,7 @@ export default () => {
   let data = [];
   const $container = document.createElement('break-overlay');
   $container.setAttribute('hidden', true);
+  $container.setAttribute('role', 'dialog');
 
   const hideOverlay = () => {
     window.ga('send', 'event', 'break', 'continued');

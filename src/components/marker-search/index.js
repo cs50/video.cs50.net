@@ -63,6 +63,7 @@ const actions = {
 
 export default () => {
   const $container = document.createElement('marker-search');
+  $container.setAttribute('role', 'search');
 
   Fetch([{}])
   .then(Node(() => `
