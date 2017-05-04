@@ -31,7 +31,7 @@ const chapters = obj => obj ? fetch(obj.src)
   .then(text => text ? text.trim().replace('WEBVTT\n\n', '').split('\n\n') : [])
   .then(arry => arry.map(chapter => chapter.split('\n')))
   .then(arry =>
-    arry.map(chapter => chapter.length === 3
+    arry.map(chapter => !chapter[0].match(' --> ')
       ? ({
         type: 'chapter',
         id: chapter[0],
