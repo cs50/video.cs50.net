@@ -19,7 +19,7 @@ export default () => {
   if(!isMobile()) {
 
     Fetch([
-      { rate: 0.5, label: '1\u22152' }
+      { rate: 0.5, label: '1\u22152' },
       { rate: 0.75, label: '3\u22154' },
       { rate: 1, label: '1', active: true },
       { rate: 1.5, label: '3\u22152' },
