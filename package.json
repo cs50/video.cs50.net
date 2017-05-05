@@ -29,16 +29,15 @@
   "engines": {
     "node": ">=4.5"
   },
+  "babel": {
+    "presets": ["es2015"]
+  },
   "devDependencies": {
-    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
     "browser-sync": "^2.13.0",
     "browserify": "^13.0.1",
     "connect-history-api-fallback": "^1.2.0",
-    "eslint": "^2.13.1",
-    "eslint-config-airbnb-base": "^3.0.1",
-    "eslint-plugin-import": "^1.8.1",
     "parallelshell": "^2.0.0",
     "parcelify": "^2.1.0",
     "sass-css-stream": "^0.1.6",
@@ -48,6 +47,7 @@
   },
   "homepage": "https://github.com/cs50/player50",
   "dependencies": {
+    "babel-polyfill": "^6.13.0",
     "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",
     "whatwg-fetch": "1.0.0",
     "youtube-player": "3.0.5"
