@@ -16,7 +16,7 @@ export default () => {
   .then(Node(({checked}) => `
     <input type="checkbox" ${ checked ? 'checked' : '' } />
     <label><i></i></label>
-    <span>Breaks between chapters</span>
+    <span>Take breaks between chapters</span>
   `))
   .then(Bind('input')('click')(actions.toggle))
   .then(Draw($container));

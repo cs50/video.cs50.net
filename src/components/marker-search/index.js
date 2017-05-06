@@ -68,7 +68,7 @@ export default () => {
   Fetch([{}])
   .then(Node(() => `
     <svg viewBox="0 0 1 1"><use xlink:href="#icon-search"></use></svg>
-    <input placeholder="Search Video.." />
+    <input placeholder="Search" />
   `))
   .then(Bind('input')('keyup')(actions.search))
   .then(Draw($container));
