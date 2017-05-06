@@ -1,6 +1,6 @@
 download-links {
   position: relative;
-  margin-left: auto;
+  margin-left: 0;
   display: flex;
 
   svg {
@@ -26,7 +26,7 @@ download-links {
 
   &.open div {
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     display: block;
     z-index: 10;
     left: 2rem;
