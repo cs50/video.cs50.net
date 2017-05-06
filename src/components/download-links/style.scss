@@ -3,25 +3,14 @@ download-links {
   margin-left: 0;
   display: flex;
 
+  @media (max-width: 400px) {
+      display: none;
+  }
+
   svg {
     width: 1.25rem;
     height: 1.25rem;
     fill: rgba(255,255,255,.8);
-  }
-
-  button- {
-    display: flex;
-    align-items: center;
-    color: rgba(255,255,255,.8);
-    padding: 0 1rem;
-    cursor: default;
-    border-left: 1px solid #000;
-    &:hover {
-      background: rgba(255,255,255,0.05);
-    }
-    > *+* {
-      margin-left: .5rem;
-    }
   }
 
   &.open div {
@@ -45,5 +34,7 @@ download-links {
 
   div {
     display: none;
+    overflow: auto;
+    max-height: 168px;
   }
 }
