@@ -11,10 +11,9 @@ export default () => {
 
   const $container = document.createElement('download-links');
   $container.innerHTML = `
-    <button->
-      <span>Download</span>
+    <button>
       <svg viewBox="0 0 1 1"><use xlink:href="#icon-download"></use></svg>
-    </button->
+    </button>
     <div></div>
   `;
 
