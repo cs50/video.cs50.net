@@ -77,7 +77,6 @@ module.exports = (() => {
 
   const $dialogRow2 = $('dialog row-:nth-child(2)');
   $dialogRow2.appendChild(BreakToggle());
-  $dialogRow2.appendChild(DownloadLinks());
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL

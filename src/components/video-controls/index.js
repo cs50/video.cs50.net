@@ -4,6 +4,7 @@ import NextChapterButton from '../next-chapter-button';
 import ProgressTimer from '../progress-timer';
 import PlaybackRates from '../playback-rates';
 import CaptionsButton from '../captions-button';
+import DownloadLinks from '../download-links';
 import FullscreenButton from '../fullscreen-button';
 
 const append = container => children =>
@@ -19,6 +20,7 @@ export default () => {
     ProgressTimer(),
     PlaybackRates(),
     CaptionsButton(),
+    DownloadLinks(),
     FullscreenButton(),
   ]);
 
