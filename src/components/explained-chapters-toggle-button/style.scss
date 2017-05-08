@@ -1,0 +1,19 @@
+explained-chapters-toggle-button {
+    position: relative;
+    margin-left: auto;
+    display: flex;
+
+    @media (max-width: 400px) {
+        display: none;
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: rgba(255,255,255,1);
+    }
+
+    [active] {
+      background: #a41034;
+    }
+}

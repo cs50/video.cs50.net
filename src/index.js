@@ -13,12 +13,14 @@ import SidebarButton from './components/sidebar-button';
 import ThumbnailPreview from './components/thumbnail-preview';
 import BreakOverlay from './components/break-overlay';
 import BreakToggle from './components/break-toggle';
+import ExplainedChaptersToggleButton from './components/explained-chapters-toggle-button';
 
 import MarkerSearch from './components/marker-search';
 import MarkerTimeline from './components/marker-timeline';
 import MarkerTeleprompter from './components/marker-teleprompter';
 import DownloadLinks from './components/download-links';
 import MarkerList from './components/marker-list';
+import MarkerListExplained from './components/marker-list-explained';
 import LanguageSelect from './components/language-select';
 
 import documentHelpers from './helpers/document.js';
@@ -69,7 +71,8 @@ module.exports = (() => {
   $control.appendChild(ThumbnailPreview());
 
   const $dialog = $('dialog');
-  $dialog.appendChild(MarkerList())
+  $dialog.appendChild(MarkerList());
+  $dialog.appendChild(MarkerListExplained());
 
   const $dialogRow = $('dialog row-:first-child');
   $dialogRow.appendChild(MarkerSearch());
@@ -77,6 +80,7 @@ module.exports = (() => {
 
   const $dialogRow2 = $('dialog row-:nth-child(2)');
   $dialogRow2.appendChild(BreakToggle());
+  $dialogRow2.appendChild(ExplainedChaptersToggleButton());
 
   subscribe('player:loadVideo', (id, lang = 'en') => {
     // Fetch episode data from CDN based on URL
