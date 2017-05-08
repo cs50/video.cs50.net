@@ -7,10 +7,6 @@ sidebar-button {
       background: #212121;
       padding: 1rem;
       z-index: 20;
-      transition: all .3s ease;
-      background-size: 200% 100%;
-      background-image: linear-gradient(to left, #a41034 50%, #212121 50%);
-      transition: background-position .3s;
 
       transform: translateX(0%);
 
@@ -26,7 +22,7 @@ sidebar-button {
     }
 
     [active] {
-        background-position: 100% 0;
+        background: #a41034;
     }
   }
   @media(orientation: portrait) {
