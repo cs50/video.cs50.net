@@ -5,6 +5,12 @@ const action = {
   toggle(e) {
     document.body.classList.toggle('dialog-open');
     window.ga('send', 'event', 'sidebar', 'open');
+
+    if (e.currentTarget.hasAttribute('active')) {
+        e.currentTarget.removeAttribute('active');
+    } else {
+        e.currentTarget.setAttribute('active', true);
+    }
   }
 }
 
@@ -15,7 +21,6 @@ export default () => {
   .then(Node(({hidden}) => `
     <button ${ hidden ? 'hidden' : '' }>
       <svg viewBox="0 0 1 1"><use xlink:href="#icon-toc"></use></svg>
-      <svg viewBox="0 0 1 1"><use xlink:href="#icon-forward"></use></svg>
     </button>
   `))
   .then(Bind('button')('click')(action.toggle))

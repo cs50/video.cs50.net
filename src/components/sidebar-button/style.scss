@@ -20,20 +20,12 @@ sidebar-button {
         fill: rgba(255,255,255,1);
       }
     }
+
+    [active] {
+        background: #a41034;
+    }
   }
   @media(orientation: portrait) {
-    display: none;
-  }
-}
-
-body.dialog-open sidebar-button  {
-  button svg:first-child {
-    display: none;
-  }
-}
-
-body:not(.dialog-open) sidebar-button {
-  button svg:last-child {
     display: none;
   }
 }
