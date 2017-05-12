@@ -15,13 +15,14 @@ export default () => {
   };
 
   const seekTo = (e) => {
-    if(e.target.tagName === 'CHAPTER-') {
+    if(e.target.tagName === 'A') {
+      e.preventDefault();
       publish('video:seekTo', [e.target.getAttribute('start')]);
     } else publish('video:seekToPercent', [percent(e.pageX)]);
   }
 
   const showThumb = (e) => {
-    if(e.target.tagName !== 'CHAPTER-') {
+    if(e.target.tagName !== 'A') {
       const $seekIndicator = $container.querySelector('seek-indicator');
       $seekIndicator.style.display = 'block';
       $seekIndicator.style.left = `${e.pageX}px`;
@@ -41,7 +42,7 @@ export default () => {
     Fetch([{}])
     .then(Node(() => `
       ${ chapters.map(x =>
-        `<chapter- title="${x.title}" start="${x.start}" style="left:${(x.start/duration)*100}%"></chapter->`
+        `<a tabindex="0" href="#" title="${x.title}" start="${x.start}" style="left:${(x.start/duration)*100}%"></a>`
       ).join('') }
       <progress-indicator></progress-indicator>
       <seek-indicator></seek-indicator>
