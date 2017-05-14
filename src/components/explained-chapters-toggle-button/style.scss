@@ -12,18 +12,20 @@ explained-chapters-toggle-button {
       padding: 1rem;
       font-size: .8rem;
       user-select: none;
-      color: rgba(255,255,255,0.5);
       background-color: #121212;
-      transition: all .3s ease;
 
       svg {
-        width: 1.25rem;
+        width: 2.5rem;
         height: 1.25rem;
-        fill: #fff;
+        fill: rgba(255,255,255,0.8);
       }
 
       &:not([active]):hover {
         background-color: #212121;
+      }
+
+      &:hover svg {
+        fill: rgba(255,255,255,1);
       }
     }
 
