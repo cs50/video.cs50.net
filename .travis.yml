@@ -1,9 +1,7 @@
 language: node_js
 node_js: 6.9.4
-install:
-  - mkdir public
-  - npm install
 script: npm run release
+before_deploy: zip -r video50.zip .
 deploy:
   provider: elasticbeanstalk
   access_key_id: "$AWS_ACCESS_KEY_ID"
@@ -13,5 +11,9 @@ deploy:
   env: video50
   bucket_name: travis50
   skip_cleanup: true
+  zip_file: video50.zip
   on:
     branch: master
+notifications:
+  slack:
+    secure: XesoVS23fnyAngi5quIkr3w8ppcgwbbxD0E+1VJ2i8110LOafXjNTHs2tbMdEeNvX6Uz8p6ktRI75REjBx3jwLUCSa47XOb8qBh97t65Xs5ugbclawpGD+4/1E6oIautSh/fH1SYiEDxA6iPgGIk0/hp4n/7EVymoizMMyKw8r0JvOL/6vOBjcadPz0uwNXfnu0+73on56NbXyrBf+ZR7DTDgkNVTnU8fxn/g94Bje9D8HzklHgjNEfJh99mmvv3mTqX+AbRdFGIBe0zlgEYJsQiH3grrwqJLUNwCEiVQOwTxClrUsjH0u0A6feTLbtLtLz+HG1HlaCl5eNU7fGTzKYCFEiKiU7CdhoJh9YsRWyQblfQ5LXnLmL/414GrhcXWGaP5NwAkp8UFQ+Zq9OXoUFuYrfi6yvGiOgcvN3nzt1v6w6gtA4vinBT0k2epwQ+3MvxkFHs6ngehjdUVM9HKsYEPJvFDw0loR74De3LACxVyl0E6ICOf/OI702pWlndHGc4ckTMxyMHsfqz16EZlHuzVaMxTfO4zzQF0/+GeEr7RmxYD/EVx0jy1uHFyBfjh16UJyjPsQLZoQLN/bcqlgYWxbTBY+EGB9mAKR6xEr7VKGBwc7TiHmXqT+DqNoTPWNV4irW4VlxsMoCSbNx2TASSVHl2Q6lTB7ilbTFZ150=
