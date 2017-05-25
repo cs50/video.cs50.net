@@ -1,9 +1,7 @@
 language: node_js
 node_js: 6.9.4
-install:
-  - mkdir public
-  - npm install
 script: npm run release
+before_deploy: zip -r video50.zip .
 deploy:
   provider: elasticbeanstalk
   access_key_id: "$AWS_ACCESS_KEY_ID"
@@ -13,5 +11,6 @@ deploy:
   env: video50
   bucket_name: travis50
   skip_cleanup: true
+  zip_file: video50.zip
   on:
     branch: master
