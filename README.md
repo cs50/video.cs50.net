@@ -1,5 +1,7 @@
 # Player50
 
+[![Build Status](https://travis-ci.org/cs50/video50.svg?branch=master)](https://travis-ci.org/cs50/video50)
+
 A web app that intends to enhance the watching experience of the CS50 video archive. Predominantly revolves around the YouTube API, with some additional functionality such as supported chaptering and video search.
 
 ## Installation
