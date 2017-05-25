@@ -12,5 +12,6 @@ deploy:
   app: video50
   env: video50
   bucket_name: travis50
+  skip_cleanup: true
   on:
     branch: master
