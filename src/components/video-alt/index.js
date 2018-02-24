@@ -17,8 +17,8 @@ export default (targetEpisode) => {
 
   // Add wide to class so that we know how to properly resize in document helpers
   // Also start off the component with the right dimensions
-  if (targetEpisode.includes('web') || targetEpisode.includes('mobile') ||
-    targetEpisode.includes('games')) {
+  if (targetEpisode.includes('web/2018') || targetEpisode.includes('mobile/2018') ||
+    targetEpisode.includes('games/2018')) {
       // Starting width and height for VideoAlt when it instantiates
       let width = 300;
       let height = width * 9/16;

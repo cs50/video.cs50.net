@@ -16,8 +16,8 @@ export default (targetEpisode) => {
   $container.appendChild($resize);
 
   // Add wide to class so that we know how to properly resize
-  if (targetEpisode.includes('web') || targetEpisode.includes('mobile') ||
-    targetEpisode.includes('games')) {
+  if (targetEpisode.includes('web/2018') || targetEpisode.includes('mobile/2018') ||
+    targetEpisode.includes('games/2018')) {
       $container.className += ' wide';
   }
 
