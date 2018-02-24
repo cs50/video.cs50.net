@@ -2,7 +2,7 @@ import YouTubePlayer from 'youtube-player';
 import { subscribe, publish } from 'minpubsub';
 import { draggable, isMobile, isIframe } from '../../helpers/document.js';
 
-export default () => {
+export default (targetEpisode) => {
   const $container = document.querySelector('video-alt');
   const $wrapper = document.createElement('video-');
   const $resize = document.createElement('resize-');
@@ -14,6 +14,19 @@ export default () => {
   // Append wrapper element to be replaced by iframe
   $container.appendChild($wrapper);
   $container.appendChild($resize);
+
+  // Add wide to class so that we know how to properly resize in document helpers
+  // Also start off the component with the right dimensions
+  if (targetEpisode.includes('web') || targetEpisode.includes('mobile') ||
+    targetEpisode.includes('games')) {
+      // Starting width and height for VideoAlt when it instantiates
+      let width = 300;
+      let height = width * 9/16;
+
+      $container.className += ' wide';
+      $container.style.width = `${width}px`;
+      $container.style.height = `${height}px`;
+  }
 
   // Activate dragging if not primary video
   $container.addEventListener('mousedown', (e) => {
@@ -32,9 +45,21 @@ export default () => {
       $container.previousElementSibling.style.left = $container.style.left;
       $container.previousElementSibling.style.top = $container.style.top;
       $container.previousElementSibling.style.width = $container.style.width;
+
+      if ($container.classList.contains('wide')) {
+        $container.previousElementSibling.style.height = $container.style.height;
+      }
+
       $container.style.top = null;
       $container.style.left = null;
-      $container.style.width = null;
+
+      if ($container.classList.contains('wide')) {
+        $container.style.width = '100%';
+        $container.style.height = '100%';
+      } else {
+        $container.style.width = null;
+      }
+      
       $container.previousElementSibling.classList.remove('primary');
       $container.classList.add('primary');
     }

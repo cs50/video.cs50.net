@@ -130,8 +130,8 @@ module.exports = (() => {
 
   documentHelpers();
 
-  VideoMain();
-  VideoAlt();
+  VideoMain(targetEpisode);
+  VideoAlt(targetEpisode);
   VideoExp();
 
   publish('player:loadVideo', [targetEpisode, 'en']);

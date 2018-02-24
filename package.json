@@ -1,5 +1,5 @@
 {
-  "name": "player50",
+  "name": "video50",
   "version": "1.0.0",
   "description": "A web interface for viewing CS50 videos.",
   "main": "index.js",
@@ -19,18 +19,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cs50/player50.git"
+    "url": "https://github.com/cs50/video50.git"
   },
   "author": "Luke Jackson <lukejacksonn@gmail.com> (http://lukejacksonn.com/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cs50/player50/issues"
+    "url": "https://github.com/cs50/video50/issues"
   },
   "engines": {
     "node": ">=4.5"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
@@ -45,7 +47,7 @@
     "uglifycss": "0.0.20",
     "watchify": "^3.7.0"
   },
-  "homepage": "https://github.com/cs50/player50",
+  "homepage": "https://github.com/cs50/video50",
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "minpubsub": "git://github.com/lukejacksonn/minpubsub.git",

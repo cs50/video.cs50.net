@@ -99,9 +99,14 @@ export const draggable = function(e) {
     // Set width/height of element according to mouse position
     const size = e.pageX - l + x;
     const min = 150;
+    const pix = size > min ? size : min;
 
     this.style.width = `${size > min ? size : min}px`;
-    //this.style.height = `${(e.pageY - t + y)}px`;
+
+    // if wide flag class is stored, calculate the aspect ratio
+    if (this.className.includes('wide') && !this.className.includes('primary')) {
+      this.style.height = `${Math.floor(pix * 9/16 + 0.5)}px`;
+    }
   }
 
   const unresize = (e) => {
