@@ -11,6 +11,7 @@ const timeToSeconds = time => {
 
 const srtToJson = src => fetch(src)
   .then(data => data.text())
+  .then(text => text.replace(/\r\n/g, '\n'))
   .then(text => text.replace(/\n\n\n/g, '\n\n'))
   .then(text => text ? text.split('\n\n') : [])
   .then(arry => arry.map(caption => caption.split('\n')))
