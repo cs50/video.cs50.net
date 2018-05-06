@@ -4,9 +4,8 @@
     <head>
 
         <!-- https://github.com/jwplayer/jwplayer/blob/master/README.md -->
-        <script src="https://www.youtube.com/iframe_api"></script>
-        <script src="bin-debug/jwplayer.js"></script>
-        <script src="provider.js"></script>
+        <script src="bin-release/jwplayer.js"></script>
+        <script src="timer.js"></script>
 
         <style>
 
@@ -33,42 +32,13 @@
         <div id="player"></div>
         <script>
 
-            var player;
-            function onYouTubeIframeAPIReady() {
-                var player = new YT.Player('player', {
-                    height: '390',
-                    width: '640',
-                    videoId: 'M7lc1UVf-VE',
-                    events: {
-                    }
-                });
-            }
-
-            jwplayer.api.registerProvider(VideoProvider);
-
-
-            function foo() {
-
                 // Setup the player
-                const player2 = jwplayer('player').setup({
+                const player = jwplayer('player').setup({
                     /* aspectratio: '4096:1728', */
-                    file: 'https://www.youtube.com/watch?v=y62zj9ozPOM', /* 'https://cdn.cs50.net/2017/fall/lectures/0/lecture0-1080p.mp4', */
+                    file: 'https://cdn.cs50.net/2017/fall/lectures/0/lecture0-1080p.mp4',
                     height: '100%',
                     width: '100%'
                 });
-
-            }
-
-            /*
-            player.addButton(
-              "https://icons.jwplayer.com/icons/white/download.svg",
-              "Download Video",
-              function() {
-                window.location.href = player.getPlaylistItem()['file'];
-              },
-              "download"
-            );
-            */
 
         </script>
     </body>
