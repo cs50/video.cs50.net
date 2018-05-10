@@ -1,7 +1,5 @@
 .*
 !.gitignore
 !.travis.yml
-__pycache__/
-docker-compose.override.yml
 flask_session/
 tmp/
