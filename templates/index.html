@@ -3,8 +3,8 @@
 <html>
     <head>
 
-        <!-- https://github.com/jwplayer/jwplayer/blob/master/README.md -->
-        <script src="/static/jwplayer.js"></script>
+        <link href="https://cdn.plyr.io/3.3.7/plyr.css" rel="stylesheet">
+        <script src="https://cdn.plyr.io/3.3.7/plyr.js"></script>
 
         <style>
 
@@ -14,14 +14,9 @@
                 overflow: hidden;
             }
 
-            #player {
+            #player, .plyr__video-embed, #player iframe {
                 height: 100%;
                 width: 100%;
-            }
-
-            /* https://support.jwplayer.com/customer/portal/questions/16706818-jw-7-7-disable-rewind-icon-in-controlbar */
-            .jw-icon-volume {
-                display: none !important;
             }
 
         </style>
@@ -30,18 +25,71 @@
 
     </head>
     <body>
-        <div id="player"></div>
+        <div class="plyr__video-embed" id="player">
+            <iframe src="https://www.youtube.com/embed/bTqVqk7FSmY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
+
+        </div>
         <script>
 
-            var player = jwplayer('player').setup({
-                autostart: true,
-                file: 'https://www.youtube.com/watch?v=y62zj9ozPOM',
-                /* file: 'https://cdn.cs50.net/2017/fall/lectures/0/lecture0-720p.mp4', */
-                height: '100%',
-                /* image: '', */
-                playbackRateControls: [0.75, 1, 1.5, 2, 3],
-                width: '100%'
+            const controls = `
+<div class="plyr__controls">
+    <button type="button" class="plyr__control" data-plyr="rewind">
+        <svg role="presentation"><use xlink:href="#plyr-restart"></use></svg>
+        <span class="plyr__tooltip" role="tooltip">Rewind {seektime} secs</span>
+    </button>
+    <button type="button" class="plyr__control" aria-pressed="false" aria-label="Play, {title}" data-plyr="play">
+        <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-pause"></use></svg>
+        <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-play"></use></svg>
+        <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
+        <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
+    </button>
+    <div class="plyr__time plyr__time--current" aria-label="Current time">00:00</div>
+    <div class="plyr__progress">
+        <label for="plyr-seek-{id}" class="plyr__sr-only">Seek</label>
+        <input data-plyr="seek" type="range" min="0" max="100" step="0.01" value="0" id="plyr-seek-{id}">
+        <progress class="plyr__progress--buffer" min="0" max="100" value="0">% buffered</progress>
+        <span role="tooltip" class="plyr__tooltip">00:00</span>
+    </div>
+    <div class="plyr__time plyr__time--duration" aria-label="Duration">00:00</div>
+    <button type="button" class="plyr__control" aria-pressed="true" aria-label="Enable captions" data-plyr="captions">
+        <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-captions-on"></use></svg>
+        <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-captions-off"></use></svg>
+        <span class="label--pressed plyr__tooltip" role="tooltip">Disable captions</span>
+        <span class="label--not-pressed plyr__tooltip" role="tooltip">Enable captions</span>
+    </button>
+    <button type="button" class="plyr__control" aria-pressed="false" aria-label="Enter fullscreen" data-plyr="fullscreen">
+        <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-exit-fullscreen"></use></svg>
+        <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-enter-fullscreen"></use></svg>
+        <span class="label--pressed plyr__tooltip" role="tooltip">Exit fullscreen</span>
+        <span class="label--not-pressed plyr__tooltip" role="tooltip">Enter fullscreen</span>
+    </button>
+</div>
+`;
+
+
+            const player = new Plyr('#player', { controls });
+
+/*
+            const player = new Plyr('#player', {
+                autoplay: true,
+                controls: [
+                    'airplay',
+                    'captions',
+                    'current-time',
+                    'duration',
+                    'fullscreen',
+                    'play',
+                    'progress',
+                    'rewind',
+                    'settings'
+                ]
             });
+*/
+
+            /*
+                file: 'https://www.youtube.com/watch?v=y62zj9ozPOM',
+                file: 'https://cdn.cs50.net/2017/fall/lectures/0/lecture0-720p.mp4', 
+            */
 
         </script>
     </body>
