@@ -10,6 +10,7 @@ const action = {
 export default () => {
 
   const $container = document.createElement('download-links');
+  $container.style.display = 'none';
   $container.innerHTML = `
     <button>
       <svg viewBox="0 0 1 1"><use xlink:href="#icon-download"></use></svg>
@@ -23,6 +24,12 @@ export default () => {
 
   subscribe('downloads:loaded', (data) => {
     Fetch(data)
+    .then(data => {
+        if (data && data.length)
+            $container.style.display = 'initial';
+
+        return data;
+    })
     .then(Node(({ label, src }) => `
       <a href='${ src }' download>
         ${ label.replace('MP4 (', '').replace(')', '') }
