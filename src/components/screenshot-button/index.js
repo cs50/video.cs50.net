@@ -16,11 +16,20 @@ const action = {
     let url;
     if (mode === 'ms') {
       const src = primary.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
-      url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`;
-    } else url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-720p.mp4`;
-    $elem.classList.add('working');
-    videoScreenshotFromUrl(url, time)
-    .then(() => $elem.classList.remove('working'))
+      url = `https://cdn.cs50.net${window.location.pathname}/week${episode}-${src}-720p.mp4`;
+    } else {
+      url = `https://cdn.cs50.net${window.location.pathname}/week${episode}-720p.mp4`;
+    }
+
+    fetch(url)
+    .then(response => {
+      if (response.status === 404)
+        url = url.replace(/week(.*)$/, "lecture$1")
+
+      $elem.classList.add('working');
+      videoScreenshotFromUrl(url, time)
+      .finally(() => $elem.classList.remove('working'))
+    })
   }
 }
 
