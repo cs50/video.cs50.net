@@ -13,14 +13,19 @@ const action = {
     const episode = cdnEpisodefromUrl().split('/').pop();
     const primary = document.querySelector('main .primary');
     const mode = document.body.getAttribute('experience');
-    let url;
+    const pathname = window.location.pathname.replace(/\/$/, "");
+    let url = `https://cdn.cs50.net${pathname}`;
+    if (/lectures\/.*$/.test(url))
+      url += `/week${episode}`;
+    else
+      url += `/${pathname.split('/').pop()}`;
+
     if (mode === 'ms') {
       const src = primary.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
-      url = `https://cdn.cs50.net${window.location.pathname}/week${episode}-${src}-720p.mp4`;
-    } else {
-      url = `https://cdn.cs50.net${window.location.pathname}/week${episode}-720p.mp4`;
+      url += `-${src}`;
     }
 
+    url += '-720p.mp4';
     fetch(url)
     .then(response => {
       if (response.status === 404)
