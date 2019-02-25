@@ -14,7 +14,7 @@ const action = {
       e.currentTarget.setAttribute('active', true);
       // Set experience mode of body
       document.body.setAttribute('experience', this.data.type);
-      window.ga('send', 'event', 'experience', this.data.type);
+      //window.ga('send', 'event', 'experience', this.data.type);
     }
     // Multiscreen experience mode
     if(this.data.type === 'ms') {

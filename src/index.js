@@ -125,7 +125,6 @@ module.exports = (() => {
     const chaptersFileUrl = resourceUrl(ep.chapters, lang);
     const captionsFileUrl = resourceUrl(ep.captions, lang);
     markers(chaptersFileUrl, captionsFileUrl);
-    window.ga('send', 'event', 'language', 'changed', lang);
   });
 
   documentHelpers();

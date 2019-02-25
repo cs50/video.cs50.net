@@ -9,20 +9,20 @@ export default () => {
   $container.setAttribute('role', 'dialog');
 
   const hideOverlay = () => {
-    window.ga('send', 'event', 'break', 'continued');
+    //window.ga('send', 'event', 'break', 'continued');
     $container.setAttribute('hidden', true);
     $container.classList.remove('stopped');
     publish('video:play');
   };
 
   const stopTimer = () => {
-    window.ga('send', 'event', 'break', 'taken');
+    //window.ga('send', 'event', 'break', 'taken');
     $container.classList.add('stopped');
     clearTimeout(timer);
   };
 
   const disableBreaks = () => {
-    window.ga('send', 'event', 'break', 'disabled');
+    //window.ga('send', 'event', 'break', 'disabled');
     document.querySelector('break-toggle input').checked = false;
     hideOverlay();
   };

@@ -129,7 +129,7 @@ export default () => {
     if (requestFullScreen) {
       requestFullScreen.bind($elem)();
     }
-    window.ga('send', 'event', 'control', 'fullscreen');
+    //window.ga('send', 'event', 'control', 'fullscreen');
   });
 
 }

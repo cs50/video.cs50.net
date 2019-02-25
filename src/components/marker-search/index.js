@@ -56,7 +56,7 @@ const actions = {
         // There was no match in this or the next caption
         return false;
       });
-      window.ga('send', 'event', 'search', window.location.pathname, e.target.value);
+      //window.ga('send', 'event', 'search', window.location.pathname, e.target.value);
     }
   }
 };

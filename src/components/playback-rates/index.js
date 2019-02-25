@@ -10,7 +10,7 @@ const action = {
     .forEach(x => x.classList.remove('active'));
     // Make this rate active
     e.currentTarget.classList.add('active');
-    window.ga('send', 'event', 'speed', 'changed', this.data.rate);
+    //window.ga('send', 'event', 'speed', 'changed', this.data.rate);
   }
 }
 

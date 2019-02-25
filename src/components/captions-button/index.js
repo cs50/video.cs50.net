@@ -5,7 +5,7 @@ const action = {
   toggle(e) {
     const btn = document.querySelector("captions-button button");
     if(!btn.classList.contains('active')) {
-      window.ga('send', 'event', 'captions', 'enabled');
+      //window.ga('send', 'event', 'captions', 'enabled');
       publish('captions:show');
     } else publish('captions:hide');
     btn.classList.toggle('active');

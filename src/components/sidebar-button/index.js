@@ -4,7 +4,7 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 const action = {
   toggle(e) {
     document.body.classList.toggle('dialog-open');
-    window.ga('send', 'event', 'sidebar', 'open');
+    //window.ga('send', 'event', 'sidebar', 'open');
 
     if (e.currentTarget.hasAttribute('active')) {
         e.currentTarget.removeAttribute('active');

@@ -16,7 +16,7 @@ export default () => {
   const select = (time) => {
     const next = data.find(x => x.start > time);
     publish('video:seekTo', [next.start]);
-    window.ga('send', 'event', 'video', 'seekNext', window.location.pathname, time);
+    //window.ga('send', 'event', 'video', 'seekNext', window.location.pathname, time);
   }
 
   Fetch([{ hidden: true }])
