@@ -3,7 +3,7 @@ import { Fetch, Node, Bind, Draw } from '../../helpers/xs.js';
 
 const action = {
   select(e) {
-    window.ga('send', 'event', 'download', window.location.pathname, this.data.label);
+    //window.ga('send', 'event', 'download', window.location.pathname, this.data.label);
   }
 }
 

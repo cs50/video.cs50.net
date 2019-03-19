@@ -106,7 +106,7 @@ module.exports = (() => {
       explained(ep.explained);
       markers(chaptersFile, captionsFile);
       thumbs(thumbnailsFile);
-      if(screenshotSources.length === 2) publish('screenshots:fetched', [screenshotSources]);
+      if (screenshotSources.length >= 1) publish('screenshots:fetched', [screenshotSources]);
       if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
       if (captionsFile) {
         const availableLanguages = ep.captions.map(x => x.srclang);
@@ -125,7 +125,6 @@ module.exports = (() => {
     const chaptersFileUrl = resourceUrl(ep.chapters, lang);
     const captionsFileUrl = resourceUrl(ep.captions, lang);
     markers(chaptersFileUrl, captionsFileUrl);
-    window.ga('send', 'event', 'language', 'changed', lang);
   });
 
   documentHelpers();

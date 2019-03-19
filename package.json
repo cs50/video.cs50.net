@@ -30,7 +30,9 @@
     "node": ">=4.5"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",

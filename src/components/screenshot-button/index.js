@@ -13,14 +13,28 @@ const action = {
     const episode = cdnEpisodefromUrl().split('/').pop();
     const primary = document.querySelector('main .primary');
     const mode = document.body.getAttribute('experience');
-    let url;
+    const pathname = window.location.pathname.replace(/\/$/, "");
+    let url = `https://cdn.cs50.net${pathname}`;
+    if (/lectures\/.*$/.test(url))
+      url += `/week${episode}`;
+    else
+      url += `/${pathname.split('/').pop()}`;
+
     if (mode === 'ms') {
       const src = primary.tagName === 'VIDEO-MAIN' ? 'a' : 'b';
-      url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-${src}-720p.mp4`;
-    } else url = `https://cdn.cs50.net/2016/fall/lectures/${episode}/week${episode}-720p.mp4`;
-    $elem.classList.add('working');
-    videoScreenshotFromUrl(url, time)
-    .then(() => $elem.classList.remove('working'))
+      url += `-${src}`;
+    }
+
+    url += '-720p.mp4';
+    fetch(url)
+    .then(response => {
+      if (response.status === 404)
+        url = url.replace(/week(.*)$/, "lecture$1")
+
+      $elem.classList.add('working');
+      videoScreenshotFromUrl(url, time)
+      .finally(() => $elem.classList.remove('working'))
+    })
   }
 }
 

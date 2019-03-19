@@ -90,8 +90,9 @@ export const videoScreenshotFromUrl = (url, time) =>
 
       // Create canvas and draw current frame to it
       const canvas = document.createElement('canvas');
-      canvas.width = 1680;
-      canvas.height = 720;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
       const ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
