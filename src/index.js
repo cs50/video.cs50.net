@@ -174,7 +174,7 @@ module.exports = (() => {
       // Try "lecture0.vtt" or fallback to "week0.vtt"
       thumbs(`${prefix}/${lectureBasename}.vtt`).then((data) => {
         if (data && !data.length) {
-            thumbs(`${prefix}/${lectureBasename.replace('lecture', 'week')}.vtt`);
+          thumbs(`${prefix}/${lectureBasename.replace('lecture', 'week')}.vtt`);
         }
       })
     });
