@@ -92,14 +92,7 @@ module.exports = (() => {
     const prefix = `${cdnUrl}${id}`
 
     // Fetch episode data from CDN based on URL
-    fetch(`${prefix}/metadata.json`)
-    .then((res) => {
-        if (res.status !== 200) {
-          return fetch(`${prefix}/index.json`);
-        }
-
-        return res;
-    })
+    fetch(`${prefix}/index.json`)
     .then(data => data.json())
     .then(ep => {
       const mainVideoId = ep.youtube && ep.youtube.main;
