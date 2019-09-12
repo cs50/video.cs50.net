@@ -33,6 +33,8 @@ import {
 
 import {
   cdnEpisodefromUrl,
+  captions,
+  chapters,
   markers,
   thumbs,
   explained,
@@ -82,49 +84,100 @@ module.exports = (() => {
   $dialogRow2.appendChild(BreakToggle());
   $dialogRow2.appendChild(ExplainedChaptersToggleButton());
 
+  const cdnUrl = 'https://cdn.cs50.net';
+  const corsAnywhere = 'https://cors-anywhere.herokuapp.com';
+
   subscribe('player:loadVideo', (id, lang = 'en') => {
+    id = id.replace(/\/$/, '')
+    const prefix = `${cdnUrl}${id}`
+
     // Fetch episode data from CDN based on URL
-    fetch(`https://cdn.cs50.net${id}/index.json`)
+    fetch(`${prefix}/metadata.json`)
+    .then((res) => {
+        if (res.status !== 200) {
+          return fetch(`${prefix}/index.json`);
+        }
+
+        return res;
+    })
     .then(data => data.json())
     .then(ep => {
-      localStorage.setItem('episode', JSON.stringify(ep));
-      const mainVideoId = ep.youtube ? ep.youtube.main : null;
-      const chaptersFile = typeof ep.chapters === 'object' ?
-        ep.chapters.find(x => x.srclang === 'en') : null;
-      const captionsFile = typeof ep.captions === 'object' ?
-        ep.captions.find(x => x.srclang === 'en') : null;
-      const thumbnailsFile = typeof ep.thumbnails === 'object' ?
-        ep.thumbnails.find(x => x.type === 'text/vtt') : null;
-      const downloadLinks = typeof ep.downloads === 'object' ?
-        ep.downloads.filter(x => x.label.match('MP4')) : null;
-      const screenshotSources = ep.sources.filter(x => x.label === '720p');
+      const mainVideoId = ep.youtube && ep.youtube.main;
+
       // Render components based on what episode data exists
       publish('video:loadMainVideoById', [mainVideoId, youTubeTimeFromUrl()]);
       publish('youtube:fetched', [
         Object.assign({}, ep.youtube, { explained: ep.explained })
       ]);
-      explained(ep.explained);
-      markers(chaptersFile, captionsFile);
-      thumbs(thumbnailsFile);
-      if (screenshotSources.length >= 1) publish('screenshots:fetched', [screenshotSources]);
-      if (downloadLinks) publish('downloads:loaded', [downloadLinks]);
-      if (captionsFile) {
-        const availableLanguages = ep.captions.map(x => x.srclang);
-        publish('languages:fetched', [availableLanguages, lang]);
-      }
-    });
-  });
 
-  subscribe('player:changeLanguage', (lang) => {
-    const ep = JSON.parse(localStorage.getItem('episode'));
-    const resourceUrl = (resource, y) => {
-      const desiredUrl = resource.find(x => x.srclang === y);
-      const defaultUrl = resource.find(x => x.srclang === 'en');
-      return desiredUrl !== undefined ? desiredUrl : defaultUrl;
-    };
-    const chaptersFileUrl = resourceUrl(ep.chapters, lang);
-    const captionsFileUrl = resourceUrl(ep.captions, lang);
-    markers(chaptersFileUrl, captionsFileUrl);
+      const idSuffix = id.split('/').pop();
+      const lectureBasename = prefix.indexOf('lecture') > 0 && `lecture${idSuffix}`;
+
+      explained(`${langPrefix}/${lang}/explained.vtt`);
+
+      const langPrefix = `${prefix}/lang`;
+
+      // e.g., lecture/0 => assumes lecture0.srt
+      // e.g., shorts/data_types => assumes data_types.srt
+      const srtFilename = `${lectureBasename || idSuffix}.srt`;
+
+      // Fetch available languages
+      // Bypass CORS policy
+      fetch(
+        `${corsAnywhere}/${langPrefix}`,
+        {
+          headers: {
+            'Origin': window.location.origin
+          }
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          return res.text();
+        }
+      })
+      .then((html) => {
+        const dom = new DOMParser().parseFromString(html, 'text/html');
+        const langs = [...dom.querySelectorAll('tr[data-basename]')];
+        if (langs && langs.length && langs[0].dataset.basename.startsWith('.')) {
+          // Remove "../"
+          langs.splice(0, 1);
+        }
+
+        publish('languages:fetched', [langs.map((l) => l.dataset.basename.replace(/\/$/, '')), lang]);
+        subscribe('player:changeLanguage', (lang) => {
+          Promise.all([
+            chapters(`${langPrefix}/${lang}/index.vtt`),
+
+            // Try "lectureX.srt" or fallback to "weekX.srt"
+            captions(`${langPrefix}/${lang}/${srtFilename}`)
+              .then((captions_) => {
+                if (captions_ && captions_.length) {
+                  return Promise.resolve(captions_);
+                }
+                else {
+                  return captions(`${langPrefix}/${lang}/${srtFilename.replace('lecture', 'week')}`);
+                }
+              })
+          ])
+          .then((results) => {
+            markers(results[0].concat(results[1]));
+          })
+        });
+
+        // Set captions language initially
+        if (lang) {
+          publish('player:changeLanguage', [lang]);
+        }
+      })
+
+      // Try "lecture0.vtt" or fallback to "week0.vtt"
+      thumbs(`${prefix}/${lectureBasename}.vtt`).then((data) => {
+        if (data && !data.length) {
+            thumbs(`${prefix}/${lectureBasename.replace('lecture', 'week')}.vtt`);
+        }
+      })
+    });
   });
 
   documentHelpers();
