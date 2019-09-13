@@ -9,23 +9,26 @@ const timeToSeconds = time => {
   return h + m + s;
 };
 
-async function fetchAndParseVTT(url, ev, mapCallback=((l)=>{})) {
-  const res = await fetch(url);
-  if (res.status !== 200) {
-    return [];
-  }
+function fetchAndParseVTT(url, ev, mapCallback=((l)=>{})) {
+  return fetch(url)
+  .then((res) => {
+      if (res.status !== 200) {
+        return [];
+      }
 
-  const items = (await res.text())
-    .replace('WEBVTT\n\n', '')
-    .split('\n\n')
-    .map(i => i.split('\n'))
-    .map(l => mapCallback(l));
+      return res.text().then((data) => {
+        const items = data.replace('WEBVTT\n\n', '')
+        .split('\n\n')
+        .map(i => i.split('\n'))
+        .map(l => mapCallback(l));
 
-  if (ev) {
-    publish(ev, [items]);
-  }
+        if (ev) {
+          publish(ev, [items]);
+        }
 
-  return items;
+        return items;
+      })
+  });
 }
 
 export const chapters = (url) => {
@@ -49,30 +52,33 @@ export const chapters = (url) => {
   })
 };
 
-export const captions = async (url, ev='captions:loaded') => {
-  const res = await fetch(url);
-  if (res.status !== 200) {
-    return [];
-  }
+export const captions = (url, ev='captions:loaded') => {
+  return fetch(url)
+  .then((res) => {
+    if (res.status !== 200) {
+      return [];
+    }
 
-  const captions_ = (await res.text())
-    .replace(/\n\n\n/g, '\n\n')
-    .split('\n\n')
-    .map(caption => caption.split('\n'))
-    .filter(caption => caption[1] !== undefined)
-    .map(caption => ({
-      type: 'caption',
-      id: caption[0],
-      start: timeToSeconds(caption[1].split(' --> ')[0].replace(',', '.')),
-      end: timeToSeconds(caption[1].split(' --> ')[1].replace(',', '.')),
-      title: caption.slice(2)
-            .join(' ')
-            .replace('>> ', '')
-            .replace('-', '') || '[NO SPEECH]',
-    }));
+    return res.text().then((data) => {
+      const captions_ = data.replace(/\n\n\n/g, '\n\n')
+        .split('\n\n')
+        .map(caption => caption.split('\n'))
+        .filter(caption => caption[1] !== undefined)
+        .map(caption => ({
+          type: 'caption',
+          id: caption[0],
+          start: timeToSeconds(caption[1].split(' --> ')[0].replace(',', '.')),
+          end: timeToSeconds(caption[1].split(' --> ')[1].replace(',', '.')),
+          title: caption.slice(2)
+                .join(' ')
+                .replace('>> ', '')
+                .replace('-', '') || '[NO SPEECH]',
+        }));
 
-  publish(ev, [captions_]);
-  return captions_;
+        publish(ev, [captions_]);
+        return captions_;
+    });
+  });
 }
 
 const expCaptions = (url) => captions(url, 'exp:captions:loaded');
