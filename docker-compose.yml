@@ -2,9 +2,10 @@ services:
   web:
     build: .
     container_name: video50_web
+    command: [ "npm", "run", "dev" ]
     ports:
-      - "8080:8080"
+    - "3000:3000"
     tty: true
     volumes:
-      - .:/var/www
+    - .:/var/www
 version: "2"

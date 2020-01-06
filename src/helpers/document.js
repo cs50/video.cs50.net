@@ -40,7 +40,7 @@ export default () => {
       const elem = document.elementFromPoint(e.clientX, e.clientY);
       showPlayerChrome();
       clearTimeout(timer);
-      if (elem.tagName === 'VIDEO-MAIN' || elem.tagName === 'VIDEO-ALT') {
+      if (elem && ['VIDEO-MAIN', 'VIDEO-ALT'].indexOf(elem.tagName) > -1) {
         timer = setTimeout(hidePlayerChrome, 3000);
       }
     };
